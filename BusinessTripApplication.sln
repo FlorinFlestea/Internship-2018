@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration", "Registration\Registration.csproj", "{94B48B00-CFDC-4F2F-80A7-0394B59A346B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessTripApplication", "BusinessTripApplication\BusinessTripApplication.csproj", "{94B48B00-CFDC-4F2F-80A7-0394B59A346B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
