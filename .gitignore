@@ -1,0 +1,9 @@
+*.nupkg
+.vs
+packages
+bin
+obj
+*.user
+
+# shared files downloaded by build scripts
+build/
