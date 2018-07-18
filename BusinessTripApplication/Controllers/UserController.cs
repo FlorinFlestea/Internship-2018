@@ -12,7 +12,8 @@ namespace BusinessTripApplication.Controllers
     public class UserController : Controller
     {
         // GET: User
-        public ActionResult Registration(int id = 0)
+        [HttpGet]
+        public ActionResult Registration()
         {
             return View();
         }
@@ -48,14 +49,8 @@ namespace BusinessTripApplication.Controllers
                     return View(user);
                 }
             }
-            else
-            {
-                ViewBag.Message = "Invalid request";
-                ViewBag.Status = false;
-                return View(user);
-            }
 
-            ViewBag.Message = "";
+            ViewBag.Message = "Invalid request";
             ViewBag.Status = false;
             return View(user);
         }
@@ -102,6 +97,29 @@ namespace BusinessTripApplication.Controllers
                 IsBodyHtml = true
             })
                 smtp.Send(message);
+        }
+
+        [HttpGet]
+        public ActionResult VerifyAccount(string id)
+        {
+            ViewBag.Status = false;
+
+            using (var db = new UserContext())
+            {
+                db.Configuration.ValidateOnSaveEnabled = false; 
+                var v = db.Users.FirstOrDefault(a => a.ActivationCode == new Guid(id));
+                if (v != null)
+                {
+                    v.IsEmailVerified = true;
+                    db.SaveChanges();
+                    ViewBag.Status = true;
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid Request";
+                }
+            }
+            return View();
         }
 
 
