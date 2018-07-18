@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using BusinessTripApplication.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace BusinessTripApplication.Controllers
 {
@@ -20,15 +21,13 @@ namespace BusinessTripApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Registration([Bind(Exclude = "IsEmailVerified,ActivationCode")] User user)
         {
-            bool registrationStatus = false;
-            string returnedMessage = "";
-
             if (ModelState.IsValid)
             {
                 var isExist = EmailExists(user.Email);
                 if (isExist)
                 {
-                    ModelState.AddModelError("EmailExist", "Email already exist");
+                    ViewBag.Message = "Email already in the database !";
+                    ViewBag.Status = false;
                     return View(user);
                 }
 
@@ -43,18 +42,21 @@ namespace BusinessTripApplication.Controllers
 
                     //Send Email to User
                     SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
-                    returnedMessage = "Registration successfully done. Account activation link " +
+                    ViewBag.Message = "Registration successfully done. Account activation link " +
                               " has been sent to your email id:" + user.Email;
-                    registrationStatus = true;
+                    ViewBag.Status = true;
+                    return View(user);
                 }
             }
             else
             {
-                returnedMessage = "Invalid Request";
+                ViewBag.Message = "Invalid request";
+                ViewBag.Status = false;
+                return View(user);
             }
 
-            ViewBag.Message = returnedMessage;
-            ViewBag.Status = registrationStatus;
+            ViewBag.Message = "";
+            ViewBag.Status = false;
             return View(user);
         }
 
