@@ -34,6 +34,11 @@ namespace Registration.Models
             Email = email;
             Password = password;
         }
+
+        public User()
+        {
+
+        }
     }
 
     public class UserContext : DbContext
