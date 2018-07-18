@@ -4,9 +4,9 @@ using System.Net;
 using System.Net.Mail;
 using System.Web.Helpers;
 using System.Web.Mvc;
-using Registration.Models;
+using BusinessTripApplication.Models;
 
-namespace Registration.Controllers
+namespace BusinessTripApplication.Controllers
 {
     public class UserController : Controller
     {
@@ -15,38 +15,27 @@ namespace Registration.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Registration([Bind(Exclude = "IsEmailVerified,ActivationCode")] User user)
         {
+            bool registrationStatus = false;
+            string returnedMessage = "";
 
-            bool Status = false;
-            string message = "";
-            //
-            // Model Validation 
             if (ModelState.IsValid)
             {
-
-                #region EMAIL ALREADY EXISTS
-
                 var isExist = EmailExists(user.Email);
                 if (isExist)
                 {
                     ModelState.AddModelError("EmailExist", "Email already exist");
                     return View(user);
                 }
-                #endregion
 
-                #region Generate Activation Code 
                 user.ActivationCode = Guid.NewGuid();
-                #endregion
-
-                #region  Password Hashing 
                 user.Password = Crypto.Hash(user.Password);
-                #endregion
                 user.IsEmailVerified = false;
 
-                #region Save to Database
                 using (var dc = new UserContext())
                 {
                     dc.Users.Add(user);
@@ -54,19 +43,18 @@ namespace Registration.Controllers
 
                     //Send Email to User
                     SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
-                    message = "Registration successfully done. Account activation link " +
+                    returnedMessage = "Registration successfully done. Account activation link " +
                               " has been sent to your email id:" + user.Email;
-                    Status = true;
+                    registrationStatus = true;
                 }
-                #endregion
             }
             else
             {
-                message = "Invalid Request";
+                returnedMessage = "Invalid Request";
             }
 
-            ViewBag.Message = message;
-            ViewBag.Status = Status;
+            ViewBag.Message = returnedMessage;
+            ViewBag.Status = registrationStatus;
             return View(user);
         }
 

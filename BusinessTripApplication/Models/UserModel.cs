@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace Registration.Models
+namespace BusinessTripApplication.Models
 {
     public class User
     {
