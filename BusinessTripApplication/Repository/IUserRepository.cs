@@ -6,5 +6,6 @@ namespace BusinessTripApplication.Repository
     {
         User Add(User addedUser);
         bool EmailExists(string email);
+        bool VerifyAccount(string id);
     }
 }
