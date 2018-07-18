@@ -12,7 +12,7 @@ namespace Registration.Controllers
         public ActionResult Registration(int id=0)
         {
             User userModel = new User("Alex Cernov","cernovalex1@gmail.com","test123");
-            using (UserContext db = new UserContext())
+            using (var db = new UserContext())
             {
                 db.Users.Add(userModel);
                 db.SaveChanges();
