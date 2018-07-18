@@ -3,14 +3,20 @@
     ViewBag.Title = "Registration";
 }
 <h2>Registration</h2>
-@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+@if (ViewBag.Status != null)
 {
-    if (ViewBag.Message != null)
+    if (Convert.ToBoolean(ViewBag.Status))
     {
         <div class="alert alert-success">
             <strong>Success!</strong>@ViewBag.Message
         </div>
     }
+    else
+        {
+            <div class="alert alert-danger">
+                <strong>Error!</strong>@ViewBag.Message
+            </div>
+        }
 }
 @using (Html.BeginForm())
 {
@@ -49,12 +55,6 @@
             </div>
         </div>
     </div>
-    if (ViewBag.Message != null)
-    {
-        <div class="alert alert-danger">
-            <strong>Error!</strong>@ViewBag.Message
-        </div>
-    }
 }
 <div>
     @Html.ActionLink("Back to List", "Index")
