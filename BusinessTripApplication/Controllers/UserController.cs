@@ -1,16 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using BusinessTripApplication.Models;
-using Microsoft.Ajax.Utilities;
+using BusinessTripApplication.Repository;
 
 namespace BusinessTripApplication.Controllers
 {
     public class UserController : Controller
     {
+
+        UserRepository UserRepository = new UserRepository();
         // GET: User
         public ActionResult Registration(int id = 0)
         {
@@ -23,7 +22,7 @@ namespace BusinessTripApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var isExist = EmailExists(user.Email);
+                var isExist = UserRepository.EmailExists(user.Email);
                 if (isExist)
                 {
                     ViewBag.Message = "Email already in the database !";
@@ -31,22 +30,15 @@ namespace BusinessTripApplication.Controllers
                     return View(user);
                 }
 
-                user.ActivationCode = Guid.NewGuid();
-                user.Password = Crypto.Hash(user.Password);
-                user.IsEmailVerified = false;
+                user = UserRepository.Add(user);
 
-                using (var dc = new UserContext())
-                {
-                    dc.Users.Add(user);
-                    dc.SaveChanges();
+                //Send Email to User
+                SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
+                ViewBag.Message = "Registration successfully done. Account activation link " +
+                            " has been sent to your email id:" + user.Email;
+                ViewBag.Status = true;
+                return View(user);
 
-                    //Send Email to User
-                    SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
-                    ViewBag.Message = "Registration successfully done. Account activation link " +
-                              " has been sent to your email id:" + user.Email;
-                    ViewBag.Status = true;
-                    return View(user);
-                }
             }
             else
             {
@@ -54,21 +46,8 @@ namespace BusinessTripApplication.Controllers
                 ViewBag.Status = false;
                 return View(user);
             }
-
-            ViewBag.Message = "";
-            ViewBag.Status = false;
-            return View(user);
         }
 
-        [NonAction]
-        public bool EmailExists(string email)
-        {
-            using (var db = new UserContext())
-            {
-                var exists = db.Users.FirstOrDefault(a => a.Email == email);
-                return exists != null;
-            }
-        }
 
         [NonAction]
         public void SendVerificationLinkEmail(string emailID, string activationCode)
