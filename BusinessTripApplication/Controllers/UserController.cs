@@ -1,84 +1,53 @@
-﻿using System;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Web.Helpers;
 using System.Web.Mvc;
-using Registration.Models;
+using BusinessTripApplication.Models;
+using BusinessTripApplication.Repository;
 
-namespace Registration.Controllers
+namespace BusinessTripApplication.Controllers
 {
     public class UserController : Controller
     {
+
+        UserRepository UserRepository = new UserRepository();
         // GET: User
         public ActionResult Registration(int id = 0)
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Registration([Bind(Exclude = "IsEmailVerified,ActivationCode")] User user)
         {
-
-            bool Status = false;
-            string message = "";
-            //
-            // Model Validation 
             if (ModelState.IsValid)
             {
-
-                #region EMAIL ALREADY EXISTS
-
-                var isExist = EmailExists(user.Email);
+                var isExist = UserRepository.EmailExists(user.Email);
                 if (isExist)
                 {
-                    ModelState.AddModelError("EmailExist", "Email already exist");
+                    ViewBag.Message = "Email already in the database !";
+                    ViewBag.Status = false;
                     return View(user);
                 }
-                #endregion
 
-                #region Generate Activation Code 
-                user.ActivationCode = Guid.NewGuid();
-                #endregion
+                user = UserRepository.Add(user);
 
-                #region  Password Hashing 
-                user.Password = Crypto.Hash(user.Password);
-                #endregion
-                user.IsEmailVerified = false;
+                //Send Email to User
+                SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
+                ViewBag.Message = "Registration successfully done. Account activation link " +
+                            " has been sent to your email id:" + user.Email;
+                ViewBag.Status = true;
+                return View(user);
 
-                #region Save to Database
-                using (var dc = new UserContext())
-                {
-                    dc.Users.Add(user);
-                    dc.SaveChanges();
-
-                    //Send Email to User
-                    SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
-                    message = "Registration successfully done. Account activation link " +
-                              " has been sent to your email id:" + user.Email;
-                    Status = true;
-                }
-                #endregion
             }
             else
             {
-                message = "Invalid Request";
-            }
-
-            ViewBag.Message = message;
-            ViewBag.Status = Status;
-            return View(user);
-        }
-
-        [NonAction]
-        public bool EmailExists(string email)
-        {
-            using (var db = new UserContext())
-            {
-                var exists = db.Users.FirstOrDefault(a => a.Email == email);
-                return exists != null;
+                ViewBag.Message = "Invalid request";
+                ViewBag.Status = false;
+                return View(user);
             }
         }
+
 
         [NonAction]
         public void SendVerificationLinkEmail(string emailID, string activationCode)
