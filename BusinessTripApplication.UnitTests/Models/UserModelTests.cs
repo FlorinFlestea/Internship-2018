@@ -1,4 +1,5 @@
 ﻿using System;
+using BusinessTripApplication.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessTripApplication.UnitTests.Models
@@ -7,8 +8,15 @@ namespace BusinessTripApplication.UnitTests.Models
     public class UserModelTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void User_CheckProperties_ReturnsTrue()
         {
+            var user = new User("andrei", "andrei@yahoo.com", "pass");
+
+            Assert.AreEqual(user.Name, "andrei");
+            Assert.AreEqual(user.Email, "andrei@yahoo.com");
+            Assert.AreEqual(user.Password, "pass");
+            Assert.AreEqual(user.ActivationCode, Guid.Empty);
+            Assert.AreEqual(user.IsEmailVerified, false);
         }
     }
 }
