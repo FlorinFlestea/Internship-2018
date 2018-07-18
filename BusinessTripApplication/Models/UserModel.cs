@@ -16,6 +16,7 @@ namespace BusinessTripApplication.Models
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
+        [Required]
         [EmailAddress]
         [StringLength(254)]
         [DataType(DataType.EmailAddress)]
