@@ -11,7 +11,18 @@ namespace BusinessTripApplication.Controllers
     public class UserController : Controller
     {
 
-        IUserRepository UserRepository = new UserRepository();
+        IUserRepository UserRepository;
+
+        public UserController(IUserRepository repo)
+        {
+            UserRepository = repo;
+        }
+
+        public UserController()
+        {
+            UserRepository = new UserRepository();
+        }
+
         // GET: User
         [HttpGet]
         public ActionResult Registration()
