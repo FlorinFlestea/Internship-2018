@@ -161,30 +161,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataRegistrationModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataRegistrationModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataRegistrationModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataRegistrationModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataRegistrationModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataRegistrationModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>DataRegistrationModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\RegistrationDb.mdf" />
-    <Content Include="App_Data\RegistrationDb_log.ldf">
-      <DependentUpon>RegistrationDb.mdf</DependentUpon>
+    <Content Include="App_Data\Users.mdf" />
+    <Content Include="App_Data\Users_log.ldf">
+      <DependentUpon>Users.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -198,27 +181,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DataRegistrationModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DataRegistrationModel.Context.cs</LastGenOutput>
-      <DependentUpon>DataRegistrationModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DataRegistrationModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataRegistrationModel.edmx</DependentUpon>
-      <LastGenOutput>DataRegistrationModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\DataRegistrationModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataRegistrationModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DataRegistrationModel.edmx.diagram">
-      <DependentUpon>DataRegistrationModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
