@@ -20,6 +20,7 @@ namespace BusinessTripApplication.Repository
             using (var dc = new UserContext())
             {
                 dc.Users.Add(addedUser);
+                dc.SaveChanges();
                 return addedUser;
 
             }
@@ -33,6 +34,25 @@ namespace BusinessTripApplication.Repository
             {
                 var exists = db.Users.FirstOrDefault(a => a.Email == email);
                 return exists != null;
+            }
+        }
+
+        public bool VerifyAccount(string id)
+        {
+            using (var db = new UserContext())
+            {
+                db.Configuration.ValidateOnSaveEnabled = false;
+                var v = db.Users.FirstOrDefault(a => a.ActivationCode == new Guid(id));
+                if (v != null)
+                {
+                    v.IsEmailVerified = true;
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

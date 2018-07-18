@@ -89,23 +89,12 @@ namespace BusinessTripApplication.Controllers
         [HttpGet]
         public ActionResult VerifyAccount(string id)
         {
-            ViewBag.Status = false;
+            bool result = UserRepository.VerifyAccount(id);
+            ViewBag.Status = result;
 
-            using (var db = new UserContext())
-            {
-                db.Configuration.ValidateOnSaveEnabled = false; 
-                var v = db.Users.FirstOrDefault(a => a.ActivationCode == new Guid(id));
-                if (v != null)
-                {
-                    v.IsEmailVerified = true;
-                    db.SaveChanges();
-                    ViewBag.Status = true;
-                }
-                else
-                {
-                    ViewBag.Message = "Invalid Request";
-                }
-            }
+            if(!result)
+                ViewBag.Message = "Invalid Request";
+            
             return View();
         }
 
