@@ -11,16 +11,16 @@ namespace BusinessTripApplication.Controllers
     public class UserController : Controller
     {
 
-        IUserRepository UserRepository;
+        IUserService UserService;
 
-        public UserController(IUserRepository repo)
+        public UserController(IUserService service)
         {
-            UserRepository = repo;
+            UserService = service;
         }
 
         public UserController()
         {
-            UserRepository = new UserRepository();
+            UserService = new UserService(new UserRepository());
         }
 
         // GET: User
@@ -36,7 +36,7 @@ namespace BusinessTripApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var isExist = UserRepository.EmailExists(user.Email);
+                var isExist = UserService.EmailExists(user.Email);
                 if (isExist)
                 {
                     ViewBag.Message = "Email already in the database !";
@@ -44,7 +44,7 @@ namespace BusinessTripApplication.Controllers
                     return View(user);
                 }
 
-                user = UserRepository.Add(user);
+                user = UserService.Add(user);
 
                 //Send Email to User
                 SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
@@ -100,7 +100,7 @@ namespace BusinessTripApplication.Controllers
         [HttpGet]
         public ActionResult VerifyAccount(string id)
         {
-            bool result = UserRepository.VerifyAccount(id);
+            bool result = UserService.VerifyAccount(id);
             ViewBag.Status = result;
 
             if(!result)
