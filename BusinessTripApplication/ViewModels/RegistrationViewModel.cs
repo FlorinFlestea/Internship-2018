@@ -1,18 +1,22 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Mail;
+using System.Web;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 
 namespace BusinessTripApplication.ViewModels
 {
-    public class RegistrationViewModel 
+    public class RegistrationViewModel
     {
         public User User;
 
         public string Message { get; }
 
         public bool Status { get; }
-        
+
         public string Title { get; }
 
         public RegistrationViewModel()
@@ -22,11 +26,11 @@ namespace BusinessTripApplication.ViewModels
 
         }
 
-        public RegistrationViewModel(bool modelState, User user, IUserRepository UserRepository)
+        public RegistrationViewModel(bool modelState, User user, IUserService userService)
         {
             if (modelState)
             {
-                var emailExists = UserRepository.EmailExists(user.Email);
+                var emailExists = userService.EmailExists(user.Email);
                 if (emailExists)
                 {
                     Message = "Email already in the database !";
@@ -34,7 +38,7 @@ namespace BusinessTripApplication.ViewModels
                     return;
                 }
 
-                User = UserRepository.Add(user);
+                User = userService.Add(user);
 
                 //Send Email to User
                 SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
@@ -52,10 +56,10 @@ namespace BusinessTripApplication.ViewModels
         {
 
             string domainName = "http://localhost:54301";
-        
+
 
             var link = domainName + "/User/VerifyAccount/" + activationCode;
-           
+
             var fromEmail = new MailAddress("businesstripapplication@gmail.com", "Registration");
             var toEmail = new MailAddress(emailId);
             var fromEmailPassword = "ParolaTest1234"; // Replace with actual password

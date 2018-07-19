@@ -9,16 +9,16 @@ namespace BusinessTripApplication.Controllers
     public class UserController : Controller
     {
 
-        IUserRepository UserRepository;
+        IUserService UserService;
 
-        public UserController(IUserRepository repo)
+        public UserController(IUserService repo)
         {
-            UserRepository = repo;
+            UserService = repo;
         }
 
         public UserController()
         {
-            UserRepository = new UserRepository();
+            UserService = new UserService(new UserRepository());
         }
 
         // GET: User
@@ -35,7 +35,7 @@ namespace BusinessTripApplication.Controllers
         {
             try
             {
-                RegistrationViewModel model = new RegistrationViewModel(ModelState.IsValid, user,UserRepository);
+                var model = new RegistrationViewModel(ModelState.IsValid, user,UserService);
                 return View(model);
             }
             catch (Exception e)
@@ -48,7 +48,7 @@ namespace BusinessTripApplication.Controllers
         [HttpGet]
         public ActionResult VerifyAccount(string id)
         {
-            bool result = UserRepository.VerifyAccount(id);
+            bool result = UserService.VerifyAccount(id);
             ViewBag.Status = result;
 
             if(!result)
