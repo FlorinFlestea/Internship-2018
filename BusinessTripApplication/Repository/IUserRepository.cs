@@ -1,11 +1,17 @@
 ﻿using BusinessTripApplication.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace BusinessTripApplication.Repository
 {
     public interface IUserRepository
     {
         User Add(User addedUser);
-        bool EmailExists(string email);
-        bool VerifyAccount(string id);
+        User FindByEmail(string email);
+        User FindByActivationCode(Guid code);
+        User Update(User updatedUser);
+        IList<User> FindAll();
     }
 }
