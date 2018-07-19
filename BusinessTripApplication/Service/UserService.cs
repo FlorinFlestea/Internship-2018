@@ -34,7 +34,7 @@ namespace BusinessTripApplication.Repository
             if (user != null)
             {
                 user.IsEmailVerified = true;
-                userRepository.Update(user);
+                userRepository.UpdateIsEmailVerified(user);
                 return true;
             }
 

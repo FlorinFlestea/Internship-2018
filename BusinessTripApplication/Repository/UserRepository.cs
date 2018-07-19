@@ -51,7 +51,7 @@ namespace BusinessTripApplication.Repository
             return users.Where(x => x.Email == email).SingleOrDefault();
         }
 
-        public User Update(User updatedUser)
+        public User UpdateIsEmailVerified(User updatedUser)
         {
             User update;
             using (var context = new UserContext())

@@ -11,7 +11,7 @@ namespace BusinessTripApplication.Repository
         User Add(User addedUser);
         User FindByEmail(string email);
         User FindByActivationCode(Guid code);
-        User Update(User updatedUser);
+        User UpdateIsEmailVerified(User updatedUser);
         IList<User> FindAll();
     }
 }
