@@ -78,6 +78,7 @@
         } else if (passwordPattern3.test(password) === false) {
             outputString = "The string must contain at least 1 numeric character";
         }
+        //console.log("error_password1" + error_password);
         if (outputString.length > 0) {
             error_password = true;
             $("#password_error_message").html(outputString);
@@ -85,6 +86,7 @@
             $(':input[type="submit"]').prop('disabled', true);
         }
         else {
+            //console.log("error_password2" + error_password);
             error_password = false;
             if (error_username === false && error_password === false && error_email === false) {
                 $(':input[type="submit"]').prop('disabled', false);

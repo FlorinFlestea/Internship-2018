@@ -8,6 +8,7 @@ using BusinessTripApplication.Repository;
 
 namespace BusinessTripApplication.Controllers
 {
+    
     public class UserController : Controller
     {
 

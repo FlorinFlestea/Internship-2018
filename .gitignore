@@ -7,3 +7,4 @@ obj
 
 # shared files downloaded by build scripts
 build/
+/BusinessTripApplication
