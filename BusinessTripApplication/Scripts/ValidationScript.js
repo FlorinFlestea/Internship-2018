@@ -18,7 +18,7 @@
     $("#User_Password").keyup(function () {
         CheckPassword();
     });
-    $("User_#Email").keyup(function () {
+    $("#User_Email").keyup(function () {
         CheckEmail();
     });
 
