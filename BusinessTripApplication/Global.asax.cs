@@ -16,6 +16,7 @@ namespace BusinessTripApplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            MvcHandler.DisableMvcResponseHeader = true;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
