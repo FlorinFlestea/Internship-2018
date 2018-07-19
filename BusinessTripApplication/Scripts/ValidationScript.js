@@ -1,9 +1,9 @@
 ﻿$(function () {
 
 
-    var error_username = false;
-    var error_password = false;
-    var error_email = false;
+    var error_username = true;
+    var error_password = true;
+    var error_email = true;
 
     $('#btn_Create').click(function () {
         CheckUsername();
@@ -55,7 +55,7 @@
         }
         else {
             error_username = false;
-            if (error_username == false && error_password == false && error_email == false) {
+            if (error_username === false && error_password === false && error_email === false) {
                 $(':input[type="submit"]').prop('disabled', false);
             }
         }
@@ -86,7 +86,7 @@
         }
         else {
             error_password = false;
-            if (error_username == false && error_password == false && error_email == false) {
+            if (error_username === false && error_password === false && error_email === false) {
                 $(':input[type="submit"]').prop('disabled', false);
             }
         }
@@ -104,7 +104,7 @@
         }
         else {
             error_email = false;
-            if (error_username == false && error_password == false && error_email == false) {
+            if (error_username === false && error_password === false && error_email === false) {
                 $(':input[type="submit"]').prop('disabled', false);
             }
         }
