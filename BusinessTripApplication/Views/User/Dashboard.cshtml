@@ -638,16 +638,22 @@
         var ScriptFour = "~/Scripts/dash-scripts/chart-data-dash.js";
     }
     @{
-        var ScriptFive = "~/Scripts/dash-scripts/sbootstrap.js";
+        var ScriptFive = "~/Scripts/dash-scripts/bootstrap-datepicker-dash.js";
+    }
+    @{
+        var ScriptSix = "~/Scripts/dash-scripts/easypiechart-data.-dash.js";
+    }
+    @{
+        var ScriptSeven = "~/Scripts/dash-scripts/easypiechart-dash.js";
     }
 
     <script src="@Href(ScriptOne)"></script>
     <script src="@Href(ScriptThree)"></script>
     <script src="@Href(ScriptFour)"></script>
-    <script src="js/chart-data.js"></script>
-    <script src="js/easypiechart.js"></script>
+    <script src="@Href(ScriptSix)"></script>
+    <script src="@Href(ScriptSeven)"></script>
     <script src="js/easypiechart-data.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="@Href(ScriptFive)"></script>
     <script src="@Href(ScriptTwo)"></script>
     <script>
         window.onload = function () {

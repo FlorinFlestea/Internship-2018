@@ -206,14 +206,14 @@
     <Content Include="Content\dash-style\bootstrap.css-dash.map" />
     <Content Include="Content\dash-style\bootstrap.min-dash.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\dash-scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\dash-scripts\bootstrap-datepicker-dash.js" />
     <Content Include="Scripts\dash-scripts\bootstrap-dash.js" />
     <Content Include="Scripts\dash-scripts\bootstrap.min-dash.js" />
     <Content Include="Scripts\dash-scripts\chart-data-dash.js" />
     <Content Include="Scripts\dash-scripts\chart.min.js" />
     <Content Include="Scripts\dash-scripts\custom-dash.js" />
-    <Content Include="Scripts\dash-scripts\easypiechart-data.js" />
-    <Content Include="Scripts\dash-scripts\easypiechart.js" />
+    <Content Include="Scripts\dash-scripts\easypiechart-data.-dash.js" />
+    <Content Include="Scripts\dash-scripts\easypiechart-dash.js" />
     <Content Include="Scripts\dash-scripts\html5shiv.min.js" />
     <Content Include="Scripts\dash-scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\dash-scripts\lumino.glyphs.js" />
