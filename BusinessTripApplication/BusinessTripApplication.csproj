@@ -173,6 +173,7 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="Tools\InternetConnection.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -180,10 +181,25 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dash-style\bootstrap-table-dash.css" />
+    <Content Include="Content\dash-style\bootstrap-theme-dash.css" />
+    <Content Include="Content\dash-style\bootstrap-theme.min-dash.css" />
+    <Content Include="Content\dash-style\bootstrap-dash.css" />
+    <Content Include="Content\dash-style\bootstrap.min-dash.css" />
+    <Content Include="Content\dash-style\datepicker-dash.css" />
+    <Content Include="Content\dash-style\datepicker3-dash.css" />
+    <Content Include="Content\dash-style\font-awesome.min-dash.css" />
+    <Content Include="Content\dash-style\styles-dash.css" />
     <Content Include="Content\images\hermes-rivera-471868-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-574844-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-579241-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-652547-unsplash.jpg" />
+    <Content Include="Content\index-style\css\bootstrap-grid.css" />
+    <Content Include="Content\index-style\css\bootstrap-grid.min.css" />
+    <Content Include="Content\index-style\css\bootstrap-reboot.css" />
+    <Content Include="Content\index-style\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\index-style\css\bootstrap.css" />
+    <Content Include="Content\index-style\css\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -193,8 +209,26 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Content\index-style\css\bootstrap.css.map" />
+    <Content Include="Content\index-style\css\bootstrap.min.css.map" />
+    <Content Include="Content\dash-style\bootstrap-theme-dash.css.map" />
+    <Content Include="Content\dash-style\bootstrap-theme.min.css-dash.map" />
+    <Content Include="Content\dash-style\bootstrap.css-dash.map" />
+    <Content Include="Content\dash-style\bootstrap.min-dash.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\dash-scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\dash-scripts\bootstrap-dash.js" />
+    <Content Include="Scripts\dash-scripts\bootstrap.min-dash.js" />
+    <Content Include="Scripts\dash-scripts\chart-data-dash.js" />
+    <Content Include="Scripts\dash-scripts\chart.min.js" />
+    <Content Include="Scripts\dash-scripts\custom-dash.js" />
+    <Content Include="Scripts\dash-scripts\easypiechart-data.js" />
+    <Content Include="Scripts\dash-scripts\easypiechart.js" />
+    <Content Include="Scripts\dash-scripts\html5shiv.min.js" />
+    <Content Include="Scripts\dash-scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\dash-scripts\lumino.glyphs.js" />
+    <Content Include="Scripts\dash-scripts\npm.js" />
+    <Content Include="Scripts\dash-scripts\respond.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -254,7 +288,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54301</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

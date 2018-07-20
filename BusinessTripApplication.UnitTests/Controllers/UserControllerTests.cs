@@ -54,7 +54,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
 
             var result = controller.Registration(dummyUser) as ViewResult;
             var model = result.Model as RegistrationViewModel;
-
+            
             Assert.IsFalse(model.Status);
 
         }
@@ -67,7 +67,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
 
             var result = controller.Registration(dummyUser) as ViewResult;
             var model = result.Model as RegistrationViewModel;
-
+            
             Assert.IsTrue(model.Status);
         }
     }
