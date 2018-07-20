@@ -39,6 +39,7 @@ namespace BusinessTripApplication.ViewModels
                 }
 
                 User = userService.Add(user);
+                User.Password = "";
 
                 //Send Email to User
                 SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
