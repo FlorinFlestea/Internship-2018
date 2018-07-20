@@ -41,10 +41,10 @@
         $("#username_error_message").hide();
 
         if (username.length < 5 || username.length > 20) {
-            outputString = "The length should be between 5 - 20 characters";
+            outputString += "The length should be between 5 - 20 characters<br>";
         }
-        else if (usernamePattern.test(username) === false) {
-            outputString = "Allowed characters: a-z, A-Z, 0-9";
+        if (usernamePattern.test(username) === false) {
+            outputString += "Allowed characters: a-z, A-Z, 0-9<br>";
         } 
 
         if (outputString.length > 0) {
@@ -69,14 +69,16 @@
         var passwordPattern3 = new RegExp(/[0-9]/);
         $("#password_error_message").hide();
         if (password.length < 8 || password.length > 24) {
-            outputString = "should be between 8 - 24 characters";
+            outputString = "should be between 8 - 24 characters <br>";
         } 
-        else if (passwordPattern1.test(password) === false) {
-            outputString = "The string must contain at least 1 lowercase alphabetical character";
-        } else if (passwordPattern2.test(password) === false) {
-            outputString = "The string must contain at least 1 uppercase alphabetical character";
-        } else if (passwordPattern3.test(password) === false) {
-            outputString = "The string must contain at least 1 numeric character";
+        if (passwordPattern1.test(password) === false) {
+            outputString += "The string must contain at least 1 lowercase alphabetical character<br>";
+        }
+        if (passwordPattern2.test(password) === false) {
+            outputString += "The string must contain at least 1 uppercase alphabetical character<br>";
+        }
+        if (passwordPattern3.test(password) === false) {
+            outputString += "The string must contain at least 1 numeric character<br>";
         }
         //console.log("error_password1" + error_password);
         if (outputString.length > 0) {
