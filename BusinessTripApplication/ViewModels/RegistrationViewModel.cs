@@ -59,7 +59,7 @@ namespace BusinessTripApplication.ViewModels
             if (!InternetConnection.CheckForInternetConnection())
                 return;
 
-            string domainName = "http://localhost:44328";
+            string domainName = "https://localhost:44328";
 
             var link = domainName + "/User/VerifyAccount/" + activationCode;
 
