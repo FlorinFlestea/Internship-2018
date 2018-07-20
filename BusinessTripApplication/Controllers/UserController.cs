@@ -16,6 +16,16 @@ namespace BusinessTripApplication.Controllers
             return View();
         }
 
+        public ActionResult LogIn(int id = 0)
+        {
+            return View();
+        }
+        public ActionResult Dashboard(int id = 0)
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Registration([Bind(Exclude = "IsEmailVerified,ActivationCode")] User user)
