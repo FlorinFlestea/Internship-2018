@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Web;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
+using BusinessTripApplication.Tools;
 
 namespace BusinessTripApplication.ViewModels
 {
@@ -54,9 +55,10 @@ namespace BusinessTripApplication.ViewModels
         }
         public void SendVerificationLinkEmail(string emailId, string activationCode)
         {
+            if (!InternetConnection.CheckForInternetConnection())
+                return;
 
             string domainName = "http://localhost:54301";
-
 
             var link = domainName + "/User/VerifyAccount/" + activationCode;
 
