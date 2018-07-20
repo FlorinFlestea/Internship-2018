@@ -12,13 +12,13 @@
     //    HideClientMessages();
     });
 
-    $("#Name").keyup(function () {
+    $("#User_Name").keyup(function () {
         CheckUsername();
     });
-    $("#Password").keyup(function () {
+    $("#User_Password").keyup(function () {
         CheckPassword();
     });
-    $("#Email").keyup(function () {
+    $("#User_Email").keyup(function () {
         CheckEmail();
     });
 
@@ -26,16 +26,16 @@
         //if ($("Name-error").length) {
             $("#username_error_message").hide();
        // }
-        if ($("Email-error").val().length() != 0) {
+        if ($("Email-error").val().length() !== 0) {
             $("#password_error_message").hide();
         }
-        if ($("text-danger-password").val().length() != 0) {
+        if ($("text-danger-password").val().length() !== 0) {
             $("#email_error_message").hide();
         }
     }
 
     function CheckUsername() {
-        var username = $("#Name").val();
+        var username = $("#User_Name").val();
         var usernamePattern = new RegExp("^[a-zA-Z0-9]+$");
         var outputString = "";
         $("#username_error_message").hide();
@@ -62,7 +62,7 @@
         //HideClientMessages();
     }
     function CheckPassword() {
-        var password = $("#Password").val();       
+        var password = $("#User_Password").val();       
         var outputString = "";
         var passwordPattern1 = new RegExp(/[a-z]/);
         var passwordPattern2 = new RegExp(/[A-Z]/);
@@ -95,7 +95,7 @@
         //HideClientMessages();
     }
     function CheckEmail() {
-        var email = $("#Email").val();
+        var email = $("#User_Email").val();
         var emailPattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         $("#email_error_message").hide();
         if (emailPattern.test(email) === false) {
