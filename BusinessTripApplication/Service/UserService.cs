@@ -5,6 +5,7 @@ using System.Web.Helpers;
 using System.Net.Mail;
 using System.Net;
 using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace BusinessTripApplication.Repository
 {
@@ -27,11 +28,16 @@ namespace BusinessTripApplication.Repository
             return userRepository.FindByEmail(email) != null;
         }
 
+        public IList<User> FindAll()
+        {
+            return userRepository.FindAll();
+        }
+
         public bool VerifyAccount(string id)
         {
             User user = userRepository.FindByActivationCode(new Guid(id));
 
-            if (user != null)
+            if (user != null && !user.IsEmailVerified)
             {
                 user.IsEmailVerified = true;
                 userRepository.UpdateIsEmailVerified(user);
