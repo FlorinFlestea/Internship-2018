@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace BusinessTripApplication.Controllers
 {
-    
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()
