@@ -12,13 +12,13 @@
     //    HideClientMessages();
     });
 
-    $("#Name").keyup(function () {
+    $("#User_Name").keyup(function () {
         CheckUsername();
     });
-    $("#Password").keyup(function () {
+    $("#User_Password").keyup(function () {
         CheckPassword();
     });
-    $("#Email").keyup(function () {
+    $("#User_Email").keyup(function () {
         CheckEmail();
     });
 
@@ -26,16 +26,16 @@
         //if ($("Name-error").length) {
             $("#username_error_message").hide();
        // }
-        if ($("Email-error").val().length() != 0) {
+        if ($("Email-error").val().length() !== 0) {
             $("#password_error_message").hide();
         }
-        if ($("text-danger-password").val().length() != 0) {
+        if ($("text-danger-password").val().length() !== 0) {
             $("#email_error_message").hide();
         }
     }
 
     function CheckUsername() {
-        var username = $("#Name").val();
+        var username = $("#User_Name").val();
         var usernamePattern = new RegExp("^[a-zA-Z0-9]+$");
         var outputString = "";
         $("#username_error_message").hide();
@@ -62,7 +62,7 @@
         //HideClientMessages();
     }
     function CheckPassword() {
-        var password = $("#Password").val();       
+        var password = $("#User_Password").val();       
         var outputString = "";
         var passwordPattern1 = new RegExp(/[a-z]/);
         var passwordPattern2 = new RegExp(/[A-Z]/);
@@ -78,6 +78,7 @@
         } else if (passwordPattern3.test(password) === false) {
             outputString = "The string must contain at least 1 numeric character";
         }
+        //console.log("error_password1" + error_password);
         if (outputString.length > 0) {
             error_password = true;
             $("#password_error_message").html(outputString);
@@ -85,6 +86,7 @@
             $(':input[type="submit"]').prop('disabled', true);
         }
         else {
+            //console.log("error_password2" + error_password);
             error_password = false;
             if (error_username === false && error_password === false && error_email === false) {
                 $(':input[type="submit"]').prop('disabled', false);
@@ -93,7 +95,7 @@
         //HideClientMessages();
     }
     function CheckEmail() {
-        var email = $("#Email").val();
+        var email = $("#User_Email").val();
         var emailPattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         $("#email_error_message").hide();
         if (emailPattern.test(email) === false) {
