@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace BusinessTripApplication.Controllers
 {
+    [RequireHttps]
     public class ErrorController : Controller
     {
         public ViewResult Index()
