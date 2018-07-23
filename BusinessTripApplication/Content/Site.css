@@ -77,15 +77,23 @@ footer {
     margin-left: 100px;
 }
 
-    .tooltip > .tooltip-inner {
-        padding: .5em 1em .4em;
-        background-color: #f66;
-        border: 1px solid #f00;
-        border-radius: 5px;
-        color: #fff;
-        font-size: 20px;
-    }
-    /* Tooltip on right */
-    .tooltip.right > .tooltip-arrow {
-        border-right: 5px solid black;
-    }
+.tooltip > .tooltip-inner {
+    white-space: nowrap;
+    max-width: none;
+    padding: .5em 1em .4em;
+    background-color: #f66;
+    border: 1px solid #f00;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 15px;
+}
+/* Tooltip on right */
+.tooltip.right > .tooltip-arrow {
+    border-right: 5px solid black;
+}
+
+.form-control {
+    border-width: 2px;
+    border-style: solid;
+    border-color: greenyellow;
+}
