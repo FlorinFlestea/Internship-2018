@@ -29,13 +29,30 @@ namespace BusinessTripApplication.Controllers
             return View(model);
         }
 
-        public ActionResult LogIn(int id = 0)
+        public ActionResult LogIn()
         {
-            return View();
+            LogInViewModel model = new LogInViewModel();
+            return View(model);
         }
         public ActionResult Dashboard(int id = 0)
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogIn([Bind(Exclude = "IsEmailVerified,ActivationCode")] User user)
+        {
+            try
+            {
+                var model = new LogInViewModel(ModelState.IsValid, user, UserService);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return RedirectToRoute("~/Shared/Error");
+            }
+
         }
 
 

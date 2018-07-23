@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44328</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -173,6 +173,7 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

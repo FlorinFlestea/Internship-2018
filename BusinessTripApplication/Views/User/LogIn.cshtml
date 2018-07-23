@@ -1,39 +1,49 @@
-﻿@model BusinessTripApplication.Models.User
-
-@{
-    ViewBag.Title = "LogIn";
-}
+﻿@model BusinessTripApplication.ViewModels.LogInViewModel
 
 @{
     Layout = "~/Views/Shared/registrationLayout.cshtml";
 }
 
 <h2>LogIn</h2>
-
+@if (Model.Message != null)
+{
+    if (Convert.ToBoolean(Model.Status))
+    {
+        <div class="alert alert-success">
+            <strong>Success!</strong>@Model.Message
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Error!</strong>@Model.Message
+        </div>
+    }
+}
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-     
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -46,7 +56,7 @@
             </div>
 
             <div class="col-md-offset-2 col-md-10">
-               <p>If you don't have an account please <button type="button" class="btn btn-primary btn-sm" style=" height:100%">Sign Up</button> </p> 
+                <p>If you don't have an account please <button type="button" class="btn btn-primary btn-sm" style=" height:100%">Sign Up</button> </p>
             </div>
 
         </div>
