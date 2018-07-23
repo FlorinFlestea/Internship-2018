@@ -1,14 +1,14 @@
 ﻿$(function () {
 
-    var input_email = "#User_Email";
     var input_username = "#User_Name";
+    var input_email = "#User_Email";
     var input_password = "#User_Password";
     var error_username = true;
     var error_password = true;
     var error_email = true;
 
+    var tooltip_username_shown = 0;
     var tooltip_email_shown = false;
-    var tooltip_username_shown = false;
     var tooltip_password_shown = false;
 
     var color_correct = "greenyellow";
@@ -30,14 +30,14 @@
         .tooltip('fixTitle').tooltip('hide');
 
 
-    
-
+   
+    /*
     $('#btn_Create').click(function () {
         CheckUsername();
         CheckPassword();
         CheckEmail();
-    //    HideClientMessages();
     });
+    */
 
     $(input_username).keyup(function () {
         CheckUsername();
@@ -49,65 +49,152 @@
         CheckEmail();
     });
 
-    function HideClientMessages() {
-        //if ($("Name-error").length) {
-            $("#username_error_message").hide();
-       // }
-        if ($("Email-error").val().length() !== 0) {
-            $("#password_error_message").hide();
-        }
-        if ($("text-danger-password").val().length() !== 0) {
-            $("#email_error_message").hide();
-        }
+
+    function SetTextTooltipUsername(text) {
+        $(input_username)
+            .attr('data-original-title', text)
+            .tooltip('fixTitle');
+        $(input_username).css("border-color", color_incorrect);
     }
+
+    function SetTextTooltipEmail(text) {
+        $(input_email)
+            .attr('data-original-title', text)
+            .tooltip('fixTitle');
+        $(input_email).css("border-color", color_incorrect);
+    }
+
+
+    function SetTextTooltipPassword(text) {
+        $(input_password)
+            .attr('data-original-title', text)
+            .tooltip('fixTitle');
+        $(input_password).css("border-color", color_incorrect);
+    }
+
+    function DisableButton() {
+        //$(':input[type="submit"]').prop('disabled', true);
+        $("#btn_Create").onclick = "return false";
+        $("#btn_Create").css('opacity', '0.5') ;
+    }
+
+    function EnableButton() {
+        $("#btn_Create").css('opacity', '1');
+        $("#btn_Create").removeAttr('onclick');
+        //$(':input[type="submit"]').prop('disabled', false);
+    }
+
+    function HideTooltipUserName() {
+        $(input_username)
+            .attr('data-original-title', "")
+            .tooltip('fixTitle');
+        $(input_username).css("border-color", color_correct);
+        $(input_username).tooltip('hide');
+    }
+
+    function HideTooltipEmail() {
+        $(input_email)
+            .attr('data-original-title', "")
+            .tooltip('fixTitle');
+        $(input_email).css("border-color", color_correct);
+        $(input_email).tooltip('hide');
+    }
+
+    function HideTooltipPassword() {
+        $(input_password)
+            .attr('data-original-title', "")
+            .tooltip('fixTitle');
+        $(input_password).css("border-color", color_correct);
+        $(input_password).tooltip('hide');
+    }
+   
+    $('#btn_Create').mouseover(function () {
+        if ($(input_username).val() === "") {
+            SetTextTooltipUsername("Username field is required!");
+            $(input_username).tooltip('show');
+        }
+        if ($(input_email).val() === "") {
+            SetTextTooltipEmail("Email field is required!");
+            $(input_email).tooltip('show');
+        }
+        if ($(input_password).val() === "") {
+            SetTextTooltipPassword("Password field is required!");
+            $(input_password).tooltip('show');
+        }
+    });
 
     function CheckUsername() {
         var username = $(input_username).val();
-
-
         var usernamePattern = new RegExp("^[a-zA-Z0-9]+$");
         var outputString = "";
+        var current_tooltip_username_shown = 0;
         $("#username_error_message").hide();
 
         if (username.length < 5 || username.length > 20) {
-            tooltip_username_shown = false;
             outputString = "The length should be between 5 - 20 characters! ";
+            current_tooltip_username_shown = 1;
         }
         if (usernamePattern.test(username) === false) {
-            tooltip_username_shown = false;
             outputString += "Allowed characters: a-z, A-Z, 0-9";
+            current_tooltip_username_shown += 2;
         } 
+
+
+        if (current_tooltip_username_shown !== tooltip_username_shown) {
+            SetTextTooltipUsername(outputString);
+            $(input_username).tooltip('show');
+            tooltip_username_shown = current_tooltip_username_shown;
+        }
+        
 
         if (outputString.length > 0) {
             error_username = true;
-            //$("#username_error_message").html(outputString);
-            //$("#username_error_message").show();
-            $(':input[type="submit"]').prop('disabled', true);
-            $(input_username)
-                .attr('data-original-title', outputString)
-                .tooltip('fixTitle');
-
-            if (tooltip_username_shown === false) {
-                $(input_username).tooltip('show');
-                tooltip_username_shown = true;
-            }
-            $(input_username).css("border-color", color_incorrect);
-            
+            DisableButton();
         }
         else {
-            tooltip_username_shown = false;
-            $(input_username).css("border-color", color_correct);
-            $(input_username)
-                .attr('data-original-title', "")
-                .tooltip('fixTitle').tooltip('hide');
+            tooltip_username_shown = 0;
+            
             error_username = false;
+            HideTooltipUserName();
             if (error_username === false && error_password === false && error_email === false) {
-                $(':input[type="submit"]').prop('disabled', false);
+                EnableButton();
             }
         }
-        //HideClientMessages();
     }
+
+
+
+    function CheckEmail() {
+        var email = $(input_email).val();
+        var emailPattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        $("#email_error_message").hide();
+        if (emailPattern.test(email) === false) {
+            error_email = true;
+            
+            DisableButton();
+            
+            if (tooltip_email_shown === false) {
+                //alert("show");
+                tooltip_email_shown = true;
+                SetTextTooltipEmail("Invalid Email Address!");
+                $(input_email).tooltip('show');
+            }
+        }
+        else {
+            //alert("hide");
+            HideTooltipEmail();
+            tooltip_email_shown = false;
+        }
+
+        error_email = false;
+        if (error_username === false && error_password === false && error_email === false) {
+            EnableButton();
+        }
+    }
+
+
     function CheckPassword() {
+        var current_tooltip_password_shown = 0;
         var password = $(input_password).val();       
         var outputString = "";
         var passwordPattern1 = new RegExp(/[a-z]/);
@@ -115,82 +202,39 @@
         var passwordPattern3 = new RegExp(/[0-9]/);
         $("#password_error_message").hide();
         if (password.length < 8 || password.length > 24) {
-            tooltip_password_shown = false;
+            current_tooltip_password_shown = 1;
             outputString = "The password should be between 8 - 24 characters! ";
         } 
         if (passwordPattern1.test(password) === false ||
             passwordPattern3.test(password) === false ||
             passwordPattern2.test(password) === false) {
-            tooltip_password_shown = false;
+            current_tooltip_password_shown += 2;
             outputString += "The password must contain a number, a lower and upper case character!";
         }
-            
+
+        if (current_tooltip_password_shown !== tooltip_password_shown) {
+            SetTextTooltipPassword(outputString);
+            $(input_password).tooltip('show');
+            tooltip_password_shown = current_tooltip_password_shown;
+        }
 
         if (outputString.length > 0) {
             error_password = true;
-            //$("#password_error_message").html(outputString);
-            //$("#password_error_message").show();
-            $(':input[type="submit"]').prop('disabled', true);
-            $(input_password)
-                .attr('data-original-title', outputString)
-                .tooltip('fixTitle');
-
-            if (tooltip_password_shown === false) {
-                $(input_password).tooltip('show');
-                tooltip_password_shown = true;
-            }
-
-            $(input_password).css("border-color", color_incorrect);
+            DisableButton();
         }
         else {
-            tooltip_password_shown = false;
-            //console.log("error_password2" + error_password);
-            $(input_password).css("border-color", color_correct);
-            error_password = false;
-            $(input_password)
-                .attr('data-original-title', "")
-                .tooltip('fixTitle').tooltip('hide');
-            if (error_username === false && error_password === false && error_email === false) {
-                $(':input[type="submit"]').prop('disabled', false);
-            }
-        }
-        //HideClientMessages();
-    }
-    function CheckEmail() {
-        var email = $(input_email).val();
-        var emailPattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-        $("#email_error_message").hide();
-        if (emailPattern.test(email) === false) {
-            error_email = true;
-            //$("#email_error_message").html("Invalid email address!");
-            //$("#email_error_message").show();
-            $(':input[type="submit"]').prop('disabled', true);
-            $(input_email)
-                .attr('data-original-title', "Invalid email address!")
-                .tooltip('fixTitle');
-            $(input_email).tooltip
+            tooltip_password_shown = 0;
+            HideTooltipPassword();
             
-            if (tooltip_email_shown === false) {
-                tooltip_email_shown = true;
-                $(input_email).tooltip('show');
-            }
-            $(input_email).css("border-color", color_incorrect);
-        }
-        else {
-            $(input_email).css("border-color", color_correct);
-            $(input_email)
-                .attr('data-original-title', "")
-                .tooltip('fixTitle').tooltip('hide');
-                
-            tooltip_email_shown = false;
-            }
-               
-            error_email = false;
+            error_password = false;
             if (error_username === false && error_password === false && error_email === false) {
-                $(':input[type="submit"]').prop('disabled', false);
+                EnableButton();
             }
-      }
-        //HideClientMessages();
+        }
+      
+    }
+    
+       
     
 
 });

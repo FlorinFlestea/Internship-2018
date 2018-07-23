@@ -92,3 +92,8 @@ textarea {
     border-style: solid;
     border-color: greenyellow;
 }
+
+#btn_Create {
+    opacity: 0.5;
+}
+​
