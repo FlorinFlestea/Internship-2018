@@ -2,66 +2,173 @@
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.UnitTests.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
+using System.Collections.Generic;
 
 namespace BusinessTripApplication.UnitTests.Service
 {
     [TestClass]
     public class UserServiceTests
     {
-        public readonly IUserService userService;
-
-        public UserServiceTests()
-        {
-            UserRepositoryTests mockUserRepository = new UserRepositoryTests();
-            userService = new UserService(mockUserRepository.MockUserRepository);
-        }
-
         [TestMethod]
         public void Add_Any_AddToDB()
         {
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            SetupMoq.Add(MockUserRepository, users);
+            SetupMoq.FindAll(MockUserRepository, users);
+            IUserService userService = new UserService(MockUserRepository.Object);
+
+            //Act
             userService.Add(new User());
-            Assert.AreEqual(userService.FindAll().Count, 4);
+            IList<User> findedUsers = userService.FindAll();
+
+            //Assert
+            Assert.AreEqual(findedUsers.Count, users.Count);
+            Assert.AreEqual(findedUsers.Count, 4);
         }
 
         [TestMethod]
         public void FindAll_Returns3Users()
         {
-            Assert.AreEqual(userService.FindAll().Count, 3);
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            SetupMoq.FindAll(MockUserRepository, users);
+            IUserService userService = new UserService(MockUserRepository.Object);
+
+            //Act
+            IList<User> findedUsers = userService.FindAll();
+
+            //Assert
+            Assert.AreEqual(findedUsers.Count, 3);
+            Assert.AreEqual(findedUsers.Count, users.Count);
         }
 
         [TestMethod]
         public void VerifyEmail_EmailInDB_ReturnsTrue()
         {
-            Assert.IsTrue(userService.EmailExists("asd"));
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            SetupMoq.FindByEmail(MockUserRepository, users);
+            IUserService userService = new UserService(MockUserRepository.Object);
+
+            //Act
+            bool isFinded = userService.EmailExists("asd");
+
+            //Assert
+            Assert.IsTrue(isFinded);
         }
 
         [TestMethod]
         public void VerifyEmail_EmailNotInDB_ReturnsFalse()
         {
-            Assert.IsFalse(userService.EmailExists("asdasdasdas"));
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            SetupMoq.FindByEmail(MockUserRepository, users);
+            IUserService userService = new UserService(MockUserRepository.Object);
+
+            //Act
+            bool isFinded = userService.EmailExists("asdasdasdas");
+
+            //Assert
+            Assert.IsFalse(isFinded);
         }
 
         [TestMethod]
         public void VerifyAccount_VerifiedAccount_ReturnsFalse()
         {
-            userService.Add(new User {IsEmailVerified = true, ActivationCode = new Guid("b5027fcc-da70-46f5-abf3-d1ae4c835df4") });
-            Assert.IsFalse(userService.VerifyAccount("b5027fcc-da70-46f5-abf3-d1ae4c835df4"));
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false},
+                new User { IsEmailVerified = true, ActivationCode = new Guid("b5027fcc-da70-46f5-abf3-d1ae4c835df4") }
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            SetupMoq.FindByActivationCode(MockUserRepository, users);
+            IUserService userService = new UserService(MockUserRepository.Object);
+
+            //Act
+            bool isVerified = userService.VerifyAccount("b5027fcc-da70-46f5-abf3-d1ae4c835df4");
+
+            //Assert
+            Assert.IsFalse(isVerified);
         }
 
         [TestMethod]
         public void VerifyAccount_NotVerifiedAccount_ReturnsTrue()
         {
-            userService.Add(new User {Id=77, IsEmailVerified = false, ActivationCode = new Guid("b5027fcc-da70-46f5-abf3-d1ae4c835df4") });
-            Assert.IsTrue(userService.VerifyAccount("b5027fcc-da70-46f5-abf3-d1ae4c835df4"));
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false},
+                new User { IsEmailVerified = true, ActivationCode = new Guid("b5027fcc-da70-46f5-abf3-d1ae4c835df4") }
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            SetupMoq.FindByActivationCode(MockUserRepository, users);
+            IUserService userService = new UserService(MockUserRepository.Object);
+
+            //Act
+            bool isVerified = userService.VerifyAccount("229c7b1b-309e-4d83-95b7-2f3e800403da");
+
+            //Assert
+            Assert.IsTrue(isVerified);
         }
 
         [TestMethod]
         public void VerifyAccount_BadActivationCode_ReturnsFalse()
         {
-            userService.Add(new User { Id=77, IsEmailVerified = false, ActivationCode = new Guid("b5027fcc-da70-46f5-abf3-d1ae4c835df5") });
-            Assert.IsFalse(userService.VerifyAccount("b5027fcc-da70-46f5-abf3-d1ae4c835df4"));
-        }
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false},             
+            };
 
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            SetupMoq.FindByActivationCode(MockUserRepository, users);
+            IUserService userService = new UserService(MockUserRepository.Object);
+
+            //Act
+            bool isVerified = userService.VerifyAccount("b5027fcc-da70-46f5-abf3-d1ae4c835df4");
+
+            //Assert
+            Assert.IsFalse(isVerified);
+        }
     }
 }
