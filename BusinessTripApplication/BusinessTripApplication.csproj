@@ -215,19 +215,6 @@
     <Content Include="Content\dash-style\bootstrap.css-dash.map" />
     <Content Include="Content\dash-style\bootstrap.min-dash.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\dash-scripts\bootstrap-datepicker.js" />
-    <Content Include="Scripts\dash-scripts\bootstrap-dash.js" />
-    <Content Include="Scripts\dash-scripts\bootstrap.min-dash.js" />
-    <Content Include="Scripts\dash-scripts\chart-data-dash.js" />
-    <Content Include="Scripts\dash-scripts\chart.min.js" />
-    <Content Include="Scripts\dash-scripts\custom-dash.js" />
-    <Content Include="Scripts\dash-scripts\easypiechart-data.js" />
-    <Content Include="Scripts\dash-scripts\easypiechart.js" />
-    <Content Include="Scripts\dash-scripts\html5shiv.min.js" />
-    <Content Include="Scripts\dash-scripts\jquery-1.11.1.min.js" />
-    <Content Include="Scripts\dash-scripts\lumino.glyphs.js" />
-    <Content Include="Scripts\dash-scripts\npm.js" />
-    <Content Include="Scripts\dash-scripts\respond.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -255,6 +242,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\VerifyAccount.cshtml" />
+    <Content Include="Views\User\Dashboard.cshtml" />
+    <Content Include="Views\Shared\registrationLayout.cshtml" />
+    <Content Include="Views\User\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

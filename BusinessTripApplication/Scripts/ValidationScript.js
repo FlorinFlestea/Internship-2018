@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-
+    $('[data-toggle="tooltip"]').tooltip(); 
     var error_username = true;
     var error_password = true;
     var error_email = true;
