@@ -1,9 +1,33 @@
 ﻿$(function () {
 
-
+    var input_email = "#User_Email";
+    var input_username = "#User_Name";
+    var input_password = "#User_Password";
     var error_username = true;
     var error_password = true;
     var error_email = true;
+
+
+    var color_correct = "greenyellow";
+    var color_incorrect = "red";
+
+    $('[data-toggle="tooltip"]').tooltip(); 
+
+    $(input_password)
+        .attr('data-original-title', "")
+        .tooltip('fixTitle').tooltip('hide');
+
+
+    $(input_email)
+        .attr('data-original-title', "")
+        .tooltip('fixTitle').tooltip('hide');
+
+    $(input_username)
+        .attr('data-original-title', "")
+        .tooltip('fixTitle').tooltip('hide');
+
+
+    
 
     $('#btn_Create').click(function () {
         CheckUsername();
@@ -12,13 +36,13 @@
     //    HideClientMessages();
     });
 
-    $("#User_Name").keyup(function () {
+    $(input_username).keyup(function () {
         CheckUsername();
     });
-    $("#User_Password").keyup(function () {
+    $(input_password).keyup(function () {
         CheckPassword();
     });
-    $("#User_Email").keyup(function () {
+    $(input_email).keyup(function () {
         CheckEmail();
     });
 
@@ -35,25 +59,36 @@
     }
 
     function CheckUsername() {
-        var username = $("#User_Name").val();
+        var username = $(input_username).val();
+
+
         var usernamePattern = new RegExp("^[a-zA-Z0-9]+$");
         var outputString = "";
         $("#username_error_message").hide();
 
         if (username.length < 5 || username.length > 20) {
-            outputString += "The length should be between 5 - 20 characters<br>";
+            outputString = "The length should be between 5 - 20 characters! ";
         }
         if (usernamePattern.test(username) === false) {
-            outputString += "Allowed characters: a-z, A-Z, 0-9<br>";
+            outputString += "Allowed characters: a-z, A-Z, 0-9";
         } 
 
         if (outputString.length > 0) {
             error_username = true;
-            $("#username_error_message").html(outputString);
-            $("#username_error_message").show();
+            //$("#username_error_message").html(outputString);
+            //$("#username_error_message").show();
             $(':input[type="submit"]').prop('disabled', true);
+            $(input_username)
+                .attr('data-original-title', outputString)
+                .tooltip('fixTitle').tooltip('show');
+            $(input_username).css("border-color", color_incorrect);
+            
         }
         else {
+            $(input_username).css("border-color", color_correct);
+            $(input_username)
+                .attr('data-original-title', "")
+                .tooltip('fixTitle').tooltip('hide');
             error_username = false;
             if (error_username === false && error_password === false && error_email === false) {
                 $(':input[type="submit"]').prop('disabled', false);
@@ -62,34 +97,35 @@
         //HideClientMessages();
     }
     function CheckPassword() {
-        var password = $("#User_Password").val();       
+        var password = $(input_password).val();       
         var outputString = "";
         var passwordPattern1 = new RegExp(/[a-z]/);
         var passwordPattern2 = new RegExp(/[A-Z]/);
         var passwordPattern3 = new RegExp(/[0-9]/);
         $("#password_error_message").hide();
         if (password.length < 8 || password.length > 24) {
-            outputString = "should be between 8 - 24 characters <br>";
+            outputString = "The password should be between 8 - 24 characters! ";
         } 
-        if (passwordPattern1.test(password) === false) {
-            outputString += "The string must contain at least 1 lowercase alphabetical character<br>";
-        }
-        if (passwordPattern2.test(password) === false) {
-            outputString += "The string must contain at least 1 uppercase alphabetical character<br>";
-        }
-        if (passwordPattern3.test(password) === false) {
-            outputString += "The string must contain at least 1 numeric character<br>";
-        }
-        //console.log("error_password1" + error_password);
+        if (passwordPattern1.test(password) === false || passwordPattern3.test(password) === false || passwordPattern2.test(password) === false)
+            outputString += "The password must contain a number, a lower and upper case character!";
+
         if (outputString.length > 0) {
             error_password = true;
-            $("#password_error_message").html(outputString);
-            $("#password_error_message").show();
+            //$("#password_error_message").html(outputString);
+            //$("#password_error_message").show();
             $(':input[type="submit"]').prop('disabled', true);
+            $(input_password)
+                .attr('data-original-title', outputString)
+                .tooltip('fixTitle').tooltip('show');
+            $(input_password).css("border-color", color_incorrect);
         }
         else {
             //console.log("error_password2" + error_password);
+            $(input_password).css("border-color", color_correct);
             error_password = false;
+            $(input_password)
+                .attr('data-original-title', "")
+                .tooltip('fixTitle').tooltip('hide');
             if (error_username === false && error_password === false && error_email === false) {
                 $(':input[type="submit"]').prop('disabled', false);
             }
@@ -97,16 +133,24 @@
         //HideClientMessages();
     }
     function CheckEmail() {
-        var email = $("#User_Email").val();
+        var email = $(input_email).val();
         var emailPattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         $("#email_error_message").hide();
         if (emailPattern.test(email) === false) {
             error_email = true;
-            $("#email_error_message").html("Invalid email address");
-            $("#email_error_message").show();
+            //$("#email_error_message").html("Invalid email address!");
+            //$("#email_error_message").show();
             $(':input[type="submit"]').prop('disabled', true);
+            $(input_email)
+                .attr('data-original-title', "Invalid email address!")
+                .tooltip('fixTitle').tooltip('show');
+            $(input_email).css("border-color", color_incorrect);
         }
         else {
+            $(input_email).css("border-color", color_correct);
+            $(input_email)
+                .attr('data-original-title', "")
+                .tooltip('fixTitle').tooltip('hide');
             error_email = false;
             if (error_username === false && error_password === false && error_email === false) {
                 $(':input[type="submit"]').prop('disabled', false);
