@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BusinessTripApplication.UnitTests.Repository
 {
-    public static class SetupMoq
+    public static class UserRepositorySetupMoq
     {
         public static void FindByEmail(Mock<IUserRepository> MockUserRepository, IList<User> users)
         {

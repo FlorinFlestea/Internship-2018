@@ -75,10 +75,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\UserControllerSetupMoq.cs" />
     <Compile Include="Controllers\UserControllerTests.cs" />
     <Compile Include="Models\UserModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\SetupMoq.cs" />
+    <Compile Include="Repository\UserRepositorySetupMoq.cs" />
     <Compile Include="Repository\UserRepositoryTests.cs" />
     <Compile Include="Service\UserServiceTests.cs" />
   </ItemGroup>

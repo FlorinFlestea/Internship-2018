@@ -23,7 +23,7 @@ namespace BusinessTripApplication.UnitTests.Repository
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindByEmail(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
 
             //Act
             string email = "asd";
@@ -45,7 +45,7 @@ namespace BusinessTripApplication.UnitTests.Repository
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindByEmail(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
 
             //Act
             string email = "badEmail";
@@ -66,7 +66,7 @@ namespace BusinessTripApplication.UnitTests.Repository
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindByActivationCode(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByActivationCode(MockUserRepository, users);
 
             //Act
             Guid code = new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da");
@@ -88,7 +88,7 @@ namespace BusinessTripApplication.UnitTests.Repository
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindByActivationCode(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByActivationCode(MockUserRepository, users);
 
             //Act
             Guid code = new Guid("229c7b1b-309e-4d83-95b7-2f3e800403bb");
@@ -110,7 +110,7 @@ namespace BusinessTripApplication.UnitTests.Repository
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindAll(MockUserRepository, users);
+            UserRepositorySetupMoq.FindAll(MockUserRepository, users);
 
             //Act
             IList<User> findedUsers = MockUserRepository.Object.FindAll();
@@ -130,7 +130,7 @@ namespace BusinessTripApplication.UnitTests.Repository
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.UpdateIsEmailVerified(MockUserRepository, users);
+            UserRepositorySetupMoq.UpdateIsEmailVerified(MockUserRepository, users);
 
             //Act
             User user = new User()
@@ -160,8 +160,8 @@ namespace BusinessTripApplication.UnitTests.Repository
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.UpdateIsEmailVerified(MockUserRepository, users);
-            SetupMoq.FindAll(MockUserRepository, users);
+            UserRepositorySetupMoq.UpdateIsEmailVerified(MockUserRepository, users);
+            UserRepositorySetupMoq.FindAll(MockUserRepository, users);
 
             //Act
             User user = new User()
@@ -194,8 +194,8 @@ namespace BusinessTripApplication.UnitTests.Repository
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.Add(MockUserRepository, users);
-            SetupMoq.FindAll(MockUserRepository, users);
+            UserRepositorySetupMoq.Add(MockUserRepository, users);
+            UserRepositorySetupMoq.FindAll(MockUserRepository, users);
 
             //Act
             User user = new User()

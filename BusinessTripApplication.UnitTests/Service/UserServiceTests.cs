@@ -23,8 +23,8 @@ namespace BusinessTripApplication.UnitTests.Service
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.Add(MockUserRepository, users);
-            SetupMoq.FindAll(MockUserRepository, users);
+            UserRepositorySetupMoq.Add(MockUserRepository, users);
+            UserRepositorySetupMoq.FindAll(MockUserRepository, users);
             IUserService userService = new UserService(MockUserRepository.Object);
 
             //Act
@@ -48,7 +48,7 @@ namespace BusinessTripApplication.UnitTests.Service
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindAll(MockUserRepository, users);
+            UserRepositorySetupMoq.FindAll(MockUserRepository, users);
             IUserService userService = new UserService(MockUserRepository.Object);
 
             //Act
@@ -71,7 +71,7 @@ namespace BusinessTripApplication.UnitTests.Service
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindByEmail(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
             IUserService userService = new UserService(MockUserRepository.Object);
 
             //Act
@@ -93,7 +93,7 @@ namespace BusinessTripApplication.UnitTests.Service
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindByEmail(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
             IUserService userService = new UserService(MockUserRepository.Object);
 
             //Act
@@ -116,7 +116,7 @@ namespace BusinessTripApplication.UnitTests.Service
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindByActivationCode(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByActivationCode(MockUserRepository, users);
             IUserService userService = new UserService(MockUserRepository.Object);
 
             //Act
@@ -139,7 +139,7 @@ namespace BusinessTripApplication.UnitTests.Service
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindByActivationCode(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByActivationCode(MockUserRepository, users);
             IUserService userService = new UserService(MockUserRepository.Object);
 
             //Act
@@ -161,7 +161,7 @@ namespace BusinessTripApplication.UnitTests.Service
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            SetupMoq.FindByActivationCode(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByActivationCode(MockUserRepository, users);
             IUserService userService = new UserService(MockUserRepository.Object);
 
             //Act
