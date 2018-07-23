@@ -1,5 +1,9 @@
 ﻿$(function () {
 
+
+    $('[data-toggle="tooltip"]').tooltip(); 
+
+
     var input_username = "#User_Name";
     var input_email = "#User_Email";
     var input_password = "#User_Password";
@@ -14,7 +18,7 @@
     var color_correct = "greenyellow";
     var color_incorrect = "red";
 
-    $('[data-toggle="tooltip"]').tooltip(); 
+    
 
     $(input_password)
         .attr('data-original-title', "")
@@ -74,7 +78,13 @@
 
     function DisableButton() {
         //$(':input[type="submit"]').prop('disabled', true);
-        $("#btn_Create").onclick = "return false";
+        //
+        if ($('#btn_Create').css('onclick') != null) {
+            $("#btn_Create").onclick = "return false";
+        } else {
+            $('#btn_Create').attr("onclick", "return false");
+            $('#btn_Create').css("onclick", "return false");
+        }
         $("#btn_Create").css('opacity', '0.5') ;
     }
 
@@ -130,15 +140,15 @@
         var current_tooltip_username_shown = 0;
         $("#username_error_message").hide();
 
-        if (username.length < 5 || username.length > 20) {
-            outputString = "The length should be between 5 - 20 characters! ";
-            current_tooltip_username_shown = 1;
-        }
+
         if (usernamePattern.test(username) === false) {
             outputString += "Allowed characters: a-z, A-Z, 0-9";
-            current_tooltip_username_shown += 2;
+            current_tooltip_username_shown = 1;
         } 
-
+        else if (username.length < 5 || username.length > 20) {
+            outputString = "The length should be between 5 - 20 characters! ";
+            current_tooltip_username_shown = 2;
+        }
 
         if (current_tooltip_username_shown !== tooltip_username_shown) {
             SetTextTooltipUsername(outputString);
@@ -201,16 +211,18 @@
         var passwordPattern2 = new RegExp(/[A-Z]/);
         var passwordPattern3 = new RegExp(/[0-9]/);
         $("#password_error_message").hide();
-        if (password.length < 8 || password.length > 24) {
-            current_tooltip_password_shown = 1;
-            outputString = "The password should be between 8 - 24 characters! ";
-        } 
+
         if (passwordPattern1.test(password) === false ||
             passwordPattern3.test(password) === false ||
             passwordPattern2.test(password) === false) {
-            current_tooltip_password_shown += 2;
-            outputString += "The password must contain a number, a lower and upper case character!";
+            current_tooltip_password_shown = 1;
+            outputString = "The password must contain a number, a lower and upper case character!";
         }
+        else if (password.length < 8 || password.length > 24) {
+            current_tooltip_password_shown = 2;
+            outputString = "The password should be between 8 - 24 characters! ";
+        } 
+       
 
         if (current_tooltip_password_shown !== tooltip_password_shown) {
             SetTextTooltipPassword(outputString);
@@ -233,8 +245,4 @@
         }
       
     }
-    
-       
-    
-
 });
