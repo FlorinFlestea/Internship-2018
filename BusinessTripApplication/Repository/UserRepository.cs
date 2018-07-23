@@ -15,7 +15,7 @@ namespace BusinessTripApplication.Repository
             addedUser.Password = Crypto.Hash(addedUser.Password);
             addedUser.IsEmailVerified = false;
 
-            using (var context = new UserContext())
+            using (var context = new BusinessContext())
             {
                 context.Users.Add(addedUser);
                 context.SaveChanges();
@@ -29,7 +29,7 @@ namespace BusinessTripApplication.Repository
         {
             IList<User> users = new List<User>();
 
-            using (var context = new UserContext())
+            using (var context = new BusinessContext())
             {
                 users = context.Users.ToList();
             }
@@ -54,7 +54,7 @@ namespace BusinessTripApplication.Repository
         public User UpdateIsEmailVerified(User updatedUser)
         {
             User update;
-            using (var context = new UserContext())
+            using (var context = new BusinessContext())
             {
                 update = context.Users.SingleOrDefault(user => user.Id == updatedUser.Id);
                 update.IsEmailVerified = updatedUser.IsEmailVerified;
