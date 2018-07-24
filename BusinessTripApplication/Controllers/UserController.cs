@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.Security;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.ViewModels;
@@ -36,6 +37,8 @@ namespace BusinessTripApplication.Controllers
             LogInViewModel model = new LogInViewModel();
             return View(model);
         }
+
+        [Authorize]
         public ActionResult Dashboard()
         {
             return View();
@@ -44,11 +47,17 @@ namespace BusinessTripApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogIn(string Email, string Password)
+        public ActionResult LogIn(string Email, string Password,bool RememberMe)
         {
             try
             {
-                var model = new LogInViewModel(ModelState.IsValid, Email, Password, UserService);
+                int response = -1;
+                var model = new LogInViewModel(ModelState.IsValid, Email, Password, RememberMe, UserService, out response);
+                if (response == 1)
+                {
+                    Response.Cookies.Add(model.cookie);
+                    return View("Dashboard");
+                }
                 return View(model);
             }
             catch (Exception e)
@@ -57,6 +66,13 @@ namespace BusinessTripApplication.Controllers
             }
         }
 
+        [Authorize]
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "User");
+        }
 
 
         [HttpPost]

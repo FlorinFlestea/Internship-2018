@@ -30,7 +30,6 @@ namespace BusinessTripApplication.ViewModels
 
         public RegistrationViewModel(bool modelState, User user, IUserService userService)
         {
-            
             if (modelState)
             {
                 var emailExists = userService.EmailExists(user.Email);
@@ -58,8 +57,6 @@ namespace BusinessTripApplication.ViewModels
         }
         public void SendVerificationLinkEmail(string emailId, string activationCode)
         {
-           
-
             string domainName = "https://localhost:44328";
 
             var link = domainName + "/User/VerifyAccount/" + activationCode;
