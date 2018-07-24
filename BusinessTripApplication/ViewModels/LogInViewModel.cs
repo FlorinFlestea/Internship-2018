@@ -15,6 +15,8 @@ namespace BusinessTripApplication.ViewModels
     {
         public string Email;
         public string Password;
+        public bool RememberMe;
+
 
         public string Message { get; }
 
