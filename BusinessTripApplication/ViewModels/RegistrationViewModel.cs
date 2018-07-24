@@ -31,7 +31,7 @@ namespace BusinessTripApplication.ViewModels
             if (modelState)
             {
                 Status = CheckUser(userService, user);
-                if(Status)
+                if(!Status)
                     Message = "Email already in the database !";
                 else
                     Message = "Registration successfully done. Account activation link " +
