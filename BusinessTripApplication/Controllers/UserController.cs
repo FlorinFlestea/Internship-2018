@@ -6,6 +6,7 @@ using BusinessTripApplication.ViewModels;
 
 namespace BusinessTripApplication.Controllers
 {
+    [RequireHttps]
     public class UserController : Controller
     {
 

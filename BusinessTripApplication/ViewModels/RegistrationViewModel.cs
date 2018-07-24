@@ -7,6 +7,7 @@ using System.Web;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 
+
 namespace BusinessTripApplication.ViewModels
 {
     public class RegistrationViewModel
@@ -39,6 +40,7 @@ namespace BusinessTripApplication.ViewModels
                 }
 
                 User = userService.Add(user);
+                User.Password = "";
 
                 //Send Email to User
                 SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
@@ -54,9 +56,9 @@ namespace BusinessTripApplication.ViewModels
         }
         public void SendVerificationLinkEmail(string emailId, string activationCode)
         {
+           
 
-            string domainName = "http://localhost:54301";
-
+            string domainName = "https://localhost:44328";
 
             var link = domainName + "/User/VerifyAccount/" + activationCode;
 

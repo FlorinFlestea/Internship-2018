@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using BusinessTripApplication.ViewModels;
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BusinessTripApplication.UnitTests.Repository;
 
 namespace BusinessTripApplication.UnitTests.Controllers
 {
@@ -21,27 +22,10 @@ namespace BusinessTripApplication.UnitTests.Controllers
          2. Email not used -> status = true
          3. Email null -> status = false
          */
-        public readonly IUserService mockRepo;
+        public readonly IUserService service;
         public UserControllerTests()
-        {
-            IList<User> users = new List<User>
-            {
-                new User(),
-                new User{Id=1, Email=null, IsEmailVerified=true, Name=""},
-                new User{Id=2, Email="test@test.com", IsEmailVerified=true, Name=""},
-
-                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
-            };
-
-            Mock<IUserService> mockRepo = new Mock<IUserService>();
-
-            mockRepo.Setup(mr => mr.EmailExists(It.IsAny<string>())).Returns(
-                (string email) => users.SingleOrDefault(x => x.Email == email) != null);
-
-            mockRepo.Setup(mr => mr.VerifyAccount(It.IsAny<string>())).Returns(
-                (string id) => users.SingleOrDefault(x => x.ActivationCode == new Guid(id)) != null);
-
-            this.mockRepo = mockRepo.Object;
+        {        
+            this.service = new UserService(new UserRepositoryTests().MockUserRepository);
         }
 
 
@@ -50,11 +34,12 @@ namespace BusinessTripApplication.UnitTests.Controllers
         {
             //Arrange
             var dummyUser = new User("", "test@test.com", "");
-            var controller = new UserController(mockRepo);
+            service.Add(dummyUser);
+            var controller = new UserController(service);
 
             var result = controller.Registration(dummyUser) as ViewResult;
             var model = result.Model as RegistrationViewModel;
-
+            
             Assert.IsFalse(model.Status);
 
         }
@@ -63,11 +48,11 @@ namespace BusinessTripApplication.UnitTests.Controllers
         public void Registration_RegisterUserWithValidData_StatusTrue()
         {
             var dummyUser = new User("Andrew", "cernovalex1@gmail.com", "");
-            var controller = new UserController(mockRepo);
+            var controller = new UserController(service);
 
             var result = controller.Registration(dummyUser) as ViewResult;
             var model = result.Model as RegistrationViewModel;
-
+            
             Assert.IsTrue(model.Status);
         }
     }

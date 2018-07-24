@@ -16,6 +16,13 @@ namespace BusinessTripApplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            MvcHandler.DisableMvcResponseHeader = true;
+        }
+
+        protected void Application_PreSendRequestHeaders()
+        {
+            Response.Headers.Remove("Server");           //Remove Server Header   
+            Response.Headers.Remove("X-AspNet-Version"); //Remove X-AspNet-Version Header
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
