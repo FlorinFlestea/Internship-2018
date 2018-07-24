@@ -5,21 +5,7 @@
 }
 
 <h2>LogIn</h2>
-@if (Model.Message != null)
-{
-    if (Convert.ToBoolean(Model.Status))
-    {
-        <div class="alert alert-success">
-            <strong>Success!</strong>@Model.Message
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-danger">
-            <strong>Error!</strong>@Model.Message
-        </div>
-    }
-}
+
 
 @using (Html.BeginForm())
 {

@@ -27,7 +27,25 @@ namespace BusinessTripApplication.ViewModels
 
         public LogInViewModel(bool modelState, User user, IUserService userService)
         {
-            //TODO: LOGIN LOGIC
+            //TODO: LOGIN COOKIES
+
+            if (modelState)
+            {
+                var emailExists = userService.EmailExists(user.Email);
+                if (!emailExists)
+                {
+                    Message = "No such email !";
+                    Status = false;
+                    return;
+                }
+
+                //TODO: LOGIN REDIRECT
+            }
+            else
+            {
+                Message = "Invalid request";
+                Status = false;
+            }
         }
         
 

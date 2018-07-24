@@ -29,6 +29,7 @@ namespace BusinessTripApplication.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult LogIn()
         {
             LogInViewModel model = new LogInViewModel();
@@ -41,8 +42,10 @@ namespace BusinessTripApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogIn([Bind(Exclude = "IsEmailVerified,ActivationCode")] User user)
+        public ActionResult LogIn([Bind(Exclude = "Name,IsEmailVerified,ActivationCode")] User user)
         {
+            return View(user.Email);
+            /*
             try
             {
                 var model = new LogInViewModel(ModelState.IsValid, user, UserService);
@@ -52,6 +55,7 @@ namespace BusinessTripApplication.Controllers
             {
                 return RedirectToRoute("~/Shared/Error");
             }
+            */
 
         }
 
