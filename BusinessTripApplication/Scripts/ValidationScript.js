@@ -79,13 +79,13 @@
     function DisableButton() {
         //$(':input[type="submit"]').prop('disabled', true);
         //
-        if ($('#btn_Create').css('onclick') != null) {
+        if ($('#btn_Create').css('onclick') !== null) {
             $("#btn_Create").onclick = "return false";
         } else {
             $('#btn_Create').attr("onclick", "return false");
             $('#btn_Create').css("onclick", "return false");
         }
-        $("#btn_Create").css('opacity', '0.5') ;
+        $("#btn_Create").css('opacity', '0.5');
     }
 
     function EnableButton() {
