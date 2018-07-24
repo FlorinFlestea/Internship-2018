@@ -58,6 +58,7 @@ namespace BusinessTripApplication.Repository
             {
                 update = context.Users.SingleOrDefault(user => user.Id == updatedUser.Id);
                 update.IsEmailVerified = updatedUser.IsEmailVerified;
+                context.SaveChanges();
             }
             return update;
         }
