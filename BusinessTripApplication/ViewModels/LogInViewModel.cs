@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
+using System.Web.ModelBinding;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 
@@ -11,7 +13,8 @@ namespace BusinessTripApplication.ViewModels
 {
     public class LogInViewModel
     {
-        public User User;
+        public string Email;
+        public string Password;
 
         public string Message { get; }
 
@@ -25,13 +28,13 @@ namespace BusinessTripApplication.ViewModels
             Title = "LogIn";
         }
 
-        public LogInViewModel(bool modelState, User user, IUserService userService)
+        public LogInViewModel(bool modelState, string Email, string Password, IUserService userService)
         {
             //TODO: LOGIN COOKIES
 
             if (modelState)
             {
-                var emailExists = userService.EmailExists(user.Email);
+                var emailExists = userService.EmailExists(Email);
                 if (!emailExists)
                 {
                     Message = "No such email !";
