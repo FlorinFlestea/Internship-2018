@@ -118,7 +118,7 @@
         $(input_password).tooltip('hide');
     }
    
-    $('#btn_Create').mouseover(function () {
+    $('#btn_Create').click(function () {
         if ($(input_username).val() === "") {
             SetTextTooltipUsername("Username field is required!");
             $(input_username).tooltip('show');
