@@ -47,13 +47,14 @@ namespace BusinessTripApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PmName,ClientName,StartingDate,EndDate,ProjectName,ProjectNumber,TaskNumber,ClientLocation,DepartureLocation,Transportation,NeedOfPhone,NeedOfBankCard,Accommodation,Comments,Approved")] Trip trip)
+        public ActionResult Create([Bind(Include = "Id,PmName,ClientName,StartingDate,EndDate,ProjectName,ProjectNumber,TaskNumber,ClientLocation,DepartureLocation,Transportation,NeedOfPhone,NeedOfBankCard,Accommodation,Comments")] Trip trip)
         {
+            var model = new TripRequestViewModel();
             //TO BE IMPLEMENTED
-            //var model = new TripRequestViewModel(ModelState, Trip, service);
+            //var model = new TripRequestViewModel(ModelState.IsValid, Trip, service);
 
 
-            return View(trip);
+            return View(model);
         }
 
         // GET: Trips/Edit/5
