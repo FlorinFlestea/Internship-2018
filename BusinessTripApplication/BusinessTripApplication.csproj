@@ -244,7 +244,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\VerifyAccount.cshtml" />
-    <Content Include="Views\User\Dashboard.cshtml" />
+    <Content Include="Views\Shared\Dashboard.cshtml" />
     <Content Include="Views\Shared\NoToolBarLayout.cshtml" />
     <Content Include="Views\User\LogIn.cshtml" />
   </ItemGroup>

@@ -12,6 +12,10 @@ namespace BusinessTripApplication.Controllers
         
         public ActionResult Index()
         {
+            if (Request.IsAuthenticated)
+            {
+                return View("Dashboard");
+            }
             return View();
         }
 
