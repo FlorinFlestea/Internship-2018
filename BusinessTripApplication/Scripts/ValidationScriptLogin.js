@@ -9,8 +9,8 @@
 
     var error_email = true;
     var error_password = true;
-    
 
+    var tooltip_email_shown = 0;
     var color_correct = "greenyellow";
     var color_incorrect = "red";
 
@@ -95,13 +95,32 @@
 
 
     function CheckEmail() {
-        if ($(input_email).val() === "") {
-            SetTextTooltipEmail("Email field is required!");
+        var temp_tooltip_email_shown = 0;
+        var outputString = "";
+        var email = $(input_email).val();
+        var emailPattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+        if (email === "") {
+            temp_tooltip_email_shown = 1;
+            outputString="Email field is required!";
+        }
+        else if (emailPattern.test(email) === false) {
+            temp_tooltip_email_shown = 2;
+            outputString = "Invalid Email Address!";
+        }
+
+        if (temp_tooltip_email_shown !== tooltip_email_shown) {
+            SetTextTooltipEmail(outputString);
             $(input_email).tooltip('show');
-            DisableButton();
+            tooltip_email_shown = temp_tooltip_email_shown;
+        }
+
+        if (outputString.length > 0) {
             error_email = true;
+            DisableButton();
         }
         else {
+            tooltip_email_shown = 0;
             HideTooltipEmail();
             error_email = false;
             if (error_email === false && error_password === false) EnableButton();
