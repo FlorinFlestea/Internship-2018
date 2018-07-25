@@ -21,6 +21,10 @@ namespace BusinessTripApplication.Controllers
 
         public ActionResult About()
         {
+            if (!Request.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "User"); ;
+            }
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -28,6 +32,10 @@ namespace BusinessTripApplication.Controllers
 
         public ActionResult Contact()
         {
+            if (!Request.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "User"); ;
+            }
             ViewBag.Message = "Your contact page.";
 
             return View();

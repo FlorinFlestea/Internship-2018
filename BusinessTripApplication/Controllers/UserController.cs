@@ -27,6 +27,11 @@ namespace BusinessTripApplication.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
+            //if user is authentificated go to Dashboard
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Dashboard");
+            }
             RegistrationViewModel model = new RegistrationViewModel();
             return View(model);
         }
@@ -34,6 +39,11 @@ namespace BusinessTripApplication.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
+            //if user is authentificated go to Dashboard
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Dashboard");
+            }
             LogInViewModel model = new LogInViewModel();
             return View(model);
         }
