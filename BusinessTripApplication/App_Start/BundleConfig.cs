@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Registration
+namespace BusinessTripApplication
 {
     public class BundleConfig
     {

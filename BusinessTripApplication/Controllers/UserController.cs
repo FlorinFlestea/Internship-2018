@@ -1,23 +1,73 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Registration.Models;
-namespace Registration.Controllers
+using BusinessTripApplication.Models;
+using BusinessTripApplication.Repository;
+using BusinessTripApplication.ViewModels;
+
+namespace BusinessTripApplication.Controllers
 {
+    [RequireHttps]
     public class UserController : Controller
     {
-        // GET: User
-        public ActionResult Registration(int id=0)
+
+        IUserService UserService;
+
+        public UserController(IUserService repo)
         {
-            User userModel = new User("Alex Cernov","cernovalex1@gmail.com","test123");
-            using (var db = new UserContext())
-            {
-                db.Users.Add(userModel);
-                db.SaveChanges();
-            }
-            return View(userModel);
+            UserService = repo;
         }
+
+        public UserController()
+        {
+            UserService = new UserService(new UserRepository());
+        }
+
+        // GET: User
+        [HttpGet]
+        public ActionResult Registration()
+        {
+            RegistrationViewModel model = new RegistrationViewModel();
+            return View(model);
+        }
+
+        public ActionResult LogIn(int id = 0)
+        {
+            return View();
+        }
+        public ActionResult Dashboard(int id = 0)
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Registration([Bind(Exclude = "IsEmailVerified,ActivationCode")] User user)
+        {
+            try
+            {
+                var model = new RegistrationViewModel(ModelState.IsValid, user,UserService);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return RedirectToRoute("~/Shared/Error");
+            }
+            
+        }
+
+        [HttpGet]
+        public ActionResult VerifyAccount(string id)
+        {
+            bool result = UserService.VerifyAccount(id);
+            ViewBag.Status = result;
+
+            if(!result)
+                ViewBag.Message = "Invalid Request";
+            
+            return View();
+        }
+
+
     }
 }

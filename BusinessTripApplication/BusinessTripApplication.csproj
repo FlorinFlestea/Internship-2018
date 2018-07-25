@@ -13,16 +13,16 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Registration</RootNamespace>
-    <AssemblyName>Registration</AssemblyName>
+    <RootNamespace>BusinessTripApplication</RootNamespace>
+    <AssemblyName>BusinessTripApplication</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>44328</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -46,11 +46,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AntiXssLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\AntiXssLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlSanitizationLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -156,27 +165,47 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Exception\DatabaseException.cs" />
+    <Compile Include="Exception\InternetException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IUserRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Service\IUserService.cs" />
+    <Compile Include="Service\UserService.cs" />
+    <Compile Include="ViewModels\IRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Users.mdf" />
-    <Content Include="App_Data\Users_log.ldf">
-      <DependentUpon>Users.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dash-style\bootstrap-table-dash.css" />
+    <Content Include="Content\dash-style\bootstrap-theme-dash.css" />
+    <Content Include="Content\dash-style\bootstrap-theme.min-dash.css" />
+    <Content Include="Content\dash-style\bootstrap-dash.css" />
+    <Content Include="Content\dash-style\bootstrap.min-dash.css" />
+    <Content Include="Content\dash-style\datepicker-dash.css" />
+    <Content Include="Content\dash-style\datepicker3-dash.css" />
+    <Content Include="Content\dash-style\font-awesome.min-dash.css" />
+    <Content Include="Content\dash-style\styles-dash.css" />
     <Content Include="Content\images\hermes-rivera-471868-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-574844-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-579241-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-652547-unsplash.jpg" />
+    <Content Include="Content\index-style\css\bootstrap-grid.css" />
+    <Content Include="Content\index-style\css\bootstrap-grid.min.css" />
+    <Content Include="Content\index-style\css\bootstrap-reboot.css" />
+    <Content Include="Content\index-style\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\index-style\css\bootstrap.css" />
+    <Content Include="Content\index-style\css\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -186,7 +215,29 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\index-style\css\bootstrap.css.map" />
+    <Content Include="Content\index-style\css\bootstrap.min.css.map" />
+    <Content Include="Content\dash-style\bootstrap-theme-dash.css.map" />
+    <Content Include="Content\dash-style\bootstrap-theme.min.css-dash.map" />
+    <Content Include="Content\dash-style\bootstrap.css-dash.map" />
+    <Content Include="Content\dash-style\bootstrap.min-dash.css.map" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\dash-scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\dash-scripts\bootstrap-dash.js" />
+    <Content Include="Scripts\dash-scripts\bootstrap.min-dash.js" />
+    <Content Include="Scripts\dash-scripts\chart-data-dash.js" />
+    <Content Include="Scripts\dash-scripts\chart.min.js" />
+    <Content Include="Scripts\dash-scripts\custom-dash.js" />
+    <Content Include="Scripts\dash-scripts\easypiechart-data.js" />
+    <Content Include="Scripts\dash-scripts\easypiechart.js" />
+    <Content Include="Scripts\dash-scripts\html5shiv.min.js" />
+    <Content Include="Scripts\dash-scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\dash-scripts\lumino.glyphs.js" />
+    <Content Include="Scripts\dash-scripts\npm.js" />
+    <Content Include="Scripts\dash-scripts\respond.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -197,6 +248,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ValidationScript.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -212,8 +264,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
+    <Content Include="Views\User\VerifyAccount.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Error\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

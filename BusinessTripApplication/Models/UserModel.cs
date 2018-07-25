@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace Registration.Models
+namespace BusinessTripApplication.Models
 {
     public class User
     {
@@ -16,6 +16,7 @@ namespace Registration.Models
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
+        [Required]
         [EmailAddress]
         [StringLength(254)]
         [DataType(DataType.EmailAddress)]
@@ -27,12 +28,16 @@ namespace Registration.Models
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
 
-
         public User(string name, string email, string password)
         {
             Name = name;
             Email = email;
             Password = password;
+        }
+
+        public User()
+        {
+
         }
     }
 
