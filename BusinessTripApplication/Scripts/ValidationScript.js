@@ -45,17 +45,17 @@
 
     $(input_username).keyup(function () {
         CheckUsername();
-        CheckPassword();
-        CheckEmail();
+        //CheckPassword();
+        //CheckEmail();
     });
     $(input_password).keyup(function () {
-        CheckUsername();
+       // CheckUsername();
         CheckPassword();
-        CheckEmail();
+       // CheckEmail();
     });
     $(input_email).keyup(function () {
-        CheckUsername();
-        CheckPassword();
+       // CheckUsername();
+       // CheckPassword();
         CheckEmail();
     });
 
