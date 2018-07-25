@@ -11,6 +11,7 @@ namespace BusinessTripApplication.ViewModels
 {
     public class RegistrationViewModel : IRegistrationViewModel
     {
+        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public User User;
 
         public string Message { get; }
@@ -30,12 +31,26 @@ namespace BusinessTripApplication.ViewModels
         {
             if (modelState)
             {
-                Status = CheckUser(userService, user);
-                if(!Status)
-                    Message = "Email already in the database !";
-                else
-                    Message = "Registration successfully done. Account activation link " +
-                                  " has been sent to your email id:" + user.Email;               
+                try
+                {
+                    Status = CheckUser(userService, user);
+                }
+                catch (InternetException e)
+                {
+                    Message = e.Message;
+                    Status = false;
+                    return;
+                }
+                catch (DatabaseException e)
+                {
+                    Message = e.Message;
+                    Status = false;
+                    return;
+                }
+
+                Message = "Registration successfully done. Account activation link " +
+                                  " has been sent to your email id:" + user.Email;
+                Status = true;
             }
             else
             {
@@ -46,17 +61,41 @@ namespace BusinessTripApplication.ViewModels
 
         public bool CheckUser(IUserService userService, User user)
         {
-            var emailExists = userService.EmailExists(user.Email);
+            bool emailExists;
+            try
+            {
+                emailExists = userService.EmailExists(user.Email);
+            }
+            catch
+            {
+                throw;
+            }
+            
             if (emailExists)
             {
-                return false;
+                throw new DatabaseException("Email already exists!\n");
             }
-
-            User = userService.Add(user);
+            try
+            {
+                User = userService.Add(user);
+            }
+            catch
+            {
+                throw;
+            }
+            
             User.Password = "";
 
             //Send Email to User
-            SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
+            try
+            {
+                SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
+            }
+            catch
+            {
+                throw;
+            }
+            
 
             return true;
         }
@@ -98,7 +137,8 @@ namespace BusinessTripApplication.ViewModels
             }
             catch (Exception ex)
             {
-                throw ex;
+                    Logger.Info(ex.Message);
+                    throw new InternetException("Cannot connect to internet!\n");
             }
         }
 
