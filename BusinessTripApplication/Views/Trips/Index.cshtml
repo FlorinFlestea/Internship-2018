@@ -1,44 +1,53 @@
 ﻿@model IEnumerable<BusinessTripApplication.Models.Trip>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
+    Layout = "~/Views/Shared/_customLayout.cshtml";
+
+    Scripts.Render("~/bundles/bootstrap");
+    Scripts.Render("~/bundles/jquery");
+    Scripts.Render("~/bundles/modernizr");
+    Styles.Render("~/Content/css");
+
+
+
 }
 
-<h2>Index</h2>
+<div class="alert alert-dismissible alert-warning">
+    <h4 class="alert-heading">Pending request</h4>
+    <p class="mb-0">Here you have your requests that haven't been processed yet. Please await admin's review .</p>
+</div>
+ 
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-hover table-dark">
+<table class="table table-hover">
     <thead>
-    <tr>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.PmName)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.ClientName)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.StartingDate)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.ProjectName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectNumber)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.TaskNumber)
-        </th>
-        <th scope="col">
-            @Html.DisplayNameFor(model => model.Approved)
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.PmName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.ClientName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.StartingDate)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.ProjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectNumber)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.TaskNumber)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Approved)
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
@@ -66,7 +75,16 @@
                     @Html.DisplayFor(modelItem => item.TaskNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Approved)
+                    @{
+                        if (item.Approved)
+                        {
+                            <span class="badge badge-pill badge-success">Approved</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-pill badge-warning">Pending</span>
+                        }
+                    }
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
@@ -77,3 +95,6 @@
         }
     </tbody>
 </table>
+@*<a href="/trips/Create" class="btn btn-primary">
+        <span class="glyphicon glyphicon-ok"></span> Request Trip
+    </a>*@
