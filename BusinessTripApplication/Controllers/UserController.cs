@@ -49,7 +49,7 @@ namespace BusinessTripApplication.Controllers
                 var model = new RegistrationViewModel(ModelState.IsValid, user,UserService);
                 return View(model);
             }
-            catch (Exception e)
+            catch
             {
                 return RedirectToRoute("~/Shared/Error");
             }

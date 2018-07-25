@@ -62,6 +62,9 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcValidationExtensions, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcValidationExtensions.1.1.4.0\lib\net45\MvcValidationExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -173,6 +176,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807251053332_Database.cs" />
+    <Compile Include="Migrations\201807251053332_Database.Designer.cs">
+      <DependentUpon>201807251053332_Database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AreaModel.cs" />
+    <Compile Include="Models\BusinessContext.cs" />
+    <Compile Include="Models\TripModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
@@ -248,6 +259,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\mvcvalidationextensions.unobtrusive.js" />
     <Content Include="Scripts\ValidationScript.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -267,6 +279,7 @@
     <Content Include="Views\User\VerifyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
@@ -284,6 +297,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807251053332_Database.resx">
+      <DependentUpon>201807251053332_Database.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
