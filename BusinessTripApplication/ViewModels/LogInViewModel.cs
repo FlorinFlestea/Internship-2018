@@ -20,7 +20,7 @@ namespace BusinessTripApplication.ViewModels
         public string Password;
         public bool RememberMe;
 
-        public HttpCookie cookie;
+        public HttpCookie Cookie;
 
         public string Message { get; }
 
@@ -36,82 +36,54 @@ namespace BusinessTripApplication.ViewModels
 
         public LogInViewModel(bool modelState, string Email, string Password,bool RememberMe, IUserService userService,out int returnValue)
         {
-            var message = "";
-            using (UserContext dc = new UserContext())
+            if (modelState)
             {
-                var v = dc.Users.Where(a => a.Email == Email).FirstOrDefault();
-                if (v != null)
+                var message = "";
+                using (UserContext dc = new UserContext())
                 {
-                    if (!v.IsEmailVerified)
+                    var v = dc.Users.Where(a => a.Email == Email).FirstOrDefault();
+                    if (v != null)
                     {
-                        Message = "Please verify your email first";
-
-                        returnValue = -1;
-                        return;
-                    }
-
-                    if (string.Compare(Crypto.Hash(Password), v.Password) == 0)
-                    {
-                        int timeout = RememberMe ? 525600 : 20; // 525600 min = 1 year
-                        var ticket = new FormsAuthenticationTicket(Email, RememberMe, timeout);
-                        string encrypted = FormsAuthentication.Encrypt(ticket);
-                        cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
-                        cookie.Expires = DateTime.Now.AddMinutes(timeout);
-                        cookie.HttpOnly = true;
-                        
-                        returnValue = 1;
-                        return;
-                        /*
-                        if (Url.IsLocalUrl(ReturnUrl))
+                        if (!v.IsEmailVerified)
                         {
+                            Message = "Please verify your email first";
+
+                            returnValue = -1;
+                            return;
+                        }
+
+                        if (string.Compare(Crypto.Hash(Password), v.Password) == 0)
+                        {
+                            int timeout = RememberMe ? 525600 : 20; // 525600 min = 1 year
+                            var ticket = new FormsAuthenticationTicket(Email, RememberMe, timeout);
+                            string encrypted = FormsAuthentication.Encrypt(ticket);
+                            Cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+                            Cookie.Expires = DateTime.Now.AddMinutes(timeout);
+                            Cookie.HttpOnly = true;
+
                             returnValue = 1;
-                            return Redirect(ReturnUrl);
+                            return;
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home");
+                            message = "Invalid credential provided";
                         }
-                        */
                     }
                     else
                     {
                         message = "Invalid credential provided";
                     }
                 }
-                else
-                {
-                    message = "Invalid credential provided";
-                }
-            }
-            Message = message;
-            returnValue = -1;
-            return;
-            /*
-            //TODO: LOGIN COOKIES
-
-            if (modelState)
-            {
-                var emailExists = userService.EmailExists(Email);
-                if (!emailExists)
-                {
-                    Message = "No such email !";
-                    Status = false;
-                    return;
-                }
-                //if(userService.)
-
-                //TODO: LOGIN REDIRECT
+                Message = message;
+                returnValue = -1;
+                return;
             }
             else
             {
+                returnValue = -1;
                 Message = "Invalid request";
                 Status = false;
             }
-            */
-
         }
-
-
-
     }
 }

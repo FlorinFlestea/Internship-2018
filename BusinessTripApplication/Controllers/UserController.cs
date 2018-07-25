@@ -57,7 +57,7 @@ namespace BusinessTripApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogIn(string Email, string Password,bool RememberMe)
+        public ActionResult LogIn(string Email, string Password, bool RememberMe)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace BusinessTripApplication.Controllers
                 var model = new LogInViewModel(ModelState.IsValid, Email, Password, RememberMe, UserService, out response);
                 if (response == 1)
                 {
-                    Response.Cookies.Add(model.cookie);
+                    Response.Cookies.Add(model.Cookie);
                     return RedirectToAction("Dashboard");//we want to load a new page with new url, not just rendering the view
                     //return View("Dashboard");
                 }
