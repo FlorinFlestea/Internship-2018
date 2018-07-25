@@ -37,26 +37,30 @@
    
     /*
     $('#btn_Create').click(function () {
-        CheckUsername();
-        CheckPassword();
-        CheckEmail();
+        CheckUsername(0);
+        CheckPassword(0);
+        CheckEmail(0);
     });
     */
+    
 
     $(input_username).keyup(function () {
-        CheckUsername();
-        //CheckPassword();
-        //CheckEmail();
+        CheckUsername(0);
+
+        CheckPassword(1);
+        CheckEmail(1);
     });
     $(input_password).keyup(function () {
-       // CheckUsername();
-        CheckPassword();
-       // CheckEmail();
+        CheckPassword(0);
+
+        CheckUsername(1);
+        CheckEmail(1);
     });
     $(input_email).keyup(function () {
-       // CheckUsername();
-       // CheckPassword();
-        CheckEmail();
+        CheckEmail(0);
+
+        CheckUsername(1);
+        CheckPassword(1);
     });
 
 
@@ -139,7 +143,7 @@
         }
     });
 
-    function CheckUsername() {
+    function CheckUsername(justCheck) {
         var username = $(input_username).val();
         var usernamePattern = new RegExp("^[a-zA-Z0-9]+$");
         var outputString = "";
@@ -156,7 +160,7 @@
             current_tooltip_username_shown = 2;
         }
 
-        if (current_tooltip_username_shown !== tooltip_username_shown) {
+        if (justCheck===0 && current_tooltip_username_shown !== tooltip_username_shown) {
             SetTextTooltipUsername(outputString);
             $(input_username).tooltip('show');
             tooltip_username_shown = current_tooltip_username_shown;
@@ -180,7 +184,7 @@
 
 
 
-    function CheckEmail() {
+    function CheckEmail(justCheck) {
         var email = $(input_email).val();
         var emailPattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         $("#email_error_message").hide();
@@ -189,7 +193,7 @@
             
             DisableButton();
             
-            if (tooltip_email_shown === false) {
+            if (justCheck === 0 && tooltip_email_shown === false) {
                 //alert("show");
                 tooltip_email_shown = true;
                 SetTextTooltipEmail("Invalid Email Address!");
@@ -209,7 +213,7 @@
     }
 
 
-    function CheckPassword() {
+    function CheckPassword(justCheck) {
         var current_tooltip_password_shown = 0;
         var password = $(input_password).val();       
         var outputString = "";
@@ -230,7 +234,7 @@
         } 
        
 
-        if (current_tooltip_password_shown !== tooltip_password_shown) {
+        if (justCheck === 0 &&  current_tooltip_password_shown !== tooltip_password_shown) {
             SetTextTooltipPassword(outputString);
             $(input_password).tooltip('show');
             tooltip_password_shown = current_tooltip_password_shown;
