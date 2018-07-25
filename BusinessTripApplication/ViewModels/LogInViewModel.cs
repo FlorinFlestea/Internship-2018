@@ -47,7 +47,6 @@ namespace BusinessTripApplication.ViewModels
                         if (!v.IsEmailVerified)
                         {
                             Message = "Please verify your email first";
-
                             returnValue = -1;
                             return;
                         }
@@ -66,12 +65,12 @@ namespace BusinessTripApplication.ViewModels
                         }
                         else
                         {
-                            message = "Invalid credential provided";
+                            message = "Invalid credentials provided";
                         }
                     }
                     else
                     {
-                        message = "Invalid credential provided";
+                        message = "Invalid credentials provided";
                     }
                 }
                 Message = message;

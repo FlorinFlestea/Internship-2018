@@ -20,8 +20,10 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44328</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -249,6 +251,7 @@
     <Content Include="Views\Shared\Dashboard.cshtml" />
     <Content Include="Views\Shared\NoToolBarLayout.cshtml" />
     <Content Include="Views\User\LogIn.cshtml" />
+    <Content Include="Views\Shared\PermissionDenied.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

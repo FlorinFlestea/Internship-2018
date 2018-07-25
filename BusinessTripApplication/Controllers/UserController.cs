@@ -27,10 +27,9 @@ namespace BusinessTripApplication.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
-            //if user is authentificated go to Dashboard
             if (Request.IsAuthenticated)
             {
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("PermissionDenied");
             }
             RegistrationViewModel model = new RegistrationViewModel();
             return View(model);
@@ -39,10 +38,9 @@ namespace BusinessTripApplication.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
-            //if user is authentificated go to Dashboard
             if (Request.IsAuthenticated)
             {
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("PermissionDenied");
             }
             LogInViewModel model = new LogInViewModel();
             return View(model);
@@ -54,6 +52,11 @@ namespace BusinessTripApplication.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult PermissionDenied()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,7 +70,6 @@ namespace BusinessTripApplication.Controllers
                 {
                     Response.Cookies.Add(model.Cookie);
                     return RedirectToAction("Dashboard");//we want to load a new page with new url, not just rendering the view
-                    //return View("Dashboard");
                 }
                 return View(model);
             }
