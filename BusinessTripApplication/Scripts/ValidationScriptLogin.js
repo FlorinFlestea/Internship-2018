@@ -28,9 +28,11 @@
 
 
     $(input_password).keyup(function () {
+        CheckEmail();
         CheckPassword();
     });
     $(input_email).keyup(function () {
+        CheckPassword();
         CheckEmail();
     });
 
