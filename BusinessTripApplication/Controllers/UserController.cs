@@ -57,12 +57,12 @@ namespace BusinessTripApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogIn(string Email, string Password, bool RememberMe)
+        public ActionResult LogIn(string email, string password, bool rememberMe)
         {
             try
             {
                 int response = -1;
-                var model = new LogInViewModel(ModelState.IsValid, Email, Password, RememberMe, UserService, out response);
+                var model = new LogInViewModel(ModelState.IsValid, email, password, rememberMe, UserService, out response);
                 if (response == 1)
                 {
                     Response.Cookies.Add(model.Cookie);
