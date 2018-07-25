@@ -28,12 +28,12 @@
 
 
     $(input_password).keyup(function () {
-        CheckEmail();
-        CheckPassword();
+        CheckEmail(1);
+        CheckPassword(0);
     });
     $(input_email).keyup(function () {
-        CheckPassword();
-        CheckEmail();
+        CheckPassword(1);
+        CheckEmail(0);
     });
 
 
@@ -89,14 +89,14 @@
     }
 
     $(button).click(function () {
-        CheckPassword();
-        CheckEmail();
+        CheckPassword(0);
+        CheckEmail(0);
         
     });
 
 
 
-    function CheckEmail() {
+    function CheckEmail(justCheck) {
         var temp_tooltip_email_shown = 0;
         var outputString = "";
         var email = $(input_email).val();
@@ -111,7 +111,7 @@
             outputString = "Invalid Email Address!";
         }
 
-        if (temp_tooltip_email_shown !== tooltip_email_shown) {
+        if (justCheck===0 && temp_tooltip_email_shown !== tooltip_email_shown) {
             SetTextTooltipEmail(outputString);
             $(input_email).tooltip('show');
             tooltip_email_shown = temp_tooltip_email_shown;
@@ -130,11 +130,14 @@
     }
 
 
-    function CheckPassword() {
+    function CheckPassword(justCheck) {
        
         if ($(input_password).val() === "") {
-            SetTextTooltipPassword("Password field is required!");
-            $(input_password).tooltip('show');
+            
+            if (justCheck === 0) {
+                SetTextTooltipPassword("Password field is required!");
+                 $(input_password).tooltip('show');
+            }
             DisableButton();
             error_password = true;
         }       
