@@ -5,14 +5,14 @@ namespace BusinessTripApplication.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BusinessTripApplication.Models.BusinessContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<BusinessTripApplication.Models.DatabaseContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(BusinessTripApplication.Models.BusinessContext context)
+        protected override void Seed(BusinessTripApplication.Models.DatabaseContext context)
         {
             //  This method will be called after migrating to the latest version.
 

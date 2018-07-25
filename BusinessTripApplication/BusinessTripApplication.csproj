@@ -182,7 +182,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AreaModel.cs" />
-    <Compile Include="Models\BusinessContext.cs" />
+    <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\TripModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
