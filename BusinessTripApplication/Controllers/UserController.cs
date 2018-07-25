@@ -56,7 +56,8 @@ namespace BusinessTripApplication.Controllers
                 if (response == 1)
                 {
                     Response.Cookies.Add(model.cookie);
-                    return View("Dashboard");
+                    return RedirectToAction("Dashboard");//we want to load a new page with new url, not just rendering the view
+                    //return View("Dashboard");
                 }
                 return View(model);
             }
