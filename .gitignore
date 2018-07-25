@@ -4,6 +4,9 @@ packages
 bin
 obj
 *.user
+*log
 
 # shared files downloaded by build scripts
 build/
+/BusinessTripApplication/Repository/ITripRepository.cs
+/BusinessTripApplication/Repository/TripRepository.cs
