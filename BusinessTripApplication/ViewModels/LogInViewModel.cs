@@ -34,14 +34,14 @@ namespace BusinessTripApplication.ViewModels
             Title = "LogIn";
         }
 
-        public LogInViewModel(bool modelState, string Email, string Password,bool RememberMe, IUserService userService,out int returnValue)
+        public LogInViewModel(bool modelState, string email, string password,bool rememberMe, IUserService userService,out int returnValue)
         {
             if (modelState)
             {
                 var message = "";
                 using (UserContext dc = new UserContext())
                 {
-                    var v = dc.Users.Where(a => a.Email == Email).FirstOrDefault();
+                    var v = dc.Users.Where(a => a.Email == email).FirstOrDefault();
                     if (v != null)
                     {
                         if (!v.IsEmailVerified)
@@ -51,14 +51,19 @@ namespace BusinessTripApplication.ViewModels
                             return;
                         }
 
-                        if (string.Compare(Crypto.Hash(Password), v.Password) == 0)
+                        if (string.Compare(Crypto.Hash(password), v.Password) == 0)
                         {
-                            int timeout = RememberMe ? 525600 : 20; // 525600 min = 1 year
-                            var ticket = new FormsAuthenticationTicket(Email, RememberMe, timeout);
+                            int timeout = rememberMe ? 525600 : 20; // 525600 min = 1 year
+                            var ticket = new FormsAuthenticationTicket(email, rememberMe, timeout);
                             string encrypted = FormsAuthentication.Encrypt(ticket);
                             Cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
                             Cookie.Expires = DateTime.Now.AddMinutes(timeout);
                             Cookie.HttpOnly = true;
+
+
+                            RememberMe = rememberMe;
+                            Email = email;
+                            Password = "";//do not expose password
 
                             returnValue = 1;
                             return;
