@@ -33,8 +33,10 @@
         .attr('data-original-title', "")
         .tooltip('fixTitle').tooltip('hide');
 
-
-   
+    //when starting the page, if the inputs are correct, do not disable the button(when refreshing the page)
+    CheckEmail(1);
+    CheckPassword(1);
+    CheckUsername(1);
     /*
     $('#btn_Create').click(function () {
         CheckUsername(0);

@@ -27,6 +27,11 @@
         .tooltip('fixTitle').tooltip('hide');
 
 
+    //when starting the page, if the inputs are correct, do not disable the button(when refreshing the page)
+    CheckEmail(1);
+    CheckPassword(1);
+
+
     $(input_password).keyup(function () {
         CheckEmail(1);
         CheckPassword(0);
