@@ -55,5 +55,25 @@ namespace BusinessTripApplication.UnitTests.Controllers
             
             Assert.IsTrue(model.Status);
         }
+
+        [TestMethod]
+        public void Login_LoginUserWithValidData_StatusTrue()
+        {
+            //Arrange
+            var rememberMe = false;
+            var email = "csabagabor97@gmail.com";
+            var password = "test1A!a";
+
+            var controller = new UserController(service);
+
+            var result = controller.LogIn(email, password, rememberMe) as RedirectToRouteResult;
+            Assert.IsNotNull(result, "Not a redirect result");
+            result.RouteValues["action"].Equals("Dashboard");
+        }
+
+        public void Login_LoginUserWithAnInvalidEmail_StatusFalse()
+        {
+
+        }
     }
 }
