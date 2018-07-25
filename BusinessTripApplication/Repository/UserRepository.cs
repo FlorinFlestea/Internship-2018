@@ -19,7 +19,7 @@ namespace BusinessTripApplication.Repository
 
             try
             {
-                using (var context = new UserContext())
+                using (var context = new DatabaseContext())
                 {
                     context.Users.Add(addedUser);
                     context.SaveChanges();
@@ -39,7 +39,7 @@ namespace BusinessTripApplication.Repository
             IList<User> users = new List<User>();
             try
             {             
-                using (var context = new UserContext())
+                using (var context = new DatabaseContext())
                 {
                     users = context.Users.ToList();
                 }
@@ -72,7 +72,7 @@ namespace BusinessTripApplication.Repository
             User update;
             try
             {
-                using (var context = new UserContext())
+                using (var context = new DatabaseContext())
                 {
                     update = context.Users.SingleOrDefault(user => user.Id == updatedUser.Id);
                     update.IsEmailVerified = updatedUser.IsEmailVerified;
