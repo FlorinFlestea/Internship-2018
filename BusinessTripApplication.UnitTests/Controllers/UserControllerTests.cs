@@ -161,26 +161,50 @@ namespace BusinessTripApplication.UnitTests.Controllers
         [TestMethod]
         public void Login_LoginUserWithAnInvalidEmail_StatusFalse()
         {
-            
-
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
-            
-            
             IUserRepository userRepository = MockUserRepository.Object;
-
             IUserService userService = new UserService(userRepository);
-
             Mock<ILogInViewModel> MockLogInViewModel = new Mock<ILogInViewModel>();
             UserControllerSetupMoq.CheckUser(MockLogInViewModel);
             ILogInViewModel loginViewModel = MockLogInViewModel.Object;
-
             //Act
             User dummyUser = new User("", "test@test.com", "");
             bool result = loginViewModel.CheckUser(userService, dummyUser);
 
             //Assert
             Assert.IsFalse(result);
+        }
 
+        [TestMethod]
+        public void Login_LoginUserWithAnIncorrectPassword_StatusFalse()
+        {
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User("", "testlogin@test.com", "testlogin")
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.Add(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
+            IUserRepository userRepository = MockUserRepository.Object;
+
+            IUserService userService = new UserService(userRepository);
+
+            Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
+            MailMessage message = new MailMessage();
+            UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
+            //UserControllerSetupMoq.CheckUser(MockRegistrationViewModel);
+
+            Mock<ILogInViewModel> MockLogInViewModel = new Mock<ILogInViewModel>();
+            UserControllerSetupMoq.CheckUser(MockLogInViewModel);
+            ILogInViewModel loginViewModel = MockLogInViewModel.Object;
+            //Act
+            User dummyUser = new User("", "testlogin@test.com", "testincorrect");
+            bool result = loginViewModel.CheckUser(userService, dummyUser);
+
+            //Assert
+            Assert.IsFalse(result);
         }
 
     }

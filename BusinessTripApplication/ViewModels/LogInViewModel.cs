@@ -42,13 +42,13 @@ namespace BusinessTripApplication.ViewModels
                 try
                 {
                     User user=new User("",email,password);
+                    RememberMe = rememberMe;
                     Status = CheckUser(userService, user);
                     if (Status)
                     {
-                        RememberMe = rememberMe;
                         Email = email;
                         Password = "";//do not expose password
-                        SetCookie(email, rememberMe);
+                        
                         returnValue = 1;
                         return;
                     }
@@ -132,7 +132,7 @@ namespace BusinessTripApplication.ViewModels
                 Message = " Incorrect password";
                 return false;
             }
-            
+            SetCookie(user.Email, RememberMe);
             return true;
         }
 

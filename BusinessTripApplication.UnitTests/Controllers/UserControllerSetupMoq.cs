@@ -3,6 +3,7 @@ using BusinessTripApplication.Repository;
 using BusinessTripApplication.ViewModels;
 using Moq;
 using System.Net.Mail;
+using System.Web.Helpers;
 
 namespace BusinessTripApplication.UnitTests.Controllers
 {
@@ -51,8 +52,9 @@ namespace BusinessTripApplication.UnitTests.Controllers
                     if (emailExists==false)
                         return false;
 
-                    User addedUser = userService.Add(user);
-                    addedUser.Password = "";
+                    User addedUser = userService.GetUserByEmail(user.Email);
+                    if ((addedUser.Password == Crypto.Hash(user.Password))==false)
+                        return false;
                     bool rememberMe = false;
 
                     MockLoginViewModel.Object.SetCookie(user.Email, rememberMe);
