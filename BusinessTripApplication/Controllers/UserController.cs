@@ -12,6 +12,8 @@ namespace BusinessTripApplication.Controllers
     {
 
         IUserService UserService;
+        private static readonly log4net.ILog Logger
+       = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public UserController(IUserService repo)
         {
@@ -99,6 +101,7 @@ namespace BusinessTripApplication.Controllers
             }
             catch (Exception e)
             {
+                Logger.Info(e.Message);
                 return RedirectToRoute("~/Shared/Error");
             }
             

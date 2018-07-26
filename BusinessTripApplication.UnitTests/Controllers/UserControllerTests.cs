@@ -9,6 +9,7 @@ using BusinessTripApplication.ViewModels;
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessTripApplication.UnitTests.Repository;
+using System.Net.Mail;
 
 namespace BusinessTripApplication.UnitTests.Controllers
 {
@@ -22,62 +23,104 @@ namespace BusinessTripApplication.UnitTests.Controllers
          2. Email not used -> status = true
          3. Email null -> status = false
          */
-        public readonly IUserService service;
-        public UserControllerTests()
-        {        
-            this.service = new UserService(new UserRepositoryTests().MockUserRepository);
-        }
-
 
         [TestMethod]
         public void Registration_RegisterUserWithAnEmailAlreadyUsed_StatusFalse()
         {
-            //Arrange
-            var dummyUser = new User("", "test@test.com", "");
-            service.Add(dummyUser);
-            var controller = new UserController(service);
+            IList<User> users = new List<User>()
+            {
+               new User("", "test@test.com", "")
+            };
 
-            var result = controller.Registration(dummyUser) as ViewResult;
-            var model = result.Model as RegistrationViewModel;
-            
-            Assert.IsFalse(model.Status);
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.Add(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
+            IUserRepository userRepository = MockUserRepository.Object;
+
+            IUserService userService = new UserService(userRepository);
+
+            var controller = new UserController(userService);
+
+            Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
+            MailMessage message = new MailMessage();
+            UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
+            UserControllerSetupMoq.CheckUser(MockRegistrationViewModel);
+            IRegistrationViewModel registrationViewModel = MockRegistrationViewModel.Object;
+
+            //Act
+            User dummyUser = new User("", "test@test.com", "");
+            bool result = registrationViewModel.CheckUser(userService, dummyUser);
+
+            //Assert
+            Assert.IsFalse(result);
 
         }
 
         [TestMethod]
         public void Registration_RegisterUserWithValidData_StatusTrue()
         {
-            var dummyUser = new User("Andrew", "cernovalex1@gmail.com", "");
-            var controller = new UserController(service);
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+               new User("", "test@test.com", "")
+            };
 
-            var result = controller.Registration(dummyUser) as ViewResult;
-            var model = result.Model as RegistrationViewModel;
-            
-            Assert.IsTrue(model.Status);
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.Add(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
+            IUserRepository userRepository = MockUserRepository.Object;
+
+            IUserService userService = new UserService(userRepository);
+
+            var controller = new UserController(userService);
+
+            Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
+            MailMessage message = new MailMessage();
+            UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
+            UserControllerSetupMoq.CheckUser(MockRegistrationViewModel);
+            IRegistrationViewModel registrationViewModel = MockRegistrationViewModel.Object;
+
+            //Act
+            var dummyUser = new User("Andrew", "cernovalex1@gmail.com", "");
+            bool result = registrationViewModel.CheckUser(userService, dummyUser);
+
+
+            //Assert
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void Login_LoginUserWithValidData_StatusTrue()
+        public void SendEmail_CheckMessage()
         {
-            var dummyUser = new User("", "csabagabor97@gmail.com", "test1A!a");
-            service.Add(dummyUser);
+            //Arrange
+            Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
+            MailMessage message = new MailMessage();
 
-            var rememberMe = false;
-            var email = "csabagabor97@gmail.com";
-            var password = "test1A!a";
+            //UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
+            MockRegistrationViewModel.Setup(mock => mock.SendVerificationLinkEmail(It.IsAny<string>(), It.IsAny<string>())).Callback(
+               (string emailTo, string activation) =>
+               {
+                   message = new MailMessage(new MailAddress("businesstripapplication@gmail.com", "Registration"), new MailAddress(emailTo))
+                   {
+                       Subject = "Activation link",
+                       Body = activation,
+                       IsBodyHtml = true
+                   };
+               });
+            //
+            IRegistrationViewModel registrationViewModel = MockRegistrationViewModel.Object;
 
-            var controller = new UserController(service);
+            //Act
+            string email = "email@asd.com";
+            string guid = Guid.NewGuid().ToString();
+            registrationViewModel.SendVerificationLinkEmail(email, guid);
 
-            var result = controller.LogIn(email, password, rememberMe) as RedirectToRouteResult;
-            Assert.IsNotNull(result, "Not a redirect result");
-            Assert.AreEqual("LogIn", result.RouteValues["controller"]);
-           // Assert.AreEqual("Dashboard", result.RouteValues["action"].ToString());
-            //result.RouteValues["action"].Equals("Dashboard");
+            //Assert
+            Assert.AreEqual(message.Subject, "Activation link");
+            Assert.AreEqual(message.To[0], email);
+            Assert.AreEqual(message.Body, guid);
+            Assert.AreEqual(message.IsBodyHtml, true);
         }
 
-        public void Login_LoginUserWithAnInvalidEmail_StatusFalse()
-        {
-
-        }
     }
 }
