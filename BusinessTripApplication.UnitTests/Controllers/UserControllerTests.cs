@@ -155,5 +155,33 @@ namespace BusinessTripApplication.UnitTests.Controllers
             Assert.IsTrue(result);
         }
 
+        /*
+        Login part
+        */
+        [TestMethod]
+        public void Login_LoginUserWithAnInvalidEmail_StatusFalse()
+        {
+            
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            
+            
+            IUserRepository userRepository = MockUserRepository.Object;
+
+            IUserService userService = new UserService(userRepository);
+
+            Mock<ILogInViewModel> MockLogInViewModel = new Mock<ILogInViewModel>();
+            UserControllerSetupMoq.CheckUser(MockLogInViewModel);
+            ILogInViewModel loginViewModel = MockLogInViewModel.Object;
+
+            //Act
+            User dummyUser = new User("", "test@test.com", "");
+            bool result = loginViewModel.CheckUser(userService, dummyUser);
+
+            //Assert
+            Assert.IsFalse(result);
+
+        }
+
     }
 }
