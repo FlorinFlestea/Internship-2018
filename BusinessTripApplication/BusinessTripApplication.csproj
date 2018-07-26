@@ -190,6 +190,8 @@
     <Compile Include="Repository\IAreaRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Service\AreaService.cs" />
+    <Compile Include="Service\IAreaService.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="ViewModels\IRegistrationViewModel.cs" />
