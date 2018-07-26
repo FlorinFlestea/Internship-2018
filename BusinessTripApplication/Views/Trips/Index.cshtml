@@ -13,6 +13,49 @@
 
 }
 
+<div id="search">
+
+    @using (Html.BeginForm("Index", "Trips", FormMethod.Get))
+    {
+        <b> Search Option: </b>
+        List<SelectListItem>
+            listItems = new List<SelectListItem>
+                ();
+        listItems.Add(new SelectListItem
+        {
+            Text = "Name",
+            Value = "Name"
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "ProjectName",
+            Value = "ProjectName",
+            Selected = true
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "ProjectNumber",
+            Value = "ProjectNumber"
+        });
+        //  }
+
+        @Html.DropDownList("option", new SelectList(listItems, "value", "text"))
+
+
+
+        //the following are search options
+        // <b> Search Option: </b>
+        //  @Html.RadioButton("option", "Name")
+        //  <text>Name</text>
+        //   @Html.RadioButton("option", "ProjectName")
+        //  <text> ProjectName </text>
+        //   @Html.RadioButton("option", "ProjectNumber")
+        //   <text>ProjectNumber</text>
+        <br>
+        @Html.TextBox("search")
+        <input type="submit" name="submit" value="Search" />
+    }
+</div>
 <div class="alert alert-dismissible alert-warning" style="margin-top:10%;">
     <h4 class="alert-heading">Pending request</h4>
     <table class="table table-hover">

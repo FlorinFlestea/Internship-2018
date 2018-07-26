@@ -16,11 +16,29 @@ namespace BusinessTripApplication.Controllers
         private BusinessContext db = new BusinessContext();
 
         // GET: Trips
-        public ActionResult Index()
+        public ActionResult Index(string option,string search)
         {
-            return View(db.Trips.ToList());
+            if (option == "Name")
+            {
+                //Index action method will return a view with a student records based on what a user specify the value in textbox  
+                return View(db.Trips.Where(x=> x.PmName == search || search == null).ToList());
+            }
+            else if (option == "ProjectName")
+            {
+                return View(db.Trips.Where(x=> x.ProjectName == search || search == null).ToList());
+            }
+            else if(option =="ProjectNumber")
+            {
+                return View(db.Trips.Where(x=> x.ProjectNumber== search || search == null).ToList());
+            }
+
+            return View(db.Trips);
         }
 
+        
+
+
+        
         // GET: Trips/Details/5
         public ActionResult Details(int? id)
         {
