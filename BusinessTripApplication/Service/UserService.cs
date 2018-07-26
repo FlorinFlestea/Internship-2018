@@ -15,32 +15,81 @@ namespace BusinessTripApplication.Repository
 
         public UserService(IUserRepository userRepository)
         {
-            this.userRepository = userRepository;
+            try
+            {
+                this.userRepository = userRepository;
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
         public User Add(User addedUser)
         {
-            return userRepository.Add(addedUser);
+            try
+            {
+                return userRepository.Add(addedUser);
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
         public bool EmailExists(string email)
         {
-            return userRepository.FindByEmail(email) != null;
+            try
+            {
+                return userRepository.FindByEmail(email) != null;
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
         public IList<User> FindAll()
         {
-            return userRepository.FindAll();
+            try
+            {
+                return userRepository.FindAll();
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
         public bool VerifyAccount(string id)
         {
-            User user = userRepository.FindByActivationCode(new Guid(id));
+            User user;
+            try
+            {
+                user = userRepository.FindByActivationCode(new Guid(id));
+            }
+            catch
+            {
+                throw;
+            }
+            
 
             if (user != null && !user.IsEmailVerified)
             {
                 user.IsEmailVerified = true;
-                userRepository.UpdateIsEmailVerified(user);
+                try
+                {
+                    userRepository.UpdateIsEmailVerified(user);
+                }
+                catch
+                {
+                    throw;
+                }
+                
                 return true;
             }
 

@@ -11,95 +11,128 @@ namespace BusinessTripApplication.UnitTests.Repository
     [TestClass]
     public class UserRepositoryTests
     {
-        public readonly IUserRepository MockUserRepository;
-        public UserRepositoryTests()
+        [TestMethod]
+        public void FindByEmail_Good_ReturnUser()
         {
-            IList<User> users = new List<User>
+            //Arrange
+            IList<User> users = new List<User>()
             {
                 new User(),
                 new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
                 new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
             };
 
-            Mock<IUserRepository> mockUserRepository = new Mock<IUserRepository>();
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
 
-            mockUserRepository.Setup(mr => mr.FindByEmail(It.IsAny<string>())).Returns(
-                (string email) => users.Where(x => x.Email == email).SingleOrDefault());
-
-            mockUserRepository.Setup(mr => mr.FindByActivationCode(It.IsAny<Guid>())).Returns(
-                (Guid id) => users.Where(x => x.ActivationCode == id).SingleOrDefault());
-
-            mockUserRepository.Setup(mr => mr.FindAll()).Returns(
-                users);
-
-            mockUserRepository.Setup(mr => mr.UpdateIsEmailVerified(It.IsAny<User>())).Returns(
-                (User update) =>
-                {
-                    User user = users.SingleOrDefault(x => x.Id == update.Id);
-
-                    if (user != null)
-                    {
-                        user.IsEmailVerified = update.IsEmailVerified;
-                    }
-                    return user;
-                });
-
-            mockUserRepository.Setup(mr => mr.Add(It.IsAny<User>())).Returns(
-                (User addedUser) =>
-                {
-                    users.Add(addedUser);
-                    return addedUser;
-                });
-
-            this.MockUserRepository = mockUserRepository.Object;
-        }
-
-        [TestMethod]
-        public void FindByEmail_Good_ReturnUser()
-        {
+            //Act
             string email = "asd";
-            User result = MockUserRepository.FindByEmail(email);
+            User result = MockUserRepository.Object.FindByEmail(email);
 
+            //Assert
             Assert.AreEqual(result.Email, email);
         }
 
         [TestMethod]
         public void FindByEmail_Bad_ReturnsNull()
         {
-            string email = "badEmail";
-            User result = MockUserRepository.FindByEmail(email);
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
 
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
+
+            //Act
+            string email = "badEmail";
+            User result = MockUserRepository.Object.FindByEmail(email);
+
+            //Assert
             Assert.AreEqual(result, null);
         }
 
         public void FindByActivationCode_Good_ReturnsUser()
         {
-            Guid code = new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da");
-            User result = MockUserRepository.FindByActivationCode(code);
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
 
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.FindByActivationCode(MockUserRepository, users);
+
+            //Act
+            Guid code = new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da");
+            User result = MockUserRepository.Object.FindByActivationCode(code);
+
+            //Assert
             Assert.AreEqual(result.Email, code);
         }
 
         [TestMethod]
         public void FindByActivationCode_Bad_ReturnsNull()
         {
-            Guid code = new Guid("229c7b1b-309e-4d83-95b7-2f3e800403bb");
-            User result = MockUserRepository.FindByActivationCode(code);
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
 
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.FindByActivationCode(MockUserRepository, users);
+
+            //Act
+            Guid code = new Guid("229c7b1b-309e-4d83-95b7-2f3e800403bb");
+            User result = MockUserRepository.Object.FindByActivationCode(code);
+
+            //Assert
             Assert.AreEqual(result, null);
         }
 
         [TestMethod]
         public void FindAll_ReturnsAllUsers()
         {
-            IList<User> users = MockUserRepository.FindAll();
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
 
-            Assert.AreEqual(users.Count, 3);
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.FindAll(MockUserRepository, users);
+
+            //Act
+            IList<User> findedUsers = MockUserRepository.Object.FindAll();
+
+            Assert.AreEqual(users.Count, findedUsers.Count);
         }
 
         [TestMethod]
         public void Update_BadUser_Nothing()
         {
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.UpdateIsEmailVerified(MockUserRepository, users);
+
+            //Act
             User user = new User()
             {
                 Id = 999,
@@ -109,15 +142,28 @@ namespace BusinessTripApplication.UnitTests.Repository
                 IsEmailVerified = false,
                 Password = "pass"
             };
+            User result = MockUserRepository.Object.UpdateIsEmailVerified(user);
 
-            User result = MockUserRepository.UpdateIsEmailVerified(user);
-
+            //Assert
             Assert.AreEqual(result, null);
         }
 
         [TestMethod]
         public void Update_GodUser_ModifyDataBase()
         {
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.UpdateIsEmailVerified(MockUserRepository, users);
+            UserRepositorySetupMoq.FindAll(MockUserRepository, users);
+
+            //Act
             User user = new User()
             {
                 Id = 1,
@@ -128,17 +174,30 @@ namespace BusinessTripApplication.UnitTests.Repository
                 Password = "pass"
             };
 
-            User result = MockUserRepository.UpdateIsEmailVerified(user);
+            User result = MockUserRepository.Object.UpdateIsEmailVerified(user);
+            User resultFromDB = MockUserRepository.Object.FindAll().Where(x => x.Id == user.Id).FirstOrDefault();
 
+            //Assert
             Assert.AreEqual(result.IsEmailVerified, user.IsEmailVerified);
-
-            User resultFromDB = MockUserRepository.FindAll().Where(x => x.Id == user.Id).FirstOrDefault();
             Assert.AreEqual(resultFromDB.IsEmailVerified, true);
         }
 
         [TestMethod]
         public void Add_Any_Modify()
         {
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User(),
+                new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false}
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.Add(MockUserRepository, users);
+            UserRepositorySetupMoq.FindAll(MockUserRepository, users);
+
+            //Act
             User user = new User()
             {
                 Id = 999,
@@ -148,14 +207,12 @@ namespace BusinessTripApplication.UnitTests.Repository
                 IsEmailVerified = false,
                 Password = "pass"
             };
-            User result = MockUserRepository.Add(user);
-            Assert.AreEqual(result, user);
-            Assert.AreEqual(MockUserRepository.FindAll().Count, 4);
+            User result = MockUserRepository.Object.Add(user);
+            IList<User> findedUsers = MockUserRepository.Object.FindAll();
 
-            user = null;
-            result = MockUserRepository.Add(user);
-            Assert.AreEqual(result, null);
-            Assert.AreEqual(MockUserRepository.FindAll().Count, 5);
+            //Assert
+            Assert.AreEqual(result, user);
+            Assert.AreEqual(findedUsers.Count, users.Count);
         }
 
 
