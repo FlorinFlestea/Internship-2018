@@ -39,7 +39,7 @@ namespace BusinessTripApplication.ViewModels
             if (modelState)
             {
                 var message = "";
-                using (UserContext dc = new UserContext())
+                using (DatabaseContext dc = new DatabaseContext())
                 {
                     var v = dc.Users.Where(a => a.Email == email).FirstOrDefault();
                     if (v != null)
