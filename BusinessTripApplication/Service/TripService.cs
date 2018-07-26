@@ -1,5 +1,4 @@
-﻿
-using BusinessTripApplication.Models;
+﻿using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 
 namespace BusinessTripApplication.Service
