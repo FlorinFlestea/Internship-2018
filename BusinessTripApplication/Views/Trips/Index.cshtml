@@ -13,9 +13,91 @@
 
 }
 
-<div class="alert alert-dismissible alert-warning">
+<div class="alert alert-dismissible alert-warning" style="margin-top:10%;">
     <h4 class="alert-heading">Pending request</h4>
-    <p class="mb-0">Here you have your requests that haven't been processed yet. Please await admin's review .</p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.PmName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.ClientName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.StartingDate)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.ProjectName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProjectNumber)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.TaskNumber)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Approved)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                 
+                    if (item.Approved == false)
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PmName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskNumber)
+                    </td>
+                    <td>
+                        @{
+                            if (item.Approved)
+                            {
+                                <span class="badge badge-pill badge-success" style="bacground-color:green;">Approved</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-pill badge-warning" style="color:orangered;">Pending</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fas fa-edit culor" }) |
+                        @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fas fa-info-circle culor" }) |
+                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fas fa-trash-alt culor" })
+                    </td>
+                </tr>
+                                }
+                            }
+            
+        </tbody>
+    </table>
+
 </div>
  
 
@@ -52,6 +134,8 @@
     <tbody>
         @foreach (var item in Model)
         {
+            if (item.Approved = true)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.PmName)
@@ -78,22 +162,24 @@
                     @{
                         if (item.Approved)
                         {
-                            <span class="badge badge-pill badge-success">Approved</span>
+                            <span class="badge badge-pill badge-success" style="bacground-color:green;">Approved</span>
                         }
                         else
                         {
-                            <span class="badge badge-pill badge-warning">Pending</span>
+                            <span class="badge badge-pill badge-warning" style="color:orangered;">Pending</span>
                         }
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id },new { @class= "fas fa-edit culor" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.Id },new { @class= "fas fa-info-circle culor" }) |
+                    @Html.ActionLink(" ", "Delete", new { id = item.Id },new { @class= "fas fa-trash-alt culor" })
                 </td>
             </tr>
-        }
+                            }
+                        }
     </tbody>
+    }
 </table>
 @*<a href="/trips/Create" class="btn btn-primary">
         <span class="glyphicon glyphicon-ok"></span> Request Trip

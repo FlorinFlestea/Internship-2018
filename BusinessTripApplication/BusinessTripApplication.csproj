@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44328</IISExpressSSLPort>
+    <IISExpressSSLPort>44319</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -202,6 +202,8 @@
     <Content Include="Content\dash-style\font-awesome.min-dash.css" />
     <Content Include="Content\dash-style\styles-dash.css" />
     <Content Include="Content\images\hermes-rivera-471868-unsplash.jpg" />
+    <Content Include="Content\images\nils-nedel-386683-unsplash.jpg" />
+    <Content Include="Content\images\rawpixel-191102-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-574844-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-579241-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-652547-unsplash.jpg" />
@@ -211,6 +213,7 @@
     <Content Include="Content\index-style\css\bootstrap-reboot.min.css" />
     <Content Include="Content\index-style\css\bootstrap.css" />
     <Content Include="Content\index-style\css\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -272,6 +275,8 @@
     <Content Include="Views\Trips\Edit.cshtml" />
     <Content Include="Views\Trips\Index.cshtml" />
     <Content Include="Views\Shared\_customLayout.cshtml" />
+    <Content Include="Views\Shared\_reg_log_layout.cshtml" />
+    <Content Include="Views\User\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Error\" />

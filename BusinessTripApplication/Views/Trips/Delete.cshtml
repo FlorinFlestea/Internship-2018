@@ -1,9 +1,10 @@
 ﻿@model BusinessTripApplication.Models.Trip
 
 @{
-    ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Layout = "~/Views/Shared/_customLayout.cshtml";
 }
+
 
 <h2>Delete</h2>
 
@@ -134,7 +135,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

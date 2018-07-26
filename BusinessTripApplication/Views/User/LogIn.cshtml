@@ -1,21 +1,21 @@
 ﻿@model BusinessTripApplication.Models.User
 
 @{
-    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_reg_log_layout.cshtml";
 }
 
 <h2>LogIn</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -33,8 +33,8 @@
             </div>
         </div>
 
-        
-        
+
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
