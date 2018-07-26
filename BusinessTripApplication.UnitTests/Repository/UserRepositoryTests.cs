@@ -55,6 +55,7 @@ namespace BusinessTripApplication.UnitTests.Repository
             Assert.AreEqual(result, null);
         }
 
+        [TestMethod]
         public void FindByActivationCode_Good_ReturnsUser()
         {
             //Arrange
@@ -73,7 +74,7 @@ namespace BusinessTripApplication.UnitTests.Repository
             User result = MockUserRepository.Object.FindByActivationCode(code);
 
             //Assert
-            Assert.AreEqual(result.Email, code);
+            Assert.AreEqual(result.ActivationCode, code);
         }
 
         [TestMethod]
