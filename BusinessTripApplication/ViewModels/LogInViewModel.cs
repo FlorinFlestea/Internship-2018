@@ -16,6 +16,7 @@ namespace BusinessTripApplication.ViewModels
 {
     public class LogInViewModel : ILogInViewModel
     {
+        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public string Email;
         public string Password;
         public bool RememberMe;
@@ -59,6 +60,7 @@ namespace BusinessTripApplication.ViewModels
                     Message = e.Message;
                     Status = false;
                     returnValue = -1;
+                    Logger.Info(e.Message);
                     return;
                 }
                 catch (DatabaseException e)
@@ -66,6 +68,7 @@ namespace BusinessTripApplication.ViewModels
                     Message = e.Message;
                     returnValue = -1;
                     Status = false;
+                    Logger.Info(e.Message);
                     return;
                 }
             }
