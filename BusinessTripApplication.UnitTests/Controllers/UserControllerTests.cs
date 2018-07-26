@@ -122,5 +122,38 @@ namespace BusinessTripApplication.UnitTests.Controllers
             Assert.AreEqual(message.IsBodyHtml, true);
         }
 
+        [TestMethod]
+        public void LogIn_InvalidEmail_StatusFalse()
+        {
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User("", "wrong@test.com", "")
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.Add(MockUserRepository, users);
+            UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
+            IUserRepository userRepository = MockUserRepository.Object;
+
+            IUserService userService = new UserService(userRepository);
+
+            var controller = new UserController(userService);
+
+            Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
+            MailMessage message = new MailMessage();
+            UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
+            UserControllerSetupMoq.CheckUser(MockRegistrationViewModel);
+            IRegistrationViewModel registrationViewModel = MockRegistrationViewModel.Object;
+
+            //Act
+            var dummyUser = new User("Andrew", "cernovalex1@gmail.com", "");
+            bool result = registrationViewModel.CheckUser(userService, dummyUser);
+
+
+            //Assert
+            Assert.IsTrue(result);
+        }
+
     }
 }

@@ -12,9 +12,9 @@ using System.Web.Security;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 
-namespace BusinessTripApplication.ViewModels
+namespace BusinessTripApplication.ViewModels 
 {
-    public class LogInViewModel
+    public class LogInViewModel : ILogInViewModel
     {
         public string Email;
         public string Password;
@@ -88,6 +88,48 @@ namespace BusinessTripApplication.ViewModels
                 Message = "Invalid request";
                 Status = false;
             }
+        }
+        public bool CheckUser(IUserService userService, User user)
+        {
+            User dbUser;
+            bool emailExists;
+            try
+            {
+                emailExists = userService.EmailExists(user.Email);
+                dbUser = userService.GetUserByEmail(user.Email);
+            }
+            catch
+            {
+                throw;
+            }
+
+            bool emailVerified;
+            try
+            {
+                emailVerified = userService.IsEmailVerified(dbUser.Email);
+            }
+            catch
+            {
+                throw;
+            }
+
+            bool goodPassword;
+            try
+            {
+                if (Crypto.Hash(dbUser.Password) == Crypto.Hash(user.Password))
+                    goodPassword = true;
+                else
+                    goodPassword = false;
+            }
+            catch
+            {
+                throw;
+            }
+
+            if (emailExists && emailVerified && goodPassword)
+                return true;
+
+            return false;
         }
     }
 }

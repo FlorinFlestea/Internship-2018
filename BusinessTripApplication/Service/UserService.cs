@@ -65,6 +65,24 @@ namespace BusinessTripApplication.Repository
             
         }
 
+        public bool IsEmailVerified(string email)
+        {
+            try
+            {
+                return userRepository.FindByEmail(email).IsEmailVerified == true;
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return userRepository.FindByEmail(email);
+        }
+
         public bool VerifyAccount(string id)
         {
             User user;
