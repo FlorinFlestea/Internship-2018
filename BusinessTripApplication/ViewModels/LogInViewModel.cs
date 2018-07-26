@@ -16,13 +16,14 @@ namespace BusinessTripApplication.ViewModels
 {
     public class LogInViewModel : ILogInViewModel
     {
+        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public string Email;
         public string Password;
         public bool RememberMe;
 
         public HttpCookie Cookie;
 
-        public string Message { get; }
+        public string Message { get; set; }
 
         public bool Status { get; }
 
@@ -38,57 +39,44 @@ namespace BusinessTripApplication.ViewModels
         {
             if (modelState)
             {
-                var message = "";
-                using (DatabaseContext dc = new DatabaseContext())
+                try
                 {
-                    var v = dc.Users.Where(a => a.Email == email).FirstOrDefault();
-                    if (v != null)
+                    User user=new User("",email,password);
+                    Status = CheckUser(userService, user);
+                    if (Status)
                     {
-                        if (!v.IsEmailVerified)
-                        {
-                            Message = "Please verify your email first";
-                            returnValue = -1;
-                            return;
-                        }
-
-                        if (string.Compare(Crypto.Hash(password), v.Password) == 0)
-                        {
-                            int timeout = rememberMe ? 525600 : 20; // 525600 min = 1 year
-                            var ticket = new FormsAuthenticationTicket(email, rememberMe, timeout);
-                            string encrypted = FormsAuthentication.Encrypt(ticket);
-                            Cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
-                            Cookie.Expires = DateTime.Now.AddMinutes(timeout);
-                            Cookie.HttpOnly = true;
-
-
-                            RememberMe = rememberMe;
-                            Email = email;
-                            Password = "";//do not expose password
-
-                            returnValue = 1;
-                            return;
-                        }
-                        else
-                        {
-                            message = "Invalid credentials provided";
-                        }
+                        RememberMe = rememberMe;
+                        Email = email;
+                        Password = "";//do not expose password
+                        SetCookie(email, rememberMe);
+                        returnValue = 1;
+                        return;
                     }
-                    else
-                    {
-                        message = "Invalid credentials provided";
-                    }
+                    returnValue = -1;
+                    return;
                 }
-                Message = message;
-                returnValue = -1;
-                return;
+                catch (InternetException e)
+                {
+                    Message = e.Message;
+                    Status = false;
+                    returnValue = -1;
+                    Logger.Info(e.Message);
+                    return;
+                }
+                catch (DatabaseException e)
+                {
+                    Message = e.Message;
+                    returnValue = -1;
+                    Status = false;
+                    Logger.Info(e.Message);
+                    return;
+                }
             }
-            else
-            {
-                returnValue = -1;
-                Message = "Invalid request";
-                Status = false;
-            }
+            returnValue = -1;
+            Message = " Invalid request";
+            Status = false;
         }
+
         public bool CheckUser(IUserService userService, User user)
         {
             User dbUser;
@@ -96,6 +84,11 @@ namespace BusinessTripApplication.ViewModels
             try
             {
                 emailExists = userService.EmailExists(user.Email);
+                if (!emailExists)
+                {
+                    Message = " Sorry, you have to register first";
+                    return false;
+                }
                 dbUser = userService.GetUserByEmail(user.Email);
             }
             catch
@@ -116,7 +109,7 @@ namespace BusinessTripApplication.ViewModels
             bool goodPassword;
             try
             {
-                if (Crypto.Hash(dbUser.Password) == Crypto.Hash(user.Password))
+                if (dbUser.Password == Crypto.Hash(user.Password))
                     goodPassword = true;
                 else
                     goodPassword = false;
@@ -126,10 +119,33 @@ namespace BusinessTripApplication.ViewModels
                 throw;
             }
 
-            if (emailExists && emailVerified && goodPassword)
-                return true;
+            
 
-            return false;
+            if (!emailVerified)
+            {
+                Message = " You have to verifiy your email first";
+                return false;
+            }
+
+            if (!goodPassword)
+            {
+                Message = " Incorrect password";
+                return false;
+            }
+            
+            return true;
         }
+
+
+        public void SetCookie(string email, bool rememberMe)
+        {
+            int timeout = rememberMe ? 525600 : 20; // 525600 min = 1 year
+            var ticket = new FormsAuthenticationTicket(email, rememberMe, timeout);
+            string encrypted = FormsAuthentication.Encrypt(ticket);
+            Cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+            Cookie.Expires = DateTime.Now.AddMinutes(timeout);
+            Cookie.HttpOnly = true;
+        }
+
     }
 }

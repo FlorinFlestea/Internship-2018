@@ -40,6 +40,26 @@ namespace BusinessTripApplication.UnitTests.Controllers
                     return true;
                 });
         }
-       
+
+        public static void CheckUser(Mock<ILogInViewModel> MockLoginViewModel)
+        {
+                MockLoginViewModel.Setup(mock => mock.CheckUser(It.IsAny<IUserService>(), It.IsAny<User>())).Returns(
+                (IUserService userService, User user) =>
+                {
+                    bool emailExists = userService.EmailExists(user.Email);
+
+                    if (emailExists==false)
+                        return false;
+
+                    User addedUser = userService.Add(user);
+                    addedUser.Password = "";
+                    bool rememberMe = false;
+
+                    MockLoginViewModel.Object.SetCookie(user.Email, rememberMe);
+
+                    return true;
+                });
+        }
+
     }
 }
