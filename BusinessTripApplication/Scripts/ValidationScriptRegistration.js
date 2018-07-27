@@ -89,21 +89,13 @@
     }
 
     function DisableButton() {
-        //$(':input[type="submit"]').prop('disabled', true);
-        //
-        if ($('#btn_Create').css('onclick') !== null) {
-            $("#btn_Create").onclick = "return false";
-        } else {
-            $('#btn_Create').attr("onclick", "return false");
-            $('#btn_Create').css("onclick", "return false");
-        }
         $("#btn_Create").css('opacity', '0.5');
+        $('#btn_Create').attr("onClick", "return false");
     }
 
     function EnableButton() {
         $("#btn_Create").css('opacity', '1');
-        $("#btn_Create").removeAttr('onclick');
-        //$(':input[type="submit"]').prop('disabled', false);
+        $('#btn_Create').attr("onClick", "return true");
     }
 
     function HideTooltipUserName() {

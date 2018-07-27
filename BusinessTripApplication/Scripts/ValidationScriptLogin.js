@@ -58,21 +58,13 @@
     }
 
     function DisableButton() {
-        //$(':input[type="submit"]').prop('disabled', true);
-        //
-        if ($(button).css('onclick') !== null) {
-            $(button).onclick = "return false";
-        } else {
-            $(button).attr("onclick", "return false");
-            $(button).css("onclick", "return false");
-        }
         $(button).css('opacity', '0.5');
+        $(button).attr("onClick", "return false");
     }
 
     function EnableButton() {
         $(button).css('opacity', '1');
-        $(button).removeAttr('onclick');
-        //$(':input[type="submit"]').prop('disabled', false);
+        $(button).attr("onClick", "return true");
     }
 
   
