@@ -13,6 +13,11 @@ namespace BusinessTripApplication.Repository
     {
         private readonly IUserRepository userRepository;
 
+        public UserService()
+        {
+            this.userRepository = new UserRepository();
+        }
+
         public UserService(IUserRepository userRepository)
         {
             try
@@ -63,6 +68,25 @@ namespace BusinessTripApplication.Repository
                 throw;
             }
             
+        }
+
+        public User FindByEmail(User user)
+        {
+            IList<User> users;
+
+            try
+            {
+                users = userRepository.FindAll();
+            }
+            catch
+            {
+                throw;
+            }
+
+            User finded = users.Where(u => u.Email == user.Email).FirstOrDefault();
+            if (finded == default(User))
+                throw new DatabaseException("User doesn't exists!");
+            return finded;
         }
 
         public bool VerifyAccount(string id)

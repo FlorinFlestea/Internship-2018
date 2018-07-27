@@ -20,11 +20,30 @@ namespace BusinessTripApplication
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/popper.js",
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/respond.js",
+                      "~/Scripts/summernote-bs4.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datepickerJS").Include(
+                     "~/Scripts/bootstrap-datepicker.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/datepickerCSS").Include(
+                     "~/Content/bootstrap-datepicker.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/selectJS").Include(
+                      "~/Scripts/bootstrap-select.js",
+                      "~/Scripts/script-bootstrap-select.js",
+                      "~/Scripts/bootstrap-select.min.js"
+                      ));
+
+            bundles.Add(new StyleBundle("~/bundles/selectCSS").Include(
+                     "~/Content/bootstrap-select.css",
+                     "~/Content/bootstrap-select.min.css"));
         }
     }
 }
