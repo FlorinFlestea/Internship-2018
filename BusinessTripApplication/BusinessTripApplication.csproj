@@ -186,10 +186,14 @@
     <Compile Include="Models\TripModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AreaRepository.cs" />
+    <Compile Include="Repository\IAreaRepository.cs" />
     <Compile Include="Repository\ITripRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\TripRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Service\AreaService.cs" />
+    <Compile Include="Service\IAreaService.cs" />
     <Compile Include="Service\ITripService.cs" />
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\TripService.cs" />
