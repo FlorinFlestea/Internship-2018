@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.Security;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.ViewModels;
@@ -28,17 +29,64 @@ namespace BusinessTripApplication.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("PermissionDenied");
+            }
             RegistrationViewModel model = new RegistrationViewModel();
             return View(model);
         }
 
-        public ActionResult LogIn(int id = 0)
+        [HttpGet]
+        public ActionResult LogIn()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("PermissionDenied");
+            }
+            LogInViewModel model = new LogInViewModel();
+            return View(model);
+        }
+
+        [Authorize]
+        public ActionResult Dashboard()
         {
             return View();
         }
-        public ActionResult Dashboard(int id = 0)
+
+        [Authorize]
+        public ActionResult PermissionDenied()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogIn(string email, string password, bool rememberMe)
+        {
+            try
+            {
+                int response = -1;
+                var model = new LogInViewModel(ModelState.IsValid, email, password, rememberMe, UserService, out response);
+                if (response == 1)
+                {
+                    Response.Cookies.Add(model.Cookie);
+                    return RedirectToAction("Dashboard");//we want to load a new page with new url, not just rendering the view
+                }
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return RedirectToRoute("~/Shared/Error");
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "User");
         }
 
 

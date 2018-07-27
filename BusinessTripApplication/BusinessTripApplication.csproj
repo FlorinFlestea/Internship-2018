@@ -23,6 +23,11 @@
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -198,7 +203,9 @@
     <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\TripService.cs" />
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="ViewModels\ILogInViewModel.cs" />
     <Compile Include="ViewModels\IRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -244,19 +251,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\dash-scripts\bootstrap-datepicker.js" />
-    <Content Include="Scripts\dash-scripts\bootstrap-dash.js" />
-    <Content Include="Scripts\dash-scripts\bootstrap.min-dash.js" />
-    <Content Include="Scripts\dash-scripts\chart-data-dash.js" />
-    <Content Include="Scripts\dash-scripts\chart.min.js" />
-    <Content Include="Scripts\dash-scripts\custom-dash.js" />
-    <Content Include="Scripts\dash-scripts\easypiechart-data.js" />
-    <Content Include="Scripts\dash-scripts\easypiechart.js" />
-    <Content Include="Scripts\dash-scripts\html5shiv.min.js" />
-    <Content Include="Scripts\dash-scripts\jquery-1.11.1.min.js" />
-    <Content Include="Scripts\dash-scripts\lumino.glyphs.js" />
-    <Content Include="Scripts\dash-scripts\npm.js" />
-    <Content Include="Scripts\dash-scripts\respond.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -268,7 +262,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\mvcvalidationextensions.unobtrusive.js" />
-    <Content Include="Scripts\ValidationScript.js" />
+    <Content Include="Scripts\ParseURL_registration.js" />
+    <Content Include="Scripts\ParseURL_login.js" />
+    <Content Include="Scripts\ValidationScriptRegistration.js" />
+    <Content Include="Scripts\ValidationScriptLogin.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -285,10 +282,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\VerifyAccount.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Dashboard.cshtml" />
+    <Content Include="Views\Shared\NoToolBarLayout.cshtml" />
+    <Content Include="Views\User\LogIn.cshtml" />
+    <Content Include="Views\Shared\PermissionDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

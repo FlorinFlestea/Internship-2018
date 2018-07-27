@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
+using System.Web.ModelBinding;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
+
 
 namespace BusinessTripApplication.ViewModels
 {
@@ -48,13 +50,13 @@ namespace BusinessTripApplication.ViewModels
                     return;
                 }
 
-                Message = "Registration successfully done. Account activation link " +
+                Message = " Registration successfully done. Account activation link " +
                                   " has been sent to your email id:" + user.Email;
                 Status = true;
             }
             else
             {
-                Message = "Invalid request";
+                Message = " Invalid request";
                 Status = false;
             }
         }
@@ -73,7 +75,7 @@ namespace BusinessTripApplication.ViewModels
             
             if (emailExists)
             {
-                throw new DatabaseException("Email already exists!\n");
+                throw new DatabaseException(" Email already exists!\n");
             }
             try
             {
