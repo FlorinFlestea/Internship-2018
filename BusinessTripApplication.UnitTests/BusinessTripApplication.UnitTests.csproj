@@ -80,6 +80,8 @@
     <Compile Include="Controllers\UserControllerTests.cs" />
     <Compile Include="Models\UserModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\TripRepositorySetupMoq.cs" />
+    <Compile Include="Repository\TripRepositoryTests.cs" />
     <Compile Include="Repository\UserRepositorySetupMoq.cs" />
     <Compile Include="Repository\UserRepositoryTests.cs" />
     <Compile Include="Service\UserServiceTests.cs" />
