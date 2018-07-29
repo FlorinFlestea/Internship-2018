@@ -39,6 +39,7 @@ namespace BusinessTripApplication.Controllers
             //Get usere from session
             trip.User = new User() { Id = 2, Name = "TempUser", Email = "dragoscojanu97@yahoo.ro" };
             TripCreateViewModel model = new TripCreateViewModel(ModelState.IsValid, trip, tripService, areaService, userService);
+            return View(model);
             if (model.Status)
                 return View(model);
             else

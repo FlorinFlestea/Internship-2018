@@ -22,16 +22,17 @@ namespace BusinessTripApplication.Models
         public string ClientName { get; set; }
 
         [Display(Name = "Starting Date*")]
-        [Required(ErrorMessage = "Please enter starting date!")]
+        [Required(ErrorMessage = "Please enter the date!")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [LessThan("EndDate", ErrorMessage = "The date must be lower than end date!")]
+        [LessThanEqualTo("EndDate", ErrorMessage = "The date must be lower than end date!")]
         public Nullable<DateTime> StartingDate { get; set; }
 
         [Display(Name = "End Date*")]
+        [Required(ErrorMessage = "Please enter the date!")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [GreaterThan("StartingDate", ErrorMessage = "The date must be greater than starting date!")]
+        [GreaterThanEqualTo("StartingDate", ErrorMessage = "The date must be greater than starting date!")]
         public Nullable<DateTime> EndDate { get; set; }
 
         [Display(Name = "Project name")]
@@ -90,6 +91,9 @@ namespace BusinessTripApplication.Models
         public int Status { get; set; }
 
         public User User { get; set; }
+
+        [Display(Name = "Area*")]
+        [Required(ErrorMessage = "Please select an area!")]
         public Area Area { get; set; }
     }
 }

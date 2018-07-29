@@ -85,6 +85,16 @@ namespace BusinessTripApplication.ViewModels
             }
             else
             {
+                try
+                {
+                    Areas = GetSelectItems(areaService);
+                }
+                catch (DatabaseException e)
+                {
+                    Message = e.Message;
+                    Status = false;
+                    return;
+                }
                 Message = "Invalid request!";
                 Status = false;
             }
