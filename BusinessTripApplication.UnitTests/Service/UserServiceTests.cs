@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessTripApplication.UnitTests.Service
 {
@@ -169,6 +170,60 @@ namespace BusinessTripApplication.UnitTests.Service
 
             //Assert
             Assert.IsFalse(isVerified);
+        }
+
+        [TestMethod]
+        public void FindByEmail_BadEmail_ReturnsDefaultUser()
+        {
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User{Id=1, Email="asd"}
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.FindAll(MockUserRepository, users);
+            IUserService userService = new UserService(MockUserRepository.Object);
+
+            //Act
+            IList<User> findedUsers = userService.FindAll();
+            User user = new User()
+            {
+                Email = "bad"
+            };
+
+            User findedUser = findedUsers.Where(u => u.Email == user.Email).FirstOrDefault();
+
+            //Assert
+            Assert.AreNotEqual(findedUser, user);
+            Assert.AreEqual(findedUser, default(User));
+        }
+
+        [TestMethod]
+        public void FindByEmail_GoodEmail_ReturnsUser()
+        {
+            //Arrange
+            IList<User> users = new List<User>()
+            {
+                new User{Id=1, Email="asd"}
+            };
+
+            Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
+            UserRepositorySetupMoq.FindAll(MockUserRepository, users);
+            IUserService userService = new UserService(MockUserRepository.Object);
+
+            //Act
+            IList<User> findedUsers = userService.FindAll();
+            User user = new User()
+            {
+                Email = "asd", Id = 2
+            };
+
+            User findedUser = findedUsers.Where(u => u.Email == user.Email).FirstOrDefault();
+
+            //Assert
+            Assert.AreNotEqual(findedUser, user);
+            Assert.AreEqual(findedUser, users[0]);
         }
     }
 }

@@ -113,5 +113,24 @@ namespace BusinessTripApplication.Repository
 
             return false;
         }
+
+        public User FindByEmail(User user)
+        {
+            IList<User> users;
+
+            try
+            {
+                users = userRepository.FindAll();
+            }
+            catch
+            {
+                throw;
+            }
+
+            User finded = users.FirstOrDefault(u => u.Email == user.Email);
+            if (finded == default(User))
+                throw new DatabaseException("User doesn't exists!");
+            return finded;
+        }
     }
 }

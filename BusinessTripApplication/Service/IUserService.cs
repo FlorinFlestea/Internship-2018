@@ -11,5 +11,6 @@ namespace BusinessTripApplication.Repository
         bool IsEmailVerified(string email);
         User GetUserByEmail(string email);
         IList<User> FindAll();
+        User FindByEmail(User user);
     }
 }
