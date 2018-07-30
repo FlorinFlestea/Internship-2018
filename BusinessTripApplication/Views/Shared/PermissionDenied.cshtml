@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Warning !</h2>
+<div id="simpleLabel" style="display: flex; justify-content: flex-end">
+    Welcome @HttpContext.Current.User.Identity.Name
+</div>
+
+<div style="display: flex; justify-content: flex-end">
+    @if (Request.IsAuthenticated)
+    {
+        <body>
+            <hgroup>
+                <h2>This action is not available while loged in !</h2>
+            </hgroup>
+        </body>
+    }
+</div>
+
