@@ -127,7 +127,7 @@ namespace BusinessTripApplication.Repository
                 throw;
             }
 
-            User finded = users.Where(u => u.Email == user.Email).FirstOrDefault();
+            User finded = users.FirstOrDefault(u => u.Email == user.Email);
             if (finded == default(User))
                 throw new DatabaseException("User doesn't exists!");
             return finded;
