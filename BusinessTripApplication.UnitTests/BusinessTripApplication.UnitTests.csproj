@@ -80,10 +80,14 @@
     <Compile Include="Controllers\UserControllerTests.cs" />
     <Compile Include="Models\UserModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AreaRepositorySetupMoq.cs" />
+    <Compile Include="Repository\AreaRepositoryTests.cs" />
     <Compile Include="Repository\TripRepositorySetupMoq.cs" />
     <Compile Include="Repository\TripRepositoryTests.cs" />
     <Compile Include="Repository\UserRepositorySetupMoq.cs" />
     <Compile Include="Repository\UserRepositoryTests.cs" />
+    <Compile Include="Service\AreaServiceTests.cs" />
+    <Compile Include="Service\TripServiceTests.cs" />
     <Compile Include="Service\UserServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
