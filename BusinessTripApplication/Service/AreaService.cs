@@ -31,7 +31,7 @@ namespace BusinessTripApplication.Service
             }
         }
 
-        public Area FindById(Area area)
+        public Area FindById(int Id)
         {
             IList<Area> areas = new List<Area>();
             try
@@ -43,7 +43,7 @@ namespace BusinessTripApplication.Service
                 throw;
             }
 
-            Area returnArea = areas.Where(a => a.Id == area.Id).FirstOrDefault();
+            Area returnArea = areas.Where(a => a.Id == Id).FirstOrDefault();
 
             if (returnArea == default(Area))
                 throw new DatabaseException("Area does't exists!\n");

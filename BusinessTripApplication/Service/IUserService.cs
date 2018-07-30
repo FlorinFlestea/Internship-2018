@@ -9,8 +9,7 @@ namespace BusinessTripApplication.Repository
         bool EmailExists(string email);
         bool VerifyAccount(string id);
         bool IsEmailVerified(string email);
-        User GetUserByEmail(string email);
+        User FindByEmail(string email);
         IList<User> FindAll();
-        User FindByEmail(User user);
     }
 }

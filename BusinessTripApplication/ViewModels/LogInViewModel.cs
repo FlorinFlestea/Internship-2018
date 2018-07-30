@@ -89,7 +89,7 @@ namespace BusinessTripApplication.ViewModels
                     Message = " Sorry, you have to register first";
                     return false;
                 }
-                dbUser = userService.GetUserByEmail(user.Email);
+                dbUser = userService.FindByEmail(user.Email);
             }
             catch
             {

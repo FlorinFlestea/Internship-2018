@@ -35,20 +35,7 @@ namespace BusinessTripApplication.Service
             {
                 throw;
             }
-        }
-
-        public void Aprove(Trip trip)
-        {
-            trip.Status = 1;
-            try
-            {
-                tripRepository.Update(trip);
-            }
-            catch
-            {
-                throw;
-            }
-        }
+        }     
 
         public void Remove(Trip trip)
         {
@@ -60,19 +47,6 @@ namespace BusinessTripApplication.Service
             {
                 throw;
             }
-        }
-
-        public void Deny(Trip trip)
-        {
-            trip.Status = 0;
-            try
-            {
-                tripRepository.Update(trip);
-            }
-            catch
-            {
-                throw;
-            }
-        }
+        }      
     }
 }

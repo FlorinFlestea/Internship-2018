@@ -56,7 +56,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
                     if (emailExists==false)
                         return false;
 
-                    User addedUser = userService.GetUserByEmail(user.Email);
+                    User addedUser = userService.FindByEmail(user.Email);
                     Console.WriteLine("0");
                     if ((addedUser.Password == user.Password)==false)
                         return false;

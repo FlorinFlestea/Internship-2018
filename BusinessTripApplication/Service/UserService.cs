@@ -78,7 +78,7 @@ namespace BusinessTripApplication.Repository
 
         }
 
-        public User GetUserByEmail(string email)
+        public User FindByEmail(string email)
         {
             return userRepository.FindByEmail(email);
         }
@@ -112,25 +112,6 @@ namespace BusinessTripApplication.Repository
             }
 
             return false;
-        }
-
-        public User FindByEmail(User user)
-        {
-            IList<User> users;
-
-            try
-            {
-                users = userRepository.FindAll();
-            }
-            catch
-            {
-                throw;
-            }
-
-            User finded = users.Where(u => u.Email == user.Email).FirstOrDefault();
-            if (finded == default(User))
-                throw new DatabaseException("User doesn't exists!");
-            return finded;
         }
     }
 }
