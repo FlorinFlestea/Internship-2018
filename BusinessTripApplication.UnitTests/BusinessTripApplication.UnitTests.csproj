@@ -84,6 +84,7 @@
     <Compile Include="Repository\TripRepositoryTests.cs" />
     <Compile Include="Repository\UserRepositorySetupMoq.cs" />
     <Compile Include="Repository\UserRepositoryTests.cs" />
+    <Compile Include="Service\TripServiceTests.cs" />
     <Compile Include="Service\UserServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
