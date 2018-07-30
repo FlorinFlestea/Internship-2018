@@ -13,7 +13,7 @@ namespace BusinessTripApplication.Controllers
 {
     public class TripsController : Controller
     {
-        private BusinessContext db = new BusinessContext();
+        private DatabaseContext db = new DatabaseContext();
 
         // GET: Trips
         public ActionResult Index()
