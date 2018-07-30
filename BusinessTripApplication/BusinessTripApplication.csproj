@@ -20,13 +20,8 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44328</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -63,13 +58,7 @@
     <Reference Include="HtmlSanitizationLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
       <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MvcValidationExtensions, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvcValidationExtensions.1.1.4.0\lib\net45\MvcValidationExtensions.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -175,15 +164,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TripsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Exception\DatabaseException.cs" />
-    <Compile Include="Exception\InternetException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807251053332_Database.cs" />
-    <Compile Include="Migrations\201807251053332_Database.Designer.cs">
-      <DependentUpon>201807251053332_Database.cs</DependentUpon>
+    <Compile Include="Migrations\201807231229210_NewDbTables.cs" />
+    <Compile Include="Migrations\201807231229210_NewDbTables.Designer.cs">
+      <DependentUpon>201807231229210_NewDbTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AreaModel.cs" />
@@ -191,22 +179,13 @@
     <Compile Include="Models\TripModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\AreaRepository.cs" />
-    <Compile Include="Repository\IAreaRepository.cs" />
-    <Compile Include="Repository\ITripRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
-    <Compile Include="Repository\TripRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="Service\AreaService.cs" />
-    <Compile Include="Service\IAreaService.cs" />
-    <Compile Include="Service\ITripService.cs" />
     <Compile Include="Service\IUserService.cs" />
-    <Compile Include="Service\TripService.cs" />
     <Compile Include="Service\UserService.cs" />
-    <Compile Include="ViewModels\ILogInViewModel.cs" />
-    <Compile Include="ViewModels\IRegistrationViewModel.cs" />
-    <Compile Include="ViewModels\LogInViewModel.cs" />
+    <Compile Include="Tools\InternetConnection.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\TripRequestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -247,10 +226,20 @@
     <Content Include="Content\dash-style\bootstrap-theme.min.css-dash.map" />
     <Content Include="Content\dash-style\bootstrap.css-dash.map" />
     <Content Include="Content\dash-style\bootstrap.min-dash.css.map" />
-    <Content Include="log4net.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\dash-scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\dash-scripts\bootstrap-dash.js" />
+    <Content Include="Scripts\dash-scripts\bootstrap.min-dash.js" />
+    <Content Include="Scripts\dash-scripts\chart-data-dash.js" />
+    <Content Include="Scripts\dash-scripts\chart.min.js" />
+    <Content Include="Scripts\dash-scripts\custom-dash.js" />
+    <Content Include="Scripts\dash-scripts\easypiechart-data.js" />
+    <Content Include="Scripts\dash-scripts\easypiechart.js" />
+    <Content Include="Scripts\dash-scripts\html5shiv.min.js" />
+    <Content Include="Scripts\dash-scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\dash-scripts\lumino.glyphs.js" />
+    <Content Include="Scripts\dash-scripts\npm.js" />
+    <Content Include="Scripts\dash-scripts\respond.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -261,11 +250,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\mvcvalidationextensions.unobtrusive.js" />
-    <Content Include="Scripts\ParseURL_registration.js" />
-    <Content Include="Scripts\ParseURL_login.js" />
-    <Content Include="Scripts\ValidationScriptRegistration.js" />
-    <Content Include="Scripts\ValidationScriptLogin.js" />
+    <Content Include="Scripts\ValidationScript.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -282,16 +267,14 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\VerifyAccount.cshtml" />
-    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Trips\Create.cshtml" />
+    <Content Include="Views\Trips\Delete.cshtml" />
+    <Content Include="Views\Trips\Details.cshtml" />
+    <Content Include="Views\Trips\Edit.cshtml" />
+    <Content Include="Views\Trips\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\Dashboard.cshtml" />
-    <Content Include="Views\Shared\NoToolBarLayout.cshtml" />
-    <Content Include="Views\User\LogIn.cshtml" />
-    <Content Include="Views\Shared\PermissionDenied.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -310,8 +293,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807251053332_Database.resx">
-      <DependentUpon>201807251053332_Database.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807231229210_NewDbTables.resx">
+      <DependentUpon>201807231229210_NewDbTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -328,11 +311,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54301</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54301/</IISUrl>
+          <IISUrl>https://localhost:44328/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
