@@ -43,7 +43,7 @@ namespace BusinessTripApplication.Service
                 throw;
             }
 
-            Area returnArea = areas.Where(a => a.Id == area.Id).FirstOrDefault();
+            Area returnArea = areas.FirstOrDefault(a => a.Id == area.Id);
 
             if (returnArea == default(Area))
                 throw new DatabaseException("Area does't exists!\n");
