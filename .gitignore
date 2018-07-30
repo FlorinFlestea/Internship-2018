@@ -10,3 +10,4 @@ obj
 build/
 /BusinessTripApplication/Repository/ITripRepository.cs
 /BusinessTripApplication/Repository/TripRepository.cs
+/BusinessTripApplication/Migrations/201807300837338_updateTriModel.resx
