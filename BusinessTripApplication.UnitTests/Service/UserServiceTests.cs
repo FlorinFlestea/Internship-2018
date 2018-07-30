@@ -216,7 +216,7 @@ namespace BusinessTripApplication.UnitTests.Service
             IList<User> findedUsers = userService.FindAll();
             User user = new User()
             {
-                Email = "bad", Id = 2
+                Email = "asd", Id = 2
             };
 
             User findedUser = findedUsers.Where(u => u.Email == user.Email).FirstOrDefault();
