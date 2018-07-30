@@ -23,11 +23,9 @@
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -185,6 +183,10 @@
     <Compile Include="Migrations\201807251053332_Database.Designer.cs">
       <DependentUpon>201807251053332_Database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807300837338_updateTriModel.cs" />
+    <Compile Include="Migrations\201807300837338_updateTriModel.Designer.cs">
+      <DependentUpon>201807300837338_updateTriModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AreaModel.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
@@ -312,6 +314,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807251053332_Database.resx">
       <DependentUpon>201807251053332_Database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807300837338_updateTriModel.resx">
+      <DependentUpon>201807300837338_updateTriModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
