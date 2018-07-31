@@ -4,6 +4,10 @@ packages
 bin
 obj
 *.user
+*log
 
 # shared files downloaded by build scripts
 build/
+/BusinessTripApplication/Repository/ITripRepository.cs
+/BusinessTripApplication/Repository/TripRepository.cs
+/BusinessTripApplication/Migrations/201807300837338_updateTriModel.resx
