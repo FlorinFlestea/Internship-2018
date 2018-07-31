@@ -10,3 +10,4 @@ obj
 build/
 /BusinessTripApplication/Repository/ITripRepository.cs
 /BusinessTripApplication/Repository/TripRepository.cs
+/BusinessTripApplication.UnitTests/Models/TripRequestModelTest.cs
