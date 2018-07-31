@@ -50,6 +50,8 @@ namespace BusinessTripApplication.ViewModels
                     Status = false;
                 }
 
+                //Send email to Admin
+
                 Message = "Submit successfully done. An admit will be notified!";
                 Status = true;
 
