@@ -90,7 +90,7 @@ namespace BusinessTripApplication.ViewModels
                               " you haven't verified your email!";
                     return false;
                 }
-                dbUser = userService.GetUserByEmail(user.Email);
+                dbUser = userService.FindByEmail(user.Email);
             }
             catch
             {
