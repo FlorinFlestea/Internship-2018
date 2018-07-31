@@ -14,7 +14,7 @@ namespace BusinessTripApplication.Controllers
 {
     public class TripsApiController : ApiController
     {
-        private BusinessContext db = new BusinessContext();
+        private DatabaseContext db = new DatabaseContext();
 
         // GET: api/TripsApi
         public IQueryable<Trip> GetTrips()
