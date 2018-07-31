@@ -31,6 +31,25 @@ namespace BusinessTripApplication.Repository
             return addedTrip;
         }
 
+        public Trip FindById(int? id)
+        {
+            Trip foundTrip;
+            try
+            {
+                using (DatabaseContext context = new DatabaseContext())
+                {
+                    foundTrip = context.Trips.Find(id);
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Info(e.Message);
+                throw new DatabaseException("Cannot connect to database!\n");
+            }
+
+            return foundTrip;
+        }
+
         public void Remove(Trip deleteTrip)
         {
             try
@@ -48,7 +67,7 @@ namespace BusinessTripApplication.Repository
             }
         }
 
-        public IList<Trip> FindAll()
+        public IList<Trip> GetAll()
         {
             IList<Trip> trips = new List<Trip>();
 

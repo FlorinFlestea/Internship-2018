@@ -3,18 +3,23 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BusinessTripApplication.Models;
+using BusinessTripApplication.Repository;
 using BusinessTripApplication.ViewModels;
 
 namespace BusinessTripApplication.Controllers
 {
     public class TripsController : Controller
     {
-        private DatabaseContext db = new DatabaseContext();
+
+        private readonly TripRepository Repository = new TripRepository();
 
         // GET: Trips
         public ActionResult Index()
         {
-            return View(db.Trips.ToList());
+            var identity = User.Identity.Name;
+            var returnList = Repository.GetAll().Where(task => task.User.Email == identity);
+
+            return View(returnList);
         }
 
         // GET: Trips/Details/5
@@ -24,7 +29,8 @@ namespace BusinessTripApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip trip = db.Trips.Find(id);
+
+            var trip = Repository.FindById(id);
             if (trip == null)
             {
                 return HttpNotFound();
@@ -60,7 +66,7 @@ namespace BusinessTripApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip trip = db.Trips.Find(id);
+            var trip = Repository.FindById(id);
             if (trip == null)
             {
                 return HttpNotFound();
@@ -77,8 +83,7 @@ namespace BusinessTripApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(trip).State = EntityState.Modified;
-                db.SaveChanges();
+                Repository.Update(trip);
                 return RedirectToAction("Index");
             }
             return View(trip);
@@ -91,7 +96,7 @@ namespace BusinessTripApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip trip = db.Trips.Find(id);
+            var trip = Repository.FindById(id);
             if (trip == null)
             {
                 return HttpNotFound();
@@ -104,9 +109,7 @@ namespace BusinessTripApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Trip trip = db.Trips.Find(id);
-            db.Trips.Remove(trip);
-            db.SaveChanges();
+            Repository.Remove(Repository.FindById(id));
             return RedirectToAction("Index");
         }
 
@@ -114,7 +117,6 @@ namespace BusinessTripApplication.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -1,6 +1,5 @@
 ﻿using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
-
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -20,9 +19,9 @@ namespace BusinessTripApplication.UnitTests.Repository
                 });
         }
 
-        public static void FindAll(Mock<ITripRepository> MockUserRepository, IList<Trip> trips)
+        public static void GetAll(Mock<ITripRepository> MockUserRepository, IList<Trip> trips)
         {
-            MockUserRepository.Setup(mock => mock.FindAll()).Returns(trips);
+            MockUserRepository.Setup(mock => mock.GetAll()).Returns(trips);
         }
 
         public static void Update(Mock<ITripRepository> MockUserRepository, IList<Trip> trips)
@@ -30,7 +29,7 @@ namespace BusinessTripApplication.UnitTests.Repository
             MockUserRepository.Setup(mock => mock.Update(It.IsAny<Trip>())).Returns(
                 (Trip addedTrip) =>
                 {
-                    Trip toUpdate = trips.Where(trip => trip.Id == addedTrip.Id).FirstOrDefault();
+                    Trip toUpdate = trips.FirstOrDefault(trip => trip.Id == addedTrip.Id);
                     if(toUpdate == default(Trip))
                         throw new Exception("Trip doesn't exists");
                     trips.Remove(toUpdate);
@@ -44,7 +43,7 @@ namespace BusinessTripApplication.UnitTests.Repository
             MockUserRepository.Setup(mock => mock.Remove(It.IsAny<Trip>())).Callback(
                 (Trip deletedTrip) =>
                 {
-                    Trip toDelete = trips.Where(trip => trip.Id == deletedTrip.Id).FirstOrDefault();
+                    Trip toDelete = trips.FirstOrDefault(trip => trip.Id == deletedTrip.Id);
                     if (toDelete == default(Trip))
                         throw new Exception();
                     trips.Remove(toDelete);
