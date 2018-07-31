@@ -175,9 +175,9 @@
     <Compile Include="Migrations\201807251053332_Database.Designer.cs">
       <DependentUpon>201807251053332_Database.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807300837338_updateTriModel.cs" />
-    <Compile Include="Migrations\201807300837338_updateTriModel.Designer.cs">
-      <DependentUpon>201807300837338_updateTriModel.cs</DependentUpon>
+    <Compile Include="Migrations\201807301054507_UpdateTripModel.cs" />
+    <Compile Include="Migrations\201807301054507_UpdateTripModel.Designer.cs">
+      <DependentUpon>201807301054507_UpdateTripModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AreaModel.cs" />
@@ -510,8 +510,8 @@
     <EmbeddedResource Include="Migrations\201807251053332_Database.resx">
       <DependentUpon>201807251053332_Database.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807300837338_updateTriModel.resx">
-      <DependentUpon>201807300837338_updateTriModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807301054507_UpdateTripModel.resx">
+      <DependentUpon>201807301054507_UpdateTripModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

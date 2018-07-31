@@ -7,13 +7,13 @@ namespace BusinessTripApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class updateTriModel : IMigrationMetadata
+    public sealed partial class UpdateTripModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updateTriModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateTripModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807300837338_updateTriModel"; }
+            get { return "201807301054507_UpdateTripModel"; }
         }
         
         string IMigrationMetadata.Source
