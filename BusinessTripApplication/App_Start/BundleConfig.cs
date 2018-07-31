@@ -20,7 +20,7 @@ namespace BusinessTripApplication
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/umd/popper.min.js",
-                "~/Scripts/bootstrap.js",
+                "~/Scripts/bootstrap.min.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/summernote-bs4.js"));
 
@@ -29,7 +29,7 @@ namespace BusinessTripApplication
 
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/datepickerJS").Include(

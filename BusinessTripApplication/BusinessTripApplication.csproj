@@ -24,12 +24,9 @@
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>
-    </IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -220,6 +217,10 @@
     <Compile Include="Migrations\201807301054507_UpdateTripModel.cs" />
     <Compile Include="Migrations\201807301054507_UpdateTripModel.Designer.cs">
       <DependentUpon>201807301054507_UpdateTripModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807311057120_asd.cs" />
+    <Compile Include="Migrations\201807311057120_asd.Designer.cs">
+      <DependentUpon>201807311057120_asd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AreaModel.cs" />
@@ -567,6 +568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807301054507_UpdateTripModel.resx">
       <DependentUpon>201807301054507_UpdateTripModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807311057120_asd.resx">
+      <DependentUpon>201807311057120_asd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -32,7 +32,7 @@
         <hr />
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        <div class="row form-group">
             @Html.Label("Area*", htmlAttributes: new { @class = "control-label col-md-12", @style = "padding-left: 25px;" })
             <div class="col-md-6">
                 @Html.DropDownListFor(model => model.Trip.Area.Id, Model.Areas, new { @class = "selectpicker", @data_width = "100%", @title = "Choose one of the following..." })
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Trip.PmName, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.Trip.PmName, new { htmlAttributes = new { @class = "form-control", @data_width = "100%", } })
@@ -53,15 +53,15 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-12">
                 @Html.Label("Date interval*", htmlAttributes: new { @class = "control-label" })
             </div>
             <div class="col-md-6">
                 <div class="input-group input-daterange" id="datepicker">
-                    <span class="input-group-addon">From</span>
+                    <span class="glyphicon glyphicon-home"></span>
                     @Html.TextBoxFor(model => model.Trip.StartingDate, new { @class = "form-control", @placeholder = "Select a date", @autocomplete = "off" })
-                    <span class="input-group-addon">to</span>
+                    <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
                     @Html.TextBoxFor(model => model.Trip.EndDate, new { @class = "form-control", @placeholder = "Select a date", @autocomplete = "off" })
                 </div>
                 <div class="col-md-12">
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-2">
                 @Html.LabelFor(model => model.Trip.ProjectNumber, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.Trip.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-2">
                 @Html.LabelFor(model => model.Trip.TaskNumber, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.Trip.TaskNumber, new { htmlAttributes = new { @class = "form-control" } })
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Trip.ClientLocation, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.Trip.ClientLocation, new { htmlAttributes = new { @class = "form-control" } })
@@ -111,7 +111,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-6">
                 @Html.LabelFor(model => model.Trip.Transportation, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.Trip.Transportation, new { htmlAttributes = new { @class = "form-control" } })
@@ -119,7 +119,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-1">
                 @Html.Label("Needs:", htmlAttributes: new { @class = "control-label" })
 
@@ -134,7 +134,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-6">
                 @Html.LabelFor(model => model.Trip.Accommodation, htmlAttributes: new { @class = "control-label" })
                 @Html.TextAreaFor(model => model.Trip.Accommodation, new { @class = "form-control", @style = "resize: none;", @rows = 4 })
@@ -142,7 +142,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-6">
                 @Html.LabelFor(model => model.Trip.Comments, htmlAttributes: new { @class = "control-label" })
                 @Html.TextAreaFor(model => model.Trip.Comments, new { @class = "form-control", @style = "resize: none;", @rows = 4 })
@@ -150,7 +150,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="row form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Make request" class="btn btn-default" />
             </div>
@@ -193,14 +193,18 @@
             max-width: 100%;
         }
 
-        .form-horizontal .control-label {
+        /*.form-horizontal .control-label {
             text-align: left;
             color: lawngreen;
             padding-left: 5px
-        }
+        }*/
 
         .input-validation-error {
             border: 2px solid #ff0000;
+        }
+
+        label{
+            font-size: 11px;    
         }
     </style>
 }
