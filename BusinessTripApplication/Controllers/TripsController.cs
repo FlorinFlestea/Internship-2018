@@ -22,7 +22,7 @@ namespace BusinessTripApplication.Controllers
         // GET: Trips/Create
         public ActionResult Create()
         {
-            TripCreateViewModel model = new TripCreateViewModel(areaService);
+            TripRequestViewModel model = new TripRequestViewModel(areaService);
             if (model.Status)
                 return View(model);
             else
@@ -38,8 +38,7 @@ namespace BusinessTripApplication.Controllers
         {
             //Get usere from session
             trip.User = new User() { Id = 2, Name = "TempUser", Email = "dragoscojanu97@yahoo.ro" };
-            TripCreateViewModel model = new TripCreateViewModel(ModelState.IsValid, trip, tripService, areaService, userService);
-            return View(model);
+            TripRequestViewModel model = new TripRequestViewModel(ModelState.IsValid, trip, tripService, areaService, userService);
             if (model.Status)
                 return View(model);
             else

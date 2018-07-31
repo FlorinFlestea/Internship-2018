@@ -214,7 +214,6 @@
     <Compile Include="ViewModels\IRegistrationViewModel.cs" />
     <Compile Include="ViewModels\ITripRequestViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
-    <Compile Include="ViewModels\TripCreateViewModel.cs" />
     <Compile Include="ViewModels\TripRequestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
