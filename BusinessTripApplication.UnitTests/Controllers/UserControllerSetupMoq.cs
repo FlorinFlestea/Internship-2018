@@ -75,7 +75,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
             MockLoginViewModel.Setup(mock => mock.SetCookie(It.IsAny<string>(), It.IsAny<bool>())).Callback(
                 (string email, bool rememberMe) =>
                 {
-                    int timeout = rememberMe ? 525600 : 20; // 525600 min = 1 year
+                    int timeout = rememberMe ? 262800 : 20; // 262800 min = 1/2 year
                     var ticket = new FormsAuthenticationTicket(email, rememberMe, timeout);
                     string encrypted = FormsAuthentication.Encrypt(ticket);
                     cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
