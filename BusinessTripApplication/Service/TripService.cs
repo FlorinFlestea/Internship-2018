@@ -27,52 +27,13 @@ namespace BusinessTripApplication.Service
 
             addedTrip.Status = 2;
 
-            try
-            {
-                return tripRepository.Add(addedTrip);
-            }
-            catch 
-            {
-                throw;
-            }
-        }
+            return tripRepository.Add(addedTrip);
 
-        public void Aprove(Trip trip)
-        {
-            trip.Status = 1;
-            try
-            {
-                tripRepository.Update(trip);
-            }
-            catch
-            {
-                throw;
-            }
-        }
+        }     
 
         public void Remove(Trip trip)
         {
-            try
-            {
-                tripRepository.Remove(trip);
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        public void Deny(Trip trip)
-        {
-            trip.Status = 0;
-            try
-            {
-                tripRepository.Update(trip);
-            }
-            catch
-            {
-                throw;
-            }
-        }
+            tripRepository.Remove(trip);
+        }      
     }
 }
