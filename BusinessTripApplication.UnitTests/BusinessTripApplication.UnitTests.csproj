@@ -101,6 +101,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\TripRequestViewModelSetupMoq.cs" />
+    <Compile Include="Controllers\TripRequestViewModelTests.cs" />
     <Compile Include="Controllers\UserControllerSetupMoq.cs" />
     <Compile Include="Controllers\UserControllerTests.cs" />
     <Compile Include="Models\UserModelTests.cs" />
