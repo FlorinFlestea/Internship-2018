@@ -20,7 +20,8 @@ namespace BusinessTripApplication
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                        "~/Scripts/popper.min.js", 
+                      "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/registrationValidation").Include(
                         "~/Scripts/jquery.validate*", "~/Scripts/ValidationScript.js"));
