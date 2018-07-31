@@ -11,11 +11,11 @@ namespace BusinessTripAdministration.Models
     public interface IApiClient
     {
 
-        IEnumerable<Trip> GetAllTrips();
-        IEnumerable<Trip> GetApprovedTrips();
-        IEnumerable<Trip> GetDeniedTrips();
-        IEnumerable<Trip> GetPendingTrips();
-        Trip GetTripById(int id);
+        Task<IEnumerable<Trip>> GetAllTrips();
+        Task<IEnumerable<Trip>> GetApprovedTrips();
+        Task<IEnumerable<Trip>> GetDeniedTrips();
+        Task<IEnumerable<Trip>> GetPendingTrips();
+        Task<Trip> GetTripById(int id);
         void UpdateTrip(int id, Trip trip);
         void DeleteTrip(int id);
         void AddTrip(Trip trip);
