@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Details</h2>
@@ -57,6 +56,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.ProjectNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TaskName)
         </dd>
 
         <dt>
@@ -123,13 +130,6 @@
             @Html.DisplayFor(model => model.Comments)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Approved)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Approved)
-        </dd>
 
     </dl>
 </div>
