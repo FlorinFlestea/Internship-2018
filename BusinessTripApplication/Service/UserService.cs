@@ -30,12 +30,22 @@ namespace BusinessTripApplication.Repository
 
         public IList<User> FindAll()
         {
-            return userRepository.FindAll();
+            return userRepository.FindAll();            
+        }
+
+        public bool IsEmailVerified(string email)
+        {
+            return userRepository.FindByEmail(email).IsEmailVerified == true;
+        }
+
+        public User FindByEmail(string email)
+        {
+            return userRepository.FindByEmail(email);
         }
 
         public bool VerifyAccount(string id)
         {
-            User user = userRepository.FindByActivationCode(new Guid(id));
+            User user = userRepository.FindByActivationCode(new Guid(id));           
 
             if (user != null && !user.IsEmailVerified)
             {
@@ -43,7 +53,6 @@ namespace BusinessTripApplication.Repository
                 userRepository.UpdateIsEmailVerified(user);
                 return true;
             }
-
             return false;
         }
     }

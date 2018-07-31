@@ -44,7 +44,7 @@
                 @Html.DisplayNameFor(model => model.TaskNumber)
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.Approved)
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th></th>
         </tr>
@@ -75,16 +75,7 @@
                     @Html.DisplayFor(modelItem => item.TaskNumber)
                 </td>
                 <td>
-                    @{
-                        if (item.Approved)
-                        {
-                            <span class="badge badge-pill badge-success">Approved</span>
-                        }
-                        else
-                        {
-                            <span class="badge badge-pill badge-warning">Pending</span>
-                        }
-                    }
+                    @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
