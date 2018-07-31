@@ -22,16 +22,16 @@
 
     $(input_password)
         .attr('data-original-title', "")
-        .tooltip('fixTitle').tooltip('hide');
+        .tooltip('_fixTitle').tooltip('hide');
 
 
     $(input_email)
         .attr('data-original-title', "")
-        .tooltip('fixTitle').tooltip('hide');
+        .tooltip('_fixTitle').tooltip('hide');
 
     $(input_username)
         .attr('data-original-title', "")
-        .tooltip('fixTitle').tooltip('hide');
+        .tooltip('_fixTitle').tooltip('hide');
 
     //when starting the page, if the inputs are correct, do not disable the button(when refreshing the page)
     CheckEmail(1);
@@ -69,14 +69,14 @@
     function SetTextTooltipUsername(text) {
         $(input_username)
             .attr('data-original-title', text)
-            .tooltip('fixTitle');
+            .tooltip('_fixTitle');
         $(input_username).css("border-color", color_incorrect);
     }
 
     function SetTextTooltipEmail(text) {
         $(input_email)
             .attr('data-original-title', text)
-            .tooltip('fixTitle');
+            .tooltip('_fixTitle');
         $(input_email).css("border-color", color_incorrect);
     }
 
@@ -84,7 +84,7 @@
     function SetTextTooltipPassword(text) {
         $(input_password)
             .attr('data-original-title', text)
-            .tooltip('fixTitle');
+            .tooltip('_fixTitle');
         $(input_password).css("border-color", color_incorrect);
     }
 
@@ -101,7 +101,7 @@
     function HideTooltipUserName() {
         $(input_username)
             .attr('data-original-title', "")
-            .tooltip('fixTitle');
+            .tooltip('_fixTitle');
         $(input_username).css("border-color", color_correct);
         $(input_username).tooltip('hide');
     }
@@ -109,7 +109,7 @@
     function HideTooltipEmail() {
         $(input_email)
             .attr('data-original-title', "")
-            .tooltip('fixTitle');
+            .tooltip('_fixTitle');
         $(input_email).css("border-color", color_correct);
         $(input_email).tooltip('hide');
     }
@@ -117,7 +117,7 @@
     function HideTooltipPassword() {
         $(input_password)
             .attr('data-original-title', "")
-            .tooltip('fixTitle');
+            .tooltip('_fixTitle');
         $(input_password).css("border-color", color_correct);
         $(input_password).tooltip('hide');
     }
