@@ -9,7 +9,7 @@ namespace BusinessTripApplication
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-3.3.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -19,12 +19,14 @@ namespace BusinessTripApplication
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                        "~/Scripts/popper.min.js", 
-                      "~/Scripts/bootstrap.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/umd/popper.min.js",
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/respond.js",
+                "~/Scripts/summernote-bs4.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/registrationValidation").Include(
-                        "~/Scripts/jquery.validate*", "~/Scripts/ValidationScript.js"));
+                        "~/Scripts/jquery.validate*", "~/Scripts/ValidationScriptRegistration.js","~/Scripts/ValidationScriptLogin.js" ));
+
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
