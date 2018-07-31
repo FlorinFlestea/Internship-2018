@@ -21,27 +21,13 @@ namespace BusinessTripApplication.Service
 
         public IList<Area> FindAll()
         {
-            try
-            {
-                return areaRepository.FindAll(); 
-            }
-            catch
-            {
-                throw;
-            }
+
+            return areaRepository.FindAll(); 
         }
 
         public Area FindById(int Id)
         {
-            IList<Area> areas = new List<Area>();
-            try
-            {
-                areas = areaRepository.FindAll();
-            }
-            catch
-            {
-                throw;
-            }
+            IList<Area> areas = areaRepository.FindAll();
 
             Area returnArea = areas.Where(a => a.Id == Id).FirstOrDefault();
 

@@ -15,67 +15,27 @@ namespace BusinessTripApplication.Repository
 
         public UserService(IUserRepository userRepository)
         {
-            try
-            {
-                this.userRepository = userRepository;
-            }
-            catch
-            {
-                throw;
-            }
-            
+            this.userRepository = userRepository;
         }
 
         public User Add(User addedUser)
         {
-            try
-            {
-                return userRepository.Add(addedUser);
-            }
-            catch
-            {
-                throw;
-            }
-            
+            return userRepository.Add(addedUser);
         }
 
         public bool EmailExists(string email)
         {
-            try
-            {
-                return userRepository.FindByEmail(email) != null;
-            }
-            catch
-            {
-                throw;
-            }
-            
+            return userRepository.FindByEmail(email) != null;
         }
 
         public IList<User> FindAll()
         {
-            try
-            {
-                return userRepository.FindAll();
-            }
-            catch
-            {
-                throw;
-            }
-            
+            return userRepository.FindAll();            
         }
 
         public bool IsEmailVerified(string email)
         {
-            try
-            {
-                return userRepository.FindByEmail(email).IsEmailVerified == true;
-            }
-            catch
-            {
-                throw;
-            }
-
+            return userRepository.FindByEmail(email).IsEmailVerified == true;
         }
 
         public User FindByEmail(string email)
@@ -85,32 +45,14 @@ namespace BusinessTripApplication.Repository
 
         public bool VerifyAccount(string id)
         {
-            User user;
-            try
-            {
-                user = userRepository.FindByActivationCode(new Guid(id));
-            }
-            catch
-            {
-                throw;
-            }
-            
+            User user = userRepository.FindByActivationCode(new Guid(id));           
 
             if (user != null && !user.IsEmailVerified)
             {
                 user.IsEmailVerified = true;
-                try
-                {
-                    userRepository.UpdateIsEmailVerified(user);
-                }
-                catch
-                {
-                    throw;
-                }
-                
+                userRepository.UpdateIsEmailVerified(user);
                 return true;
             }
-
             return false;
         }
     }
