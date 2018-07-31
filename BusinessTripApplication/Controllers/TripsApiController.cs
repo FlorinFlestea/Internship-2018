@@ -22,6 +22,29 @@ namespace BusinessTripApplication.Controllers
             return db.Trips;
         }
 
+
+        // GET : api/TripsApi/approved
+        [Route("api/TripsApi/approved")]
+        public IQueryable<Trip> GetTripsApproved()
+        {
+            return db.Trips.Where(a => a.Status == 1);
+        }
+
+        // GET : api/TripsApi/denied
+        [Route("api/TripsApi/denied")]
+        public IQueryable<Trip> GetTripsDenied()
+        {
+            return db.Trips.Where(a => a.Status == 0);
+        }
+
+
+        // GET : api/TripsApi/pending
+        [Route("api/TripsApi/pending")]
+        public IQueryable<Trip> GetTripsPending()
+        {
+            return db.Trips.Where(a => a.Status > 1);
+        }
+
         // GET: api/TripsApi/5
         [ResponseType(typeof(Trip))]
         public IHttpActionResult GetTrip(int id)
