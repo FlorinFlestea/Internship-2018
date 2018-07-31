@@ -55,7 +55,8 @@ namespace BusinessTripApplication.Controllers
         public ActionResult Create([Bind(Exclude = "User, Status")] Trip trip)
         {
             //Get usere from session
-            trip.User = new User() { Id = 2, Name = "TempUser", Email = "dragoscojanu97@yahoo.ro" };
+            trip.User = new User() { Email = User.Identity.Name };
+
             TripRequestViewModel model = new TripRequestViewModel(ModelState.IsValid, trip, tripService, areaService, userService);
             if (model.Status)
                 return View(model);

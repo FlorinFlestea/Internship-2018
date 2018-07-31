@@ -124,18 +124,22 @@
             </div>
 
             <div class="row form-group">
-                <div class="col-md-12">
+                @*<div class="col-md-12">
                     @Html.Label("Needs:", htmlAttributes: new { @class = "control-label col-md-2" })
-                </div>
+                </div>*@
                 <div class="col-md-6">
-                    <div class="form-check form-check-inline col-md-4">
-                        @Html.EditorFor(model => model.Trip.NeedOfBankCard, new { htmlAttributes = new { @class = "form-check-input" } })
-                        @Html.LabelFor(model => model.Trip.NeedOfBankCard, new { htmlAttributes = new { @class = "form-check-label" } })
-                    </div>
-                    <div class="form-check form-check-inline col-md-4">
-                        @Html.EditorFor(model => model.Trip.NeedOfPhone, new { htmlAttributes = new { @class = "form-check-input" } })
-                        @Html.LabelFor(model => model.Trip.NeedOfPhone, new { htmlAttributes = new { @class = "form-check-label" } })
-                    </div>
+                    <fieldset>
+                        <legend>Needs</legend>
+                        <div class="form-check form-check-inline col-md-4">
+                            @Html.EditorFor(model => model.Trip.NeedOfBankCard, new { htmlAttributes = new { @class = "form-check-input" } })
+                            @Html.LabelFor(model => model.Trip.NeedOfBankCard, new { htmlAttributes = new { @class = "control-label" } })
+                        </div>
+                        <div class="form-check form-check-inline col-md-4">
+                            @Html.EditorFor(model => model.Trip.NeedOfPhone, new { htmlAttributes = new { @class = "form-check-input" } })
+                            @Html.LabelFor(model => model.Trip.NeedOfPhone, new { htmlAttributes = new { @class = "form-check-label" } })
+                        </div>
+                    </fieldset>
+                    
                 </div>
                 
             </div>
