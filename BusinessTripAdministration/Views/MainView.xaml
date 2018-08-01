@@ -37,7 +37,7 @@
             </Grid.RowDefinitions>
             <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right">
                 <Menu VerticalAlignment="Stretch"  Background="#212121" BorderBrush="WhiteSmoke" BorderThickness="1" FontSize="24">
-                    <MenuItem Header="roman.cosmin97@yahoo.com" Foreground="WhiteSmoke" VerticalAlignment="Stretch" >
+                    <MenuItem Header="{Binding Email,Mode=TwoWay}" Foreground="WhiteSmoke" VerticalAlignment="Stretch" >
                         <MenuItem Header="Logout" Background="#212121"/>
                         <MenuItem Header="Account" Background="#212121"/>
                     </MenuItem>

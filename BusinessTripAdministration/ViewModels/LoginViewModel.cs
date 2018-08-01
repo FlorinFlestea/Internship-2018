@@ -76,7 +76,9 @@ namespace BusinessTripAdministration.ViewModels
         {
             HideCurrentWindow();
             IWindowManager manager = new WindowManager();
-            manager.ShowWindow(new MainViewModel(), null, null);
+            MainViewModel main = new MainViewModel();
+            manager.ShowWindow(main, context: null, settings: null);
+            main.Email = Email;
         }
 
         void HideCurrentWindow()

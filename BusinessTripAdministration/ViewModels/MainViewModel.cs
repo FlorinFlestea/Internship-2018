@@ -11,6 +11,20 @@ namespace BusinessTripAdministration.ViewModels
 {
     internal class MainViewModel : Conductor<object>
     {
+        private string email;
+
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                email = value;
+                NotifyOfPropertyChange(() => Email);
+            }
+        }
         public MainViewModel()
         {
             LoadHome();
