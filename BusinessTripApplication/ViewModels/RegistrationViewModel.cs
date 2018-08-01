@@ -92,7 +92,8 @@ namespace BusinessTripApplication.ViewModels
             //Send Email to User
             try
             {
-                Server.EmailSender.SendEmail(user.Email, "Register", user.ActivationCode.ToString());
+                Server.EmailSender emailSender = new EmailSender();
+                emailSender.SendEmail(user.Email, "Register", user.ActivationCode.ToString());
             }
             catch
             {

@@ -234,6 +234,7 @@
     <Compile Include="Repository\TripRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Server\EmailSender.cs" />
+    <Compile Include="Server\IEmailSender.cs" />
     <Compile Include="Service\AreaService.cs" />
     <Compile Include="Service\IAreaService.cs" />
     <Compile Include="Service\ITripService.cs" />

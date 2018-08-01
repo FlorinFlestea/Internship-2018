@@ -9,14 +9,14 @@ using log4net.Repository.Hierarchy;
 
 namespace BusinessTripApplication.Server
 {
-    public static class EmailSender
+    public class EmailSender : IEmailSender
     {
-        private static readonly MailAddress fromEmail = new MailAddress("businesstripapplication@gmail.com");
-        private static readonly string fromEmailPassword = "ParolaTest1234";
+        private readonly MailAddress fromEmail = new MailAddress("businesstripapplication@gmail.com");
+        private readonly string fromEmailPassword = "ParolaTest1234";
 
-        private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private static SmtpClient CreateSmtpClient()
+        private SmtpClient CreateSmtpClient()
         {
             var smtp = new SmtpClient
             {
@@ -30,7 +30,7 @@ namespace BusinessTripApplication.Server
             return smtp;
         }
 
-        public static MailMessage CreateMail(string email, string subject, string message)
+        public MailMessage CreateMail(string email, string subject, string message)
         {
             var mail = new MailMessage(fromEmail, new MailAddress(email))
             {
@@ -41,7 +41,7 @@ namespace BusinessTripApplication.Server
             return mail;
         }
 
-        public static void SendEmail(string email, string subject, string message)
+        public void SendEmail(string email, string subject, string message)
         {
             SmtpClient smtp = CreateSmtpClient();
             MailMessage mail = CreateMail(email, subject, message);

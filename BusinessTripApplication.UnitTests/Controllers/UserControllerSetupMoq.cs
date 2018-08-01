@@ -13,19 +13,6 @@ namespace BusinessTripApplication.UnitTests.Controllers
 {
     public static class UserControllerSetupMoq
     {
-        public static void SendVerificationLinkEmail(Mock<IRegistrationViewModel> MockRegistrationViewModel, MailMessage message)
-        {
-            MockRegistrationViewModel.Setup(mock => mock.SendVerificationLinkEmail(It.IsAny<string>(), It.IsAny<string>())).Callback(
-               (string email, string activation) =>
-               {
-                   message = new MailMessage(new MailAddress("businesstripapplication@gmail.com", "Registration"), new MailAddress(email))
-                   {
-                       Subject = "Activation link",
-                       Body = activation,
-                       IsBodyHtml = true
-                   };
-               });
-        }
 
         public static void CheckUser(Mock<IRegistrationViewModel> MockRegistrationViewModel)
         {
@@ -39,8 +26,6 @@ namespace BusinessTripApplication.UnitTests.Controllers
 
                     User addedUser = userService.Add(user);
                     addedUser.Password = "";
-
-                    MockRegistrationViewModel.Object.SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
 
                     return true;
                 });
