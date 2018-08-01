@@ -23,6 +23,7 @@ namespace BusinessTripApplication.Models
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
 
+
         public User(string name, string email, string password)
         {
             Name = name;

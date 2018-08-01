@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using BusinessTripApplication.Controllers;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
-using System.Web.Mvc;
 using BusinessTripApplication.ViewModels;
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -19,12 +17,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
     public class UserControllerTests
     {
 
-        /*
-         Cases to test:
-         1. Email already used -> status = false
-         2. Email not used -> status = true
-         3. Email null -> status = false
-         */
+
 
         [TestMethod]
         public void Registration_RegisterUserWithAnEmailAlreadyUsed_StatusFalse()
@@ -124,7 +117,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
             Assert.AreEqual(message.IsBodyHtml, true);
         }
 
-        
+
 
         /*
         Login part
@@ -198,14 +191,14 @@ namespace BusinessTripApplication.UnitTests.Controllers
             MailMessage message = new MailMessage();
             UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
             UserControllerSetupMoq.CheckUser(MockRegistrationViewModel);
-            
+
             Mock<ILogInViewModel> MockLogInViewModel = new Mock<ILogInViewModel>();
             UserControllerSetupMoq.CheckUser(MockLogInViewModel);
             ILogInViewModel loginViewModel = MockLogInViewModel.Object;
             //Act
             User dummyUser = new User("", "testvalid@test.com", "test");
             bool result = loginViewModel.CheckUser(userService, dummyUser);
-            
+
             //Assert
             Assert.IsTrue(result);
         }
@@ -216,19 +209,19 @@ namespace BusinessTripApplication.UnitTests.Controllers
         {
             //Arrange
             Mock<ILogInViewModel> MockLogInViewModel = new Mock<ILogInViewModel>();
-            HttpCookie cookie=null;
+            HttpCookie cookie = null;
 
             //UserControllerSetupMoq.SetCookie(MockLogInViewModel,cookie);
-             MockLogInViewModel.Setup(mock => mock.SetCookie(It.IsAny<string>(), It.IsAny<bool>())).Callback(
-                (string email, bool rememberMe) =>
-                {
-                    int timeout = rememberMe ? 525600 : 20; // 525600 min = 1 year
+            MockLogInViewModel.Setup(mock => mock.SetCookie(It.IsAny<string>(), It.IsAny<bool>())).Callback(
+               (string email, bool rememberMe) =>
+               {
+                   int timeout = rememberMe ? 525600 : 20; // 525600 min = 1 year
                     var ticket = new FormsAuthenticationTicket(email, rememberMe, timeout);
-                    string encrypted = FormsAuthentication.Encrypt(ticket);
-                    cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
-                    cookie.Expires = DateTime.Now.AddMinutes(timeout);
-                    cookie.HttpOnly = true;
-                });
+                   string encrypted = FormsAuthentication.Encrypt(ticket);
+                   cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+                   cookie.Expires = DateTime.Now.AddMinutes(timeout);
+                   cookie.HttpOnly = true;
+               });
             //
             ILogInViewModel loginViewModel = MockLogInViewModel.Object;
 
@@ -238,7 +231,14 @@ namespace BusinessTripApplication.UnitTests.Controllers
             loginViewModel.SetCookie(mail, remember);
 
             //Assert
-            Assert.AreEqual(cookie.Expires, DateTime.Now.AddMinutes(20));
+            //Assert.AreEqual(cookie.Expires, DateTime.Now.AddMinutes(20));
+            /*
+             * CPU needs some time to execute the test and during this time, the cookie's duration
+             * could be less(when tested with the if condition)
+             */
+            DateTime timeCookieCorrectEndTime = DateTime.Now.AddMinutes(20);
+            DateTime timeCookieEndTime = cookie.Expires;
+            Assert.IsTrue((timeCookieCorrectEndTime - timeCookieEndTime).Minutes < 2, "Fail");
             Assert.AreEqual(cookie.HttpOnly, true);
         }
 
@@ -253,7 +253,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
             MockLogInViewModel.Setup(mock => mock.SetCookie(It.IsAny<string>(), It.IsAny<bool>())).Callback(
                 (string email, bool rememberMe) =>
                 {
-                    int timeout = rememberMe ? 525600 : 20; // 525600 min = 1 year
+                    int timeout = rememberMe ? 262800 : 20; // 262800 min = 1/2 year
                     var ticket = new FormsAuthenticationTicket(email, rememberMe, timeout);
                     string encrypted = FormsAuthentication.Encrypt(ticket);
                     cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
@@ -269,7 +269,13 @@ namespace BusinessTripApplication.UnitTests.Controllers
             loginViewModel.SetCookie(mail, remember);
 
             //Assert
-            Assert.AreEqual(cookie.Expires, DateTime.Now.AddMinutes(525600));
+            /*
+            * CPU needs some time to execute the test and during this time, the cookie's duration
+            * could be less(when tested with the if condition)
+            */
+            DateTime timeCookieCorrectEndTime = DateTime.Now.AddMinutes(262800);
+            DateTime timeCookieEndTime = cookie.Expires;
+            Assert.IsTrue((timeCookieCorrectEndTime - timeCookieEndTime).Minutes < 2, "Fail");
             Assert.AreEqual(cookie.HttpOnly, true);
         }
 

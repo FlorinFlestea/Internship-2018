@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
 
 namespace BusinessTripApplication.Repository
@@ -15,16 +16,38 @@ namespace BusinessTripApplication.Repository
                 using (DatabaseContext context = new DatabaseContext())
                 {
                     context.Trips.Add(addedTrip);
+                    context.Entry(addedTrip.Area).State = EntityState.Modified;
+                    context.Entry(addedTrip.User).State = EntityState.Modified;
+                    context.Entry(addedTrip).State = EntityState.Added;
                     context.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to database!\n");
             }
 
             return addedTrip;
+        }
+
+        public Trip FindById(int? id)
+        {
+            Trip foundTrip;
+            try
+            {
+                using (DatabaseContext context = new DatabaseContext())
+                {
+                    foundTrip = context.Trips.Find(id);
+                }
+            }
+            catch (System.Exception e)
+            {
+                Logger.Info(e.Message);
+                throw new DatabaseException("Cannot connect to database!\n");
+            }
+
+            return foundTrip;
         }
 
         public void Remove(Trip deleteTrip)
@@ -37,14 +60,14 @@ namespace BusinessTripApplication.Repository
                     context.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to database!\n");
             }
         }
 
-        public IList<Trip> FindAll()
+        public IList<Trip> GetAll()
         {
             IList<Trip> trips = new List<Trip>();
 
@@ -55,7 +78,7 @@ namespace BusinessTripApplication.Repository
                     trips = context.Trips.ToList();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to database!\n");
@@ -80,7 +103,7 @@ namespace BusinessTripApplication.Repository
                     context.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to database!\n");

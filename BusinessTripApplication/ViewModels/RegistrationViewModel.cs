@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Web;
-using System.Web.ModelBinding;
+using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 
@@ -72,7 +68,7 @@ namespace BusinessTripApplication.ViewModels
             {
                 throw;
             }
-            
+
             if (emailExists)
             {
                 throw new DatabaseException(" Email already exists!\n");
@@ -85,7 +81,7 @@ namespace BusinessTripApplication.ViewModels
             {
                 throw;
             }
-            
+
             User.Password = "";
 
             //Send Email to User
@@ -97,7 +93,7 @@ namespace BusinessTripApplication.ViewModels
             {
                 throw;
             }
-            
+
 
             return true;
         }
@@ -133,15 +129,15 @@ namespace BusinessTripApplication.ViewModels
                 IsBodyHtml = true
             })
 
-            try
-            {
-                smtp.Send(message);
-            }
-            catch (Exception ex)
-            {
+                try
+                {
+                    smtp.Send(message);
+                }
+                catch (System.Exception ex)
+                {
                     Logger.Info(ex.Message);
                     throw new InternetException("Cannot connect to internet!\n");
-            }
+                }
         }
 
     }
