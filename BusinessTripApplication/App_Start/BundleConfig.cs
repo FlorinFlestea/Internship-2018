@@ -31,6 +31,16 @@ namespace BusinessTripApplication
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/loginValidation").Include(
+                "~/Scripts/jquery.validate*",
+                "~/Scripts/ValidationScriptLogin.js",
+                "~/Scripts/ParseURL_login.js"
+                ));
+
+            bundles.Add(new StyleBundle("~/bundles/loginStyle").Include(
+                "~/Content/login.css"
+                ));
         }
     }
 }
