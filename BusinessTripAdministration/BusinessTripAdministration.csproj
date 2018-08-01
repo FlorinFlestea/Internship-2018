@@ -86,7 +86,9 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\ButtonCommand.cs" />
+    <Compile Include="Models\ApiClient.cs" />
     <Compile Include="Models\DatabaseQuery.cs" />
+    <Compile Include="Models\IApiClient.cs" />
     <Compile Include="Validation\ValidateField.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
