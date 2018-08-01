@@ -6,14 +6,15 @@
         xmlns:local="clr-namespace:BusinessTripAdministration.Views"
         mc:Ignorable="d"
         Title="LoginView" Height="380" Width="360" Background="#00BCD4"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Visibility="{Binding Path=IsCurrentWindowVisible,Mode=TwoWay}">
     <StackPanel Margin="2" Background="#212121">
        
         <StackPanel Margin="0,40,0,0">
             <Label Content="Email" HorizontalAlignment="Center" Foreground="#999999" FontSize="20"/>
             <TextBox x:Name="Email" BorderBrush="#00BCD4" Height="27" Width="250" Background="#333333" Foreground="WhiteSmoke" FontSize="16" TextAlignment="Center"/>
             <Label Content="Password" HorizontalAlignment="Center" Foreground="#999999" FontSize="20"/>
-            <PasswordBox x:Name="Password" BorderBrush="#00BCD4" Height="27" Width="250" Background="#333333" Foreground="WhiteSmoke" FontSize="16" />
+            <TextBox x:Name="Password" BorderBrush="#00BCD4" Height="27" Width="250" Background="#333333" Foreground="WhiteSmoke" FontSize="16" />
             <WrapPanel Orientation="Horizontal" Margin="50,10,0,0">
                 <CheckBox x:Name="RememberMe" VerticalAlignment="Center" BorderBrush="#00BCD4"/>
                 <Label Content="Remember me" Foreground="#999999" FontSize="16"/>

@@ -13,23 +13,29 @@ using System.Windows.Input;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    internal class LoginViewModel : Conductor<object>
+    internal class LoginViewModel:Screen
     {
-
-        private string email;
-        public string Email
-        {
-            get
-            { return email; }
-            set
-            {   email = value;
-                NotifyOfPropertyChange(() => Email);
-            }
-        }
+        public string Email { get; set; }
         public string Password { get; set; }
         public bool RememberMe { get; set; }
+        private string isCurrentWindowVisible;
+        public string IsCurrentWindowVisible
+        {
+            get
+            {
+                return isCurrentWindowVisible;
+            }
+            set
+            {
+                isCurrentWindowVisible = value;
+                NotifyOfPropertyChange(() => IsCurrentWindowVisible);
+            }
+        }
 
-        public LoginViewModel() { }
+        public LoginViewModel()
+        {
+            ShowCurrentWindow();
+        }
 
         private ICommand loginCommand;
 
@@ -67,7 +73,18 @@ namespace BusinessTripAdministration.ViewModels
 
         void LoadMainPage()
         {
-            //ActivateItem();
+            HideCurrentWindow();
+            MainView mainView = new MainView();
+            mainView.Show();
+        }
+
+        void HideCurrentWindow()
+        {
+            IsCurrentWindowVisible = "Hidden";
+        }
+        void ShowCurrentWindow()
+        {
+            IsCurrentWindowVisible = "Visible";
         }
 
     }

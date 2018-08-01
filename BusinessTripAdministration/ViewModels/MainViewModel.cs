@@ -8,8 +8,21 @@ using System.Threading.Tasks;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    internal class MainViewModel : Screen
+    internal class MainViewModel : Conductor<object>
     {
-       
+        public MainViewModel()
+        {
+            LoadHome();
+        }
+
+        public void LoadHome()
+        {
+            ActivateItem(new HomeViewModel());
+        }
+        public void LoadRequests()
+        {
+            ActivateItem(new RequestsViewModel());
+        }
+        
     }
 }
