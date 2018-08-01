@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    class RequestsViewModel: Screen
+    class RequestsViewModel: Conductor<object>
     {
         
         public RequestsViewModel()
@@ -17,6 +17,7 @@ namespace BusinessTripAdministration.ViewModels
             RequestList.Add(new SingleRequestViewModel("Thomas", "georgia", "2018", "2019"));
             RequestList.Add(new SingleRequestViewModel("Cosmin", "acasa", "2018", "2019"));
             RequestList.Add(new SingleRequestViewModel("Tudor", "???", "2018", "2019"));
+            
         }
         private List<SingleRequestViewModel> requestList;
         public List<SingleRequestViewModel> RequestList

@@ -20,14 +20,15 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label  Content="User" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Center"/>
-            <Label Grid.Column="1" Content="Destination" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Center"/>
-            <Label Grid.Column="2" Content="Starting Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Center"/>
-            <Label Grid.Column="3" Content="Ending Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Center"/>
-            <Label Grid.Column="4" Content="Actions" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Center"/>
+            <Label  Content="User" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Center"/>
+            <Label Grid.Column="1" Content="Destination" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Center"/>
+            <Label Grid.Column="2" Content="Starting Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Center"/>
+            <Label Grid.Column="3" Content="Ending Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Center"/>
+            <Label Grid.Column="4" Content="Actions" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Center"/>
         </Grid>
-
+        <ContentControl Grid.Row="1" x:Name="ActiveItem"/>
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+            
             <ItemsControl x:Name="RequestList" Grid.Column="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -37,6 +38,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <local:SingleRequestView/>
+                        
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

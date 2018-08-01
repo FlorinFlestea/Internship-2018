@@ -11,11 +11,11 @@
  
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style TargetType="Label">
@@ -26,17 +26,17 @@
                 <Setter Property="BorderThickness" Value="1" />
             </Style> 
         </Grid.Resources>
-        <Label x:Name="User" Grid.Column="0"/>
-        <Label x:Name="Destination" Grid.Column="1"/>
-        <Label x:Name="StartDate" Grid.Column="2"/>
-        <Label x:Name="EndDate" Grid.Column="3"/>
+        <Label Content="{Binding User, Mode=TwoWay}" Grid.Column="0"/>
+        <Label Content="{Binding Destination, Mode=TwoWay}" Grid.Column="1"/>
+        <Label Content="{Binding StartDate, Mode=TwoWay}" Grid.Column="2"/>
+        <Label Content="{Binding EndDate, Mode=TwoWay}" Grid.Column="3"/>
         <Grid Grid.Column="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="AcceptRequest" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="20">Accept</Button>
-            <Button x:Name="DenyRequest" Grid.Column="1" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="20" >Deny</Button>
+            <Button Command="{Binding AcceptCommand}" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="20">Accept</Button>
+            <Button Command="{Binding DenyRequest}" Grid.Column="1" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="20" >Deny</Button>
         </Grid>
         
     </Grid>
