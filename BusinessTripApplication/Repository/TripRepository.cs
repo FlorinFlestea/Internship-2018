@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
+using BusinessTripModels;
 
 namespace BusinessTripApplication.Repository
 {

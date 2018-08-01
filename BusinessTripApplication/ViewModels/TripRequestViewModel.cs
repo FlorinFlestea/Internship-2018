@@ -4,6 +4,7 @@ using BusinessTripApplication.Service;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using BusinessTripApplication.Exception;
+using BusinessTripModels;
 
 namespace BusinessTripApplication.ViewModels
 {
