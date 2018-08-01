@@ -5,10 +5,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    internal class MainViewModel : Conductor<object>
+    internal class MainViewModel : Conductor<object>,IViewModel
     {
         public MainViewModel()
         {

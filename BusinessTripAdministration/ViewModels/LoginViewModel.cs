@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    internal class LoginViewModel:Screen
+    internal class LoginViewModel: Screen
     {
         public string Email { get; set; }
         public string Password { get; set; }
@@ -34,6 +34,7 @@ namespace BusinessTripAdministration.ViewModels
 
         public LoginViewModel()
         {
+
             ShowCurrentWindow();
         }
 
@@ -74,8 +75,8 @@ namespace BusinessTripAdministration.ViewModels
         void LoadMainPage()
         {
             HideCurrentWindow();
-            MainView mainView = new MainView();
-            mainView.Show();
+            IWindowManager manager = new WindowManager();
+            manager.ShowWindow(new MainViewModel(), null, null);
         }
 
         void HideCurrentWindow()

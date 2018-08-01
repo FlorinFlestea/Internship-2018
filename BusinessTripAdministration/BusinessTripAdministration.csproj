@@ -70,6 +70,7 @@
     <Compile Include="Commands\ButtonCommand.cs" />
     <Compile Include="Validation\ValidateField.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RequestsViewModel.cs" />
@@ -141,7 +142,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Resources\UserControls\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\User_Image.png" />
