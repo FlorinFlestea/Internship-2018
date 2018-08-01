@@ -217,9 +217,9 @@
     <Compile Include="Migrations\201807251053332_Database.Designer.cs">
       <DependentUpon>201807251053332_Database.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807301054507_UpdateTripModel.cs" />
-    <Compile Include="Migrations\201807301054507_UpdateTripModel.Designer.cs">
-      <DependentUpon>201807301054507_UpdateTripModel.cs</DependentUpon>
+    <Compile Include="Migrations\201807311113295_TripsTable.cs" />
+    <Compile Include="Migrations\201807311113295_TripsTable.Designer.cs">
+      <DependentUpon>201807311113295_TripsTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AreaModel.cs" />
@@ -233,6 +233,7 @@
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\TripRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Server\EmailSender.cs" />
     <Compile Include="Service\AreaService.cs" />
     <Compile Include="Service\IAreaService.cs" />
     <Compile Include="Service\ITripService.cs" />
@@ -565,8 +566,8 @@
     <EmbeddedResource Include="Migrations\201807251053332_Database.resx">
       <DependentUpon>201807251053332_Database.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807301054507_UpdateTripModel.resx">
-      <DependentUpon>201807301054507_UpdateTripModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807311113295_TripsTable.resx">
+      <DependentUpon>201807311113295_TripsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,7 @@ namespace BusinessTripApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Trip trip = db.Trips.Find(id);
             if (trip == null)
             {
