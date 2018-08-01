@@ -1,9 +1,10 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Arima+Madurai');
 body {
-   width:100%;
-   height:100%;
+    width: 100%;
+    height: 100%;
+    background-color: #2d2d30;
 }
-a {
+/*a {
     font-family: 'Arima Madurai', cursive;
     color: white;
 }
@@ -23,7 +24,7 @@ h4 {
 label {
     font-family: 'Arima Madurai', cursive;
     color: #6BD425;
-}
+}*/
 
 
 p{
@@ -33,7 +34,6 @@ p{
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
-    background: linear-gradient(#42113C 0%, rgba(107, 212, 37, 0.50)), url('images/rawpixel-574844-unsplash.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
@@ -47,9 +47,7 @@ p{
 .index-background {
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    background: linear-gradient(#42113C 0%, rgba(107, 212, 37, 0.50)), url('images/rawpixel-574844-unsplash.jpg');
-    
+    -ms-text-size-adjust: 100%;    
     background-repeat: no-repeat;
 
     z-index: 1;
