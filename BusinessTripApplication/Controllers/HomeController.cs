@@ -18,9 +18,9 @@ namespace BusinessTripApplication.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return View("Dashboard");
+                return RedirectToAction("Index", "Trips");
             }
-            return View();
+            return RedirectToAction("Login", "User");
         }
 
         public ActionResult About()

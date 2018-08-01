@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/NoToolBarLayout.cshtml";
 }
 
-<h2>Registration</h2>
+
 @if (Model.Message != null)
 {
     if (Convert.ToBoolean(Model.Status))
@@ -29,51 +29,57 @@
         <script type="text/javascript" src="@Url.Content("/Scripts/ValidationScriptRegistration.js")"></script>
         <script type="text/javascript" src="@Url.Content("/Scripts/ParseURL_registration.js")"></script>
 
-    <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.User.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User.Name, new { htmlAttributes = new { @class = "form-control", @data_toggle = "tooltip", @title = "Hooray!", @data_placement = "bottom" } })
-                @* @Html.ValidationMessageFor(model => model.Name, "", new { @id= "text-danger-username", @class = "text-danger" }) *@
-                @Html.ValidationMessage("", new { id = "username_error_message", style = "color:red" })
-
-            </div>
-        </div>
-        <br />
-        <br />
-        <div class="form-group">
-            @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control", @data_toggle = "tooltip", @title = "Hooray!", @data_placement = "bottom" } })
-                @* @Html.ValidationMessageFor(model => model.Email, "", new { @id = "text-danger-email", @class = "text-danger" }) *@
-                @Html.ValidationMessage("", new { id = "email_error_message", style = "color:red" })
-
-            </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <h2 class="col-md-6">Registration</h2>
+            <div class="col-md-3"></div>
         </div>
 
-        <br />
-        <br />
-        <div class="form-group">
-            @Html.LabelFor(model => model.User.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "form-control", data_toggle = "tooltip", title = "Hooray!", data_placement = "bottom" } })
-                @* @Html.ValidationMessageFor(model => model.Password, "", new { @id = "text-danger-password", @class = "text-danger" }) *@
-                @Html.ValidationMessage("", new { id = "password_error_message", style = "color:red" })
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+
+                <div class="form-group offset-md-3 col-md-6">
+                    @Html.LabelFor(model => model.User.Name, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.User.Name, new { htmlAttributes = new { @class = "form-control", @data_toggle = "tooltip", @title = "Hooray!", @data_placement = "bottom" } })
+                    @* @Html.ValidationMessageFor(model => model.Name, "", new { @id= "text-danger-username", @class = "text-danger" }) *@
+                    @Html.ValidationMessage("", new { id = "username_error_message", style = "color:red" })
+                </div>
+            </div>
+
+
+            <br />
+            <div class="row">
+                <div class="form-group offset-md-3 col-md-6">
+                    @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control", @data_toggle = "tooltip", @title = "Hooray!", @data_placement = "bottom" } })
+                    @* @Html.ValidationMessageFor(model => model.Email, "", new { @id = "text-danger-email", @class = "text-danger" }) *@
+                    @Html.ValidationMessage("", new { id = "email_error_message", style = "color:red" })
+                </div>
 
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input id="btn_Create" onclick="return false" type="submit" value="Create" class="btn btn-primary btn-lg" />
+
+            <br />
+            <div class="row">
+                <div class="form-group offset-md-3 col-md-6">
+                    @Html.LabelFor(model => model.User.Password, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "form-control", data_toggle = "tooltip", title = "Hooray!", data_placement = "bottom" } })
+                    @* @Html.ValidationMessageFor(model => model.Password, "", new { @id = "text-danger-password", @class = "text-danger" }) *@
+                    @Html.ValidationMessage("", new { id = "password_error_message", style = "color:red" })
+                </div>
             </div>
-            <div class="col-md-offset-2 col-md-10">
-                <p>If you already have an account please <button id="btn_log_in" type="button" onclick="window.open('https://localhost:44328/User/Login?email='+document.getElementById('User_Email').value,'_self','resizable=yes')" class="btn btn-primary btn-sm" style=" height:100%">Log In</button> </p>
+            <br />
+            <div class="row">
+                <div class="form-group offset-md-3 col-md-6">
+                    <input id="btn_Create" onclick="return false" type="submit" value="Create" class="btn btn-primary btn-block" />
+                    <p>If you already have an account please <button id="btn_log_in" type="button" onclick="window.open('https://localhost:44328/User/Login?email=' + document.getElementById('User_Email').value, '_self', 'resizable=yes')" class="btn btn-primary btn-sm" style="height: 100%">Log In</button> </p>
+
+                </div>
             </div>
         </div>
-    </div>
 }
 
