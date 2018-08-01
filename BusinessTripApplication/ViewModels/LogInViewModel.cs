@@ -35,6 +35,11 @@ namespace BusinessTripApplication.ViewModels
             Title = "LogIn";
         }
 
+        public LogInViewModel(IUserService userService, Guid activationCode)
+        {
+            SetCookie(userService.FindByActivationCode(activationCode).Email, true);
+        }
+
         public LogInViewModel(bool modelState, string email, string password,bool rememberMe, IUserService userService,out int returnValue)
         {
             if (modelState)
