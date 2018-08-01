@@ -36,8 +36,8 @@
                 <RowDefinition Height="14*" />
             </Grid.RowDefinitions>
             <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right">
-                <Menu Height="26" Background="#212121" BorderBrush="WhiteSmoke" BorderThickness="1">
-                    <MenuItem Header="roman.cosmin97@yahoo.com" Foreground="WhiteSmoke" Height="26" >
+                <Menu VerticalAlignment="Stretch"  Background="#212121" BorderBrush="WhiteSmoke" BorderThickness="1" FontSize="24">
+                    <MenuItem Header="roman.cosmin97@yahoo.com" Foreground="WhiteSmoke" VerticalAlignment="Stretch" >
                         <MenuItem Header="Logout" Background="#212121"/>
                         <MenuItem Header="Account" Background="#212121"/>
                     </MenuItem>
