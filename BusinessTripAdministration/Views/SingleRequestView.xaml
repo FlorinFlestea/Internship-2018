@@ -22,7 +22,7 @@
                 <Setter Property="Foreground" Value="WhiteSmoke" />
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="BorderBrush" Value="#00BCD4" />
+                <Setter Property="BorderBrush" Value="#2f4656" />
                 <Setter Property="BorderThickness" Value="1" />
             </Style> 
         </Grid.Resources>
@@ -36,9 +36,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding AcceptCommand}" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16">Accept</Button>
-            <Button Command="{Binding DenyCommand}" Grid.Column="1" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16" >Deny</Button>
-            <Button Command="{Binding DetailsCommand}" Grid.Column="2" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16" >Details</Button>
+            <Button Command="{Binding AcceptCommand}" BorderBrush="#1b815a" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16">Accept</Button>
+            <Button Command="{Binding DenyCommand}" Grid.Column="1" BorderBrush="#1b815a" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16" >Deny</Button>
+            <Button Command="{Binding DetailsCommand}" Grid.Column="2" BorderBrush="#1b815a" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16" >Details</Button>
         </Grid>
         
     </Grid>

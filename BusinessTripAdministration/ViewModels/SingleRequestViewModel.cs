@@ -78,6 +78,7 @@ namespace BusinessTripAdministration.ViewModels
 
         private ICommand acceptCommand;
         private ICommand denyCommand;
+        private ICommand detailsCommand;
 
         public ICommand AcceptCommand
         {
@@ -110,7 +111,30 @@ namespace BusinessTripAdministration.ViewModels
                 return denyCommand;
             }
         }
+        public ICommand DetailsCommand
+        {
+            get
+            {
+                if (detailsCommand == null)
+                {
+                    detailsCommand = new ButtonCommand(
+                        param => this.DetailsRequest(),
+                        param => this.CanRequestDetails()
+                    );
+                }
+                return detailsCommand;
+            }
+        }
 
+        private bool CanRequestDetails()
+        {
+            return true;
+        }
+
+        private void DetailsRequest()
+        {
+            
+        }
 
         public void AcceptRequest()
         {
