@@ -9,10 +9,25 @@ namespace BusinessTripAdministration.ViewModels
 {
     class RequestsViewModel: Screen
     {
+        
         public RequestsViewModel()
         {
 
         }
+        private List<SingleRequestViewModel> requestList;
+        public List<SingleRequestViewModel> RequestList
+        {
+            get
+            {
+                return requestList;
+            }
+            set
+            {
+                requestList = value;
+                NotifyOfPropertyChange(() => RequestList);
+            }
+        }
+
 
     }
 }

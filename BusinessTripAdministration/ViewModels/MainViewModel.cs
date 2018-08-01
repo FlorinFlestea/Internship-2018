@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    internal class MainViewModel : Conductor<object>,IViewModel
+    internal class MainViewModel : Conductor<object>
     {
         public MainViewModel()
         {
