@@ -19,12 +19,12 @@
 
     $(input_password)
         .attr('data-original-title', "")
-        .tooltip('_fixTitle').tooltip('hide');
+        .tooltip('fixTitle').tooltip('hide');
 
 
     $(input_email)
         .attr('data-original-title', "")
-        .tooltip('_fixTitle').tooltip('hide');
+        .tooltip('fixTitle').tooltip('hide');
 
 
     //when starting the page, if the inputs are correct, do not disable the button(when refreshing the page)
@@ -45,7 +45,7 @@
     function SetTextTooltipEmail(text) {
         $(input_email)
             .attr('data-original-title', text)
-            .tooltip('_fixTitle');
+            .tooltip('fixTitle');
         $(input_email).css("border-color", color_incorrect);
     }
 
@@ -53,7 +53,7 @@
     function SetTextTooltipPassword(text) {
         $(input_password)
             .attr('data-original-title', text)
-            .tooltip('_fixTitle');
+            .tooltip('fixTitle');
         $(input_password).css("border-color", color_incorrect);
     }
 
@@ -72,7 +72,7 @@
     function HideTooltipEmail() {
         $(input_email)
             .attr('data-original-title', "")
-            .tooltip('_fixTitle');
+            .tooltip('fixTitle');
         $(input_email).css("border-color", color_correct);
         $(input_email).tooltip('hide');
     }
@@ -80,7 +80,7 @@
     function HideTooltipPassword() {
         $(input_password)
             .attr('data-original-title', "")
-            .tooltip('_fixTitle');
+            .tooltip('fixTitle');
         $(input_password).css("border-color", color_correct);
         $(input_password).tooltip('hide');
     }

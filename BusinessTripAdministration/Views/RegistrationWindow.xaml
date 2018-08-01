@@ -1,0 +1,58 @@
+﻿<Window x:Class="BusinessTripAdministration.Views.RegistrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Registration" Height="460" Width="560" Background="#00BCD4" >
+    <StackPanel Margin="2" Background="#212121">
+        <Label Foreground="#999999" FontSize="20" HorizontalAlignment="Center" Margin="0,20,0,0" >
+            Register a new administrator account
+        </Label>
+            <StackPanel Margin="0,20,0,0">
+            <Label Content="Username" HorizontalAlignment="Center" Foreground="#999999" FontSize="20"/>
+            <TextBox Name="UsernameBox" Text="{Binding RegistrationViewModel.Username}" BorderBrush="#00BCD4" Height="27" Width="300" Background="#333333" Foreground="WhiteSmoke" FontSize="16"  TextAlignment="Center">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock/>
+                        </StackPanel>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <Label Content="Email" HorizontalAlignment="Center" Foreground="#999999" FontSize="20"/>
+            <TextBox Name="EmailBox" Text="{Binding  RegistrationViewModel.Email}" BorderBrush="#00BCD4" Height="27" Width="300" Background="#333333" Foreground="WhiteSmoke" FontSize="16"  TextAlignment="Center">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock/>
+                        </StackPanel>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <Label  Content="Password" HorizontalAlignment="Center" Foreground="#999999" FontSize="20"/>
+            <TextBox Name="PasswordBox" Text="{Binding  RegistrationViewModel.Password}" BorderBrush="#00BCD4" Height="27" Width="300" Background="#333333" Foreground="WhiteSmoke" FontSize="16"  TextAlignment="Center">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock/>
+                        </StackPanel>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+            <Label Content="Confirm Password" HorizontalAlignment="Center" Foreground="#999999" FontSize="20"/>
+            <TextBox Name="ConfirmPasswordBox" Text="{Binding RegistrationViewModel.ConfirmPassword}" BorderBrush="#00BCD4" Height="27" Width="300" Background="#333333" Foreground="WhiteSmoke" FontSize="16"  TextAlignment="Center">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock/>
+                        </StackPanel>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+        </StackPanel>
+        <Button Name="RegisterBox" Command="{Binding RegisterCommand}" Content="Register" HorizontalAlignment="Center" Margin="0,20,0,0" Height="30" Width="100" Background="#333333" Foreground="#00BCD4" BorderBrush="#00BCD4" FontSize="18"/>
+
+    </StackPanel>
+</Window>

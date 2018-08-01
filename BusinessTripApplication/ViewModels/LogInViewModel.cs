@@ -12,7 +12,7 @@ using System.Web.Security;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 
-namespace BusinessTripApplication.ViewModels
+namespace BusinessTripApplication.ViewModels 
 {
     public class LogInViewModel : ILogInViewModel
     {
@@ -48,7 +48,7 @@ namespace BusinessTripApplication.ViewModels
                     {
                         Email = email;
                         Password = "";//do not expose password
-
+                        
                         returnValue = 1;
                         return;
                     }
@@ -86,11 +86,10 @@ namespace BusinessTripApplication.ViewModels
                 emailExists = userService.EmailExists(user.Email);
                 if (!emailExists)
                 {
-                    Message = " Your email is invalid or your password is invalid or" +
-                              " you haven't verified your email!";
+                    Message = " Sorry, you have to register first";
                     return false;
                 }
-                dbUser = userService.FindByEmail(user.Email);
+                dbUser = userService.GetUserByEmail(user.Email);
             }
             catch
             {
@@ -120,10 +119,17 @@ namespace BusinessTripApplication.ViewModels
                 throw;
             }
 
-            if (!goodPassword || !emailVerified)
+            
+
+            if (!emailVerified)
             {
-                Message = " Your email is invalid or your password is invalid or" +
-                          " you haven't verified your email!";
+                Message = " You have to verifiy your email first";
+                return false;
+            }
+
+            if (!goodPassword)
+            {
+                Message = " Incorrect password";
                 return false;
             }
             SetCookie(user.Email, RememberMe);
@@ -133,7 +139,7 @@ namespace BusinessTripApplication.ViewModels
 
         public void SetCookie(string email, bool rememberMe)
         {
-            int timeout = rememberMe ? 262800 : 20; // 262800 min = 1/2 year
+            int timeout = rememberMe ? 525600 : 20; // 525600 min = 1 year
             var ticket = new FormsAuthenticationTicket(email, rememberMe, timeout);
             string encrypted = FormsAuthentication.Encrypt(ticket);
             Cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
