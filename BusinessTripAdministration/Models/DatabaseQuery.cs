@@ -28,10 +28,9 @@ namespace BusinessTripAdministration.Models
             sqlConnection.Open();
 
             var reader = cmd.ExecuteReader();
-            var fieldCount = reader.FieldCount;
-
+            var returnOption = reader.HasRows;
             sqlConnection.Close();
-            return true;
+            return returnOption;
         }
     }
 }

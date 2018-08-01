@@ -11,7 +11,7 @@ namespace BusinessTripAdministration.Views
         public LoginView()
         {
             InitializeComponent();
-            DatabaseQuery.Login("cernovalex1@gmail.com", "Test123!");
+            
 
         }
 
