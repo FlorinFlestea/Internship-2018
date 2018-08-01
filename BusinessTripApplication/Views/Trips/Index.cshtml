@@ -17,29 +17,39 @@
 
     @using (Html.BeginForm("Index", "Trips", FormMethod.Get))
     {
-        <b> Search Option: </b>
+        <b> Transportation: </b>
         List<SelectListItem>
-            listItems = new List<SelectListItem>
+            listItemsTransportation = new List<SelectListItem>
                 ();
-        listItems.Add(new SelectListItem
+        listItemsTransportation.Add(new SelectListItem
         {
-            Text = "Name",
-            Value = "Name"
+            Text = "Car",
+            Value = "Car"
         });
-        listItems.Add(new SelectListItem
+        listItemsTransportation.Add(new SelectListItem
         {
-            Text = "ProjectName",
-            Value = "ProjectName",
+            Text = "AirPlane",
+            Value = "AirPlane",
             Selected = true
         });
-        listItems.Add(new SelectListItem
+        listItemsTransportation.Add(new SelectListItem
         {
-            Text = "ProjectNumber",
-            Value = "ProjectNumber"
+            Text = "Bus",
+            Value = "Bus"
         });
+        listItemsTransportation.Add(new SelectListItem
+        {
+            Text = "All",
+            Value = "All"
+        });
+
         //  }
 
-        @Html.DropDownList("option", new SelectList(listItems, "value", "text"))
+        @Html.DropDownList("optionTransportation", new SelectList(listItemsTransportation, "value", "text"))
+        
+
+        //  }
+
 
 
 
@@ -51,12 +61,14 @@
         //  <text> ProjectName </text>
         //   @Html.RadioButton("option", "ProjectNumber")
         //   <text>ProjectNumber</text>
-        <br>
-        @Html.TextBox("search")
+
         <input type="submit" name="submit" value="Search" />
     }
 </div>
-<div class="alert alert-dismissible alert-warning" style="margin-top:10%;">
+
+
+
+<div class="alert alert-dismissible alert-warning" style="margin-top:10%; background-color:#E8F1F2;" >
     <h4 class="alert-heading">Pending request</h4>
     <table class="table table-hover">
         <thead>
@@ -83,6 +95,9 @@
                     @Html.DisplayNameFor(model => model.TaskNumber)
                 </th>
                 <th scope="col">
+                    @Html.DisplayNameFor(model => model.Transportation)
+                </th>
+                <th scope="col">
                     @Html.DisplayNameFor(model => model.Approved)
                 </th>
                 <th></th>
@@ -95,46 +110,50 @@
                  
                     if (item.Approved == false)
                     {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PmName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ClientName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartingDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProjectName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProjectNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TaskNumber)
-                    </td>
-                    <td>
-                        @{
-                            if (item.Approved)
-                            {
-                                <span class="badge badge-pill badge-success" style="bacground-color:green;">Approved</span>
-                            }
-                            else
-                            {
-                                <span class="badge badge-pill badge-warning" style="color:orangered;">Pending</span>
-                            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PmName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Transportation)
+                </td>
+
+                <td>
+                    @{
+                        if (item.Approved)
+                        {
+                            <span class="badge badge-pill badge-success" style="background-color:green;">Approved</span>
                         }
-                    </td>
-                    <td>
-                        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fas fa-edit culor" }) |
-                        @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fas fa-info-circle culor" }) |
-                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fas fa-trash-alt culor" })
-                    </td>
-                </tr>
+                        else
+                        {
+                            <span class="badge badge-pill badge-warning" style="color:orangered;">Pending</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fas fa-edit culor" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fas fa-info-circle culor" }) |
+                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fas fa-trash-alt culor" })
+                </td>
+            </tr>
                                 }
                             }
             
@@ -168,6 +187,9 @@
             <th scope="col">
                 @Html.DisplayNameFor(model => model.TaskNumber)
             </th>
+            <td>
+                @Html.DisplayNameFor(model => model.Transportation)
+            </td>
             <th scope="col">
                 @Html.DisplayNameFor(model => model.Approved)
             </th>
@@ -179,46 +201,86 @@
         {
             if (item.Approved = true)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PmName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClientName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartingDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProjectName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProjectNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaskNumber)
-                </td>
-                <td>
-                    @{
-                        if (item.Approved)
-                        {
-                            <span class="badge badge-pill badge-success" style="bacground-color:green;">Approved</span>
-                        }
-                        else
-                        {
-                            <span class="badge badge-pill badge-warning" style="color:orangered;">Pending</span>
-                        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PmName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transportation
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           )
+            </td>
+            <td>
+                @{
+                    if (item.Approved)
+                    {
+                        <span class="badge badge-pill badge-success" style="bacground-color:green;">Approved</span>
                     }
-                </td>
-                <td>
-                    @Html.ActionLink(" ", "Edit", new { id = item.Id },new { @class= "fas fa-edit culor" }) |
-                    @Html.ActionLink(" ", "Details", new { id = item.Id },new { @class= "fas fa-info-circle culor" }) |
-                    @Html.ActionLink(" ", "Delete", new { id = item.Id },new { @class= "fas fa-trash-alt culor" })
-                </td>
-            </tr>
+                    else
+                    {
+                        <span class="badge badge-pill badge-warning" style="color:orangered;">Pending</span>
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "fas fa-edit culor" }) |
+                @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "fas fa-info-circle culor" }) |
+                @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "fas fa-trash-alt culor" })
+            </td>
+        </tr>
                             }
                         }
     </tbody>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -16,23 +17,19 @@ namespace BusinessTripApplication.Controllers
         private BusinessContext db = new BusinessContext();
 
         // GET: Trips
-        public ActionResult Index(string option,string search)
+        public ActionResult Index(string optionTransportation)
         {
-            if (option == "Name")
-            {
-                //Index action method will return a view with a student records based on what a user specify the value in textbox  
-                return View(db.Trips.Where(x=> x.PmName == search || search == null).ToList());
-            }
-            else if (option == "ProjectName")
-            {
-                return View(db.Trips.Where(x=> x.ProjectName == search || search == null).ToList());
-            }
-            else if(option =="ProjectNumber")
-            {
-                return View(db.Trips.Where(x=> x.ProjectNumber== search || search == null).ToList());
-            }
 
-            return View(db.Trips);
+            if (optionTransportation != null)
+            {
+                if (optionTransportation == "All")
+                    return View(db.Trips.ToList());
+
+                return View(db.Trips.Where(x => x.Transportation == optionTransportation || optionTransportation == null).ToList());
+            }
+           
+             return View(db.Trips.ToList());
+
         }
 
         
