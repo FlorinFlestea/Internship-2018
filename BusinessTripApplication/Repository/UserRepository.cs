@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Helpers;
 using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
+using BusinessTripModels;
 
 namespace BusinessTripApplication.Repository
 {

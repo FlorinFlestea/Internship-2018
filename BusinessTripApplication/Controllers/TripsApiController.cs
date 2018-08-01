@@ -5,6 +5,7 @@ using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BusinessTripApplication.Models;
+using BusinessTripModels;
 
 namespace BusinessTripApplication.Controllers
 {

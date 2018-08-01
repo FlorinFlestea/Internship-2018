@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using BusinessTripApplication.Models;
+using BusinessTripModels;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Service;
 using BusinessTripApplication.ViewModels;
