@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Helpers;
+using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
 
 namespace BusinessTripApplication.Repository
@@ -25,7 +25,7 @@ namespace BusinessTripApplication.Repository
                     context.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to Database!\n");
@@ -38,13 +38,13 @@ namespace BusinessTripApplication.Repository
         {
             IList<User> users = new List<User>();
             try
-            {             
+            {
                 using (var context = new DatabaseContext())
                 {
                     users = context.Users.ToList();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to Database!\n");
@@ -57,14 +57,14 @@ namespace BusinessTripApplication.Repository
         {
             IList<User> users = FindAll();
 
-            return users.Where(x => x.ActivationCode == code).SingleOrDefault();
+            return users.SingleOrDefault(x => x.ActivationCode == code);
         }
 
         public User FindByEmail(string email)
         {
             IList<User> users = FindAll();
 
-            return users.Where(x => x.Email == email).SingleOrDefault();
+            return users.SingleOrDefault(x => x.Email == email);
         }
 
         public User UpdateIsEmailVerified(User updatedUser)
@@ -79,12 +79,12 @@ namespace BusinessTripApplication.Repository
                     context.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to Database!\n");
             }
-            
+
             return update;
         }
     }

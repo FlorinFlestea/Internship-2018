@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 
@@ -20,14 +22,20 @@ namespace BusinessTripApplication.Service
 
         public IList<Area> FindAll()
         {
-            try
-            {
-                return areaRepository.FindAll(); 
-            }
-            catch
-            {
-                throw;
-            }
+
+            return areaRepository.FindAll();
+        }
+
+        public Area FindById(int Id)
+        {
+            IList<Area> areas = areaRepository.FindAll();
+
+            Area returnArea = areas.FirstOrDefault(a => a.Id == Id);
+
+            if (returnArea == default(Area))
+                throw new DatabaseException("Area does't exists!\n");
+            return returnArea;
+
         }
     }
 }
