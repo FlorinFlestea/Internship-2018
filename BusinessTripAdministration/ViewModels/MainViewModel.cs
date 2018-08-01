@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    internal class MainViewModel : INotifyPropertyChanged
+    internal class MainViewModel : Screen
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+       
     }
 }

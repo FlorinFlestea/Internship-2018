@@ -23,11 +23,11 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    
+        @Scripts.Render("~/bundles/jqueryval")
 
-    @Scripts.Render("~/bundles/jqueryval")
-
-    <script type="text/javascript" src="@Url.Content("/Scripts/ValidationScriptRegistration.js")"></script>
-    <script type="text/javascript" src="@Url.Content("/Scripts/ParseURL_registration.js")"></script>
+        <script type="text/javascript" src="@Url.Content("/Scripts/ValidationScriptRegistration.js")"></script>
+        <script type="text/javascript" src="@Url.Content("/Scripts/ParseURL_registration.js")"></script>
 
     <div class="form-horizontal">
         <h4>User</h4>
@@ -76,3 +76,4 @@
         </div>
     </div>
 }
+

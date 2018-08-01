@@ -238,14 +238,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
             loginViewModel.SetCookie(mail, remember);
 
             //Assert
-            //Assert.AreEqual(cookie.Expires, DateTime.Now.AddMinutes(20));
-            /*
-             * CPU needs some time to execute the test and during this time, the cookie's duration
-             * could be less(when tested with the if condition)
-             */
-            DateTime timeCookieCorrectEndTime = DateTime.Now.AddMinutes(20);
-            DateTime timeCookieEndTime = cookie.Expires;
-            Assert.IsTrue((timeCookieCorrectEndTime - timeCookieEndTime).Minutes < 2,"Fail");
+            Assert.AreEqual(cookie.Expires, DateTime.Now.AddMinutes(20));
             Assert.AreEqual(cookie.HttpOnly, true);
         }
 
@@ -260,7 +253,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
             MockLogInViewModel.Setup(mock => mock.SetCookie(It.IsAny<string>(), It.IsAny<bool>())).Callback(
                 (string email, bool rememberMe) =>
                 {
-                    int timeout = rememberMe ? 262800 : 20; // 262800 min = 1/2 year
+                    int timeout = rememberMe ? 525600 : 20; // 525600 min = 1 year
                     var ticket = new FormsAuthenticationTicket(email, rememberMe, timeout);
                     string encrypted = FormsAuthentication.Encrypt(ticket);
                     cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
@@ -276,13 +269,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
             loginViewModel.SetCookie(mail, remember);
 
             //Assert
-            /*
-            * CPU needs some time to execute the test and during this time, the cookie's duration
-            * could be less(when tested with the if condition)
-            */
-            DateTime timeCookieCorrectEndTime = DateTime.Now.AddMinutes(262800);
-            DateTime timeCookieEndTime = cookie.Expires;
-            Assert.IsTrue((timeCookieCorrectEndTime - timeCookieEndTime).Minutes < 2, "Fail");
+            Assert.AreEqual(cookie.Expires, DateTime.Now.AddMinutes(525600));
             Assert.AreEqual(cookie.HttpOnly, true);
         }
 
