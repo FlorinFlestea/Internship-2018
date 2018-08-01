@@ -13,7 +13,6 @@ namespace BusinessTripApplication.Controllers
         private readonly ITripService tripService = new TripService(new TripRepository());
         private readonly IAreaService areaService = new AreaService(new AreaRepository());
         private readonly IUserService userService = new UserService(new UserRepository());
-        private DatabaseContext db = new DatabaseContext();
 
         private readonly TripRepository Repository = new TripRepository();
 
