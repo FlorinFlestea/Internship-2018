@@ -11,11 +11,11 @@
  
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="23*"/>
-            <ColumnDefinition Width="23*"/>
-            <ColumnDefinition Width="23*"/>
-            <ColumnDefinition Width="23*"/>
-            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
             <Style TargetType="Label">
@@ -34,9 +34,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding AcceptCommand}" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="20">Accept</Button>
-            <Button Command="{Binding DenyRequest}" Grid.Column="1" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="20" >Deny</Button>
+            <Button Command="{Binding AcceptCommand}" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16">Accept</Button>
+            <Button Command="{Binding DenyCommand}" Grid.Column="1" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16" >Deny</Button>
+            <Button Command="{Binding DetailsCommand}" Grid.Column="2" BorderBrush="#00BCD4" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16" >Details</Button>
         </Grid>
         
     </Grid>

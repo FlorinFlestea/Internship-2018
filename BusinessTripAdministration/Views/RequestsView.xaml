@@ -5,12 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BusinessTripAdministration.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="850"
+             d:DesignHeight="500" d:DesignWidth="1000"
              BorderBrush="#00BCD4" BorderThickness="1">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="12*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -19,14 +20,33 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="17"/>
             </Grid.ColumnDefinitions>
-            <Label  Content="User" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Center"/>
-            <Label Grid.Column="1" Content="Destination" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Center"/>
-            <Label Grid.Column="2" Content="Starting Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Center"/>
-            <Label Grid.Column="3" Content="Ending Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Center"/>
-            <Label Grid.Column="4" Content="Actions" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Center"/>
+            <Label  Content="User" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Label Grid.Column="1" Content="Destination" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Label Grid.Column="2" Content="Starting Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Label Grid.Column="3" Content="Ending Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Label Grid.Column="4" Content="Actions" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
         </Grid>
         <ContentControl Grid.Row="1" x:Name="ActiveItem"/>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="1" Background="Transparent" Foreground="WhiteSmoke" FontSize="22" HorizontalAlignment="Stretch"/>
+            <Button Grid.Column="2" Content="Refresh" FontSize="22" Background="#212121" Foreground="WhiteSmoke" HorizontalAlignment="Stretch"/>
+            <Button Grid.Column="3" Content="Search" HorizontalAlignment="Stretch" FontSize="22" Background="#212121" Foreground="WhiteSmoke"/>
+            <Menu  Background="#212121" BorderBrush="WhiteSmoke" BorderThickness="1">
+                <MenuItem Header="Select Filter" Foreground="WhiteSmoke" FontSize="24" >
+                    <MenuItem Header="User" Background="#212121"/>
+                    <MenuItem Header="Destination" Background="#212121"/>
+                </MenuItem>
+            </Menu>
+        </Grid>
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
             
             <ItemsControl x:Name="RequestList" Grid.Column="0">
@@ -38,7 +58,6 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <local:SingleRequestView/>
-                        
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

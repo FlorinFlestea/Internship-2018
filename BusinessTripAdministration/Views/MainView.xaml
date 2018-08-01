@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessTripAdministration.Views"
         mc:Ignorable="d"
-        Title="MainView" Height="650" Width="950">
+        Title="MainView" Height="650" Width="1050">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
