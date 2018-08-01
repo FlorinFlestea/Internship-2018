@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using BusinessTripApplication.Models;
 
@@ -16,9 +15,6 @@ namespace BusinessTripApplication.Repository
                 using (DatabaseContext context = new DatabaseContext())
                 {
                     context.Trips.Add(addedTrip);
-                    context.Entry(addedTrip.Area).State = EntityState.Modified;
-                    context.Entry(addedTrip.User).State = EntityState.Modified;
-                    context.Entry(addedTrip).State = EntityState.Added;
                     context.SaveChanges();
                 }
             }
