@@ -14,13 +14,13 @@ namespace BusinessTripAdministration.Models
         private const string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True";
         private static readonly SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-      
+
 
         public static bool Login(string email, string password)
         {
             var cmd = new SqlCommand
             {
-                CommandText = "SELECT * FROM Users WHERE Email=" + email + " AND Password=" + Crypto.Hash(password),
+                CommandText = "SELECT * FROM Users WHERE Email='" + email + "' AND Password='" + Crypto.Hash(password) + "'",
                 CommandType = CommandType.Text,
                 Connection = sqlConnection
             };

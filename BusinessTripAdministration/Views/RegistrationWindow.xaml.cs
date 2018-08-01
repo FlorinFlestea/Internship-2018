@@ -23,7 +23,7 @@ namespace BusinessTripAdministration.Views
         public RegistrationWindow()
         {
             InitializeComponent();
-            DataContext = new RegistrationViewModel();
+            //DataContext = new RegistrationViewModel();
         }
 
     }
