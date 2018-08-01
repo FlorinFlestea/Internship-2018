@@ -14,38 +14,38 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body> 
-    <div class="index-background">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
-        <div class="card-deck">
-            <div class="card text-white bg-primary mb-3" style="max-width:60rem;margin-top:10%; background-color: #370926; padding: 70px;width:22em; display:inline-block;">
-                @*<div class="card-header"> <h4></h4> </div>*@
-                <div class="card-body">
-                    <div>
-                        <i class="fas fa-user-plus fa-x" style="color:#6BD425; font-size:10em; margin-left:15%; "></i>
-                    </div>
-                    <div class="button">
-                        @Html.ActionLink("Sign Up", "Registration", "User", "User", new { @class = "btn btn-primary btn-lg" })
-                    </div>
+<div class="index-background">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <div class="card-content">
+        <div class="card text-white bg-primary mb-3" style="max-width:60rem;margin-top:10%; background-color: #370926; padding: 70px;width:22em; display:inline-block;">
+            <div class="card-header"> <h4></h4> </div>
+            <div class="card-body">
+                <div>
+                    <i class="fas fa-user-plus fa-x" style="color:#6BD425; font-size:10em; margin-left:15%; "></i>
                 </div>
+                @*<div class="button">*@
+                    @Html.ActionLink("Sign Up", "Registration", "User", "User", new { @class = "btn btn-success btn-lg" })
+                @*</div>*@
             </div>
-        
+        </div>
+    </div>
 
-        
-            <div class="card text-white bg-primary mb-3" style="max-width:50rem;margin-top:10%; background-color: #370926; padding: 70px; width:22em;  display:inline-block; ">
-                <div class="card-header"> <h4></h4> </div>
-                <div class="card-body">
-                    <div>
-                        <i class="fas fa-sign-in-alt" style="color:#6BD425; font-size:10em; margin-left:15%; "></i>
-                    </div>
-                    <div class="button">
-                        @Html.ActionLink("Sign In", "LogIn", "User", "User", new { @class = "btn btn-primary btn-lg" })
-                    </div>
+    <div class="card-content">
+        <div class="card text-white bg-primary mb-3" style="max-width:50rem;margin-top:10%; background-color: #370926; padding: 70px; width:22em;  display:inline-block; ">
+            <div class="card-header"> <h4></h4> </div>
+            <div class="card-body">
+                <div>
+                    <i class="fas fa-sign-in-alt" style="color:#6BD425; font-size:10em; margin-left:15%; "></i>
+                </div>
+                <div class="button">
+                    @Html.ActionLink("Sign In", "LogIn", "User", "User", new { @class = "btn btn-primary btn-lg" })
                 </div>
             </div>
         </div>
+    </div>
 
 
-        </div>
+</div>
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")

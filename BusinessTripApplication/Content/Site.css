@@ -115,3 +115,9 @@ footer {
 #simpleLabel {
     color: #6BD425;
 }
+
+.card-content {
+    display: inline;
+    width: 40em;
+    margin-left: 20%;
+}
