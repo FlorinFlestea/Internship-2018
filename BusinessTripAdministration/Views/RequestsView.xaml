@@ -5,21 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BusinessTripAdministration.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="850">
+             d:DesignHeight="500" d:DesignWidth="850"
+             BorderBrush="#00BCD4" BorderThickness="1">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="8*" />
+            <RowDefinition Height="12*" />
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="User" Foreground="WhiteSmoke" FontSize="30" HorizontalAlignment="Center"/>
+            <Label  Content="User" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Center"/>
+            <Label Grid.Column="1" Content="Destination" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Center"/>
+            <Label Grid.Column="2" Content="Starting Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Center"/>
+            <Label Grid.Column="3" Content="Ending Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Center"/>
+            <Label Grid.Column="4" Content="Actions" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Center"/>
         </Grid>
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="RequestList" Grid.Column="0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:SingleRequestView/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

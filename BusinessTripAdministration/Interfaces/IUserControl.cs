@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessTripAdministration.ViewModels
+namespace BusinessTripAdministration.Interfaces
 {
-    public interface IViewModel
+    public interface IUserControl
     {
+
     }
 }

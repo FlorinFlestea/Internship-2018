@@ -68,9 +68,10 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\ButtonCommand.cs" />
+    <Compile Include="Interfaces\IUserControl.cs" />
+    <Compile Include="ViewModels\SingleRequestViewModel.cs" />
     <Compile Include="Validation\ValidateField.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RequestsViewModel.cs" />
@@ -82,6 +83,9 @@
     </Compile>
     <Compile Include="Views\RequestsView.xaml.cs">
       <DependentUpon>RequestsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SingleRequestView.xaml.cs">
+      <DependentUpon>SingleRequestView.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Dictionaries\LoginTextBox.xaml">
       <SubType>Designer</SubType>
@@ -107,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RequestsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SingleRequestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,5 +9,10 @@ namespace BusinessTripAdministration.ViewModels
 {
     class RequestsViewModel: Screen
     {
+        public RequestsViewModel()
+        {
+
+        }
+
     }
 }
