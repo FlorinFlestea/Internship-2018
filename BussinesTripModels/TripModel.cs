@@ -1,9 +1,9 @@
-﻿using MvcValidationExtensions.Attribute;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MvcValidationExtensions.Attribute;
 
-namespace BusinessTripApplication.Models
+namespace BusinessTripModels
 {
     public class Trip
     {
