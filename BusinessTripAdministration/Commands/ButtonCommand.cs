@@ -23,7 +23,7 @@ namespace BusinessTripAdministration.Commands
 
         #region ICommand Members
 
-        [DebuggerStepThrough]
+        
         public bool CanExecute(object parameters)
         {
             return canExecute == null ? true : canExecute(parameters);

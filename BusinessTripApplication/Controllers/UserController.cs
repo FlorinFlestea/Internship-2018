@@ -66,7 +66,8 @@ namespace BusinessTripApplication.Controllers
         {
             try
             {
-                var model = new LogInViewModel(ModelState.IsValid, email, password, rememberMe, UserService, out var response);
+                int response = -1;
+                var model = new LogInViewModel(ModelState.IsValid, email, password, rememberMe, UserService, out response);
                 if (response == 1)
                 {
                     Response.Cookies.Add(model.Cookie);

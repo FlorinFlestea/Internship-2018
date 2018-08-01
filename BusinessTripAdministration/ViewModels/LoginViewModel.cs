@@ -1,35 +1,37 @@
 ﻿using BusinessTripAdministration.Commands;
+using BusinessTripAdministration.Validation;
 using BusinessTripAdministration.Views;
+using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    internal class LoginViewModel : INotifyPropertyChanged
+    internal class LoginViewModel : Conductor<object>
     {
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private string Email { get; set; }
-        private string Password { get; set; }
-        private bool RememberMe { get; set; }
+        private string email;
+        public string Email
+        {
+            get
+            { return email; }
+            set
+            {   email = value;
+                NotifyOfPropertyChange(() => Email);
+            }
+        }
+        public string Password { get; set; }
+        public bool RememberMe { get; set; }
 
         public LoginViewModel() { }
 
-
-        /*
-         * protected void OnPropertyChanged(string name)
-         {
-             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-         }
-         */
-
         private ICommand loginCommand;
-        private ICommand registerCommand;
 
         public ICommand LoginCommand
         {
@@ -45,37 +47,27 @@ namespace BusinessTripAdministration.ViewModels
                 return loginCommand;
             }
         }
-        public ICommand RegisterCommand
-        {
-            get
-            {
-                if (registerCommand == null)
-                {
-                    registerCommand = new ButtonCommand(
-                        param => this.Register(),
-                        param => this.CanRegister()
-                    );
-                }
-                return registerCommand;
-            }
-        }
 
         private void Login()
         {
-
+            LoadMainPage();
         }
         private bool CanLogin()
         {
+           
+            string emailErrors = "";
+            string passwordErrors = "";
             bool canLogin = false;
+            if ((ValidateField.Email(Email, ref emailErrors) && ValidateField.Password(Password, ref passwordErrors)) == true)
+            {
+                canLogin = true;
+            }
             return canLogin;
         }
-        private void Register()
-        {
 
-        }
-        private bool CanRegister()
+        void LoadMainPage()
         {
-            return true;
+            //ActivateItem();
         }
 
     }
