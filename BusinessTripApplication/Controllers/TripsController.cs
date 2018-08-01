@@ -27,7 +27,7 @@ namespace BusinessTripApplication.Controllers
 
                 return View(db.Trips.Where(x => x.Transportation == optionTransportation || optionTransportation == null).ToList());
             }
-           
+            
              return View(db.Trips.ToList());
 
         }
