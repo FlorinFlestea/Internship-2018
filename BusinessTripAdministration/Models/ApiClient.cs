@@ -23,26 +23,28 @@ namespace BusinessTripAdministration.Models
 
 
 
-
+        // GET : /api/tripsapi/
         async Task<IEnumerable<Trip>> IApiClient.GetAllTrips()
         {
-            //var response = client.GetAsync(RequestLink);
+            var response = client.GetAsync("");
 
-            //if (response.Result.IsSuccessStatusCode)
-            //{
-            //    var jsonString = await response.Result.Content.ReadAsStringAsync();
-            //    var result = JsonConvert.DeserializeObject<IEnumerable<Trip>>(jsonString);
-            //    return await result;
-            //}
+            if (response.Result.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Result.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<IEnumerable<Trip>>(jsonString);
+                return result;
+            }
 
             throw new NotImplementedException();
         }
 
+        // GET : /api/tripsapi/approved
         Task<IEnumerable<Trip>> IApiClient.GetApprovedTrips()
         {
             throw new NotImplementedException();
         }
 
+        // GET : /api/tripsapi/denied
         Task<IEnumerable<Trip>> IApiClient.GetDeniedTrips()
         {
             throw new NotImplementedException();
