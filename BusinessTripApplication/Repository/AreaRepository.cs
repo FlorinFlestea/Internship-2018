@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
 
 namespace BusinessTripApplication.Repository
@@ -20,7 +20,7 @@ namespace BusinessTripApplication.Repository
                     areas = context.Areas.ToList();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to database!\n");

@@ -29,11 +29,11 @@ namespace BusinessTripApplication.Service
 
             return tripRepository.Add(addedTrip);
 
-        }     
+        }
 
         public void Remove(Trip trip)
         {
             tripRepository.Remove(trip);
-        }      
+        }
     }
 }

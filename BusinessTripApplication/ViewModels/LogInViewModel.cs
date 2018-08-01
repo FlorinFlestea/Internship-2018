@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Security.Policy;
 using System.Web;
 using System.Web.Helpers;
-using System.Web.ModelBinding;
 using System.Web.Security;
+using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 
@@ -35,13 +29,13 @@ namespace BusinessTripApplication.ViewModels
             Title = "LogIn";
         }
 
-        public LogInViewModel(bool modelState, string email, string password,bool rememberMe, IUserService userService,out int returnValue)
+        public LogInViewModel(bool modelState, string email, string password, bool rememberMe, IUserService userService, out int returnValue)
         {
             if (modelState)
             {
                 try
                 {
-                    User user=new User("",email,password);
+                    User user = new User("", email, password);
                     RememberMe = rememberMe;
                     Status = CheckUser(userService, user);
                     if (Status)

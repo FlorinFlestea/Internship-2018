@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-[Serializable]
-internal class InternetException : Exception
+namespace BusinessTripApplication.Exception
 {
-    public InternetException()
+    [Serializable]
+    internal class InternetException : System.Exception
     {
-    }
+        public InternetException()
+        {
+        }
 
-    public InternetException(string message) : base(message)
-    {
-    }
+        public InternetException(string message) : base(message)
+        {
+        }
 
-    public InternetException(string message, Exception innerException) : base(message, innerException)
-    {
-    }
+        public InternetException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
 
-    protected InternetException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
+        protected InternetException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
     }
 }
