@@ -46,6 +46,12 @@ namespace BusinessTripApplication
 
             bundles.Add(new StyleBundle("~/bundles/selectCSS").Include(
                      "~/Content/bootstrap-select.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/loginValidation").Include(
+                "~/Scripts/jquery.validate*",
+                "~/Scripts/ValidationScriptLogin.js",
+                "~/Scripts/ParseURL_login.js"
+                ));
         }
     }
 }
