@@ -1,5 +1,4 @@
-﻿using BusinessTripAdministration.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BusinessTripAdministration.Views
 {
     /// <summary>
-    /// Interaction logic for RegistrationWindow.xaml
+    /// Interaction logic for SingleRequestView.xaml
     /// </summary>
-    public partial class RegistrationWindow : Window
+    public partial class SingleRequestView : UserControl
     {
-        public RegistrationWindow()
+        public SingleRequestView()
         {
             InitializeComponent();
-            //DataContext = new RegistrationViewModel();
         }
-
     }
 }

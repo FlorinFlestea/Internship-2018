@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using BusinessTripModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using BusinessTripModels;
 
 namespace BusinessTripAdministration.Models
 {
