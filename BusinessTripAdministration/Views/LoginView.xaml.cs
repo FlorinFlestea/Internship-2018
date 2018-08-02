@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 using BusinessTripAdministration.Models;
 namespace BusinessTripAdministration.Views
@@ -11,7 +13,13 @@ namespace BusinessTripAdministration.Views
         public LoginView()
         {
             InitializeComponent();
-            
+            Thread.Sleep(10000);
+
+            ApiClient api = new ApiClient();
+
+            var trips =  api.GetAllTrips();
+
+            Console.WriteLine(trips);
 
         }
 
