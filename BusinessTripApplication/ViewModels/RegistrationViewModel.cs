@@ -3,6 +3,7 @@ using System.Net.Mail;
 using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
+using BusinessTripModels;
 
 
 namespace BusinessTripApplication.ViewModels
