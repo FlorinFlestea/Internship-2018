@@ -2,8 +2,8 @@ namespace BusinessTripApplication.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
-    public partial class TripsTable : DbMigration
+
+    public partial class TripsDB : DbMigration
     {
         public override void Up()
         {

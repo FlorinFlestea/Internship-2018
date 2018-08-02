@@ -7,13 +7,13 @@ namespace BusinessTripApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class TripsTable : IMigrationMetadata
+    public sealed partial class TripsDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(TripsTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(TripsDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807311113295_TripsTable"; }
+            get { return "201808021117010_TripsDB"; }
         }
         
         string IMigrationMetadata.Source
