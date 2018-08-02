@@ -35,7 +35,6 @@ namespace BusinessTripApplication.Controllers
             }
 
 
-            
             var trip = Repository.FindById(id);
 
             if (trip == null)
