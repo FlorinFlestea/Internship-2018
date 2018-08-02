@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BusinessTripModels;
@@ -68,7 +69,7 @@ namespace BusinessTripApplication.Controllers
         {
             //Get usere from session
             trip.User = new User() { Email = User.Identity.Name };
-
+         
             TripRequestViewModel model = new TripRequestViewModel(ModelState.IsValid, trip, tripService, areaService, userService);
             if (model.Status)
                 return View(model);

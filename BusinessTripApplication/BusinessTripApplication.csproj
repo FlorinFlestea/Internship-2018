@@ -204,7 +204,10 @@
     <Compile Include="Migrations\201807251053332_Database.Designer.cs">
       <DependentUpon>201807251053332_Database.cs</DependentUpon>
     </Compile>
-
+    <Compile Include="Migrations\201808021117010_TripsDB.cs" />
+    <Compile Include="Migrations\201808021117010_TripsDB.Designer.cs">
+      <DependentUpon>201808021117010_TripsDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -393,7 +396,9 @@
     <EmbeddedResource Include="Migrations\201807251053332_Database.resx">
       <DependentUpon>201807251053332_Database.cs</DependentUpon>
     </EmbeddedResource>
-
+    <EmbeddedResource Include="Migrations\201808021117010_TripsDB.resx">
+      <DependentUpon>201808021117010_TripsDB.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
