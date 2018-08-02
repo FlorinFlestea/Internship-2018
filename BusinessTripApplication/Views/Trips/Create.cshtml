@@ -70,6 +70,7 @@
                     </div>
                     <div class="col-md-12">
                         @Html.ValidationMessageFor(model => model.Trip.StartingDate, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Trip.EndDate, "", new { @class = "text-danger" })
                     </div>
 
                 </div>
@@ -109,7 +110,7 @@
                     @Html.ValidationMessageFor(model => model.Trip.ClientLocation, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-3">
-                    @Html.LabelFor(model => model.Trip.DepartureLocation, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.Trip.DepartureLocation, new { @class = "control-label" })
                     @Html.EditorFor(model => model.Trip.DepartureLocation, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Trip.DepartureLocation, "", new { @class = "text-danger" })
                 </div>
@@ -129,14 +130,14 @@
                 </div>*@
                 <div class="col-md-6">
                     <fieldset>
-                        <legend>Needs</legend>
+                        <legend><label class="control-label">Needs</label></legend>
                         <div class="form-check form-check-inline col-md-4">
                             @Html.EditorFor(model => model.Trip.NeedOfBankCard, new { htmlAttributes = new { @class = "form-check-input" } })
-                            @Html.LabelFor(model => model.Trip.NeedOfBankCard, new { htmlAttributes = new { @class = "control-label" } })
+                            @Html.LabelFor(model => model.Trip.NeedOfBankCard, new { @class = "form-check-label control-label" })
                         </div>
                         <div class="form-check form-check-inline col-md-4">
                             @Html.EditorFor(model => model.Trip.NeedOfPhone, new { htmlAttributes = new { @class = "form-check-input" } })
-                            @Html.LabelFor(model => model.Trip.NeedOfPhone, new { htmlAttributes = new { @class = "form-check-label" } })
+                            @Html.LabelFor(model => model.Trip.NeedOfPhone,  new { @class = "form-check-label control-label" })
                         </div>
                     </fieldset>
                     
@@ -196,7 +197,7 @@
 
     </script>
 
-    <style>
+    @*<style>
         input,
         select,
         textarea {
@@ -216,9 +217,5 @@
         .input-validation-error {
             border: 2px solid #ff0000;
         }
-
-        label{
-            font-size: 11px;    
-        }
-    </style>
+    </style>*@
 }
