@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BusinessTripApplication.Controllers;
-using BusinessTripApplication.Models;
+using BusinessTripModels;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.ViewModels;
 using Moq;
@@ -38,7 +38,6 @@ namespace BusinessTripApplication.UnitTests.Controllers
 
             Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
             MailMessage message = new MailMessage();
-            UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
             UserControllerSetupMoq.CheckUser(MockRegistrationViewModel);
             IRegistrationViewModel registrationViewModel = MockRegistrationViewModel.Object;
 
@@ -64,14 +63,13 @@ namespace BusinessTripApplication.UnitTests.Controllers
             UserRepositorySetupMoq.Add(MockUserRepository, users);
             UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
             IUserRepository userRepository = MockUserRepository.Object;
-
             IUserService userService = new UserService(userRepository);
 
             var controller = new UserController(userService);
 
             Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
             MailMessage message = new MailMessage();
-            UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
+            
             UserControllerSetupMoq.CheckUser(MockRegistrationViewModel);
             IRegistrationViewModel registrationViewModel = MockRegistrationViewModel.Object;
 
@@ -83,41 +81,6 @@ namespace BusinessTripApplication.UnitTests.Controllers
             //Assert
             Assert.IsTrue(result);
         }
-
-        [TestMethod]
-        public void SendEmail_CheckMessage()
-        {
-            //Arrange
-            Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
-            MailMessage message = new MailMessage();
-
-            //UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
-            MockRegistrationViewModel.Setup(mock => mock.SendVerificationLinkEmail(It.IsAny<string>(), It.IsAny<string>())).Callback(
-               (string emailTo, string activation) =>
-               {
-                   message = new MailMessage(new MailAddress("businesstripapplication@gmail.com", "Registration"), new MailAddress(emailTo))
-                   {
-                       Subject = "Activation link",
-                       Body = activation,
-                       IsBodyHtml = true
-                   };
-               });
-            //
-            IRegistrationViewModel registrationViewModel = MockRegistrationViewModel.Object;
-
-            //Act
-            string email = "email@asd.com";
-            string guid = Guid.NewGuid().ToString();
-            registrationViewModel.SendVerificationLinkEmail(email, guid);
-
-            //Assert
-            Assert.AreEqual(message.Subject, "Activation link");
-            Assert.AreEqual(message.To[0], email);
-            Assert.AreEqual(message.Body, guid);
-            Assert.AreEqual(message.IsBodyHtml, true);
-        }
-
-
 
         /*
         Login part
@@ -157,7 +120,6 @@ namespace BusinessTripApplication.UnitTests.Controllers
 
             Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
             MailMessage message = new MailMessage();
-            UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
             UserControllerSetupMoq.CheckUser(MockRegistrationViewModel);
 
             Mock<ILogInViewModel> MockLogInViewModel = new Mock<ILogInViewModel>();
@@ -189,7 +151,6 @@ namespace BusinessTripApplication.UnitTests.Controllers
 
             Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
             MailMessage message = new MailMessage();
-            UserControllerSetupMoq.SendVerificationLinkEmail(MockRegistrationViewModel, message);
             UserControllerSetupMoq.CheckUser(MockRegistrationViewModel);
 
             Mock<ILogInViewModel> MockLogInViewModel = new Mock<ILogInViewModel>();
