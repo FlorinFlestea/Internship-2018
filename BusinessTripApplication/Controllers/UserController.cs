@@ -115,6 +115,12 @@ namespace BusinessTripApplication.Controllers
             if (!result)
                 ViewBag.Message = "Invalid Request";
 
+            else
+            {
+                Guid guid = new Guid(id);
+                LogInViewModel loginVM = new LogInViewModel(UserService, guid);
+                Response.Cookies.Add(loginVM.Cookie);
+            }
             return View();
         }
 
