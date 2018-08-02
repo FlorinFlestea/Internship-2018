@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-    [Serializable]
-internal class DatabaseException : Exception
+namespace BusinessTripApplication.Exception
 {
-    public DatabaseException()
+    [Serializable]
+    internal class DatabaseException : System.Exception
     {
-    }
+        public DatabaseException()
+        {
+        }
 
-    public DatabaseException(string message) : base(message)
-    {
-    }
+        public DatabaseException(string message) : base(message)
+        {
+        }
 
-    public DatabaseException(string message, Exception innerException) : base(message, innerException)
-    {
-    }
+        public DatabaseException(string message, System.Exception innerException) : base(message, innerException)
+        {
+        }
 
-    protected DatabaseException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
+        protected DatabaseException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
     }
 }

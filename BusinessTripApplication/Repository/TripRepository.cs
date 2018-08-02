@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
+using BusinessTripModels;
 
 namespace BusinessTripApplication.Repository
 {
@@ -22,7 +23,7 @@ namespace BusinessTripApplication.Repository
                     context.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to database!\n");
@@ -41,7 +42,7 @@ namespace BusinessTripApplication.Repository
                     foundTrip = context.Trips.Find(id);
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to database!\n");
@@ -60,7 +61,7 @@ namespace BusinessTripApplication.Repository
                     context.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to database!\n");
@@ -78,7 +79,7 @@ namespace BusinessTripApplication.Repository
                     trips = context.Trips.ToList();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to database!\n");
@@ -103,7 +104,7 @@ namespace BusinessTripApplication.Repository
                     context.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 throw new DatabaseException("Cannot connect to database!\n");

@@ -1,7 +1,6 @@
 ﻿using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,7 +11,7 @@ namespace BusinessTripApplication.UnitTests.Repository
         public static void Add(Mock<ITripRepository> MockUserRepository, IList<Trip> trips)
         {
             MockUserRepository.Setup(mock => mock.Add(It.IsAny<Trip>())).Returns(
-                (Trip addedTrip) => 
+                (Trip addedTrip) =>
                 {
                     trips.Add(addedTrip);
                     return addedTrip;
@@ -30,8 +29,8 @@ namespace BusinessTripApplication.UnitTests.Repository
                 (Trip addedTrip) =>
                 {
                     Trip toUpdate = trips.FirstOrDefault(trip => trip.Id == addedTrip.Id);
-                    if(toUpdate == default(Trip))
-                        throw new Exception("Trip doesn't exists");
+                    if (toUpdate == default(Trip))
+                        throw new System.Exception("Trip doesn't exists");
                     trips.Remove(toUpdate);
                     trips.Add(addedTrip);
                     return addedTrip;
@@ -45,7 +44,7 @@ namespace BusinessTripApplication.UnitTests.Repository
                 {
                     Trip toDelete = trips.FirstOrDefault(trip => trip.Id == deletedTrip.Id);
                     if (toDelete == default(Trip))
-                        throw new Exception();
+                        throw new System.Exception();
                     trips.Remove(toDelete);
                 });
         }
