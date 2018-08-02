@@ -12,13 +12,16 @@
         <a class="navbar-brand" href="@Url.Action("Index", "Home")">
             <img class="navbar-brand" src="~/Resources/logo.png" alt="logo" style="width:100px;">
         </a>
-        <div class="collapse navbar-collapse">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
                 @if (Request.IsAuthenticated)
                 {
                     <li class="nav-item dropdown">
-                        @Html.ActionLink("Trips", "Index", "Trips", null,  new { @class = "nav-link dropdown-toggle", @data_toggle = "dropdown", @role = "button", aria_haspopup = "true", @aria_expanded = "false" })
+                        @Html.ActionLink("Trips", "Index", "Trips", null, new { @class = "nav-link dropdown-toggle", @data_toggle = "dropdown", @role = "button", aria_haspopup = "true", @aria_expanded = "false" })
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @Html.ActionLink("Home", "Index", "Trips", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Create", "Create", "Trips", null, new { @class = "dropdown-item" })
@@ -26,28 +29,23 @@
                     </li>
                 }
                 <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink(linkText:"Contact", controllerName: "Home", actionName: "Contact", routeValues: null,  htmlAttributes: new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink(linkText: "Contact", controllerName: "Home", actionName: "Contact", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
             </ul>
 
-            <ul class="navbar-nav float-right">
-                <li class="nav-item">
-                    @if (Request.IsAuthenticated)
-                    {
-                        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-                        {
-                            <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-                        }
-                    }
-                </li>
-            </ul>
+
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    <a class="navbar-nav nav-link" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                }
+            }
+
         </div>
     </nav>
-    <div class="container body-content" ">
+    <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - BusinessTripApplication</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
