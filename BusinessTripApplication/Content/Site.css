@@ -14,22 +14,9 @@ a {
     color: white;
 }
 
-h2 {
-    font-family: 'Arima Madurai', cursive;
-    color:white;
-}
-h3 {
-    font-family: 'Arima Madurai', cursive;
-    color: #6BD425;
-}
-h4 {
-    font-family: 'Arima Madurai', cursive;
-    color: #6BD425;
-}
 label {
-    font-family: 'Arima Madurai', cursive;
     color: #6BD425;
-    font-size: 11px;
+    font-size: 15px;
 }
 
 .control-label {
