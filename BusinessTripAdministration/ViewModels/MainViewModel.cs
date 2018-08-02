@@ -5,11 +5,39 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    internal class MainViewModel : Screen
+    internal class MainViewModel : Conductor<object>
     {
-       
+        private string email;
+
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                email = value;
+                NotifyOfPropertyChange(() => Email);
+            }
+        }
+        public MainViewModel()
+        {
+            LoadHome();
+        }
+
+        public void LoadHome()
+        {
+            ActivateItem(new HomeViewModel());
+        }
+        public void LoadRequests()
+        {
+            ActivateItem(new RequestsViewModel());
+        }
+        
     }
 }

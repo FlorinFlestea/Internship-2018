@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace BusinessTripAdministration.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Requests.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RequestsView : UserControl
     {
-        public MainWindow()
+        public RequestsView()
         {
             InitializeComponent();
         }

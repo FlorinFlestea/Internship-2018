@@ -19,5 +19,6 @@ namespace BusinessTripAdministration
         {
             DisplayRootViewFor<LoginViewModel>();
         }
+
     }
 }

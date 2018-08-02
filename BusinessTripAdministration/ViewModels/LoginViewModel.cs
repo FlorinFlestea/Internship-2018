@@ -1,35 +1,36 @@
 ﻿using BusinessTripAdministration.Commands;
+using BusinessTripAdministration.Models;
 using BusinessTripAdministration.Validation;
-using BusinessTripAdministration.Views;
 using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    internal class LoginViewModel : Conductor<object>
+    internal class LoginViewModel: Screen
     {
-
-        private string email;
-        public string Email
+        public string Email { get; set; }
+        public string Password {private get; set; }
+        public bool RememberMe { get; set; }
+        private string isCurrentWindowVisible;
+        public string IsCurrentWindowVisible
         {
             get
-            { return email; }
+            {
+                return isCurrentWindowVisible;
+            }
             set
-            {   email = value;
-                NotifyOfPropertyChange(() => Email);
+            {
+                isCurrentWindowVisible = value;
+                NotifyOfPropertyChange(() => IsCurrentWindowVisible);
             }
         }
-        public string Password { get; set; }
-        public bool RememberMe { get; set; }
 
-        public LoginViewModel() { }
+        public LoginViewModel()
+        {
+
+            ShowCurrentWindow();
+        }
 
         private ICommand loginCommand;
 
@@ -50,7 +51,10 @@ namespace BusinessTripAdministration.ViewModels
 
         private void Login()
         {
-            LoadMainPage();
+            if (DatabaseQuery.Login(Email, Password) == true)
+                LoadMainPage();
+            else
+                MessageBox.Show("Invalid Username or Password");
         }
         private bool CanLogin()
         {
@@ -67,7 +71,20 @@ namespace BusinessTripAdministration.ViewModels
 
         void LoadMainPage()
         {
-            //ActivateItem();
+            HideCurrentWindow();
+            IWindowManager manager = new WindowManager();
+            MainViewModel main = new MainViewModel();
+            manager.ShowWindow(main, context: null, settings: null);
+            main.Email = Email;
+        }
+
+        void HideCurrentWindow()
+        {
+            IsCurrentWindowVisible = "Hidden";
+        }
+        void ShowCurrentWindow()
+        {
+            IsCurrentWindowVisible = "Visible";
         }
 
     }
