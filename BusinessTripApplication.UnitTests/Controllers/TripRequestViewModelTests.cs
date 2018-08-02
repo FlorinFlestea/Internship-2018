@@ -3,6 +3,7 @@ using BusinessTripApplication.Repository;
 using BusinessTripApplication.Service;
 using BusinessTripApplication.UnitTests.Repository;
 using BusinessTripApplication.ViewModels;
+using BusinessTripModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
