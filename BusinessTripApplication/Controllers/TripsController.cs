@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using BusinessTripApplication.Models;
 using BusinessTripModels;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Service;
@@ -23,9 +24,15 @@ namespace BusinessTripApplication.Controllers
         public ActionResult Index()
         {
             var identity = User.Identity.Name;
-            var returnList = Repository.GetAll();
+            User user = userService.FindByEmail(identity);
 
-            return View(returnList);
+            if (user != null)
+            {
+                var db = new DatabaseContext();
+                return View(db.Trips.Where(t => t.User.Id == user.Id));
+            }
+            else
+                return View();
         }
 
         // GET: Trips/Details/5
