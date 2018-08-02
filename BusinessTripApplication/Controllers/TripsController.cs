@@ -18,6 +18,7 @@ namespace BusinessTripApplication.Controllers
         private readonly TripRepository Repository = new TripRepository();
 
         // GET: Trips
+        [Authorize]
         public ActionResult Index()
         {
             var identity = User.Identity.Name;
@@ -27,6 +28,7 @@ namespace BusinessTripApplication.Controllers
         }
 
         // GET: Trips/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -45,6 +47,7 @@ namespace BusinessTripApplication.Controllers
         }
 
         // GET: Trips/Create
+        [Authorize]
         public ActionResult Create()
         {
             TripRequestViewModel model = new TripRequestViewModel(areaService);
@@ -59,6 +62,7 @@ namespace BusinessTripApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Exclude = "User, Status")] Trip trip)
         {
             //Get usere from session
@@ -72,6 +76,7 @@ namespace BusinessTripApplication.Controllers
         }
 
         // GET: Trips/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -91,6 +96,7 @@ namespace BusinessTripApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,PmName,ClientName,StartingDate,EndDate,ProjectName,ProjectNumber,TaskNumber,ClientLocation,DepartureLocation,Transportation,NeedOfPhone,NeedOfBankCard,Accommodation,Comments,Approved")] Trip trip)
         {
             if (ModelState.IsValid)
@@ -102,6 +108,7 @@ namespace BusinessTripApplication.Controllers
         }
 
         // GET: Trips/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -119,6 +126,7 @@ namespace BusinessTripApplication.Controllers
         // POST: Trips/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Repository.Remove(Repository.FindById(id));

@@ -10,16 +10,16 @@ namespace BusinessTripApplication.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return View("Dashboard");
+                return RedirectToAction("Index", "Trips");
             }
-            return View();
+            return RedirectToAction("Login", "User");
         }
 
         public ActionResult About()
         {
             if (!Request.IsAuthenticated)
             {
-                return RedirectToAction("Login", "User"); ;
+                return RedirectToAction("Login", "User");
             }
             ViewBag.Message = "Your application description page.";
 
