@@ -13,14 +13,6 @@ namespace BusinessTripAdministration.Views
         public LoginView()
         {
             InitializeComponent();
-            Thread.Sleep(10000);
-
-            ApiClient api = new ApiClient();
-
-            var trips =  api.GetAllTrips();
-
-            Console.WriteLine(trips);
-
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
