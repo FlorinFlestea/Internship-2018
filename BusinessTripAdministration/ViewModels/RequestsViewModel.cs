@@ -16,7 +16,6 @@ namespace BusinessTripAdministration.ViewModels
         {
             requestList = new List<SingleRequestViewModel>();
             ApiClient = apiClient;
-            GetAllUnapporvedRequestsFromDatabase();
         }
         private List<SingleRequestViewModel> requestList;
         public List<SingleRequestViewModel> RequestList
@@ -32,12 +31,12 @@ namespace BusinessTripAdministration.ViewModels
             }
         }
 
-        private void GetAllUnapporvedRequestsFromDatabase()
+        private async void GetAllUnapporvedRequestsFromDatabaseAsync()
         {
-            List<Trip> tripList = ApiClient.GetPendingTrips().Result.ToList();
-            if (tripList.Count == 0)
-                return;
-            foreach(Trip trip in tripList)
+            IEnumerable<Trip> tripList = await ApiClient.GetPendingTrips();
+            
+               
+            foreach(Trip trip in tripList.ToList())
             {
                 RequestList.Add(new SingleRequestViewModel(trip.ClientName,trip.DepartureLocation.ToString(),trip.StartingDate.ToString(),trip.EndDate.ToString()));
             }
