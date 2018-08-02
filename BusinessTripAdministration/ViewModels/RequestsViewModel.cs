@@ -35,6 +35,8 @@ namespace BusinessTripAdministration.ViewModels
         private void GetAllUnapporvedRequestsFromDatabase()
         {
             List<Trip> tripList = ApiClient.GetPendingTrips().Result.ToList();
+            if (tripList.Count == 0)
+                return;
             foreach(Trip trip in tripList)
             {
                 RequestList.Add(new SingleRequestViewModel(trip.ClientName,trip.DepartureLocation.ToString(),trip.StartingDate.ToString(),trip.EndDate.ToString()));
