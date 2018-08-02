@@ -1,5 +1,6 @@
 ﻿using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
+using BusinessTripModels;
 
 namespace BusinessTripApplication.Service
 {
@@ -29,11 +30,11 @@ namespace BusinessTripApplication.Service
 
             return tripRepository.Add(addedTrip);
 
-        }     
+        }
 
         public void Remove(Trip trip)
         {
             tripRepository.Remove(trip);
-        }      
+        }
     }
 }

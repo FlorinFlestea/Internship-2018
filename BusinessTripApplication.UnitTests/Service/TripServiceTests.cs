@@ -4,7 +4,6 @@ using BusinessTripApplication.Service;
 using BusinessTripApplication.UnitTests.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
 
 namespace BusinessTripApplication.UnitTests.Service

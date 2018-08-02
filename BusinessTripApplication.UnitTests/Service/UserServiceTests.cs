@@ -158,7 +158,7 @@ namespace BusinessTripApplication.UnitTests.Service
             {
                 new User(),
                 new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
-                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false},             
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false},
             };
 
             Mock<IUserRepository> MockUserRepository = new Mock<IUserRepository>();
@@ -192,7 +192,7 @@ namespace BusinessTripApplication.UnitTests.Service
                 Email = "bad"
             };
 
-            User findedUser = findedUsers.Where(u => u.Email == user.Email).FirstOrDefault();
+            User findedUser = findedUsers.FirstOrDefault(u => u.Email == user.Email);
 
             //Assert
             Assert.AreNotEqual(findedUser, user);
@@ -216,10 +216,11 @@ namespace BusinessTripApplication.UnitTests.Service
             IList<User> findedUsers = userService.FindAll();
             User user = new User()
             {
-                Email = "asd", Id = 2
+                Email = "asd",
+                Id = 2
             };
 
-            User findedUser = findedUsers.Where(u => u.Email == user.Email).FirstOrDefault();
+            User findedUser = findedUsers.FirstOrDefault(u => u.Email == user.Email);
 
             //Assert
             Assert.AreNotEqual(findedUser, user);

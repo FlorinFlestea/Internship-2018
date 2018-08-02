@@ -7,8 +7,9 @@
 @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
 {
     <div class="alert alert-success">
-        <strong>Success!</strong> Your account has been activated successfully. Click here to @Html.ActionLink("Login", "Login", "User")
+        <strong>Success!</strong> Your account has been activated successfully. You will be redirected ...
     </div>
+    <meta http-equiv="refresh" content="3; url=https://localhost:44328/User/Dashboard/" />
 }
 else
 {
