@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BusinessTripModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BusinessTripAdministration.Models
