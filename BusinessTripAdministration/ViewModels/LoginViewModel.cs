@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,7 +17,7 @@ namespace BusinessTripAdministration.ViewModels
     internal class LoginViewModel: Screen
     {
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string Password {private get; set; }
         public bool RememberMe { get; set; }
         private string isCurrentWindowVisible;
         public string IsCurrentWindowVisible
