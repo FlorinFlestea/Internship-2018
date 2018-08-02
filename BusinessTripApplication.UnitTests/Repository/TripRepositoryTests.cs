@@ -1,8 +1,7 @@
-﻿using BusinessTripApplication.Models;
+﻿using BusinessTripModels;
 using BusinessTripApplication.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
 
 namespace BusinessTripApplication.UnitTests.Repository
@@ -18,13 +17,13 @@ namespace BusinessTripApplication.UnitTests.Repository
 
             Mock<ITripRepository> MockTripRepository = new Mock<ITripRepository>();
             TripRepositorySetupMoq.Add(MockTripRepository, trips);
-            TripRepositorySetupMoq.FindAll(MockTripRepository, trips);
+            TripRepositorySetupMoq.GetAll(MockTripRepository, trips);
             ITripRepository tripRepository = MockTripRepository.Object;
 
             //Act
             Trip trip = new Trip();
             Trip result = tripRepository.Add(trip);
-            IList<Trip> findedTrips = tripRepository.FindAll();
+            IList<Trip> findedTrips = tripRepository.GetAll();
 
             //Assert
             Assert.AreEqual(result, trip);
@@ -42,11 +41,11 @@ namespace BusinessTripApplication.UnitTests.Repository
             };
 
             Mock<ITripRepository> MockTripRepository = new Mock<ITripRepository>();
-            TripRepositorySetupMoq.FindAll(MockTripRepository, trips);
+            TripRepositorySetupMoq.GetAll(MockTripRepository, trips);
             ITripRepository tripRepository = MockTripRepository.Object;
 
             //Act
-            IList<Trip> findedTrips = tripRepository.FindAll();
+            IList<Trip> findedTrips = tripRepository.GetAll();
 
             //Assert
             Assert.AreEqual(findedTrips.Count, trips.Count);
@@ -64,13 +63,13 @@ namespace BusinessTripApplication.UnitTests.Repository
 
             Mock<ITripRepository> MockTripRepository = new Mock<ITripRepository>();
             TripRepositorySetupMoq.Update(MockTripRepository, trips);
-            TripRepositorySetupMoq.FindAll(MockTripRepository, trips);
+            TripRepositorySetupMoq.GetAll(MockTripRepository, trips);
             ITripRepository tripRepository = MockTripRepository.Object;
 
             //Act
-            Trip trip = new Trip() { Id = 1, ClientName = "Alin"};
+            Trip trip = new Trip() { Id = 1, ClientName = "Alin" };
             Trip result = tripRepository.Update(trip);
-            IList<Trip> findedTrips = tripRepository.FindAll();
+            IList<Trip> findedTrips = tripRepository.GetAll();
 
             //Assert
             Assert.AreEqual(result, trip);
@@ -80,7 +79,7 @@ namespace BusinessTripApplication.UnitTests.Repository
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(System.Exception))]
         public void Update_BadTrip_ThrowException()
         {
             //Arrange
@@ -92,14 +91,14 @@ namespace BusinessTripApplication.UnitTests.Repository
 
             Mock<ITripRepository> MockTripRepository = new Mock<ITripRepository>();
             TripRepositorySetupMoq.Update(MockTripRepository, trips);
-            TripRepositorySetupMoq.FindAll(MockTripRepository, trips);
+            TripRepositorySetupMoq.GetAll(MockTripRepository, trips);
             ITripRepository tripRepository = MockTripRepository.Object;
 
             //Act
             Trip trip = new Trip() { Id = 3, ClientName = "Alin" };
 
             //Assert
-            Trip result = tripRepository.Update(trip);            
+            Trip result = tripRepository.Update(trip);
         }
 
         [TestMethod]
@@ -114,13 +113,13 @@ namespace BusinessTripApplication.UnitTests.Repository
 
             Mock<ITripRepository> MockTripRepository = new Mock<ITripRepository>();
             TripRepositorySetupMoq.Remove(MockTripRepository, trips);
-            TripRepositorySetupMoq.FindAll(MockTripRepository, trips);
+            TripRepositorySetupMoq.GetAll(MockTripRepository, trips);
             ITripRepository tripRepository = MockTripRepository.Object;
 
             //Act
             Trip trip = new Trip() { Id = 1, ClientName = "Alin" };
             tripRepository.Remove(trip);
-            IList<Trip> findedTrips = tripRepository.FindAll();
+            IList<Trip> findedTrips = tripRepository.GetAll();
 
             //Assert
             Assert.AreEqual(findedTrips.Count, trips.Count);
@@ -128,7 +127,7 @@ namespace BusinessTripApplication.UnitTests.Repository
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(System.Exception))]
         public void Remove_BadTrip_ThrowException()
         {
             //Arrange
@@ -140,7 +139,7 @@ namespace BusinessTripApplication.UnitTests.Repository
 
             Mock<ITripRepository> MockTripRepository = new Mock<ITripRepository>();
             TripRepositorySetupMoq.Remove(MockTripRepository, trips);
-            TripRepositorySetupMoq.FindAll(MockTripRepository, trips);
+            TripRepositorySetupMoq.GetAll(MockTripRepository, trips);
             ITripRepository tripRepository = MockTripRepository.Object;
 
             //Act

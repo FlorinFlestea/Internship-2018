@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Web;
-using System.Web.ModelBinding;
+using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
+using BusinessTripApplication.Server;
+using BusinessTripModels;
 
 
 namespace BusinessTripApplication.ViewModels
@@ -72,7 +70,7 @@ namespace BusinessTripApplication.ViewModels
             {
                 throw;
             }
-            
+
             if (emailExists)
             {
                 throw new DatabaseException(" Email already exists!\n");
@@ -85,64 +83,24 @@ namespace BusinessTripApplication.ViewModels
             {
                 throw;
             }
-            
+
             User.Password = "";
 
             //Send Email to User
             try
             {
-                SendVerificationLinkEmail(user.Email, user.ActivationCode.ToString());
+                Server.EmailSender emailSender = new EmailSender();
+                emailSender.SendEmail(user.Email, "Register", user.ActivationCode.ToString());
             }
             catch
             {
                 throw;
             }
-            
+
 
             return true;
         }
-        public void SendVerificationLinkEmail(string emailId, string activationCode)
-        {
-            string domainName = "https://localhost:44328";
 
-            var link = domainName + "/User/VerifyAccount/" + activationCode;
-
-            var fromEmail = new MailAddress("businesstripapplication@gmail.com", "Registration");
-            var toEmail = new MailAddress(emailId);
-            var fromEmailPassword = "ParolaTest1234"; // Replace with actual password
-            string subject = "Your account is successfully created!";
-
-            string body = "<br/><br/>We are excited to tell you that your account is" +
-                            " successfully created. Please click on the below link to verify your account" +
-                            " <br/><br/><a href='" + link + "'>" + link + "</a> ";
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
-            };
-
-            using (var message = new MailMessage(fromEmail, toEmail)
-            {
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
-            })
-
-            try
-            {
-                smtp.Send(message);
-            }
-            catch (Exception ex)
-            {
-                    Logger.Info(ex.Message);
-                    throw new InternetException("Cannot connect to internet!\n");
-            }
-        }
 
     }
 }

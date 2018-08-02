@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
-using BusinessTripApplication.Models;
+using BusinessTripModels;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.ViewModels;
 
@@ -66,8 +66,7 @@ namespace BusinessTripApplication.Controllers
         {
             try
             {
-                int response = -1;
-                var model = new LogInViewModel(ModelState.IsValid, email, password, rememberMe, UserService, out response);
+                var model = new LogInViewModel(ModelState.IsValid, email, password, rememberMe, UserService, out var response);
                 if (response == 1)
                 {
                     Response.Cookies.Add(model.Cookie);
@@ -75,7 +74,7 @@ namespace BusinessTripApplication.Controllers
                 }
                 return View(model);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 return RedirectToRoute("~/Shared/Error");
             }
@@ -96,15 +95,15 @@ namespace BusinessTripApplication.Controllers
         {
             try
             {
-                var model = new RegistrationViewModel(ModelState.IsValid, user,UserService);
+                var model = new RegistrationViewModel(ModelState.IsValid, user, UserService);
                 return View(model);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Logger.Info(e.Message);
                 return RedirectToRoute("~/Shared/Error");
             }
-            
+
         }
 
         [HttpGet]
@@ -113,9 +112,15 @@ namespace BusinessTripApplication.Controllers
             bool result = UserService.VerifyAccount(id);
             ViewBag.Status = result;
 
-            if(!result)
+            if (!result)
                 ViewBag.Message = "Invalid Request";
-            
+
+            else
+            {
+                Guid guid = new Guid(id);
+                LogInViewModel loginVM = new LogInViewModel(UserService, guid);
+                Response.Cookies.Add(loginVM.Cookie);
+            }
             return View();
         }
 

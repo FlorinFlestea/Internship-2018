@@ -1,0 +1,224 @@
+﻿@model BusinessTripApplication.ViewModels.TripRequestViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@if (Model.Message != null)
+{
+    if (Convert.ToBoolean(Model.Status))
+    {
+        <div class="alert alert-success">
+            <strong>Success! </strong>@Model.Message
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Error! </strong>@Model.Message
+        </div>
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Trip</h4>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row form-group">
+                @Html.Label("Area*", htmlAttributes: new { @class = "control-label col-md-12", @style = "padding-left: 25px;" })
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => model.Trip.Area.Id, Model.Areas, new { @class = "selectpicker", @data_width = "100%", @title = "Choose one of the following..." })
+                    @Html.ValidationMessageFor(model => model.Trip.Area, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Trip.PmName, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Trip.PmName, new { htmlAttributes = new { @class = "form-control", @data_width = "100%", } })
+                    @Html.ValidationMessageFor(model => model.Trip.PmName, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Trip.ClientName, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Trip.ClientName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trip.ClientName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-12">
+                    @Html.Label("Date interval*", htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group input-daterange" id="datepicker">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">From</span>
+                        </div>
+                        @Html.TextBoxFor(model => model.Trip.StartingDate, new { @class = "form-control", @placeholder = "Select a date", @autocomplete = "off" })
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">To</span>
+                        </div>
+                        @Html.TextBoxFor(model => model.Trip.EndDate, new { @class = "form-control", @placeholder = "Select a date", @autocomplete = "off" })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.ValidationMessageFor(model => model.Trip.StartingDate, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.Trip.ProjectNumber, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Trip.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trip.ProjectNumber, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Trip.ProjectName, htmlAttributes: new { @class = "control-label col-md-6" })
+                    @Html.EditorFor(model => model.Trip.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trip.ProjectName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.Trip.TaskNumber, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Trip.TaskNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trip.TaskNumber, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.Trip.TaskName, htmlAttributes: new { @class = "control-label col-md-5" })
+                    @Html.EditorFor(model => model.Trip.TaskName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trip.TaskName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Trip.ClientLocation, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Trip.ClientLocation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trip.ClientLocation, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Trip.DepartureLocation, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Trip.DepartureLocation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trip.DepartureLocation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Trip.Transportation, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Trip.Transportation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trip.Transportation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                @*<div class="col-md-12">
+                    @Html.Label("Needs:", htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>*@
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Needs</legend>
+                        <div class="form-check form-check-inline col-md-4">
+                            @Html.EditorFor(model => model.Trip.NeedOfBankCard, new { htmlAttributes = new { @class = "form-check-input" } })
+                            @Html.LabelFor(model => model.Trip.NeedOfBankCard, new { htmlAttributes = new { @class = "control-label" } })
+                        </div>
+                        <div class="form-check form-check-inline col-md-4">
+                            @Html.EditorFor(model => model.Trip.NeedOfPhone, new { htmlAttributes = new { @class = "form-check-input" } })
+                            @Html.LabelFor(model => model.Trip.NeedOfPhone, new { htmlAttributes = new { @class = "form-check-label" } })
+                        </div>
+                    </fieldset>
+                    
+                </div>
+                
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Trip.Accommodation, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.Trip.Accommodation, new { @class = "form-control", @style = "resize: none;", @rows = 4 })
+                    @Html.ValidationMessageFor(model => model.Trip.Accommodation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Trip.Comments, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.Trip.Comments, new { @class = "form-control", @style = "resize: none;", @rows = 4 })
+                    @Html.ValidationMessageFor(model => model.Trip.Comments, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Make request" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/selectJS")
+    @Scripts.Render("~/bundles/datepickerJS")
+
+    @Styles.Render("~/bundles/datepickerCSS")
+    @Styles.Render("~/bundles/selectCSS")
+
+
+    <script type="text/javascript">
+        $('.selectpicker').selectpicker();
+
+        $('.input-daterange').datepicker({
+            format: "dd/mm/yyyy",
+            startDate: "today",
+            language: "ro",
+            orientation: "bottom auto"
+        });
+
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
+
+    </script>
+
+    <style>
+        input,
+        select,
+        textarea {
+            max-width: 100%;
+        }
+
+        .form-horizontal .control-label {
+            text-align: left;
+            color: CaptionText;
+            padding-left: 5px
+        }
+
+        .form-horizontal .form-control{
+            border-color: ActiveBorder;
+        }
+
+        .input-validation-error {
+            border: 2px solid #ff0000;
+        }
+
+        label{
+            font-size: 11px;    
+        }
+    </style>
+}

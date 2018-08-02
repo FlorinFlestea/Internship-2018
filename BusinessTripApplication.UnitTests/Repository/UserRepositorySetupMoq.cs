@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using Moq;
-using BusinessTripApplication.Models;
+using BusinessTripModels;
 using System.Collections.Generic;
 
 namespace BusinessTripApplication.UnitTests.Repository
@@ -12,13 +12,13 @@ namespace BusinessTripApplication.UnitTests.Repository
         public static void FindByEmail(Mock<IUserRepository> MockUserRepository, IList<User> users)
         {
             MockUserRepository.Setup(mr => mr.FindByEmail(It.IsAny<string>())).Returns(
-                (string email) => users.Where(x => x.Email == email).SingleOrDefault());
+                (string email) => users.SingleOrDefault(x => x.Email == email));
         }
 
         public static void FindByActivationCode(Mock<IUserRepository> MockUserRepository, IList<User> users)
         {
             MockUserRepository.Setup(mr => mr.FindByActivationCode(It.IsAny<Guid>())).Returns(
-                (Guid id) => users.Where(x => x.ActivationCode == id).SingleOrDefault());
+                (Guid id) => users.SingleOrDefault(x => x.ActivationCode == id));
         }
 
         public static void FindAll(Mock<IUserRepository> MockUserRepository, IList<User> users)

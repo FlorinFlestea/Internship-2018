@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Security.Policy;
 using System.Web;
 using System.Web.Helpers;
-using System.Web.ModelBinding;
 using System.Web.Security;
+using BusinessTripApplication.Exception;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
+using BusinessTripModels;
 
-namespace BusinessTripApplication.ViewModels 
+namespace BusinessTripApplication.ViewModels
 {
     public class LogInViewModel : ILogInViewModel
     {
@@ -35,20 +30,26 @@ namespace BusinessTripApplication.ViewModels
             Title = "LogIn";
         }
 
+
+        public LogInViewModel(IUserService userService, Guid activationCode)
+        {
+            SetCookie(userService.FindByActivationCode(activationCode).Email, true);
+        }
+
         public LogInViewModel(bool modelState, string email, string password,bool rememberMe, IUserService userService,out int returnValue)
         {
             if (modelState)
             {
                 try
                 {
-                    User user=new User("",email,password);
+                    User user = new User("", email, password);
                     RememberMe = rememberMe;
                     Status = CheckUser(userService, user);
                     if (Status)
                     {
                         Email = email;
                         Password = "";//do not expose password
-                        
+
                         returnValue = 1;
                         return;
                     }
@@ -86,10 +87,11 @@ namespace BusinessTripApplication.ViewModels
                 emailExists = userService.EmailExists(user.Email);
                 if (!emailExists)
                 {
-                    Message = " Sorry, you have to register first";
+                    Message = " Your email is invalid or your password is invalid or" +
+                              " you haven't verified your email!";
                     return false;
                 }
-                dbUser = userService.GetUserByEmail(user.Email);
+                dbUser = userService.FindByEmail(user.Email);
             }
             catch
             {
@@ -119,17 +121,10 @@ namespace BusinessTripApplication.ViewModels
                 throw;
             }
 
-            
-
-            if (!emailVerified)
+            if (!goodPassword || !emailVerified)
             {
-                Message = " You have to verifiy your email first";
-                return false;
-            }
-
-            if (!goodPassword)
-            {
-                Message = " Incorrect password";
+                Message = " Your email is invalid or your password is invalid or" +
+                          " you haven't verified your email!";
                 return false;
             }
             SetCookie(user.Email, RememberMe);
@@ -139,7 +134,7 @@ namespace BusinessTripApplication.ViewModels
 
         public void SetCookie(string email, bool rememberMe)
         {
-            int timeout = rememberMe ? 525600 : 20; // 525600 min = 1 year
+            int timeout = rememberMe ? 262800 : 20; // 262800 min = 1/2 year
             var ticket = new FormsAuthenticationTicket(email, rememberMe, timeout);
             string encrypted = FormsAuthentication.Encrypt(ticket);
             Cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
