@@ -5,9 +5,9 @@
 }
 
 <head>
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/loginValidation")
 
@@ -15,7 +15,6 @@
     <script type="text/javascript" src="@Url.Content("/Scripts/ParseURL_registration.js")"></script>
 
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/bundles/loginStyle")
 </head>
 <body>
     <div class="container body-content">
