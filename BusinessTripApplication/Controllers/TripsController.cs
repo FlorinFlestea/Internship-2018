@@ -35,7 +35,7 @@ namespace BusinessTripApplication.Controllers
             }
 
 
-            Trip trip = db.Trips.Find(id);
+            
             var trip = Repository.FindById(id);
 
             if (trip == null)

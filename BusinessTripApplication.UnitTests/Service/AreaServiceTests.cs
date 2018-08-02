@@ -1,4 +1,4 @@
-﻿using BusinessTripApplication.Models;
+﻿using BusinessTripModels;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Service;
 using BusinessTripApplication.UnitTests.Repository;
