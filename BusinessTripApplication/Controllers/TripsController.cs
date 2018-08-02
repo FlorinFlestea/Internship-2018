@@ -34,7 +34,10 @@ namespace BusinessTripApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+
+            Trip trip = db.Trips.Find(id);
             var trip = Repository.FindById(id);
+
             if (trip == null)
             {
                 return HttpNotFound();
