@@ -7,9 +7,9 @@ namespace BusinessTripAdministration.Models
         private int Id { get; set; }
         private Trip Trip { get; set; }
 
-        public UpdateTripModel(int id, Trip t)
+        public UpdateTripModel(int id, Trip trip)
         {
-            Trip = t;
+            Trip = trip;
             Id = id;
         }
     }
