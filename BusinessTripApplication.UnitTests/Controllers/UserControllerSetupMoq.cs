@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Net;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.ViewModels;
 using Moq;
 using System.Net.Mail;
 using System.Web;
-using System.Web.Helpers;
 using System.Web.Security;
 
 namespace BusinessTripApplication.UnitTests.Controllers
@@ -48,26 +46,26 @@ namespace BusinessTripApplication.UnitTests.Controllers
 
         public static void CheckUser(Mock<ILogInViewModel> MockLoginViewModel)
         {
-                MockLoginViewModel.Setup(mock => mock.CheckUser(It.IsAny<IUserService>(), It.IsAny<User>())).Returns(
-                (IUserService userService, User user) =>
-                {
-                    bool emailExists = userService.EmailExists(user.Email);
+            MockLoginViewModel.Setup(mock => mock.CheckUser(It.IsAny<IUserService>(), It.IsAny<User>())).Returns(
+            (IUserService userService, User user) =>
+            {
+                bool emailExists = userService.EmailExists(user.Email);
 
-                    if (emailExists==false)
-                        return false;
+                if (emailExists == false)
+                    return false;
 
-                    User addedUser = userService.FindByEmail(user.Email);
-                    Console.WriteLine("0");
-                    if ((addedUser.Password == user.Password)==false)
-                        return false;
-                    Console.WriteLine("1");
-                   
-                    bool rememberMe = false;
+                User addedUser = userService.FindByEmail(user.Email);
+                Console.WriteLine("0");
+                if ((addedUser.Password == user.Password) == false)
+                    return false;
+                Console.WriteLine("1");
+
+                bool rememberMe = false;
                     //MockLoginViewModel.Object.
                     MockLoginViewModel.Object.SetCookie(user.Email, rememberMe);
 
-                    return true;
-                });
+                return true;
+            });
         }
 
         public static void SetCookie(Mock<ILogInViewModel> MockLoginViewModel, HttpCookie cookie)

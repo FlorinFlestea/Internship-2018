@@ -1,11 +1,7 @@
 ﻿using BusinessTripApplication.Models;
 using System;
-using System.Linq;
-using System.Web.Helpers;
-using System.Net.Mail;
-using System.Net;
-using System.Web.Mvc;
 using System.Collections.Generic;
+using BusinessTripModels;
 
 namespace BusinessTripApplication.Repository
 {
@@ -30,7 +26,7 @@ namespace BusinessTripApplication.Repository
 
         public IList<User> FindAll()
         {
-            return userRepository.FindAll();            
+            return userRepository.FindAll();
         }
 
         public bool IsEmailVerified(string email)
@@ -45,7 +41,7 @@ namespace BusinessTripApplication.Repository
 
         public bool VerifyAccount(string id)
         {
-            User user = userRepository.FindByActivationCode(new Guid(id));           
+            User user = userRepository.FindByActivationCode(new Guid(id));
 
             if (user != null && !user.IsEmailVerified)
             {
