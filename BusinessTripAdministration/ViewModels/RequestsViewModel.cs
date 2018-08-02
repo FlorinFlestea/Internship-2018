@@ -12,12 +12,7 @@ namespace BusinessTripAdministration.ViewModels
         
         public RequestsViewModel()
         {
-            requestList = new List<SingleRequestViewModel>();
-            RequestList.Add(new SingleRequestViewModel("Andrei","america","2018","2019"));
-            RequestList.Add(new SingleRequestViewModel("Thomas", "georgia", "2018", "2019"));
-            RequestList.Add(new SingleRequestViewModel("Cosmin", "acasa", "2018", "2019"));
-            RequestList.Add(new SingleRequestViewModel("Tudor", "???", "2018", "2019"));
-            
+            requestList = new List<SingleRequestViewModel>();   
         }
         private List<SingleRequestViewModel> requestList;
         public List<SingleRequestViewModel> RequestList
@@ -33,6 +28,10 @@ namespace BusinessTripAdministration.ViewModels
             }
         }
 
+        private void GetRequestsFromDatabase(List<SingleRequestViewModel> requestList)
+        {
+
+        }
 
     }
 }
