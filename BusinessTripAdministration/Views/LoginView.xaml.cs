@@ -3,6 +3,8 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using BusinessTripAdministration.Models;
+using BusinessTripModels;
+
 namespace BusinessTripAdministration.Views
 {
     /// <summary>
@@ -13,6 +15,8 @@ namespace BusinessTripAdministration.Views
         public LoginView()
         {
             InitializeComponent();
+
+
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
