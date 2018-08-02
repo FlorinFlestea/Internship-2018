@@ -20,13 +20,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="17"/>
+                <ColumnDefinition Width="15"/>
             </Grid.ColumnDefinitions>
-            <Label  Content="User" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-            <Label Grid.Column="1" Content="Destination" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-            <Label Grid.Column="2" Content="Starting Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-            <Label Grid.Column="3" Content="Ending Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-            <Label Grid.Column="4" Content="Actions" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Label Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#00BCD4" />
+            <Label  Content="User" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Label Grid.Column="1" Content="Destination" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Label Grid.Column="2" Content="Starting Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Label Grid.Column="3" Content="Ending Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Label Grid.Column="4" Content="Actions" Foreground="WhiteSmoke" FontSize="22"  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"/>
         </Grid>
         <ContentControl Grid.Row="1" x:Name="ActiveItem"/>
         
@@ -48,8 +49,8 @@
             </Menu>
         </Grid>
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
-            
-            <ItemsControl x:Name="RequestList" Grid.Column="0">
+
+            <ItemsControl x:Name="RequestList" Grid.Column="0" BorderBrush="#aa8cc5" BorderThickness="3">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel/>

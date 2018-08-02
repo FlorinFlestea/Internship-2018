@@ -15,6 +15,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
@@ -30,13 +31,13 @@
         <Label Content="{Binding Destination, Mode=TwoWay}" Grid.Column="1"/>
         <Label Content="{Binding StartDate, Mode=TwoWay}" Grid.Column="2"/>
         <Label Content="{Binding EndDate, Mode=TwoWay}" Grid.Column="3"/>
-        <Grid Grid.Column="4">
+        <Grid Grid.Column="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding AcceptCommand}" BorderBrush="#1b815a" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16">Accept</Button>
+            <Button Command="{Binding AcceptCommand}" Grid.Column="0" BorderBrush="#1b815a" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16">Accept</Button>
             <Button Command="{Binding DenyCommand}" Grid.Column="1" BorderBrush="#1b815a" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16" >Deny</Button>
             <Button Command="{Binding DetailsCommand}" Grid.Column="2" BorderBrush="#1b815a" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16" >Details</Button>
         </Grid>
