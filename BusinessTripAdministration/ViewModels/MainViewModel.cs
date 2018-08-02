@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using BusinessTripAdministration.Models;
+using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ namespace BusinessTripAdministration.ViewModels
     internal class MainViewModel : Conductor<object>
     {
         private string email;
-
+        private ApiClient apiClient = new ApiClient();
         public string Email
         {
             get
@@ -36,7 +37,7 @@ namespace BusinessTripAdministration.ViewModels
         }
         public void LoadRequests()
         {
-            ActivateItem(new RequestsViewModel());
+            ActivateItem(new RequestsViewModel(apiClient));
         }
         
     }
