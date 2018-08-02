@@ -1,14 +1,7 @@
 ﻿using BusinessTripAdministration.Commands;
+using BusinessTripAdministration.Models;
 using BusinessTripAdministration.Validation;
-using BusinessTripAdministration.Views;
 using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -58,7 +51,10 @@ namespace BusinessTripAdministration.ViewModels
 
         private void Login()
         {
-            LoadMainPage();
+            if (DatabaseQuery.Login(Email, Password) == true)
+                LoadMainPage();
+            else
+                MessageBox.Show("Invalid Username or Password");
         }
         private bool CanLogin()
         {
