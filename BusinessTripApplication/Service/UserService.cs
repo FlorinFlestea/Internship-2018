@@ -51,5 +51,10 @@ namespace BusinessTripApplication.Repository
             }
             return false;
         }
+
+        public User FindByActivationCode(Guid activationCode)
+        {
+            return userRepository.FindByActivationCode(activationCode);
+        }
     }
 }
