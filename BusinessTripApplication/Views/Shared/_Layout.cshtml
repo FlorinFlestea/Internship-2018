@@ -8,28 +8,40 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("BusinessTripApplication", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    
-                </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+            <img class="navbar-brand" src="~/Resources/logo.png" alt="logo" style="width:100px;">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="nav-item dropdown">
+                        @Html.ActionLink("Trips", "Index", "Trips", null,  new { @class = "nav-link dropdown-toggle", @data_toggle = "dropdown", @role = "button", aria_haspopup = "true", @aria_expanded = "false" })
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("Home", "Index", "Trips", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Create", "Create", "Trips", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                }
+                <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink(linkText:"Contact", controllerName: "Home", actionName: "Contact", routeValues: null,  htmlAttributes: new { @class = "nav-link" })</li>
+            </ul>
 
-            </div>
-           
+            <ul class="navbar-nav float-right">
+                <li class="nav-item">
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+                        }
+                    }
+                </li>
+            </ul>
         </div>
-    </div>
+    </nav>
     <div class="container body-content" ">
         @RenderBody()
         <hr />
