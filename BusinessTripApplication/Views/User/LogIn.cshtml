@@ -41,7 +41,7 @@
 
                                     <div class="form-group">
                                         @Html.EditorFor(model => model.RememberMe)
-                                        @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label" })
+                                        @Html.LabelFor(model => model.RememberMe,new { @class = "form-check-label control-label" })
                                     </div>
 
                                     <div class="form-group">
@@ -55,25 +55,35 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 mx-auto">
-                <br />
-                @if (Model.Message != null)
-                {
-                    if (Convert.ToBoolean(Model.Status))
+                <div class="col-md-6 mx-auto">
+                    <br />
+                    @if (Model.Message != null)
                     {
-                        <div class="alert alert-success">
-                            <strong>Success!</strong>@Model.Message
-                        </div>
+                        if (Convert.ToBoolean(Model.Status))
+                        {
+                            <div class="alert alert-success">
+                                <strong>Success!</strong>@Model.Message
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-danger">
+                                <strong>Error!</strong>@Model.Message
+                            </div>
+                        }
                     }
-                    else
-                    {
-                        <div class="alert alert-danger">
-                            <strong>Error!</strong>@Model.Message
+                </div>
+                <div class="col-md-6 mx-auto">
+                    <div class="row">
+                        <div class="col-md-6" style="text-align:center">
+                            @Html.ActionLink("About", "About", "Home")
                         </div>
-                    }
-                }
-            </div>
+                        <div class="col-md-6" style="text-align:center">
+                            @Html.ActionLink("Contact", "Contact", "Home")
+                        </div>
+                    </div>
+                </div>
+            </div>            
         </div>
     </div>
 </body>

@@ -208,6 +208,7 @@
     <Compile Include="Migrations\201808021117010_TripsDB.Designer.cs">
       <DependentUpon>201808021117010_TripsDB.cs</DependentUpon>
     </Compile>
+
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -284,6 +285,7 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\logo.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

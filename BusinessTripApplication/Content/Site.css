@@ -1,28 +1,28 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Arima+Madurai');
 body {
-   width:100%;
-   height:100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#42113C 0%, rgba(107, 212, 37, 0.50)), url('images/rawpixel-574844-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
 }
+
 a {
     font-family: 'Arima Madurai', cursive;
     color: white;
 }
 
-h2 {
-    font-family: 'Arima Madurai', cursive;
-    color:white;
-}
-h3 {
-    font-family: 'Arima Madurai', cursive;
-    color: #6BD425;
-}
-h4 {
-    font-family: 'Arima Madurai', cursive;
-    color: #6BD425;
-}
 label {
-    font-family: 'Arima Madurai', cursive;
     color: #6BD425;
+    font-size: 15px;
+}
+
+.control-label {
+    text-align: left;
+    color: CaptionText;
+    padding-left: 5px
 }
 
 
@@ -33,9 +33,7 @@ p{
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
-    background: linear-gradient(#42113C 0%, rgba(107, 212, 37, 0.50)), url('images/rawpixel-574844-unsplash.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
+    
     position: relative;
     z-index: 2;
     width: auto;
@@ -74,11 +72,7 @@ select,
 textarea {
     max-width: 100%;
 }
-footer {
-    position: absolute;
-    bottom: 0;
-    margin-top:30%;
-}
+
 .tooltip {
     margin-left: 100px;
 }
@@ -101,7 +95,11 @@ footer {
 .form-control {
     border-width: 2px;
     border-style: solid;
-    border-color: greenyellow;
+    border-color: ActiveBorder;
+}
+
+.input-validation-error {
+    border: 2px solid #ff0000;
 }
 
 #btn_Create {

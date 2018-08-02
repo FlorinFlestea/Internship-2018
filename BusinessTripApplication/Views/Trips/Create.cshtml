@@ -4,7 +4,6 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Create</h2>
 
 @if (Model.Message != null)
@@ -70,6 +69,7 @@
                     </div>
                     <div class="col-md-12">
                         @Html.ValidationMessageFor(model => model.Trip.StartingDate, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Trip.EndDate, "", new { @class = "text-danger" })
                     </div>
 
                 </div>
@@ -109,7 +109,7 @@
                     @Html.ValidationMessageFor(model => model.Trip.ClientLocation, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-3">
-                    @Html.LabelFor(model => model.Trip.DepartureLocation, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.Trip.DepartureLocation, new { @class = "control-label" })
                     @Html.EditorFor(model => model.Trip.DepartureLocation, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Trip.DepartureLocation, "", new { @class = "text-danger" })
                 </div>
@@ -129,14 +129,14 @@
                 </div>*@
                 <div class="col-md-6">
                     <fieldset>
-                        <legend>Needs</legend>
+                        <legend><label class="control-label">Needs</label></legend>
                         <div class="form-check form-check-inline col-md-4">
                             @Html.EditorFor(model => model.Trip.NeedOfBankCard, new { htmlAttributes = new { @class = "form-check-input" } })
-                            @Html.LabelFor(model => model.Trip.NeedOfBankCard, new { htmlAttributes = new { @class = "control-label" } })
+                            @Html.LabelFor(model => model.Trip.NeedOfBankCard, new { @class = "form-check-label control-label" })
                         </div>
                         <div class="form-check form-check-inline col-md-4">
                             @Html.EditorFor(model => model.Trip.NeedOfPhone, new { htmlAttributes = new { @class = "form-check-input" } })
-                            @Html.LabelFor(model => model.Trip.NeedOfPhone, new { htmlAttributes = new { @class = "form-check-label" } })
+                            @Html.LabelFor(model => model.Trip.NeedOfPhone,  new { @class = "form-check-label control-label" })
                         </div>
                     </fieldset>
                     
@@ -161,16 +161,12 @@
             </div>
 
             <div class="row form-group">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="offset-sm-2 col-md-4">     
                     <input type="submit" value="Make request" class="btn btn-default" />
                 </div>
             </div>
         </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -196,7 +192,7 @@
 
     </script>
 
-    <style>
+    @*<style>
         input,
         select,
         textarea {
@@ -216,9 +212,5 @@
         .input-validation-error {
             border: 2px solid #ff0000;
         }
-
-        label{
-            font-size: 11px;    
-        }
-    </style>
+    </style>*@
 }
