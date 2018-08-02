@@ -13,13 +13,13 @@ namespace BusinessTripAdministration.Views
         public LoginView()
         {
             InitializeComponent();
-            Thread.Sleep(10000);
+            //Thread.Sleep(10000);
 
-            ApiClient api = new ApiClient();
+            //ApiClient api = new ApiClient();
 
-            var trips =  api.GetAllTrips();
+            //var trips =  api.GetAllTrips();
 
-            Console.WriteLine(trips);
+            //Console.WriteLine(trips);
 
         }
 
