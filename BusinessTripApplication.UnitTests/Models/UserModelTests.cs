@@ -1,5 +1,5 @@
 ﻿using System;
-using BusinessTripApplication.Models;
+using BusinessTripModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessTripApplication.UnitTests.Models

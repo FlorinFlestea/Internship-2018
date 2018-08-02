@@ -224,15 +224,26 @@
     <Compile Include="Service\UserService.cs" />
     <Compile Include="ViewModels\ILogInViewModel.cs" />
     <Compile Include="ViewModels\IRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\ITripRequestViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\TripRequestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datepicker.css" />
+    <Content Include="Content\bootstrap-datepicker.min.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-select.css" />
+    <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dash-style\bootstrap-table-dash.css" />
@@ -274,6 +285,16 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.css.map" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
+    <Content Include="Content\bootstrap-datepicker.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-select.css.map" />
+    <None Include="packages.config" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -332,6 +353,11 @@
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\VerifyAccount.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Trips\Create.cshtml" />
+    <Content Include="Views\Trips\Delete.cshtml" />
+    <Content Include="Views\Trips\Details.cshtml" />
+    <Content Include="Views\Trips\Edit.cshtml" />
+    <Content Include="Views\Trips\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -350,7 +376,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="fonts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
