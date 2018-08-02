@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using BusinessTripModels;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace BusinessTripAdministration.Models
 {
     public class ApiClient : IApiClient
     {
-        static HttpClient client = new HttpClient();
+        static readonly HttpClient client = new HttpClient();
 
         public ApiClient()
         {
@@ -23,50 +26,82 @@ namespace BusinessTripAdministration.Models
         public async Task<IEnumerable<Trip>> GetAllTrips()
         {
             var response = await client.GetAsync("/api/tripsapi");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var returnList = JsonConvert.DeserializeObject<IEnumerable<Trip>>(jsonResponse);
 
-            throw new NotImplementedException();
+            return returnList;
         }
 
         // GET: /api/TripsApi/approved
         public async Task<IEnumerable<Trip>> GetApprovedTrips()
         {
-            throw new NotImplementedException();
+            var response = await client.GetAsync("/api/TripsApi/approved");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var returnList = JsonConvert.DeserializeObject<IEnumerable<Trip>>(jsonResponse);
+
+            return returnList;
         }
 
         // GET: /api/TripsApi/denied
         public async Task<IEnumerable<Trip>> GetDeniedTrips()
         {
-            throw new NotImplementedException();
+            var response = await client.GetAsync("/api/TripsApi/denied");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var returnList = JsonConvert.DeserializeObject<IEnumerable<Trip>>(jsonResponse);
+
+            return returnList;
         }
 
         // GET: /api/TripsApi/pending
         public async Task<IEnumerable<Trip>> GetPendingTrips()
         {
-            throw new NotImplementedException();
+            var response = await client.GetAsync("/api/TripsApi/pending");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var returnList = JsonConvert.DeserializeObject<IEnumerable<Trip>>(jsonResponse);
+
+
+            return returnList;
         }
 
         // GET: /api/TripsApi/id
         public async Task<Trip> GetTripById(int id)
         {
-            throw new NotImplementedException();
+            var response = await client.GetAsync("/api/TripsApi/" + id);
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var returnObject = JsonConvert.DeserializeObject<Trip>(jsonResponse);
+
+            return returnObject;
         }
 
         // PUT: /api/TripsApi
-        public async void UpdateTrip(int tripId, Trip newTrip)
+        public async Task<bool> UpdateTrip(int tripId, Trip newTrip)
         {
-            throw new NotImplementedException();
+            var jsonString = JsonConvert.SerializeObject(newTrip);
+            var httpContent = new StringContent(jsonString);
+            var response = await client.PutAsync("/api/TripsApi/",httpContent);
+            var returnResponse = response.Content.ReadAsStringAsync();
+
+            return response.IsSuccessStatusCode;
+
         }
 
         // POST: /api/TripsApi
-        public async void AddTrip(Trip trip)
+        public async Task<bool> AddTrip(Trip trip)
         {
-            throw new NotImplementedException();
+            var jsonString = JsonConvert.SerializeObject(trip);
+            var httpContent = new StringContent(jsonString);
+            var response = await client.PostAsync("/api/TripsApi/", httpContent);
+
+            return response.IsSuccessStatusCode;
+
         }
 
         // DELETE: api/TripsApi/id
-        public async void DeleteTrip(int id)
+        public async Task<bool> DeleteTrip(int id)
         {
-            throw new NotImplementedException();
+            var response = await client.DeleteAsync("/api/TripsApi/" + id);
+
+            return response.IsSuccessStatusCode;
         }
     }
 }

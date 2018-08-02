@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
+using BusinessTripApplication.Exception;
 using log4net.Repository.Hierarchy;
 
 
@@ -50,7 +51,7 @@ namespace BusinessTripApplication.Server
             {
                 smtp.Send(mail);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 Logger.Info(ex.Message);
                 throw new InternetException("Cannot connect to internet!\n");

@@ -17,11 +17,11 @@ namespace BusinessTripAdministration.Models
         // GET REQUEST: Returns a trip with a given id from the db
         Task<Trip> GetTripById(int id);
         // PUT REQUEST: updates a trip with a given id
-        void UpdateTrip(int tripId,Trip newTrip);
+        Task<bool> UpdateTrip(int tripId,Trip newTrip);
         // POST REQUEST: adds a trip to the db
-        void AddTrip(Trip trip);
+        Task<bool> AddTrip(Trip trip);
         // DELETE REQUEST: deletes a trip with a given id from the db
-        void DeleteTrip(int id);
+        Task<bool> DeleteTrip(int id);
 
     }
 }
