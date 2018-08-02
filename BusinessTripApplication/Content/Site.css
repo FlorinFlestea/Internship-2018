@@ -85,11 +85,7 @@ select,
 textarea {
     max-width: 100%;
 }
-.footer {
-    padding: 1rem 0;
-    margin-top: auto;
-    background-color: #f5f5f5;
-}
+
 .tooltip {
     margin-left: 100px;
 }
