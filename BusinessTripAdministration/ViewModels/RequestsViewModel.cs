@@ -37,20 +37,13 @@ namespace BusinessTripAdministration.ViewModels
         {
             List<SingleRequestViewModel> list = new List<SingleRequestViewModel>();
             var trips = await ApiClient.GetPendingTrips();
-            //tripList.Wait();
             var tripList = trips.ToList();
-            //var tripList = trips.Result.ToList();
-            Console.WriteLine(tripList);
-
-
-            
             foreach(Trip trip in tripList)
             {
                  list.Add(new SingleRequestViewModel(trip.ClientName,trip.DepartureLocation.ToString(),trip.StartingDate.ToString(),trip.EndDate.ToString()));
             }
 
             RequestList = list;
-            Thread.Sleep(3000);
         }
 
     }
