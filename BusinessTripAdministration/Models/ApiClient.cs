@@ -76,7 +76,7 @@ namespace BusinessTripAdministration.Models
         // PUT: /api/TripsApi
         public async Task<bool> UpdateTrip(int tripId, Trip newTrip)
         {
-            var jsonString = JsonConvert.SerializeObject(newTrip);
+            var jsonString = JsonConvert.SerializeObject(new UpdateTripModel(tripId, newTrip));
             var httpContent = new StringContent(jsonString);
             var response = await client.PutAsync("/api/TripsApi/",httpContent);
             var returnResponse = response.Content.ReadAsStringAsync();

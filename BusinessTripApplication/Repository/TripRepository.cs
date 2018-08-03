@@ -57,6 +57,7 @@ namespace BusinessTripApplication.Repository
             {
                 using (DatabaseContext context = new DatabaseContext())
                 {
+                    context.Trips.Attach(deleteTrip);
                     context.Trips.Remove(deleteTrip);
                     context.SaveChanges();
                 }
@@ -96,11 +97,12 @@ namespace BusinessTripApplication.Repository
                 using (DatabaseContext context = new DatabaseContext())
                 {
                     update = context.Trips.SingleOrDefault(trip => trip.Id == updatedTrip.Id);
+                    
 
                     if (update == null)
                         throw new DatabaseException("Trip doesn't exists!");
 
-                    update = updatedTrip;
+                    context.Entry(update).CurrentValues.SetValues(updatedTrip);
                     context.SaveChanges();
                 }
             }

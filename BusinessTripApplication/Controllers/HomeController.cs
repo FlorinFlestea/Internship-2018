@@ -10,17 +10,13 @@ namespace BusinessTripApplication.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return View("Dashboard");
+                return RedirectToAction("Index", "Trips");
             }
-            return View();
+            return RedirectToAction("Login", "User");
         }
 
         public ActionResult About()
         {
-            if (!Request.IsAuthenticated)
-            {
-                return RedirectToAction("Login", "User"); ;
-            }
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -28,10 +24,10 @@ namespace BusinessTripApplication.Controllers
 
         public ActionResult Contact()
         {
-            if (!Request.IsAuthenticated)
-            {
-                return RedirectToAction("Login", "User"); ;
-            }
+            //if (!Request.IsAuthenticated)
+            //{
+            //    return RedirectToAction("Login", "User"); ;
+            //}
             ViewBag.Message = "Your contact page.";
 
             return View();
