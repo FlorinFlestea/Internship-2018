@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BusinessTripAdministration.ViewModels
@@ -32,15 +33,21 @@ namespace BusinessTripAdministration.ViewModels
             }
         }
 
-        private void GetAllUnapporvedRequestsFromDatabase()
+        private async void GetAllUnapporvedRequestsFromDatabase()
         {
-            List<Trip> tripList = ApiClient.GetPendingTrips().Result.ToList();
-            if (tripList.Count == 0)
-                return;
+            var trips = await ApiClient.GetPendingTrips();
+            //tripList.Wait();
+            var tripList = trips.ToList();
+            //var tripList = trips.Result.ToList();
+            Console.WriteLine(tripList);
+
+
+            /*
             foreach(Trip trip in tripList)
             {
                 RequestList.Add(new SingleRequestViewModel(trip.ClientName,trip.DepartureLocation.ToString(),trip.StartingDate.ToString(),trip.EndDate.ToString()));
             }
+            */
         }
 
     }

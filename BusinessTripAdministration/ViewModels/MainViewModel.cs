@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -13,7 +14,7 @@ namespace BusinessTripAdministration.ViewModels
     internal class MainViewModel : Conductor<object>
     {
         private string email;
-        private ApiClient apiClient = new ApiClient();
+        private ApiClient apiClient;
         public string Email
         {
             get
@@ -28,6 +29,8 @@ namespace BusinessTripAdministration.ViewModels
         }
         public MainViewModel()
         {
+            Thread.Sleep(12000);
+            apiClient = new ApiClient();
             LoadHome();
         }
 
