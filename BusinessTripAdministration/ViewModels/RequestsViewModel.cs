@@ -35,6 +35,7 @@ namespace BusinessTripAdministration.ViewModels
 
         private async void GetAllUnapporvedRequestsFromDatabase()
         {
+            List<SingleRequestViewModel> list = new List<SingleRequestViewModel>();
             var trips = await ApiClient.GetPendingTrips();
             //tripList.Wait();
             var tripList = trips.ToList();
@@ -42,12 +43,14 @@ namespace BusinessTripAdministration.ViewModels
             Console.WriteLine(tripList);
 
 
-            /*
+            
             foreach(Trip trip in tripList)
             {
-                RequestList.Add(new SingleRequestViewModel(trip.ClientName,trip.DepartureLocation.ToString(),trip.StartingDate.ToString(),trip.EndDate.ToString()));
+                 list.Add(new SingleRequestViewModel(trip.ClientName,trip.DepartureLocation.ToString(),trip.StartingDate.ToString(),trip.EndDate.ToString()));
             }
-            */
+
+            RequestList = list;
+            Thread.Sleep(3000);
         }
 
     }
