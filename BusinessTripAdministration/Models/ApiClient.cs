@@ -49,7 +49,7 @@ namespace BusinessTripAdministration.Models
             var jsonResponse = await response.Content.ReadAsStringAsync();
             var returnList = JsonConvert.DeserializeObject<IEnumerable<Trip>>(jsonResponse);
 
-            return await Task.FromResult(returnList);
+            return returnList;
         }
 
         // GET: /api/TripsApi/pending
