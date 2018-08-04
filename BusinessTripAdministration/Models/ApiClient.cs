@@ -77,8 +77,8 @@ namespace BusinessTripAdministration.Models
         public async Task<bool> UpdateTrip(int tripId, Trip newTrip)
         {
             var jsonString = JsonConvert.SerializeObject(new UpdateTripModel(tripId, newTrip));
-            var httpContent = new StringContent(jsonString);
-            var response = await client.PutAsync("/api/TripsApi/",httpContent);
+            var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("/api/TripsApi/",httpContent);
             var returnResponse = response.Content.ReadAsStringAsync();
 
             return response.IsSuccessStatusCode;
