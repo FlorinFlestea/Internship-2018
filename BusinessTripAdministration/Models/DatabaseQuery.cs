@@ -18,12 +18,20 @@ namespace BusinessTripAdministration.Models
 
         public static bool Login(string email, string password)
         {
-            var cmd = new SqlCommand
-            {
-                CommandText = "SELECT * FROM Users WHERE Email='" + email + "' AND Password='" + Crypto.Hash(password) + "'",
-                CommandType = CommandType.Text,
-                Connection = sqlConnection
-            };
+            string commandText = "SELECT * FROM Users WHERE Email= @email "
+                                 + "AND Password= @pass;";
+            SqlParameter paramEmail = new SqlParameter();
+            paramEmail.ParameterName = "@email";
+            paramEmail.Value = email;
+
+            SqlParameter paramPass = new SqlParameter();
+            paramPass.ParameterName = "@pass";
+            paramPass.Value = Crypto.Hash(password);
+
+            SqlCommand cmd = new SqlCommand(
+                commandText, sqlConnection);
+            cmd.Parameters.Add(paramEmail);
+            cmd.Parameters.Add(paramPass);
 
             sqlConnection.Open();
 
