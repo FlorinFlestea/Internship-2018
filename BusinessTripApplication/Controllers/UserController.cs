@@ -155,14 +155,14 @@ namespace BusinessTripApplication.Controllers
         [AllowAnonymous]
         public ActionResult Facebook()
         {
-            var fbLogin = new FacebookModelLogin(RedirectUri);
+            var fbLogin = new FacebookLoginer(RedirectUri);
             var redirectLoginUrl = fbLogin.LoginUrl;
             return Redirect(redirectLoginUrl.AbsoluteUri);
         }
 
         public ActionResult FacebookCallback(string code)
         {
-            var fbLogin = new FacebookModelLogin(RedirectUri);
+            var fbLogin = new FacebookLoginer(RedirectUri);
 
             dynamic result = fbLogin.FbClient.Post("oauth/access_token", new
             {

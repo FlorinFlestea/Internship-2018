@@ -11,7 +11,7 @@ using Facebook;
 
 namespace BusinessTripApplication.Server
 {
-    public class FacebookModelLogin
+    public class FacebookLoginer: IFacebookLoginer
     {
         public readonly FacebookClient FbClient = new FacebookClient();
         public String AppId = "1937273663237215";
@@ -19,19 +19,24 @@ namespace BusinessTripApplication.Server
         public Uri LoginUrl { get; set; }
         private Uri RedirectUri;
 
-        public FacebookModelLogin(Uri redirectUri)
+        public FacebookLoginer(Uri redirectUri)
         {
             RedirectUri = redirectUri;
-            LoginUrl = FbClient.GetLoginUrl(new
+            LoginUrl = FbClient.GetLoginUrl(SetLoginUrl(redirectUri));
+        }
+
+        public object SetLoginUrl(Uri redirectUri)
+        {
+            var loginUrl=new
             {
                 client_id = AppId,
                 client_secret = AppSecret,
-                redirect_uri = RedirectUri.AbsoluteUri,
+                redirect_uri = redirectUri.AbsoluteUri,
                 response_type = "code",
                 scope = "email" // Add other permissions as needed
-            });
+            };
+            return loginUrl;
         }
-
 
         public void Response(IUserService service,dynamic result)
         {
@@ -52,7 +57,7 @@ namespace BusinessTripApplication.Server
             FormsAuthentication.SetAuthCookie(email, false);
         }
 
-        public void RegisterUserIfNotPresent(IUserService service, string firstname, string email, string accessToken)
+        private void RegisterUserIfNotPresent(IUserService service, string firstname, string email, string accessToken)
         {
             bool emailExists;
             try
