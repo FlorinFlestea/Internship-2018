@@ -219,6 +219,7 @@
     <Compile Include="Repository\TripRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Server\EmailSender.cs" />
+    <Compile Include="Server\FacebookModelLogin.cs" />
     <Compile Include="Server\IEmailSender.cs" />
     <Compile Include="Service\AreaService.cs" />
     <Compile Include="Service\IAreaService.cs" />
@@ -260,6 +261,7 @@
     <Content Include="Content\dash-style\font-awesome.min-dash.css" />
     <Content Include="Content\dash-style\styles-dash.css" />
     <Content Include="Content\images\hermes-rivera-471868-unsplash.jpg" />
+    <Content Include="Content\images\FbLoginButton.png" />
     <Content Include="Content\images\rawpixel-574844-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-579241-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-652547-unsplash.jpg" />
