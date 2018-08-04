@@ -15,7 +15,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            
+            <ColumnDefinition Width="*"/>
+
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
@@ -27,10 +28,11 @@
                 <Setter Property="BorderThickness" Value="1" />
             </Style> 
         </Grid.Resources>
-        <Label Content="{Binding User, Mode=TwoWay}" Grid.Column="0"/>
-        <Label Content="{Binding Destination, Mode=TwoWay}" Grid.Column="1"/>
-        <Label Content="{Binding StartDate, Mode=TwoWay}" Grid.Column="2"/>
-        <Label Content="{Binding EndDate, Mode=TwoWay}" Grid.Column="3"/>
+        <Label Content="{Binding Id, Mode=TwoWay}" Grid.Column="0"/>
+        <Label Content="{Binding User, Mode=TwoWay}" Grid.Column="1"/>
+        <Label Content="{Binding Destination, Mode=TwoWay}" Grid.Column="2"/>
+        <Label Content="{Binding StartDate, Mode=TwoWay}" Grid.Column="3"/>
+        <Label Content="{Binding EndDate, Mode=TwoWay}" Grid.Column="4"/>
         <Grid Grid.Column="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

@@ -8,22 +8,38 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using BusinessTripAdministration.Models;
 
 namespace BusinessTripAdministration.ViewModels
 {
     internal class SingleRequestViewModel 
     {
+        private int id;
         private string user;
         private string destination;
         private string startDate;
         private string endDate;
 
-        public SingleRequestViewModel(string user, string destination, string startDate, string endDate)
+        public SingleRequestViewModel(int id, string user, string destination, string startDate, string endDate)
         {
+            Id = id;
             User = user;
             Destination = destination;
             StartDate = startDate;
             EndDate = endDate;
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+
+            }
         }
 
         public string User
@@ -138,7 +154,7 @@ namespace BusinessTripAdministration.ViewModels
 
         public void AcceptRequest()
         {
-            MessageBox.Show("Binding Works");
+            RequestManager.ApproveTrip(Id);
         }
         private bool CanAccept()
         {
@@ -146,7 +162,7 @@ namespace BusinessTripAdministration.ViewModels
         }
         public void DenyRequest()
         {
-
+            RequestManager.DenyTrip(Id);
         }
         private bool CanDeny()
         {

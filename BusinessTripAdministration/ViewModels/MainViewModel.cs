@@ -14,7 +14,6 @@ namespace BusinessTripAdministration.ViewModels
     internal class MainViewModel : Conductor<object>
     {
         private string email;
-        private ApiClient apiClient;
         public string Email
         {
             get
@@ -29,7 +28,6 @@ namespace BusinessTripAdministration.ViewModels
         }
         public MainViewModel()
         {
-            apiClient = new ApiClient();
             LoadHome();
         }
 
@@ -39,7 +37,7 @@ namespace BusinessTripAdministration.ViewModels
         }
         public void LoadRequests()
         {
-            ActivateItem(new RequestsViewModel(apiClient));
+            ActivateItem(new RequestsViewModel());
         }
         
     }
