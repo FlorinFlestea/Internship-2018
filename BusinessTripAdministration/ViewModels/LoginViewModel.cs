@@ -28,8 +28,8 @@ namespace BusinessTripAdministration.ViewModels
 
         public LoginViewModel()
         {
-
             ShowCurrentWindow();
+            RequestManager.Init();
         }
 
         private ICommand loginCommand;
