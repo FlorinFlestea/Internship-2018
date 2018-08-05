@@ -12,7 +12,7 @@ using BusinessTripAdministration.Commands;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    class HistoryViewModel: Conductor<object>
+    class HistoryViewModel: Conductor<object>, IRequest
     {
         
         public HistoryViewModel()
@@ -57,16 +57,52 @@ namespace BusinessTripAdministration.ViewModels
         }
 
 
+        private ICommand filterCommand;
+
+        public ICommand FilterCommand
+        {
+            get
+            {
+                if (filterCommand == null)
+                {
+                    filterCommand = new ButtonCommand(
+                        param => this.LoadFilterPage(),
+                        param => this.CanFilter()
+                    );
+                }
+                return filterCommand;
+            }
+        }
+
+        private bool CanFilter()
+        {
+            return true;
+        }
+
+        void LoadFilterPage()
+        {
+            IWindowManager manager = new WindowManager();
+            List<String> statuses = new List<string>()
+            {
+                "Pending",
+                "Approved",
+                "Denied"
+            };
+            FilterViewModel model = new FilterViewModel(this, RequestManager.DepartureLocationList, statuses);
+            manager.ShowWindow(model, context: null, settings: null);
+        }
+
+
         private async void RefreshAllRequests()
         {
             await RequestManager.RefreshApprovedRequestsFromDatabase();
             await RequestManager.RefreshDeniedRequestsFromDatabase();
-            ShowTrips();
+            List<Trip> tripList = RequestManager.DeniedTripList;
+            ShowTrips(tripList);
         }
 
-        private void ShowTrips()
+        public void ShowTrips(List<Trip> tripList)
         {
-            List<Trip> tripList = RequestManager.DeniedTripList;
             tripList.AddRange(RequestManager.ApprovedTripList);
             List <SingleHistoryViewModel> list = new List<SingleHistoryViewModel>();
             foreach (Trip trip in tripList)

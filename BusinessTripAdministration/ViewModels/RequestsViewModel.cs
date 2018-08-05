@@ -12,7 +12,7 @@ using BusinessTripAdministration.Commands;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    class RequestsViewModel: Conductor<object>
+    class RequestsViewModel: Conductor<object>, IRequest
     {
         
         public RequestsViewModel()
@@ -56,16 +56,46 @@ namespace BusinessTripAdministration.ViewModels
             return true;
         }
 
+        private ICommand filterCommand;
+
+        public ICommand FilterCommand
+        {
+            get
+            {
+                if (filterCommand == null)
+                {
+                    filterCommand = new ButtonCommand(
+                        param => this.LoadFilterPage(),
+                        param => this.CanFilter()
+                    );
+                }
+                return filterCommand;
+            }
+        }
+
+        private bool CanFilter()
+        {
+            return true;
+        }
+
+        void LoadFilterPage()
+        {
+            IWindowManager manager = new WindowManager();
+            FilterViewModel model = new FilterViewModel(this, RequestManager.DepartureLocationList,new List<string>());
+            manager.ShowWindow(model, context: null, settings: null);
+        }
+
+
+
 
         private async void RefreshUnapporvedRequests()
         {
             await RequestManager.RefreshPendingRequestsFromDatabase();
-            ShowPendingTrips();
+            ShowTrips(RequestManager.PendingTripList);
         }
 
-        private void ShowPendingTrips()
+        public void ShowTrips(List<Trip> tripList)
         {
-            List<Trip> tripList = RequestManager.PendingTripList;
             List <SingleRequestViewModel> list = new List<SingleRequestViewModel>();
             foreach (Trip trip in tripList)
             {
