@@ -12,16 +12,16 @@ using BusinessTripAdministration.Commands;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    class RequestsViewModel: Conductor<object>
+    class HistoryViewModel: Conductor<object>
     {
         
-        public RequestsViewModel()
+        public HistoryViewModel()
         {
-            requestList = new List<SingleRequestViewModel>();
-            RefreshUnapporvedRequests();
+            requestList = new List<SingleHistoryViewModel>();
+            RefreshAllRequests();
         }
-        private List<SingleRequestViewModel> requestList;
-        public List<SingleRequestViewModel> RequestList
+        private List<SingleHistoryViewModel> requestList;
+        public List<SingleHistoryViewModel> RequestList
         {
             get
             {
@@ -43,7 +43,7 @@ namespace BusinessTripAdministration.ViewModels
                 if (refreshCommand == null)
                 {
                     refreshCommand = new ButtonCommand(
-                        param => this.RefreshUnapporvedRequests(),
+                        param => this.RefreshAllRequests(),
                         param => this.CanRefresh()
                     );
                 }
@@ -57,19 +57,21 @@ namespace BusinessTripAdministration.ViewModels
         }
 
 
-        private async void RefreshUnapporvedRequests()
+        private async void RefreshAllRequests()
         {
-            await RequestManager.RefreshPendingRequestsFromDatabase();
-            ShowPendingTrips();
+            await RequestManager.RefreshApprovedRequestsFromDatabase();
+            await RequestManager.RefreshDeniedRequestsFromDatabase();
+            ShowTrips();
         }
 
-        private void ShowPendingTrips()
+        private void ShowTrips()
         {
-            List<Trip> tripList = RequestManager.PendingTripList;
-            List <SingleRequestViewModel> list = new List<SingleRequestViewModel>();
+            List<Trip> tripList = RequestManager.DeniedTripList;
+            tripList.AddRange(RequestManager.ApprovedTripList);
+            List <SingleHistoryViewModel> list = new List<SingleHistoryViewModel>();
             foreach (Trip trip in tripList)
             {
-                list.Add(new SingleRequestViewModel(trip.Id,trip.ClientName, trip.DepartureLocation, trip.StartingDate.Value.ToString("dd/MM/yyyy"), trip.EndDate.Value.ToString("dd/MM/yyyy")));
+                list.Add(new SingleHistoryViewModel(trip.Id,trip.ClientName, trip.DepartureLocation, trip.StartingDate.Value.ToString("dd/MM/yyyy"), trip.EndDate.Value.ToString("dd/MM/yyyy")));
             }
             RequestList = list;
         }

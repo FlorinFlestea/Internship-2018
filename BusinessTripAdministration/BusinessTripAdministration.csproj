@@ -115,7 +115,9 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\RequestsViewModel.cs" />
+    <Compile Include="ViewModels\SingleHistoryViewModel.cs" />
     <Compile Include="ViewModels\SingleRequestViewModel.cs" />
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
@@ -123,8 +125,14 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\HistoryView.xaml.cs">
+      <DependentUpon>HistoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RequestsView.xaml.cs">
       <DependentUpon>RequestsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SingleHistoryView.xaml.cs">
+      <DependentUpon>SingleHistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SingleRequestView.xaml.cs">
       <DependentUpon>SingleRequestView.xaml</DependentUpon>
@@ -152,7 +160,15 @@
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\HistoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\RequestsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SingleHistoryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

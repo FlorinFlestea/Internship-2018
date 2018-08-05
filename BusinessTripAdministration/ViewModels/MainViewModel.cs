@@ -35,10 +35,17 @@ namespace BusinessTripAdministration.ViewModels
         {
             ActivateItem(new HomeViewModel());
         }
+
+
         public void LoadRequests()
         {
             ActivateItem(new RequestsViewModel());
         }
-        
+
+        public void LoadHistory()
+        {
+            ActivateItem(new HistoryViewModel());
+        }
+
     }
 }

@@ -28,7 +28,7 @@
             <Button x:Name="LoadHome" Content="Home" FontSize="20" Grid.Row="1" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="#00BCD4"/>
             <Button x:Name="LoadRequests" Content="Requests" FontSize="20" Grid.Row="2" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="#00BCD4"/>
             <Button Content="Users" FontSize="20" Grid.Row="3" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="#00BCD4"/>
-            <Button Content="History" FontSize="20" Grid.Row="4" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="#00BCD4"/>
+            <Button x:Name="LoadHistory" Content="History" FontSize="20" Grid.Row="4" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="#00BCD4"/>
         </Grid>
         <Grid  Grid.Column="2"  Background="#333333">
             <Grid.RowDefinitions>
