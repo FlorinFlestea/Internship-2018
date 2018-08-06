@@ -97,13 +97,17 @@ namespace BusinessTripAdministration.ViewModels
         {
             await RequestManager.RefreshApprovedRequestsFromDatabase();
             await RequestManager.RefreshDeniedRequestsFromDatabase();
-            List<Trip> tripList = RequestManager.DeniedTripList;
+            //IMMPORTANT
+            //MUST create new list, else the original lists will be modified
+            List<Trip> tripList =new List<Trip>();
+            tripList.AddRange(RequestManager.ApprovedTripList);
+            tripList.AddRange(RequestManager.DeniedTripList);
+            //IMMPORTANT
             ShowTrips(tripList);
         }
 
         public void ShowTrips(List<Trip> tripList)
         {
-            tripList.AddRange(RequestManager.ApprovedTripList);
             List <SingleHistoryViewModel> list = new List<SingleHistoryViewModel>();
             foreach (Trip trip in tripList)
             {

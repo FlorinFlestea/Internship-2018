@@ -32,7 +32,8 @@ namespace BusinessTripAdministration.ViewModels
             departureLocationSelected = departureLocationList[0];
             StartingAnyDate = true;
             EndingAnyDate = true;
-
+            StartingSelectedDate = DateTime.Today;
+            EndingSelectedDate = DateTime.Today;
             ShowCurrentWindow();
         }
 
@@ -281,16 +282,17 @@ namespace BusinessTripAdministration.ViewModels
 
             //filter by ending date
             if (exactEndingDate == true)
-                allTrips = RequestManager.SearchTripsByStartingDate(allTrips, EndingSelectedDate).ToList();
+                allTrips = RequestManager.SearchTripsByEndingDate(allTrips, EndingSelectedDate).ToList();
             else if (beforeEndingDate == true)
-                allTrips = RequestManager.SearchTripsBeforeStartingDate(allTrips, EndingSelectedDate).ToList();
+                allTrips = RequestManager.SearchTripsBeforeEndingDate(allTrips, EndingSelectedDate).ToList();
             else if (afterEndingDate == true)
-                allTrips = RequestManager.SearchTripsAfterStartingDate(allTrips, EndingSelectedDate).ToList();
+                allTrips = RequestManager.SearchTripsAfterEndingDate(allTrips, EndingSelectedDate).ToList();
 
             //send list back to the request object
             myRequest.ShowTrips(allTrips);
             HideCurrentWindow();
         }
+
         private bool CanSearch()
         {
             return true;

@@ -123,17 +123,17 @@ namespace BusinessTripAdministration.Models
 
         public static IEnumerable<Trip> SearchTripsByEndingDate(List<Trip> tripList, DateTime endingDate)
         {
-            return tripList.Where(trip => trip.StartingDate.Value.Day == endingDate.Day);
+            return tripList.Where(trip => trip.EndDate.Value.Day == endingDate.Day);
         }
 
         public static IEnumerable<Trip> SearchTripsBeforeEndingDate(List<Trip> tripList, DateTime endingDate)
         {
-            return tripList.Where(trip => trip.StartingDate.Value.Day < endingDate.Day);
+            return tripList.Where(trip => trip.EndDate.Value.Day < endingDate.Day);
         }
 
         public static IEnumerable<Trip> SearchTripsAfterEndingDate(List<Trip> tripList, DateTime endingDate)
         {
-            return tripList.Where(trip => trip.StartingDate.Value.Day > endingDate.Day);
+            return tripList.Where(trip => trip.EndDate.Value.Day > endingDate.Day);
         }
 
 
