@@ -112,6 +112,7 @@
     <Compile Include="Models\RequestManager.cs" />
     <Compile Include="Models\UpdateTripModel.cs" />
     <Compile Include="Validation\ValidateField.cs" />
+    <Compile Include="ViewModels\DetailsViewModel.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IRequest.cs" />
@@ -121,6 +122,9 @@
     <Compile Include="ViewModels\RequestsViewModel.cs" />
     <Compile Include="ViewModels\SingleHistoryViewModel.cs" />
     <Compile Include="ViewModels\SingleRequestViewModel.cs" />
+    <Compile Include="Views\DetailsView.xaml.cs">
+      <DependentUpon>DetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -145,6 +149,10 @@
     <Page Include="Resources\Dictionaries\LoginTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\HomeView.xaml">
       <Generator>MSBuild:Compile</Generator>

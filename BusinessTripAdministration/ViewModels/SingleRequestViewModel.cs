@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using BusinessTripAdministration.Models;
+using BusinessTripModels;
 
 namespace BusinessTripAdministration.ViewModels
 {
@@ -149,9 +150,12 @@ namespace BusinessTripAdministration.ViewModels
             return true;
         }
 
-        private void DetailsRequest()
+        private async void DetailsRequest()
         {
-            
+            Trip trip = await RequestManager.GetTripById(id);
+            var model = new DetailsViewModel(trip);
+            IWindowManager manager = new WindowManager();
+            manager.ShowWindow(model, context: null, settings: null);
         }
 
         public async void AcceptRequest()
