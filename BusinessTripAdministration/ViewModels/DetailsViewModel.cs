@@ -48,9 +48,10 @@ namespace BusinessTripAdministration.ViewModels
                 case 1: status = "Approved"; break;
                 default: status = "Pending"; break;
             }
-            
-            user = trip.User;
-            area = trip.Area;
+            if(trip.User!=null)
+                user = trip.User.Email;
+            if (trip.Area != null)
+                area = trip.Area.Name;
         }
 
         private int id;
@@ -87,8 +88,8 @@ namespace BusinessTripAdministration.ViewModels
 
         private string status ;
 
-        private User user ;
-        private Area area ;
+        private string user ;
+        private string area ;
 
 
 
@@ -320,7 +321,7 @@ namespace BusinessTripAdministration.ViewModels
             }
         }
 
-        public User User
+        public string User
         {
             get
             {
@@ -333,7 +334,7 @@ namespace BusinessTripAdministration.ViewModels
             }
         }
 
-        public Area Area
+        public string Area
         {
             get
             {

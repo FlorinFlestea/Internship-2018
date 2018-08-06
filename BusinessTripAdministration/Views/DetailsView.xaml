@@ -61,11 +61,11 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0" >
                     <Label Content="Need Of Phone" Foreground="#999999" FontSize="25" Margin="10,0,0,0" Width="220"/>
-                    <CheckBox x:Name="NeedOfPhone" Foreground="#999999" FontSize="20" Width="220" Height="40"    Margin="25,0,0,0"/>
+                    <CheckBox x:Name="NeedOfPhone"  IsEnabled="false" IsHitTestVisible="false" Focusable="false"  Foreground="#999999" FontSize="20" Width="220" Height="40"    Margin="25,0,0,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0" >
                     <Label Content="Need Of BankCard" Foreground="#999999" FontSize="25" Margin="10,0,0,0" Width="220"/>
-                    <CheckBox x:Name="NeedOfBankCard" Foreground="#999999" FontSize="20" Width="220" Height="40"    Margin="25,0,0,0"/>
+                    <CheckBox x:Name="NeedOfBankCard" IsEnabled="false" IsHitTestVisible="false" Focusable="false" Foreground="#999999" FontSize="20" Width="220" Height="40"    Margin="25,0,0,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0" >
                     <Label Content="Accommodation" Foreground="#999999" FontSize="25" Margin="10,0,0,0" Width="220"/>
