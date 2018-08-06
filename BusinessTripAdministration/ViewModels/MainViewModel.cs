@@ -49,13 +49,13 @@ namespace BusinessTripAdministration.ViewModels
         }
 
         
-
+        
 
         public void Logout()
         {
             LoginViewModel.RemoveUserCredentials();
             HideCurrentWindow();
-            ActivateItem(new LoginViewModel());
+            LoginViewModel.MainLoginViewModelInstance.ShowCurrentWindow();
         }
 
         public void LoadHome()

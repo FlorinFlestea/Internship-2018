@@ -34,7 +34,7 @@ namespace BusinessTripAdministration.ViewModels
             EndingAnyDate = true;
             StartingSelectedDate = DateTime.Today;
             EndingSelectedDate = DateTime.Today;
-            ShowCurrentWindow();
+            this.ShowCurrentWindow();
         }
 
         private string departureLocationSelected;
@@ -298,11 +298,11 @@ namespace BusinessTripAdministration.ViewModels
             return true;
         }
 
-        void HideCurrentWindow()
+        public void HideCurrentWindow()
         {
             IsCurrentWindowVisible = "Hidden";
         }
-        void ShowCurrentWindow()
+        public void ShowCurrentWindow()
         {
             IsCurrentWindowVisible = "Visible";
         }

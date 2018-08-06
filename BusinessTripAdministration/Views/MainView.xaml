@@ -28,8 +28,7 @@
             </Image>
             <Button x:Name="LoadHome" Content="Home" FontSize="20" Grid.Row="1" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="#00BCD4"/>
             <Button x:Name="LoadRequests" Content="Requests" FontSize="20" Grid.Row="2" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="#00BCD4"/>
-            <Button Content="Users" FontSize="20" Grid.Row="3" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="#00BCD4"/>
-            <Button x:Name="LoadHistory" Content="History" FontSize="20" Grid.Row="4" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="#00BCD4"/>
+            <Button x:Name="LoadHistory" Content="History" FontSize="20" Grid.Row="3" Foreground="WhiteSmoke" Background="Transparent" BorderBrush="#00BCD4"/>
         </Grid>
         <Grid  Grid.Column="2"  Background="#333333">
             <Grid.RowDefinitions>
@@ -40,7 +39,6 @@
                 <Menu VerticalAlignment="Stretch"  Background="#212121" BorderBrush="WhiteSmoke" BorderThickness="1" FontSize="24">
                     <MenuItem Header="{Binding Email,Mode=TwoWay}" Foreground="WhiteSmoke" VerticalAlignment="Stretch" >
                         <MenuItem x:Name="Logout" Header="Logout" Background="#212121"/>
-                        <MenuItem Header="Account" Background="#212121"/>
                     </MenuItem>
                 </Menu>
             </WrapPanel>

@@ -14,7 +14,7 @@ namespace BusinessTripAdministration.ViewModels
 {
     class HistoryViewModel: Conductor<object>, IRequest
     {
-        
+        private FilterViewModel MyFilterViewModel;
         public HistoryViewModel()
         {
             requestList = new List<SingleHistoryViewModel>();
@@ -81,17 +81,24 @@ namespace BusinessTripAdministration.ViewModels
 
         void LoadFilterPage()
         {
-            IWindowManager manager = new WindowManager();
+            if (MyFilterViewModel == null || MyFilterViewModel.IsActive == false)
+                InitialiseMyFilter();
+           MyFilterViewModel.ShowCurrentWindow();
+        }
+
+        private void InitialiseMyFilter()
+        {
             List<String> statuses = new List<string>()
             {
                 "Pending",
                 "Approved",
                 "Denied"
             };
-            FilterViewModel model = new FilterViewModel(this, RequestManager.DepartureLocationList, statuses);
-            manager.ShowWindow(model, context: null, settings: null);
+            MyFilterViewModel = new FilterViewModel(this, RequestManager.DepartureLocationList, statuses);
+            IWindowManager manager = new WindowManager();
+            manager.ShowWindow(MyFilterViewModel, context: null, settings: null);
+            MyFilterViewModel.HideCurrentWindow();
         }
-
 
         private async void RefreshAllRequests()
         {

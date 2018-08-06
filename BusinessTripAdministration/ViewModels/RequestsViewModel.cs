@@ -14,7 +14,7 @@ namespace BusinessTripAdministration.ViewModels
 {
     class RequestsViewModel: Conductor<object>, IRequest
     {
-        
+        private FilterViewModel MyFilterViewModel;
         public RequestsViewModel()
         {
             requestList = new List<SingleRequestViewModel>();
@@ -80,13 +80,19 @@ namespace BusinessTripAdministration.ViewModels
 
         void LoadFilterPage()
         {
-            IWindowManager manager = new WindowManager();
-            FilterViewModel model = new FilterViewModel(this, RequestManager.DepartureLocationList,new List<string>());
-            manager.ShowWindow(model, context: null, settings: null);
+            if (MyFilterViewModel == null || MyFilterViewModel.IsActive == false)
+                InitialiseMyFilter();
+            MyFilterViewModel.ShowCurrentWindow();
         }
 
-
-
+        private void InitialiseMyFilter()
+        {
+            List<String> statuses = new List<string>();
+            MyFilterViewModel = new FilterViewModel(this, RequestManager.DepartureLocationList, statuses);
+            IWindowManager manager = new WindowManager();
+            manager.ShowWindow(MyFilterViewModel, context: null, settings: null);
+            MyFilterViewModel.HideCurrentWindow();
+        }
 
         private async void RefreshUnapporvedRequests()
         {

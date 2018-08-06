@@ -1,4 +1,5 @@
-﻿using BusinessTripAdministration.Commands;
+﻿using System;
+using BusinessTripAdministration.Commands;
 using BusinessTripAdministration.Models;
 using BusinessTripAdministration.Validation;
 using Caliburn.Micro;
@@ -9,6 +10,7 @@ namespace BusinessTripAdministration.ViewModels
 {
     internal class LoginViewModel: Screen
     {
+        public static LoginViewModel MainLoginViewModelInstance { get; set; }
         public string Email { get; set; }
         public string Password {private get; set; }
         public bool RememberMe { get; set; }
@@ -28,6 +30,11 @@ namespace BusinessTripAdministration.ViewModels
 
         public LoginViewModel()
         {
+            if (MainLoginViewModelInstance == null)
+            {
+                MainLoginViewModelInstance = this;
+            }
+            else throw new Exception("Cannot create multiple Main Windows");
             ShowCurrentWindow();
             //Very Important
             //need to call it exactly one time
@@ -121,11 +128,12 @@ namespace BusinessTripAdministration.ViewModels
             main.Email = Email;
         }
 
-        void HideCurrentWindow()
+        public void HideCurrentWindow()
         {
             IsCurrentWindowVisible = "Hidden";
         }
-        void ShowCurrentWindow()
+
+        public void ShowCurrentWindow()
         {
             IsCurrentWindowVisible = "Visible";
         }
