@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BusinessTripAdministration.Views"
         mc:Ignorable="d"
-        Title="MainView" Height="650" Width="1050">
+        Title="MainView" Height="650" Width="1050"
+        Visibility="{Binding Path=IsCurrentWindowVisible,Mode=TwoWay}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -38,7 +39,7 @@
             <WrapPanel Orientation="Horizontal"  HorizontalAlignment="Right">
                 <Menu VerticalAlignment="Stretch"  Background="#212121" BorderBrush="WhiteSmoke" BorderThickness="1" FontSize="24">
                     <MenuItem Header="{Binding Email,Mode=TwoWay}" Foreground="WhiteSmoke" VerticalAlignment="Stretch" >
-                        <MenuItem Header="Logout" Background="#212121"/>
+                        <MenuItem x:Name="Logout" Header="Logout" Background="#212121"/>
                         <MenuItem Header="Account" Background="#212121"/>
                     </MenuItem>
                 </Menu>
