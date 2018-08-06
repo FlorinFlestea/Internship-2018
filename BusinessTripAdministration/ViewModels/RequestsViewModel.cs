@@ -94,7 +94,7 @@ namespace BusinessTripAdministration.ViewModels
             MyFilterViewModel.HideCurrentWindow();
         }
 
-        private async void RefreshUnapporvedRequests()
+        public async void RefreshUnapporvedRequests()
         {
             await RequestManager.RefreshPendingRequestsFromDatabase();
             ShowTrips(RequestManager.PendingTripList);
@@ -105,7 +105,7 @@ namespace BusinessTripAdministration.ViewModels
             List <SingleRequestViewModel> list = new List<SingleRequestViewModel>();
             foreach (Trip trip in tripList)
             {
-                list.Add(new SingleRequestViewModel(trip.Id,trip.ClientName, trip.DepartureLocation, trip.StartingDate.Value.ToString("dd/MM/yyyy"), trip.EndDate.Value.ToString("dd/MM/yyyy")));
+                list.Add(new SingleRequestViewModel(this,trip.Id,trip.ClientName, trip.DepartureLocation, trip.StartingDate.Value.ToString("dd/MM/yyyy"), trip.EndDate.Value.ToString("dd/MM/yyyy")));
             }
             RequestList = list;
         }

@@ -19,9 +19,11 @@ namespace BusinessTripAdministration.ViewModels
         private string destination;
         private string startDate;
         private string endDate;
+        private RequestsViewModel parentRequestsViewModel;
 
-        public SingleRequestViewModel(int id, string user, string destination, string startDate, string endDate)
+        public SingleRequestViewModel(RequestsViewModel requestsViewModel, int id, string user, string destination, string startDate, string endDate)
         {
+            parentRequestsViewModel = requestsViewModel;
             Id = id;
             User = user;
             Destination = destination;
@@ -152,17 +154,19 @@ namespace BusinessTripAdministration.ViewModels
             
         }
 
-        public void AcceptRequest()
+        public async void AcceptRequest()
         {
-            RequestManager.ApproveTrip(Id);
+            await RequestManager.ApproveTrip(Id);
+            parentRequestsViewModel.RefreshUnapporvedRequests();
         }
         private bool CanAccept()
         {
             return true;
         }
-        public void DenyRequest()
+        public async void DenyRequest()
         {
-            RequestManager.DenyTrip(Id);
+            await RequestManager.DenyTrip(Id);
+            parentRequestsViewModel.RefreshUnapporvedRequests();
         }
         private bool CanDeny()
         {

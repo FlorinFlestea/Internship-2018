@@ -70,14 +70,14 @@ namespace BusinessTripAdministration.Models
             PendingTripList = trips.ToList();
         }
 
-        public static async void ApproveTrip(int id)
+        public static async Task ApproveTrip(int id)
         {
             Trip trip = PendingTripList.Find(t => t.Id == id);
             trip.Status = 1;//1 means approved
             await ApiClient.UpdateTrip(id, trip);
         }
 
-        public static async void DenyTrip(int id)
+        public static async Task DenyTrip(int id)
         {
             Trip trip = PendingTripList.Find(t => t.Id == id);
             trip.Status = 0;//0 means denied
