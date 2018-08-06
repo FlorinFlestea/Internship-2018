@@ -85,6 +85,37 @@ namespace BusinessTripAdministration.ViewModels
             MyFilterViewModel.ShowCurrentWindow();
         }
 
+
+        private ICommand approveAllCommand;
+        public ICommand ApproveAllCommand
+        {
+            get
+            {
+                if (approveAllCommand == null)
+                {
+                    approveAllCommand = new ButtonCommand(
+                        param => this.ApproveAll(),
+                        param => this.CanApproveAll()
+                    );
+                }
+                return approveAllCommand;
+            }
+        }
+        private bool CanApproveAll()
+        {
+            return true;
+        }
+
+        public async void ApproveAll()
+        {
+            List<Trip> pendingTrips = RequestManager.PendingTripList;
+            foreach (Trip trip in pendingTrips)
+            {
+                await RequestManager.ApproveTrip(trip.Id);
+            }
+            RefreshUnapporvedRequests();
+        }
+
         private void InitialiseMyFilter()
         {
             List<String> statuses = new List<string>();
