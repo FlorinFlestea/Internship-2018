@@ -66,32 +66,11 @@ namespace BusinessTripApplication.Controllers
             }
 
 
-            var updatedTrip = tripService.Update(trip);
+            var updatedTrip = tripService.Update(model.Trip);
 
-            //if (id != trip.Id)
-            //{
-            //    return BadRequest();
-            //}
+            return StatusCode(updatedTrip.Id == model.Id ? HttpStatusCode.Accepted : HttpStatusCode.NoContent);
 
-            //db.Entry(trip).State = EntityState.Modified;
-
-            //try
-            //{
-            //    db.SaveChanges();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!TripExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-
-            return StatusCode(HttpStatusCode.NoContent);
+      
         }
 
         // POST: api/TripsApi

@@ -1,8 +1,10 @@
-﻿using BusinessTripAdministration.Models;
+﻿using System;
+using BusinessTripAdministration.Models;
 using BusinessTripModels;
 using Caliburn.Micro;
 using System.Collections.Generic;
-using System.Linq;
+using System.Windows.Input;
+using BusinessTripAdministration.Commands;
 
 namespace BusinessTripAdministration.ViewModels
 {
