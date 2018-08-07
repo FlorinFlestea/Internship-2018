@@ -108,32 +108,32 @@ namespace BusinessTripAdministration.Models
 
         public static IEnumerable<Trip> SearchTripsByStartingDate(List<Trip> tripList, DateTime startingDate)
         {
-            return tripList.Where(trip => trip.StartingDate.Value.Day == startingDate.Day);
+            return tripList.Where(trip => trip.StartingDate.Value == startingDate);
         }
 
         public static IEnumerable<Trip> SearchTripsBeforeStartingDate(List<Trip> tripList, DateTime startingDate)
         {
-            return tripList.Where(trip => trip.StartingDate.Value.Day < startingDate.Day);
+            return tripList.Where(trip => trip.StartingDate.Value <= startingDate);
         }
 
         public static IEnumerable<Trip> SearchTripsAfterStartingDate(List<Trip> tripList, DateTime startingDate)
         {
-            return tripList.Where(trip => trip.StartingDate.Value.Day > startingDate.Day);
+            return tripList.Where(trip => trip.StartingDate.Value >= startingDate);
         }
 
         public static IEnumerable<Trip> SearchTripsByEndingDate(List<Trip> tripList, DateTime endingDate)
         {
-            return tripList.Where(trip => trip.EndDate.Value.Day == endingDate.Day);
+            return tripList.Where(trip => trip.EndDate.Value == endingDate);
         }
 
         public static IEnumerable<Trip> SearchTripsBeforeEndingDate(List<Trip> tripList, DateTime endingDate)
         {
-            return tripList.Where(trip => trip.EndDate.Value.Day < endingDate.Day);
+            return tripList.Where(trip => trip.EndDate.Value <= endingDate);
         }
 
         public static IEnumerable<Trip> SearchTripsAfterEndingDate(List<Trip> tripList, DateTime endingDate)
         {
-            return tripList.Where(trip => trip.EndDate.Value.Day > endingDate.Day);
+            return tripList.Where(trip => trip.EndDate.Value >= endingDate);
         }
 
 
