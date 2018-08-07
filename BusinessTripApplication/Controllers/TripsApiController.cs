@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BusinessTripApplication.Service;
 using BusinessTripModels;
+using BussinesTripModels;
 
 namespace BusinessTripApplication.Controllers
 {
@@ -57,7 +58,7 @@ namespace BusinessTripApplication.Controllers
 
         // PUT: api/TripsApi/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTrip(int id, Trip trip)
+        public IHttpActionResult PutTrip(UpdateTripModel model)
         {
             if (!ModelState.IsValid)
             {

@@ -208,7 +208,6 @@
     <Compile Include="Migrations\201808021117010_TripsDB.Designer.cs">
       <DependentUpon>201808021117010_TripsDB.cs</DependentUpon>
     </Compile>
-
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

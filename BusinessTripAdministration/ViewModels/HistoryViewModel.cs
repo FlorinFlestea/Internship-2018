@@ -1,21 +1,27 @@
 ﻿using BusinessTripAdministration.Models;
 using BusinessTripModels;
 using Caliburn.Micro;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using BusinessTripAdministration.Commands;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    class RequestsViewModel: Conductor<object>, IRequest
+    class HistoryViewModel: Conductor<object>, IRequest
     {
         private FilterViewModel MyFilterViewModel;
-        public RequestsViewModel()
+        public HistoryViewModel()
         {
-            requestList = new List<SingleRequestViewModel>();
-            RefreshUnapporvedRequests();
+            requestList = new List<SingleHistoryViewModel>();
+            RefreshAllRequests();
         }
-        private List<SingleRequestViewModel> requestList;
-        public List<SingleRequestViewModel> RequestList
+        private List<SingleHistoryViewModel> requestList;
+        public List<SingleHistoryViewModel> RequestList
         {
             get
             {
@@ -37,7 +43,7 @@ namespace BusinessTripAdministration.ViewModels
                 if (refreshCommand == null)
                 {
                     refreshCommand = new ButtonCommand(
-                        param => this.RefreshUnapporvedRequests(),
+                        param => this.RefreshAllRequests(),
                         param => this.CanRefresh()
                     );
                 }
@@ -49,6 +55,7 @@ namespace BusinessTripAdministration.ViewModels
         {
             return true;
         }
+
 
         private ICommand filterCommand;
 
@@ -76,61 +83,42 @@ namespace BusinessTripAdministration.ViewModels
         {
             if (MyFilterViewModel == null || MyFilterViewModel.IsActive == false)
                 InitialiseMyFilter();
-            MyFilterViewModel.ShowCurrentWindow();
-        }
-
-
-        private ICommand approveAllCommand;
-        public ICommand ApproveAllCommand
-        {
-            get
-            {
-                if (approveAllCommand == null)
-                {
-                    approveAllCommand = new ButtonCommand(
-                        param => this.ApproveAll(),
-                        param => this.CanApproveAll()
-                    );
-                }
-                return approveAllCommand;
-            }
-        }
-        private bool CanApproveAll()
-        {
-            return true;
-        }
-
-        public async void ApproveAll()
-        {
-            List<Trip> pendingTrips = RequestManager.PendingTripList;
-            foreach (Trip trip in pendingTrips)
-            {
-                await RequestManager.ApproveTrip(trip.Id);
-            }
-            RefreshUnapporvedRequests();
+           MyFilterViewModel.ShowCurrentWindow();
         }
 
         private void InitialiseMyFilter()
         {
-            List<String> statuses = new List<string>();
+            List<String> statuses = new List<string>()
+            {
+                "Pending",
+                "Approved",
+                "Denied"
+            };
             MyFilterViewModel = new FilterViewModel(this, RequestManager.DepartureLocationList, statuses);
             IWindowManager manager = new WindowManager();
             manager.ShowWindow(MyFilterViewModel, context: null, settings: null);
             MyFilterViewModel.HideCurrentWindow();
         }
 
-        public async void RefreshUnapporvedRequests()
+        private async void RefreshAllRequests()
         {
-            await RequestManager.RefreshPendingRequestsFromDatabase();
-            ShowTrips(RequestManager.PendingTripList);
+            await RequestManager.RefreshApprovedRequestsFromDatabase();
+            await RequestManager.RefreshDeniedRequestsFromDatabase();
+            //IMMPORTANT
+            //MUST create new list, else the original lists will be modified
+            List<Trip> tripList =new List<Trip>();
+            tripList.AddRange(RequestManager.ApprovedTripList);
+            tripList.AddRange(RequestManager.DeniedTripList);
+            //IMMPORTANT
+            ShowTrips(tripList);
         }
 
         public void ShowTrips(List<Trip> tripList)
         {
-            List <SingleRequestViewModel> list = new List<SingleRequestViewModel>();
+            List <SingleHistoryViewModel> list = new List<SingleHistoryViewModel>();
             foreach (Trip trip in tripList)
             {
-                list.Add(new SingleRequestViewModel(this,trip.Id,trip.ClientName, trip.DepartureLocation, trip.StartingDate.Value.ToString("dd/MM/yyyy"), trip.EndDate.Value.ToString("dd/MM/yyyy")));
+                list.Add(new SingleHistoryViewModel(trip.Id,trip.ClientName, trip.DepartureLocation, trip.StartingDate.Value.ToString("dd/MM/yyyy"), trip.EndDate.Value.ToString("dd/MM/yyyy")));
             }
             RequestList = list;
         }

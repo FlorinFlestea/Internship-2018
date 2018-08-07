@@ -1,0 +1,53 @@
+﻿<Window x:Class="BusinessTripAdministration.Views.FilterView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BusinessTripAdministration.Views"
+        mc:Ignorable="d"
+        Title="Filter" Height="420" Width="720" Background="#00BCD4"
+        WindowStartupLocation="CenterScreen"
+        Visibility="{Binding Path=IsCurrentWindowVisible,Mode=TwoWay}">
+    <StackPanel Margin="2" Background="#212121">
+
+        <StackPanel Margin="0,20,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0" >
+                <Label Content="Departure Location" Foreground="#999999" FontSize="20" Margin="10,0,0,0" Width="194"/>
+                <ComboBox x:Name="ComboBoxDepartureLocationCatalog" SelectedItem="{Binding DepartureLocationSelected}" Width="200" Height="30"    Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Status" Foreground="#999999" FontSize="20" Margin="10,0,0,0" Width="194"/>
+                <ComboBox x:Name="ComboBoxStatusCatalog" SelectedItem="{Binding StatusSelected}" Width="200" Height="30"    Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                <StackPanel Orientation="Vertical" Width="140" Margin="10,0,0,0">
+                <Label Content="Starting Date" Foreground="#999999" FontSize="20" Margin="10,0,0,0" Width="137"/>
+                    <RadioButton x:Name="StartingAnyDate" Foreground="#999999" FontSize="20" IsChecked="True">Any Date</RadioButton>
+                    <RadioButton x:Name="ExactStartingDate" Foreground="#999999" FontSize="20" >Exact Date</RadioButton>
+                    <RadioButton x:Name="BeforeStartingDate" Foreground="#999999" FontSize="20">Before Date</RadioButton>
+                    <RadioButton x:Name="AfterStartingDate" Foreground="#999999" FontSize="20">After Date</RadioButton>
+                </StackPanel>
+                <Calendar x:Name="StartingDateCalendar" SelectedDate ="{Binding StartingSelectedDate}" Margin="30,0,0,0"/>
+                <StackPanel Orientation="Vertical" Width="140" Margin="10,0,0,0">
+                    <Label Content="Ending Date" Foreground="#999999" FontSize="20" Margin="10,0,0,0" Width="137"/>
+                    <RadioButton x:Name="EndingAnyDate" Foreground="#999999" FontSize="20" IsChecked="True">Any Date</RadioButton>
+                    <RadioButton x:Name="ExactEndingDate" Foreground="#999999" FontSize="20">Exact Date</RadioButton>
+                    <RadioButton x:Name="BeforeEndingDate" Foreground="#999999" FontSize="20">Before Date</RadioButton>
+                    <RadioButton x:Name="AfterEndingDate" Foreground="#999999" FontSize="20">After Date</RadioButton>
+                </StackPanel>
+                <Calendar x:Name="EndingDateCalendar" SelectedDate ="{Binding EndingSelectedDate}" Margin="10,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+
+            </StackPanel>
+            
+            
+            <Button Content="Search" Command="{Binding SearchCommand}" Margin="0,10,0,0" HorizontalAlignment="Center"  Height="30" Width="80" Background="#333333" Foreground="#00BCD4" BorderBrush="#00BCD4" FontSize="18"/>
+        </StackPanel>
+        
+
+
+
+
+    </StackPanel>
+</Window>
