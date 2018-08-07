@@ -11,81 +11,87 @@
     @Scripts.Render("~/bundles/loginValidation")
 
     @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="/Content/login_registration.css">
 </head>
 <body>
-    <div class="container body-content">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center text-white mb-4">Sign in</h1>
-                <div class="row">
-                    <div class="col-md-6 mx-auto">
-                        <div class="card">
-                            <div class="card-body">
-                                @using (Html.BeginForm())
-                                {
-                                    @Html.AntiForgeryToken()
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
-                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", data_toggle = "tooltip", title = "Hooray!", data_placement = "bottom" } })
-                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                    </div>
-
-                                    <div class=" form-group">
-                                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
-                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password", data_toggle = "tooltip", title = "Hooray!", data_placement = "bottom" } })
-                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        @Html.EditorFor(model => model.RememberMe)
-                                        @Html.LabelFor(model => model.RememberMe,new { @class = "form-check-label control-label" })
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input id="btn_LogIn" onclick="return false" type="submit" value="Log In" class="btn btn-primary btn-lg" style="width:100%;" />
-                                    </div>
-                                }
-                            </div>
-                            <div class="card-footer">
-                                <p style="color:black;">If you don't have an account please <button id="btn_SignUp" type="button" onclick="window.open('https://localhost:44328/User/Registration?email='+document.getElementById('Email').value,'_self','resizable=yes')" class="btn btn-primary btn-sm">Sign Up</button> </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mx-auto">
-                    <br />
-                    @if (Model.Message != null)
+<br />
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center mb-4">Sign in</h1>
+            <div class="col-md-6 mx-auto">
+                <br />
+                @if (Model.Message != null)
+                {
+                    if (Convert.ToBoolean(Model.Status))
                     {
-                        if (Convert.ToBoolean(Model.Status))
-                        {
-                            <div class="alert alert-success">
-                                <strong>Success!</strong>@Model.Message
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="alert alert-danger">
-                                <strong>Error!</strong>@Model.Message
-                            </div>
-                        }
-                    }
-                </div>
-                <div class="col-md-6 mx-auto">
-                    <div class="row">
-                        <div class="col-md-6" style="text-align:center">
-                            @Html.ActionLink("About", "About", "Home")
+                        <div class="alert alert-success">
+                            <strong>Success!</strong>@Model.Message
                         </div>
-                        <div class="col-md-6" style="text-align:center">
-                            @Html.ActionLink("Contact", "Contact", "Home")
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong>@Model.Message
+                        </div>
+                    }
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card rounded shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="card-body">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", data_toggle = "tooltip", title = "Hooray!", data_placement = "top", style = "border:1px solid rgb(52, 58, 64)" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class=" form-group">
+                                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password", data_toggle = "tooltip", title = "Hooray!", data_placement = "top", style = "border:1px solid rgb(52, 58, 64)" } })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+
+
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.RememberMe)
+                                    @Html.LabelFor(model => model.RememberMe, new { @class = "form-check-label control-label" })
+                                </div>
+
+                                <div class="form-group">
+                                    <input id="btn_LogIn" onclick="return false" type="submit" value="Log In" class="btn btn-primary btn-lg" style="width: 100%;" />
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <p style="color: black;">If you don't have an account please <button id="btn_SignUp" type="button" onclick="window.open('https://localhost:44328/User/Registration?email=' + document.getElementById('Email').value, '_self', 'resizable=yes')" class="btn btn-primary btn-sm">Sign Up</button> </p>
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
+
+            <div class="col-md-6 mx-auto">
+                <div class="row">
+                    <div class="col-md-6" style="text-align: center">
+                        @Html.ActionLink("About", "About", "Home")
+                    </div>
+                    <div class="col-md-6" style="text-align: center">
+                        @Html.ActionLink("Contact", "Contact", "Home")
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+<footer style="float: right; margin-right: 50px">
+    <p>&copy; @DateTime.Now.Year - BusinessTripApplication  </p>
+</footer>
 </body>
 
 
