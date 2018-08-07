@@ -1,9 +1,5 @@
-﻿using System;
-using System.Threading;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using BusinessTripAdministration.Models;
-using BusinessTripModels;
 
 namespace BusinessTripAdministration.Views
 {

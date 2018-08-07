@@ -110,7 +110,6 @@
     <Compile Include="Models\DatabaseQuery.cs" />
     <Compile Include="Models\IApiClient.cs" />
     <Compile Include="Models\RequestManager.cs" />
-    <Compile Include="Models\UpdateTripModel.cs" />
     <Compile Include="Validation\ValidateField.cs" />
     <Compile Include="ViewModels\DetailsViewModel.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
