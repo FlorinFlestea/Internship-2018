@@ -259,7 +259,6 @@ namespace BusinessTripAdministration.ViewModels
         private void Search()
         {
             List<Trip> allTrips=new List<Trip>();
-            //filter by status
             if (StatusSelected=="Pending" || StatusSelected == "Any Status")
                 allTrips.AddRange(RequestManager.PendingTripList);
             if (!(myRequest is RequestsViewModel))
@@ -269,10 +268,8 @@ namespace BusinessTripAdministration.ViewModels
                 if (StatusSelected == "Denied" || StatusSelected == "Any Status")
                     allTrips.AddRange(RequestManager.DeniedTripList);
             }
-            //filter by departure location
             if(departureLocationSelected != "Any Location")
                 allTrips = RequestManager.SearchTripsByDepartureLocation(allTrips, departureLocationSelected).ToList();
-            //filter by starting date
             if (exactStartingDate == true)
                 allTrips = RequestManager.SearchTripsByStartingDate(allTrips, StartingSelectedDate).ToList();
             else if (beforeStartingDate == true)
@@ -280,7 +277,6 @@ namespace BusinessTripAdministration.ViewModels
             else if (afterStartingDate == true)
                 allTrips = RequestManager.SearchTripsAfterStartingDate(allTrips, StartingSelectedDate).ToList();
 
-            //filter by ending date
             if (exactEndingDate == true)
                 allTrips = RequestManager.SearchTripsByEndingDate(allTrips, EndingSelectedDate).ToList();
             else if (beforeEndingDate == true)
@@ -288,7 +284,6 @@ namespace BusinessTripAdministration.ViewModels
             else if (afterEndingDate == true)
                 allTrips = RequestManager.SearchTripsAfterEndingDate(allTrips, EndingSelectedDate).ToList();
 
-            //send list back to the request object
             myRequest.ShowTrips(allTrips);
             HideCurrentWindow();
         }
