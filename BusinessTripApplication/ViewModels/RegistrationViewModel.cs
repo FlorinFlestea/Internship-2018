@@ -90,7 +90,11 @@ namespace BusinessTripApplication.ViewModels
             try
             {
                 Server.EmailSender emailSender = new EmailSender();
-                emailSender.SendEmail(user.Email, "Register", user.ActivationCode.ToString());
+                string url = "https://localhost:44328/User/VerifyAccount/" + user.ActivationCode.ToString();
+                string message = "We are excited to tell you that your account is successfully created. " +
+                                 "Please <a href='" + url + "'>Click here </a> to verify your account. </br>";
+
+                emailSender.SendEmail(user.Email, "Register", message);
             }
             catch
             {
