@@ -261,6 +261,7 @@
     <Content Include="Content\dash-style\datepicker3-dash.css" />
     <Content Include="Content\dash-style\font-awesome.min-dash.css" />
     <Content Include="Content\dash-style\styles-dash.css" />
+	<Content Include="Content\images\36892c14.png" />
     <Content Include="Content\images\hermes-rivera-471868-unsplash.jpg" />
     <Content Include="Content\images\FbLoginButton.png" />
     <Content Include="Content\images\rawpixel-574844-unsplash.jpg" />
@@ -272,7 +273,7 @@
     <Content Include="Content\index-style\css\bootstrap-reboot.min.css" />
     <Content Include="Content\index-style\css\bootstrap.css" />
     <Content Include="Content\index-style\css\bootstrap.min.css" />
-    <Content Include="Content\login.css" />
+    <Content Include="Content\login_registration.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

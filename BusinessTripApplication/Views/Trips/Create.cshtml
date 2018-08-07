@@ -4,7 +4,8 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Create</h2>
+<br/>
+<h2>Create new Trip</h2>
 
 @if (Model.Message != null)
 {
@@ -27,7 +28,6 @@
     @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Trip</h4>
             <hr />
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
