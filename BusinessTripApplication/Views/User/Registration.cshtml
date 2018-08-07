@@ -23,6 +23,24 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="text-center mb-4">Register</h1>
+            <div class="col-md-6 mx-auto">
+                <br/>
+                @if (Model.Message != null)
+                {
+                    if (Convert.ToBoolean(Model.Status))
+                    {
+                        <div class="alert alert-success">
+                            <strong>Success!</strong>@Model.Message
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong>@Model.Message
+                        </div>
+                    }
+                }
+            </div>
             <div class="row">
                 <div class="col-md-6 mx-auto">
                     <div class="card rounded shadow-lg p-3 mb-5 bg-white rounded">
@@ -82,24 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 mx-auto">
-            <br/>
-            @if (Model.Message != null)
-            {
-                if (Convert.ToBoolean(Model.Status))
-                {
-                    <div class="alert alert-success">
-                        <strong>Success!</strong>@Model.Message
-                    </div>
-                }
-                else
-                {
-                    <div class="alert alert-danger">
-                        <strong>Error!</strong>@Model.Message
-                    </div>
-                }
-            }
-        </div>
+        
     </div>
 </div>
 <footer style="float: right; margin-right: 50px">
