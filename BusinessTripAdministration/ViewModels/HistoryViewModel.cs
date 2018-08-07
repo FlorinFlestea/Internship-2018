@@ -12,9 +12,9 @@ using BusinessTripAdministration.Commands;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    class HistoryViewModel: Conductor<object>
+    class HistoryViewModel: Conductor<object>, IRequest
     {
-        
+        private FilterViewModel MyFilterViewModel;
         public HistoryViewModel()
         {
             requestList = new List<SingleHistoryViewModel>();
@@ -57,17 +57,64 @@ namespace BusinessTripAdministration.ViewModels
         }
 
 
+        private ICommand filterCommand;
+
+        public ICommand FilterCommand
+        {
+            get
+            {
+                if (filterCommand == null)
+                {
+                    filterCommand = new ButtonCommand(
+                        param => this.LoadFilterPage(),
+                        param => this.CanFilter()
+                    );
+                }
+                return filterCommand;
+            }
+        }
+
+        private bool CanFilter()
+        {
+            return true;
+        }
+
+        void LoadFilterPage()
+        {
+            if (MyFilterViewModel == null || MyFilterViewModel.IsActive == false)
+                InitialiseMyFilter();
+           MyFilterViewModel.ShowCurrentWindow();
+        }
+
+        private void InitialiseMyFilter()
+        {
+            List<String> statuses = new List<string>()
+            {
+                "Pending",
+                "Approved",
+                "Denied"
+            };
+            MyFilterViewModel = new FilterViewModel(this, RequestManager.DepartureLocationList, statuses);
+            IWindowManager manager = new WindowManager();
+            manager.ShowWindow(MyFilterViewModel, context: null, settings: null);
+            MyFilterViewModel.HideCurrentWindow();
+        }
+
         private async void RefreshAllRequests()
         {
             await RequestManager.RefreshApprovedRequestsFromDatabase();
             await RequestManager.RefreshDeniedRequestsFromDatabase();
-            ShowTrips();
+            //IMMPORTANT
+            //MUST create new list, else the original lists will be modified
+            List<Trip> tripList =new List<Trip>();
+            tripList.AddRange(RequestManager.ApprovedTripList);
+            tripList.AddRange(RequestManager.DeniedTripList);
+            //IMMPORTANT
+            ShowTrips(tripList);
         }
 
-        private void ShowTrips()
+        public void ShowTrips(List<Trip> tripList)
         {
-            List<Trip> tripList = RequestManager.DeniedTripList;
-            tripList.AddRange(RequestManager.ApprovedTripList);
             List <SingleHistoryViewModel> list = new List<SingleHistoryViewModel>();
             foreach (Trip trip in tripList)
             {

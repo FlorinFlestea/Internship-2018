@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using BusinessTripAdministration.Models;
+using BusinessTripModels;
 
 namespace BusinessTripAdministration.ViewModels
 {
@@ -19,9 +20,11 @@ namespace BusinessTripAdministration.ViewModels
         private string destination;
         private string startDate;
         private string endDate;
+        private RequestsViewModel parentRequestsViewModel;
 
-        public SingleRequestViewModel(int id, string user, string destination, string startDate, string endDate)
+        public SingleRequestViewModel(RequestsViewModel requestsViewModel, int id, string user, string destination, string startDate, string endDate)
         {
+            parentRequestsViewModel = requestsViewModel;
             Id = id;
             User = user;
             Destination = destination;
@@ -147,22 +150,27 @@ namespace BusinessTripAdministration.ViewModels
             return true;
         }
 
-        private void DetailsRequest()
+        private async void DetailsRequest()
         {
-            
+            Trip trip = await RequestManager.GetTripById(id);
+            var model = new DetailsViewModel(trip);
+            IWindowManager manager = new WindowManager();
+            manager.ShowWindow(model, context: null, settings: null);
         }
 
-        public void AcceptRequest()
+        public async void AcceptRequest()
         {
-            RequestManager.ApproveTrip(Id);
+            await RequestManager.ApproveTrip(Id);
+            parentRequestsViewModel.RefreshUnapporvedRequests();
         }
         private bool CanAccept()
         {
             return true;
         }
-        public void DenyRequest()
+        public async void DenyRequest()
         {
-            RequestManager.DenyTrip(Id);
+            await RequestManager.DenyTrip(Id);
+            parentRequestsViewModel.RefreshUnapporvedRequests();
         }
         private bool CanDeny()
         {

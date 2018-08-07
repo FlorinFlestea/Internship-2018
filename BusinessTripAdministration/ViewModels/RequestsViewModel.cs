@@ -12,9 +12,9 @@ using BusinessTripAdministration.Commands;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    class RequestsViewModel: Conductor<object>
+    class RequestsViewModel: Conductor<object>, IRequest
     {
-        
+        private FilterViewModel MyFilterViewModel;
         public RequestsViewModel()
         {
             requestList = new List<SingleRequestViewModel>();
@@ -56,20 +56,87 @@ namespace BusinessTripAdministration.ViewModels
             return true;
         }
 
+        private ICommand filterCommand;
 
-        private async void RefreshUnapporvedRequests()
+        public ICommand FilterCommand
         {
-            await RequestManager.RefreshPendingRequestsFromDatabase();
-            ShowPendingTrips();
+            get
+            {
+                if (filterCommand == null)
+                {
+                    filterCommand = new ButtonCommand(
+                        param => this.LoadFilterPage(),
+                        param => this.CanFilter()
+                    );
+                }
+                return filterCommand;
+            }
         }
 
-        private void ShowPendingTrips()
+        private bool CanFilter()
         {
-            List<Trip> tripList = RequestManager.PendingTripList;
+            return true;
+        }
+
+        void LoadFilterPage()
+        {
+            if (MyFilterViewModel == null || MyFilterViewModel.IsActive == false)
+                InitialiseMyFilter();
+            MyFilterViewModel.ShowCurrentWindow();
+        }
+
+
+        private ICommand approveAllCommand;
+        public ICommand ApproveAllCommand
+        {
+            get
+            {
+                if (approveAllCommand == null)
+                {
+                    approveAllCommand = new ButtonCommand(
+                        param => this.ApproveAll(),
+                        param => this.CanApproveAll()
+                    );
+                }
+                return approveAllCommand;
+            }
+        }
+        private bool CanApproveAll()
+        {
+            return true;
+        }
+
+        public async void ApproveAll()
+        {
+            List<Trip> pendingTrips = RequestManager.PendingTripList;
+            foreach (Trip trip in pendingTrips)
+            {
+                await RequestManager.ApproveTrip(trip.Id);
+            }
+            RefreshUnapporvedRequests();
+        }
+
+        private void InitialiseMyFilter()
+        {
+            List<String> statuses = new List<string>();
+            MyFilterViewModel = new FilterViewModel(this, RequestManager.DepartureLocationList, statuses);
+            IWindowManager manager = new WindowManager();
+            manager.ShowWindow(MyFilterViewModel, context: null, settings: null);
+            MyFilterViewModel.HideCurrentWindow();
+        }
+
+        public async void RefreshUnapporvedRequests()
+        {
+            await RequestManager.RefreshPendingRequestsFromDatabase();
+            ShowTrips(RequestManager.PendingTripList);
+        }
+
+        public void ShowTrips(List<Trip> tripList)
+        {
             List <SingleRequestViewModel> list = new List<SingleRequestViewModel>();
             foreach (Trip trip in tripList)
             {
-                list.Add(new SingleRequestViewModel(trip.Id,trip.ClientName, trip.DepartureLocation, trip.StartingDate.Value.ToString("dd/MM/yyyy"), trip.EndDate.Value.ToString("dd/MM/yyyy")));
+                list.Add(new SingleRequestViewModel(this,trip.Id,trip.ClientName, trip.DepartureLocation, trip.StartingDate.Value.ToString("dd/MM/yyyy"), trip.EndDate.Value.ToString("dd/MM/yyyy")));
             }
             RequestList = list;
         }
