@@ -13,8 +13,14 @@ namespace BusinessTripAdministration.ViewModels
 {
     internal class MainViewModel : Conductor<object>
     {
+
+        public MainViewModel()
+        {
+            ShowCurrentWindow();
+            LoadHome();
+        }
+
         private string email;
-        private ApiClient apiClient;
         public string Email
         {
             get
@@ -27,21 +33,56 @@ namespace BusinessTripAdministration.ViewModels
                 NotifyOfPropertyChange(() => Email);
             }
         }
-        public MainViewModel()
+
+        private string isCurrentWindowVisible;
+        public string IsCurrentWindowVisible
         {
-            //Thread.Sleep(12000);
-            apiClient = new ApiClient();
-            LoadHome();
+            get
+            {
+                return isCurrentWindowVisible;
+            }
+            set
+            {
+                isCurrentWindowVisible = value;
+                NotifyOfPropertyChange(() => IsCurrentWindowVisible);
+            }
+        }
+
+        
+        
+
+        public void Logout()
+        {
+            LoginViewModel.RemoveUserCredentials();
+            HideCurrentWindow();
+            LoginViewModel.MainLoginViewModelInstance.ShowCurrentWindow();
         }
 
         public void LoadHome()
         {
             ActivateItem(new HomeViewModel());
         }
+
+
         public void LoadRequests()
         {
-            ActivateItem(new RequestsViewModel(apiClient));
+            ActivateItem(new RequestsViewModel());
         }
-        
+
+        public void LoadHistory()
+        {
+            ActivateItem(new HistoryViewModel());
+        }
+
+
+        void HideCurrentWindow()
+        {
+            IsCurrentWindowVisible = "Hidden";
+        }
+        void ShowCurrentWindow()
+        {
+            IsCurrentWindowVisible = "Visible";
+        }
+
     }
 }

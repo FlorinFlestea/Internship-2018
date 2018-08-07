@@ -57,12 +57,15 @@ namespace BusinessTripApplication.Controllers
 
         // PUT: api/TripsApi/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTrip(int id, Trip trip)
+        public IHttpActionResult PutTrip(UpdateTripModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            Trip trip = model.Trip;
+            int id = model.Id;
 
             if (id != trip.Id)
             {
