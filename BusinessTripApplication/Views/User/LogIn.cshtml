@@ -57,6 +57,14 @@
                     </div>
                 </div>
             </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card" style="border: 0; background-color: rgba(245, 245, 245, 0);">
+                        <img class="img-responsive" style= "cursor: pointer;" onclick="location.href='@Url.Action("Facebook", "User")'" src='@Url.Content("~/Content/Images/FbLoginButton.png")' />
+                    </div>
+                </div>
+            </div>
             <div class="col-md-6 mx-auto">
                 <br/>
                 @if (Model.Message != null)

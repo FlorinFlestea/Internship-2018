@@ -261,7 +261,7 @@
     <Content Include="Content\dash-style\datepicker3-dash.css" />
     <Content Include="Content\dash-style\font-awesome.min-dash.css" />
     <Content Include="Content\dash-style\styles-dash.css" />
-	<Content Include="Content\images\36892c14.png" />
+    <Content Include="Content\images\36892c14.png" />
     <Content Include="Content\images\hermes-rivera-471868-unsplash.jpg" />
     <Content Include="Content\images\FbLoginButton.png" />
     <Content Include="Content\images\rawpixel-574844-unsplash.jpg" />
@@ -303,7 +303,9 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap-select.css.map" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -345,7 +347,9 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\ValidationScriptRegistration.js" />
     <Content Include="Scripts\ValidationScriptLogin.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
