@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using BusinessTripModels;
+﻿using BusinessTripModels;
 
-namespace BusinessTripApplication.Models
+namespace BussinesTripModels
 {
     public class UpdateTripModel
     {
