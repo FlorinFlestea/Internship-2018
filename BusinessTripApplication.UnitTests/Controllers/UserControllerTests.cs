@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BusinessTripApplication.Controllers;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.ViewModels;
 using Moq;

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
-using BusinessTripApplication.Exception;
 using log4net.Repository.Hierarchy;
+using BusinessTripModels.Exception;
 
 
 namespace BusinessTripApplication.Server

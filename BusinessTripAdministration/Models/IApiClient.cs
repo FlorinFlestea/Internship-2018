@@ -1,4 +1,4 @@
-﻿using BusinessTripModels;
+﻿using BusinessTripModels.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

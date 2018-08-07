@@ -1,10 +1,10 @@
 ﻿using System.Net;
 using System.Net.Mail;
-using BusinessTripApplication.Exception;
+using BusinessTripModels.Exception;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Server;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 
 
 namespace BusinessTripApplication.ViewModels

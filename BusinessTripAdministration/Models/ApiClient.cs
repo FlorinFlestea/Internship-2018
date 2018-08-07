@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 

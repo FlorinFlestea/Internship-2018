@@ -1,5 +1,5 @@
 ﻿using System;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.ViewModels;
 using Moq;
