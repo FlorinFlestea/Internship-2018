@@ -63,7 +63,7 @@ namespace BusinessTripApplication.Controllers
             if (model.Status)
                 return View(model);
             else
-                return RedirectToRoute("~/Shared/Error", "HomeController");
+                return RedirectToRoute("Index", "Error");
         }
 
         // POST: Trips/Create
@@ -81,7 +81,7 @@ namespace BusinessTripApplication.Controllers
             if (model.Status)
                 return View(model);
             else
-                return RedirectToRoute("~/Shared/Error");
+                return RedirectToRoute("Index", "Error");
         }
 
         // GET: Trips/Edit/5
