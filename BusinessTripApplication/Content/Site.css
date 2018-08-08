@@ -115,3 +115,7 @@ textarea {
 #simpleLabel {
     color: #6BD425;
 }
+
+.table td {
+    text-align: center;
+}
