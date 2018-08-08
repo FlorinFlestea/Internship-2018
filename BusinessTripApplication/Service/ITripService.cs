@@ -1,5 +1,5 @@
 ﻿using BusinessTripApplication.Models;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 
 namespace BusinessTripApplication.Service
 {

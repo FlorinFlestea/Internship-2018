@@ -29,7 +29,6 @@ namespace BusinessTripAdministration.ViewModels
         }
         public MainViewModel()
         {
-            //Thread.Sleep(12000);
             apiClient = new ApiClient();
             LoadHome();
         }

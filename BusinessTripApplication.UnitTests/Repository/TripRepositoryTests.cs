@@ -1,4 +1,4 @@
-﻿using BusinessTripModels;
+﻿using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

@@ -2,8 +2,7 @@
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
-using BusinessTripApplication.Exception;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Server;
 using BusinessTripApplication.ViewModels;
@@ -90,7 +89,7 @@ namespace BusinessTripApplication.Controllers
                 }
                 return View(model);
             }
-            catch (System.Exception e)
+            catch
             {
                 return RedirectToRoute("~/Shared/Error");
             }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace BusinessTripApplication.Exception
+namespace BusinessTripModels.Exception
 {
     [Serializable]
-    internal class InternetException : System.Exception
+    public class InternetException : System.Exception
     {
         public InternetException()
         {
