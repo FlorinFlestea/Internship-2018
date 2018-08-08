@@ -206,10 +206,6 @@
     <Compile Include="Migrations\201808070956251_SP.Designer.cs">
       <DependentUpon>201808070956251_SP.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808080857507_s.cs" />
-    <Compile Include="Migrations\201808080857507_s.Designer.cs">
-      <DependentUpon>201808080857507_s.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -382,14 +378,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
@@ -399,9 +387,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808070956251_SP.resx">
       <DependentUpon>201808070956251_SP.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808080857507_s.resx">
-      <DependentUpon>201808080857507_s.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
