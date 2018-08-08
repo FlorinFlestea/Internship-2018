@@ -1,7 +1,6 @@
 ﻿using System;
-using BusinessTripApplication.Models;
 using System.Collections.Generic;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 
 namespace BusinessTripApplication.Repository
 {

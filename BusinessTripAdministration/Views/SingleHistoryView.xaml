@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="BusinessTripAdministration.Views.SingleHistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BusinessTripAdministration.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="850">
+
+     
+ 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="WhiteSmoke" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="BorderBrush" Value="#2f4656" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style> 
+        </Grid.Resources>
+        <Label Content="{Binding Id, Mode=TwoWay}" Grid.Column="0"/>
+        <Label Content="{Binding User, Mode=TwoWay}" Grid.Column="1"/>
+        <Label Content="{Binding Destination, Mode=TwoWay}" Grid.Column="2"/>
+        <Label Content="{Binding StartDate, Mode=TwoWay}" Grid.Column="3"/>
+        <Label Content="{Binding EndDate, Mode=TwoWay}" Grid.Column="4"/>
+        <Grid Grid.Column="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding DetailsCommand}" Grid.Column="0" BorderBrush="DarkGray" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16" >Details</Button>
+        </Grid>
+        
+    </Grid>
+</UserControl>

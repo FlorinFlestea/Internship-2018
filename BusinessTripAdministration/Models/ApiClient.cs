@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using BusinessTripModels;
+using BusinessTripModels.Models;
+using BussinesTripModels.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace BusinessTripAdministration.Models
 {
@@ -77,23 +76,21 @@ namespace BusinessTripAdministration.Models
         public async Task<bool> UpdateTrip(int tripId, Trip newTrip)
         {
             var jsonString = JsonConvert.SerializeObject(new UpdateTripModel(tripId, newTrip));
-            var httpContent = new StringContent(jsonString);
+            var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
             var response = await client.PutAsync("/api/TripsApi/",httpContent);
             var returnResponse = response.Content.ReadAsStringAsync();
 
             return response.IsSuccessStatusCode;
-
         }
 
         // POST: /api/TripsApi
         public async Task<bool> AddTrip(Trip trip)
         {
             var jsonString = JsonConvert.SerializeObject(trip);
-            var httpContent = new StringContent(jsonString);
+            var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
             var response = await client.PostAsync("/api/TripsApi/", httpContent);
 
             return response.IsSuccessStatusCode;
-
         }
 
         // DELETE: api/TripsApi/id

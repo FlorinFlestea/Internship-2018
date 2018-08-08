@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BusinessTripApplication.Models;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Service;
 using BusinessTripApplication.ViewModels;

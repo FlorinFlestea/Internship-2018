@@ -2,10 +2,9 @@
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Security;
-using BusinessTripApplication.Exception;
-using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
-using BusinessTripModels;
+using BusinessTripModels.Models;
+using BusinessTripModels.Exception;
 
 namespace BusinessTripApplication.ViewModels
 {

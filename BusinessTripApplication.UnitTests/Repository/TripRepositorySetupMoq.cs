@@ -1,4 +1,4 @@
-﻿using BusinessTripModels;
+﻿using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using Moq;
 using System.Collections.Generic;

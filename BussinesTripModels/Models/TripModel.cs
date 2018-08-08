@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MvcValidationExtensions.Attribute;
 
-namespace BusinessTripModels
+namespace BusinessTripModels.Models
 {
     public class Trip
     {

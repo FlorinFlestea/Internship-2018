@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BusinessTripApplication.Exception;
-using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
-using BusinessTripModels;
+using BusinessTripModels.Models;
+using BusinessTripModels.Exception;
 
 namespace BusinessTripApplication.Service
 {

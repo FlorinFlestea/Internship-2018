@@ -1,29 +1,41 @@
 ﻿using BusinessTripAdministration.Commands;
-using BusinessTripAdministration.Views;
 using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
+using BusinessTripAdministration.Models;
+using BusinessTripModels.Models;
 
 namespace BusinessTripAdministration.ViewModels
 {
     internal class SingleRequestViewModel 
     {
+        private int id;
         private string user;
         private string destination;
         private string startDate;
         private string endDate;
+        private RequestsViewModel parentRequestsViewModel;
 
-        public SingleRequestViewModel(string user, string destination, string startDate, string endDate)
+        public SingleRequestViewModel(RequestsViewModel requestsViewModel, int id, string user, string destination, string startDate, string endDate)
         {
+            parentRequestsViewModel = requestsViewModel;
+            Id = id;
             User = user;
             Destination = destination;
             StartDate = startDate;
             EndDate = endDate;
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+
+            }
         }
 
         public string User
@@ -131,22 +143,27 @@ namespace BusinessTripAdministration.ViewModels
             return true;
         }
 
-        private void DetailsRequest()
+        private async void DetailsRequest()
         {
-            
+            Trip trip = await RequestManager.GetTripById(id);
+            var model = new DetailsViewModel(trip);
+            IWindowManager manager = new WindowManager();
+            manager.ShowWindow(model, context: null, settings: null);
         }
 
-        public void AcceptRequest()
+        public async void AcceptRequest()
         {
-            MessageBox.Show("Binding Works");
+            await RequestManager.ApproveTrip(Id);
+            parentRequestsViewModel.RefreshUnapporvedRequests();
         }
         private bool CanAccept()
         {
             return true;
         }
-        public void DenyRequest()
+        public async void DenyRequest()
         {
-
+            await RequestManager.DenyTrip(Id);
+            parentRequestsViewModel.RefreshUnapporvedRequests();
         }
         private bool CanDeny()
         {

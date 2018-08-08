@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Helpers;
-using BusinessTripApplication.Exception;
+using BusinessTripModels.Exception;
+using BusinessTripModels.Models;
 using BusinessTripApplication.Models;
-using BusinessTripModels;
 
 namespace BusinessTripApplication.Repository
 {

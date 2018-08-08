@@ -195,8 +195,6 @@
     <Compile Include="Controllers\TripsApiController.cs" />
     <Compile Include="Controllers\TripsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Exception\DatabaseException.cs" />
-    <Compile Include="Exception\InternetException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -217,8 +215,6 @@
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\TripRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="Server\EmailSender.cs" />
-    <Compile Include="Server\IEmailSender.cs" />
     <Compile Include="Service\AreaService.cs" />
     <Compile Include="Service\IAreaService.cs" />
     <Compile Include="Service\ITripService.cs" />

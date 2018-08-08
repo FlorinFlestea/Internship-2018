@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="BusinessTripAdministration.Views.HistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BusinessTripAdministration.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1000"
+            >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="17"/>
+            </Grid.ColumnDefinitions>
+            <Grid  Background="#191919" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label  Content="TripId" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1"  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"/>
+                <Label Grid.Column="1" Content="User" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Label Grid.Column="2" Content="Destination" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Label Grid.Column="3" Content="Starting Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Label Grid.Column="4" Content="Ending Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Label Grid.Column="5" Content="Actions" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1"  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"/>
+            </Grid>
+        </Grid>
+        <ContentControl Grid.Row="1" x:Name="ActiveItem"/>
+
+        <Grid Grid.Row="2"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="17"/>
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding FilterCommand}" Content="Filter Options" BorderBrush="#00BCD4" BorderThickness="1"  HorizontalAlignment="Stretch" FontSize="22" Background="#191919" Foreground="WhiteSmoke"/>
+            <Button Grid.Column="3" Command="{Binding RefreshCommand}" BorderBrush="#00BCD4" BorderThickness="1"  Content="Refresh" HorizontalAlignment="Stretch" FontSize="22" Background="#191919" Foreground="WhiteSmoke"/>
+
+        </Grid>
+        <Grid Grid.Row="1" Background="#191919" >
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+
+                <ItemsControl x:Name="RequestList" Grid.Column="0" BorderBrush="#0dba86" BorderThickness="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:SingleHistoryView/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

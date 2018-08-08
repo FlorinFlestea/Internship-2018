@@ -1,4 +1,5 @@
-﻿using BusinessTripAdministration.Commands;
+﻿using System;
+using BusinessTripAdministration.Commands;
 using BusinessTripAdministration.Models;
 using BusinessTripAdministration.Validation;
 using Caliburn.Micro;
@@ -9,6 +10,7 @@ namespace BusinessTripAdministration.ViewModels
 {
     internal class LoginViewModel: Screen
     {
+        public static LoginViewModel MainLoginViewModelInstance { get; set; }
         public string Email { get; set; }
         public string Password {private get; set; }
         public bool RememberMe { get; set; }
@@ -28,9 +30,35 @@ namespace BusinessTripAdministration.ViewModels
 
         public LoginViewModel()
         {
-
+            if (MainLoginViewModelInstance == null)
+            {
+                MainLoginViewModelInstance = this;
+            }
+            else throw new Exception("Cannot create multiple Main Windows");
             ShowCurrentWindow();
+            //Very Important
+            //need to call it exactly one time
+            RequestManager.Init();
+            //check if remember me option was set last time
+            CheckIfAutomaticLogin();
         }
+
+        private void CheckIfAutomaticLogin()
+        {
+            var email = Properties.Settings.Default.Email;
+            var password = Properties.Settings.Default.Password;
+            if (email != "" && password != "")
+            {
+                if (DatabaseQuery.Login(email, password) == true)
+                {
+                    Password = password;
+                    Email = email;
+                    LoadMainPage();
+                }
+                    
+            }
+        }
+
 
         private ICommand loginCommand;
 
@@ -49,10 +77,32 @@ namespace BusinessTripAdministration.ViewModels
             }
         }
 
+        private void SaveUserCredentials()
+        {
+            Properties.Settings.Default.Email = Email;
+            Properties.Settings.Default.Password = Password;
+            Properties.Settings.Default.Save();
+        }
+
+        public static void RemoveUserCredentials()
+        {
+            Properties.Settings.Default.Email = "";
+            Properties.Settings.Default.Password = "";
+            Properties.Settings.Default.Save();
+        }
+
         private void Login()
         {
             if (DatabaseQuery.Login(Email, Password) == true)
+            {
+                if (RememberMe == true)
+                    SaveUserCredentials();
+                else
+                    RemoveUserCredentials();
+
                 LoadMainPage();
+            }
+                
             else
                 MessageBox.Show("Invalid Username or Password");
         }
@@ -78,11 +128,12 @@ namespace BusinessTripAdministration.ViewModels
             main.Email = Email;
         }
 
-        void HideCurrentWindow()
+        public void HideCurrentWindow()
         {
             IsCurrentWindowVisible = "Hidden";
         }
-        void ShowCurrentWindow()
+
+        public void ShowCurrentWindow()
         {
             IsCurrentWindowVisible = "Visible";
         }

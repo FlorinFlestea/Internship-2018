@@ -15,7 +15,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            
+            <ColumnDefinition Width="*"/>
+
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
@@ -27,19 +28,20 @@
                 <Setter Property="BorderThickness" Value="1" />
             </Style> 
         </Grid.Resources>
-        <Label Content="{Binding User, Mode=TwoWay}" Grid.Column="0"/>
-        <Label Content="{Binding Destination, Mode=TwoWay}" Grid.Column="1"/>
-        <Label Content="{Binding StartDate, Mode=TwoWay}" Grid.Column="2"/>
-        <Label Content="{Binding EndDate, Mode=TwoWay}" Grid.Column="3"/>
+        <Label Content="{Binding Id, Mode=TwoWay}" Grid.Column="0"/>
+        <Label Content="{Binding User, Mode=TwoWay}" Grid.Column="1"/>
+        <Label Content="{Binding Destination, Mode=TwoWay}" Grid.Column="2"/>
+        <Label Content="{Binding StartDate, Mode=TwoWay}" Grid.Column="3"/>
+        <Label Content="{Binding EndDate, Mode=TwoWay}" Grid.Column="4"/>
         <Grid Grid.Column="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding AcceptCommand}" Grid.Column="0" BorderBrush="DarkGray" BorderThickness="1" Background="#212121" Foreground="White" FontSize="16">Accept</Button>
-            <Button Command="{Binding DenyCommand}" Grid.Column="1" BorderBrush="DarkGray" BorderThickness="1" Background="#212121" Foreground="White" FontSize="16" >Deny</Button>
-            <Button Command="{Binding DetailsCommand}" Grid.Column="2" BorderBrush="DarkGray" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="16" >Details</Button>
+            <Button Command="{Binding AcceptCommand}" Grid.Column="0" BorderBrush="DarkGray" BorderThickness="1" Background="#212121" Foreground="White" FontSize="14">Accept</Button>
+            <Button Command="{Binding DenyCommand}" Grid.Column="1" BorderBrush="DarkGray" BorderThickness="1" Background="#212121" Foreground="White" FontSize="14" >Deny</Button>
+            <Button Command="{Binding DetailsCommand}" Grid.Column="2" BorderBrush="DarkGray" BorderThickness="1" Background="#212121" Foreground="WhiteSmoke" FontSize="14" >Details</Button>
         </Grid>
         
     </Grid>

@@ -25,12 +25,14 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label  Content="User" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Label Grid.Column="1" Content="Destination" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Label Grid.Column="2" Content="Starting Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Label Grid.Column="3" Content="Ending Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Label Grid.Column="4" Content="Actions" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1"  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"/>
+                <Label  Content="TripId" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1"  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"/>
+                <Label Grid.Column="1" Content="User" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Label Grid.Column="2" Content="Destination" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Label Grid.Column="3" Content="Starting Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Label Grid.Column="4" Content="Ending Date" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Label Grid.Column="5" Content="Actions" Foreground="WhiteSmoke" FontSize="22" BorderBrush="#00BCD4" BorderThickness="1"  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch"/>
             </Grid>
         </Grid>
         <ContentControl Grid.Row="1" x:Name="ActiveItem"/>
@@ -43,10 +45,9 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="17"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Filter Options" BorderBrush="#00BCD4" BorderThickness="1"  HorizontalAlignment="Stretch" FontSize="22" Background="#191919" Foreground="WhiteSmoke"/>
-            <TextBox Grid.Column="1" BorderBrush="#00BCD4" BorderThickness="1"  Background="#191919" Foreground="WhiteSmoke" FontSize="22" HorizontalAlignment="Stretch"/>
-            <Button Grid.Column="2" BorderBrush="#00BCD4" BorderThickness="1" Content="Search" FontSize="22" Background="#191919" Foreground="WhiteSmoke" HorizontalAlignment="Stretch"/>
-            <Button Grid.Column="3" BorderBrush="#00BCD4" BorderThickness="1"  Content="Refresh" HorizontalAlignment="Stretch" FontSize="22" Background="#191919" Foreground="WhiteSmoke"/>
+            <Button Command="{Binding FilterCommand}" Content="Filter Options" BorderBrush="#00BCD4" BorderThickness="1"  HorizontalAlignment="Stretch" FontSize="22" Background="#191919" Foreground="WhiteSmoke"/>
+            <Button Grid.Column="3" Command="{Binding RefreshCommand}" BorderBrush="#00BCD4" BorderThickness="1"  Content="Refresh" HorizontalAlignment="Stretch" FontSize="22" Background="#191919" Foreground="WhiteSmoke"/>
+            <Button Grid.Column="2" Command="{Binding ApproveAllCommand}" BorderBrush="#00BCD4" BorderThickness="1"  Content="Approve All" HorizontalAlignment="Stretch" FontSize="22" Background="#191919" Foreground="WhiteSmoke"/>
 
         </Grid>
         <Grid Grid.Row="1" Background="#191919" >
