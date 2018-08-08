@@ -5,6 +5,7 @@ using System.Windows.Input;
 using BusinessTripAdministration.Models;
 using BusinessTripApplication.Server;
 using BusinessTripModels.Models;
+using System.Data.Entity;
 
 namespace BusinessTripAdministration.ViewModels
 {
@@ -157,6 +158,7 @@ namespace BusinessTripAdministration.ViewModels
         {
             await RequestManager.ApproveTrip(Id);
             parentRequestsViewModel.RefreshUnapporvedRequests();
+
             SendEmail(true);
         }
         private bool CanAccept()
