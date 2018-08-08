@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using BusinessTripModels;
 using BusinessTripModels.Models;
 
 namespace BusinessTripApplication.Service

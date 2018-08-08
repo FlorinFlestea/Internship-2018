@@ -87,9 +87,7 @@
     <Compile Include="Server\IEmailSender.cs" />
     <Compile Include="Models\TripModel.cs" />
     <Compile Include="Models\UserModel.cs" />
-    <Compile Include="TripModel.cs" />
-    <Compile Include="UpdateTripModel.cs" />
-    <Compile Include="UserModel.cs" />
+    <Compile Include="Models\UpdateTripModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

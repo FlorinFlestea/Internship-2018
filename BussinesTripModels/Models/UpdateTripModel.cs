@@ -1,6 +1,6 @@
 ﻿using BusinessTripModels.Models;
 
-namespace BussinesTripModels
+namespace BussinesTripModels.Models
 {
     public class UpdateTripModel
     {
