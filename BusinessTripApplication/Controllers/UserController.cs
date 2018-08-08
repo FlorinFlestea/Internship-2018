@@ -2,6 +2,7 @@
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
+using BusinessTripApplication.Models;
 using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Server;
@@ -110,6 +111,7 @@ namespace BusinessTripApplication.Controllers
         {
             try
             {
+           
                 var model = new RegistrationViewModel(ModelState.IsValid, user, UserService);
                 return View(model);
             }

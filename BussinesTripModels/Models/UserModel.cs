@@ -29,7 +29,7 @@ namespace BusinessTripModels.Models
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
 
-        public DateTime ActivationCodeExpireDate { get; set; }
+        public DateTime? ActivationCodeExpireDate { get; set; }
 
         public Role Role { get; set; }
 

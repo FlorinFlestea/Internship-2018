@@ -17,6 +17,15 @@ namespace BusinessTripApplication.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Roles",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Type = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Trips",
                 c => new
                     {
@@ -24,7 +33,7 @@ namespace BusinessTripApplication.Migrations
                         PmName = c.String(nullable: false),
                         ClientName = c.String(nullable: false),
                         StartingDate = c.DateTime(nullable: false),
-                        EndDate = c.DateTime(nullable: false),
+                        EndDate = c.DateTime(),
                         ProjectName = c.String(),
                         ProjectNumber = c.String(nullable: false),
                         TaskName = c.String(),
@@ -56,19 +65,26 @@ namespace BusinessTripApplication.Migrations
                         Password = c.String(nullable: false, maxLength: 250),
                         IsEmailVerified = c.Boolean(nullable: false),
                         ActivationCode = c.Guid(nullable: false),
+                        ActivationCodeExpireDate = c.DateTime(nullable: false),
+                        Role_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Roles", t => t.Role_Id)
+                .Index(t => t.Role_Id);
             
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.Trips", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.Users", "Role_Id", "dbo.Roles");
             DropForeignKey("dbo.Trips", "Area_Id", "dbo.Areas");
+            DropIndex("dbo.Users", new[] { "Role_Id" });
             DropIndex("dbo.Trips", new[] { "User_Id" });
             DropIndex("dbo.Trips", new[] { "Area_Id" });
             DropTable("dbo.Users");
             DropTable("dbo.Trips");
+            DropTable("dbo.Roles");
             DropTable("dbo.Areas");
         }
     }
