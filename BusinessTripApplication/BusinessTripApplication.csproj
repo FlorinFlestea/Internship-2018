@@ -204,11 +204,10 @@
     <Compile Include="Migrations\201807251053332_Database.Designer.cs">
       <DependentUpon>201807251053332_Database.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808021117010_TripsDB.cs" />
-    <Compile Include="Migrations\201808021117010_TripsDB.Designer.cs">
-      <DependentUpon>201808021117010_TripsDB.cs</DependentUpon>
+    <Compile Include="Migrations\201808070956251_SP.cs" />
+    <Compile Include="Migrations\201808070956251_SP.Designer.cs">
+      <DependentUpon>201808070956251_SP.cs</DependentUpon>
     </Compile>
-
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -359,8 +358,6 @@
     <Content Include="Views\User\VerifyAccount.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Trips\Create.cshtml" />
-    <Content Include="Views\Trips\Delete.cshtml" />
-    <Content Include="Views\Trips\Details.cshtml" />
     <Content Include="Views\Trips\Edit.cshtml" />
     <Content Include="Views\Trips\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -372,6 +369,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Trips\_Details.cshtml" />
+    <Content Include="Views\Trips\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Dashboard.cshtml" />
@@ -398,8 +397,8 @@
     <EmbeddedResource Include="Migrations\201807251053332_Database.resx">
       <DependentUpon>201807251053332_Database.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808021117010_TripsDB.resx">
-      <DependentUpon>201808021117010_TripsDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808070956251_SP.resx">
+      <DependentUpon>201808070956251_SP.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -409,6 +408,12 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BussinesTripModels\BusinessTripModels.csproj">
+      <Project>{b7a340f4-2234-48ee-acba-e8a0bafe9cf2}</Project>
+      <Name>BusinessTripModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
