@@ -40,7 +40,7 @@ namespace BusinessTripApplication.Repository
             {
                 using (DatabaseContext context = new DatabaseContext())
                 {
-                    foundTrip = context.Trips.Include(x => x.User).FirstOrDefault(x=> x.Id == id);
+                    foundTrip = context.Trips.Include(x => x.Area).Include(x => x.User).FirstOrDefault(x=> x.Id == id);
                 }
             }
             catch (System.Exception e)
