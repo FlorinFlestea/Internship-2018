@@ -23,13 +23,6 @@
     }
 }
 
-@if (Model.Areas.Count() == 0)
-{
-        <div class="alert alert-danger">
-            <strong>Error! </strong> You can't submit trips because Areas doesn't exists.
-        </div>
-}
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
