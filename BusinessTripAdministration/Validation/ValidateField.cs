@@ -7,24 +7,8 @@ using System.Threading.Tasks;
 
 namespace BusinessTripAdministration.Validation
 {
-    internal static class ValidateField
+    public static class ValidateField
     {
-        public static bool Username(string username,ref string message)
-        {
-            bool isValid = true;
-            Regex pattern = new Regex("^[a-zA-Z0-9]+$");
-            if(username.Length < 5 || username.Length > 20 )
-            {
-                message = "The length should be between 5 - 20 characters!\n";
-                isValid = false;
-            }
-            if (username!=null && pattern.Match(username).Success)
-            {
-                message += "Allowed characters: a-z, A-Z, 0-9";
-                isValid = false;
-            }
-            return isValid;
-        }
         public static bool Email(string email, ref string message)
         {
             bool isValid;
