@@ -5,7 +5,6 @@ using System.Web.Helpers;
 using BusinessTripModels.Exception;
 using BusinessTripModels.Models;
 using BusinessTripApplication.Models;
-using BusinessTripModels;
 
 namespace BusinessTripApplication.Repository
 {
