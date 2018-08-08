@@ -82,6 +82,7 @@
     <Compile Include="Models\AreaModel.cs" />
     <Compile Include="Exception\DatabaseException.cs" />
     <Compile Include="Exception\InternetException.cs" />
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\EmailSender.cs" />
     <Compile Include="Server\IEmailSender.cs" />
