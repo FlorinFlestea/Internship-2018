@@ -1,11 +1,11 @@
 ﻿using BusinessTripModels.Models;
 
-namespace BusinessTripAdministration.Models
+namespace BussinesTripModels.Models
 {
     public class UpdateTripModel
     {
-        private int Id { get; set; }
-        private Trip Trip { get; set; }
+        public int Id { get; set; }
+        public Trip Trip { get; set; }
 
         public UpdateTripModel(int id, Trip trip)
         {

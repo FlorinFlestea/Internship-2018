@@ -6,18 +6,16 @@ using BusinessTripModels.Models;
 
 namespace BusinessTripAdministration.ViewModels
 {
-    internal class SingleRequestViewModel 
+    internal class SingleHistoryViewModel 
     {
         private int id;
         private string user;
         private string destination;
         private string startDate;
         private string endDate;
-        private RequestsViewModel parentRequestsViewModel;
 
-        public SingleRequestViewModel(RequestsViewModel requestsViewModel, int id, string user, string destination, string startDate, string endDate)
+        public SingleHistoryViewModel(int id, string user, string destination, string startDate, string endDate)
         {
-            parentRequestsViewModel = requestsViewModel;
             Id = id;
             User = user;
             Destination = destination;
@@ -88,41 +86,10 @@ namespace BusinessTripAdministration.ViewModels
         }
 
 
-        private ICommand acceptCommand;
-        private ICommand denyCommand;
+        
         private ICommand detailsCommand;
 
-        public ICommand AcceptCommand
-        {
-            get
-            {
-                if (acceptCommand == null)
-                {
-                    acceptCommand = new ButtonCommand(
-                        param => this.AcceptRequest(),
-                        param => this.CanAccept()
-                    );
-                }
-                return acceptCommand;
-            }
-        }
-
-
-
-        public ICommand DenyCommand
-        {
-            get
-            {
-                if (denyCommand == null)
-                {
-                    denyCommand = new ButtonCommand(
-                        param => this.DenyRequest(),
-                        param => this.CanDeny()
-                    );
-                }
-                return denyCommand;
-            }
-        }
+        
         public ICommand DetailsCommand
         {
             get
@@ -150,25 +117,5 @@ namespace BusinessTripAdministration.ViewModels
             IWindowManager manager = new WindowManager();
             manager.ShowWindow(model, context: null, settings: null);
         }
-
-        public async void AcceptRequest()
-        {
-            await RequestManager.ApproveTrip(Id);
-            parentRequestsViewModel.RefreshUnapporvedRequests();
-        }
-        private bool CanAccept()
-        {
-            return true;
-        }
-        public async void DenyRequest()
-        {
-            await RequestManager.DenyTrip(Id);
-            parentRequestsViewModel.RefreshUnapporvedRequests();
-        }
-        private bool CanDeny()
-        {
-            return true;
-        }
-
     }
 }

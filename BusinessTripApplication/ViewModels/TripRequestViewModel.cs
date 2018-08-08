@@ -1,5 +1,4 @@
-﻿using BusinessTripApplication.Models;
-using BusinessTripApplication.Repository;
+﻿using BusinessTripApplication.Repository;
 using BusinessTripApplication.Service;
 using System.Collections.Generic;
 using System.Web.Mvc;

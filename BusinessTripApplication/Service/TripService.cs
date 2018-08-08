@@ -1,4 +1,5 @@
-﻿using BusinessTripApplication.Models;
+﻿using System.Collections.Generic;
+using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripModels.Models;
 
@@ -35,6 +36,21 @@ namespace BusinessTripApplication.Service
         public void Remove(Trip trip)
         {
             tripRepository.Remove(trip);
+        }
+
+        public IList<Trip> GetAll()
+        {
+            return tripRepository.GetAll();
+        }
+
+        public Trip Update(Trip updatedTrip)
+        {
+            return tripRepository.Update(updatedTrip);
+        }
+
+        public Trip FindById(int? id)
+        {
+            return tripRepository.FindById(id);
         }
     }
 }
