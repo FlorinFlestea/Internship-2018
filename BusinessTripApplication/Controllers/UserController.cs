@@ -5,7 +5,6 @@ using System.Web.Security;
 using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Server;
-using BusinessTripApplication.Service;
 using BusinessTripApplication.ViewModels;
 using Facebook;
 
@@ -14,7 +13,7 @@ namespace BusinessTripApplication.Controllers
     [RequireHttps]
     public class UserController : Controller
     {
-        private readonly IRoleService roleService = new RoleService(new RoleRepository());
+
         IUserService UserService;
         private static readonly log4net.ILog Logger
        = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -111,7 +110,7 @@ namespace BusinessTripApplication.Controllers
         {
             try
             {
-                var model = new RegistrationViewModel(ModelState.IsValid, user, UserService,roleService);
+                var model = new RegistrationViewModel(ModelState.IsValid, user, UserService);
                 return View(model);
             }
             catch (System.Exception e)

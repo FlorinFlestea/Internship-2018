@@ -10,7 +10,6 @@ using BusinessTripApplication.UnitTests.Repository;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Security;
-using BusinessTripApplication.Service;
 
 namespace BusinessTripApplication.UnitTests.Controllers
 {
@@ -33,9 +32,8 @@ namespace BusinessTripApplication.UnitTests.Controllers
             UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
             IUserRepository userRepository = MockUserRepository.Object;
 
-            IRoleRepository roleRepository = new RoleRepository();
             IUserService userService = new UserService(userRepository);
-            IRoleService roleService = new RoleService(roleRepository);
+
             var controller = new UserController(userService);
 
             Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
@@ -45,7 +43,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
 
             //Act
             User dummyUser = new User("", "test@test.com", "");
-            bool result = registrationViewModel.CheckUser(userService, roleService, dummyUser);
+            bool result = registrationViewModel.CheckUser(userService, dummyUser);
 
             //Assert
             Assert.IsFalse(result);
@@ -65,10 +63,8 @@ namespace BusinessTripApplication.UnitTests.Controllers
             UserRepositorySetupMoq.Add(MockUserRepository, users);
             UserRepositorySetupMoq.FindByEmail(MockUserRepository, users);
             IUserRepository userRepository = MockUserRepository.Object;
-
             IUserService userService = new UserService(userRepository);
-            IRoleRepository roleRepository = new RoleRepository();
-            IRoleService roleService = new RoleService(roleRepository);
+
             var controller = new UserController(userService);
 
             Mock<IRegistrationViewModel> MockRegistrationViewModel = new Mock<IRegistrationViewModel>();
@@ -79,7 +75,7 @@ namespace BusinessTripApplication.UnitTests.Controllers
 
             //Act
             var dummyUser = new User("Andrew", "cernovalex1@gmail.com", "");
-            bool result = registrationViewModel.CheckUser(userService,roleService, dummyUser);
+            bool result = registrationViewModel.CheckUser(userService, dummyUser);
 
 
             //Assert

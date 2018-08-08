@@ -4,7 +4,6 @@ using BusinessTripModels.Exception;
 using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Server;
-using BusinessTripApplication.Service;
 using BusinessTripModels.Models;
 
 
@@ -28,13 +27,13 @@ namespace BusinessTripApplication.ViewModels
 
         }
 
-        public RegistrationViewModel(bool modelState, User user, IUserService userService, IRoleService roleService)
+        public RegistrationViewModel(bool modelState, User user, IUserService userService)
         {
             if (modelState)
             {
                 try
                 {
-                    Status = CheckUser(userService, roleService, user);
+                    Status = CheckUser(userService, user);
                 }
                 catch (InternetException e)
                 {
@@ -60,7 +59,7 @@ namespace BusinessTripApplication.ViewModels
             }
         }
 
-        public bool CheckUser(IUserService userService, IRoleService roleService, User user)
+        public bool CheckUser(IUserService userService, User user)
         {
             bool emailExists;
             try
@@ -78,9 +77,6 @@ namespace BusinessTripApplication.ViewModels
             }
             try
             {
-
-                Role role = roleService.FindByType("user");
-                user.Role = role;
                 User = userService.Add(user);
             }
             catch

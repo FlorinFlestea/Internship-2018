@@ -1,9 +1,7 @@
 ﻿using BusinessTripApplication.Repository;
 using BusinessTripApplication.Service;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
-using BusinessTripApplication.Server;
 using BusinessTripModels.Exception;
 using BusinessTripModels.Models;
 
@@ -55,9 +53,9 @@ namespace BusinessTripApplication.ViewModels
 
                 //Send email to Admin
 
-                Message = "Submit successfully done. An admin will be notified!";
+                Message = "Submit successfully done. An admit will be notified!";
                 Status = true;
-                SendEmail(trip);
+
             }
             else
             {
@@ -112,29 +110,6 @@ namespace BusinessTripApplication.ViewModels
             {
                 throw;
             }
-        }
-
-        private void SendEmail(Trip trip)
-        {
-            EmailSender emailSender = new EmailSender();
-            string message = "<h1>New trip request</h1>" +
-                             "id: " + trip.Id + "</br>" +
-                             "Client's name: " + trip.ClientName + "</br>" +
-                             "Client's location: " + trip.ClientLocation + "</br>" +
-                             "Starting date: " + trip.StartingDate + "</br>" +
-                             "End date: " + trip.EndDate + "</br>";
-
-            List<User> admins = FindAdmins();
-            foreach(User admin in admins)
-            {
-                emailSender.SendEmail(admin.Email, "New Trip Request", message);
-            }
-        }
-
-        private List<User> FindAdmins()
-        {
-            UserRepository rep=new UserRepository();
-            return rep.FindAll().Where(user=> user.Role.Type=="admin").ToList();
         }
     }
 }
