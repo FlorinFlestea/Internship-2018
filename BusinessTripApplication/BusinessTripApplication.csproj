@@ -216,9 +216,7 @@
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\TripRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="Server\EmailSender.cs" />
     <Compile Include="Server\FacebookLoginer.cs" />
-    <Compile Include="Server\IEmailSender.cs" />
     <Compile Include="Server\IFacebookLoginer.cs" />
     <Compile Include="Service\AreaService.cs" />
     <Compile Include="Service\IAreaService.cs" />
