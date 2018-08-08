@@ -7,70 +7,148 @@
 
 <h2>Index</h2>
 
-<table class="table table-hover table-dark">
-    <thead>
+
+<table class="table table-hover align-content-center">
+    <thead class="thead-dark">
         <tr>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.PmName)
+                @Html.DisplayNameFor(model => model.ProjectNumber)
             </th>
             <th scope="col">
                 @Html.DisplayNameFor(model => model.ClientName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.ClientLocation)
             </th>
             <th scope="col">
                 @Html.DisplayNameFor(model => model.StartingDate)
             </th>
             <th scope="col">
                 @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.ProjectName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProjectNumber)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.TaskNumber)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
+            </th>        
             <th></th>
         </tr>
     </thead>
     <tbody>
+        <tr class="table-light">
+            <td colspan="6">
+                <h4 class="title">
+                    Pending
+                </h4>
+            </td>
+        </tr>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PmName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClientName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartingDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProjectName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProjectNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TaskNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
+            if (item.Status == 2)
+            {
+                <tr class="table-light">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-info" data-toggle="modal" onclick="RenderActions('/Trips/Details/' + @item.Id)" data-target="#modalCreate">Info</button>
+                        <button class="btn btn-sm btn-danger" data-toggle="modal" onclick="RenderActions('/Trips/Delete/' + @item.Id)" data-target="#modalCreate">Delete</button>
+                    </td>
+                </tr>
+            }
+
+        }
+
+        <tr class="table-success">
+            <td colspan="6">
+                <h4 class="title">
+                    Approved
+                </h4>
+            </td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            if (item.Status == 1)
+            {
+                <tr class="table-success">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-info" data-toggle="modal" onclick="RenderActions('/Trips/Details/' + @item.Id)" data-target="#modalCreate">Info</button>
+                    </td>
+                </tr>
+            }
+
+        }
+
+        <tr class="table-danger">
+            <td colspan="6">
+                <h4 class="title">
+                    Denied
+                </h4>
+            </td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            if (item.Status == 0)
+            {
+                <tr class="table-danger">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-info" data-toggle="modal" onclick="RenderActions('/Trips/Details/' + @item.Id)" data-target="#modalCreate">Info</button>
+                    </td>
+                </tr>
+            }
+
         }
     </tbody>
 </table>
+
+<div id="modalCreate" class="modal fade" role="dialog" data-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="OpenDialog" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function RenderActions(RenderActionstring) {
+        $("#OpenDialog").load(RenderActionstring);
+    };
+</script>

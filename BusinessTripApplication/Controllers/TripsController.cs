@@ -29,6 +29,7 @@ namespace BusinessTripApplication.Controllers
             if (user != null)
             {
                 var db = new DatabaseContext();
+                Repository.GetAll();
                 return View(db.Trips.Where(t => t.User.Id == user.Id));
             }
             else
@@ -51,7 +52,7 @@ namespace BusinessTripApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(trip);
+            return PartialView("_Details",trip);
         }
 
         // GET: Trips/Create
@@ -62,7 +63,7 @@ namespace BusinessTripApplication.Controllers
             if (model.Status)
                 return View(model);
             else
-                return RedirectToRoute("~/Shared/Error");
+                return RedirectToRoute("Index", "Error");
         }
 
         // POST: Trips/Create
@@ -80,7 +81,7 @@ namespace BusinessTripApplication.Controllers
             if (model.Status)
                 return View(model);
             else
-                return RedirectToRoute("~/Shared/Error");
+                return RedirectToRoute("Index", "Error");
         }
 
         // GET: Trips/Edit/5
@@ -128,7 +129,7 @@ namespace BusinessTripApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(trip);
+            return PartialView("_Delete",trip);
         }
 
         // POST: Trips/Delete/5
