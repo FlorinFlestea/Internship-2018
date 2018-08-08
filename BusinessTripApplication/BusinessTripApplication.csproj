@@ -209,10 +209,6 @@
     <Compile Include="Migrations\201808080848494_Roles.Designer.cs">
       <DependentUpon>201808080848494_Roles.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808081146107_Update-Trip-Valiations.cs" />
-    <Compile Include="Migrations\201808081146107_Update-Trip-Valiations.Designer.cs">
-      <DependentUpon>201808081146107_Update-Trip-Valiations.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -402,9 +398,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808080848494_Roles.resx">
       <DependentUpon>201808080848494_Roles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808081146107_Update-Trip-Valiations.resx">
-      <DependentUpon>201808081146107_Update-Trip-Valiations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
