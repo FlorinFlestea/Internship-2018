@@ -22,6 +22,8 @@ namespace BusinessTripApplication.Repository
             {
                 using (var context = new DatabaseContext())
                 {
+                    addedUser.Role = context.Roles.FirstOrDefault(t => t.Type == "User");
+
                     context.Users.Add(addedUser);
                     context.SaveChanges();
                 }
