@@ -1,5 +1,5 @@
 ﻿using BusinessTripAdministration.Models;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;

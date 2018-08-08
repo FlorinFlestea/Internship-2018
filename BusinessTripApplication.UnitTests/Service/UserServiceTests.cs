@@ -1,4 +1,4 @@
-﻿using BusinessTripModels;
+﻿using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.UnitTests.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

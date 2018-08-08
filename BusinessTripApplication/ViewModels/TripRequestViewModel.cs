@@ -3,8 +3,8 @@ using BusinessTripApplication.Repository;
 using BusinessTripApplication.Service;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using BusinessTripApplication.Exception;
-using BusinessTripModels;
+using BusinessTripModels.Exception;
+using BusinessTripModels.Models;
 
 namespace BusinessTripApplication.ViewModels
 {
