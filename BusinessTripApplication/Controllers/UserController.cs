@@ -130,7 +130,7 @@ namespace BusinessTripApplication.Controllers
             ViewBag.Status = result;
 
             if (!result)
-                ViewBag.Message = "Invalid Request";
+                ViewBag.Message = id;
 
             else
             {
@@ -140,6 +140,20 @@ namespace BusinessTripApplication.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public ActionResult VerifyAccountAgain(string code)
+        {
+            User user = UserService.FindByActivationCode(new Guid(code));
+            Server.EmailSender emailSender = new EmailSender();
+            string url = "https://localhost:44328/User/VerifyAccount/" + user.ActivationCode.ToString();
+            string message = "We are excited to tell you that your account is successfully created. " +
+                             "Please <a href='" + url + "'>Click here </a> to verify your account. </br>";
+
+            emailSender.SendEmail(user.Email, "Register", message);
+            return View();
+        }
+
 
         [AllowAnonymous]
         public ActionResult login()

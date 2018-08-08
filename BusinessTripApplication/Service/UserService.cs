@@ -42,7 +42,8 @@ namespace BusinessTripApplication.Repository
         public bool VerifyAccount(string id)
         {
             User user = userRepository.FindByActivationCode(new Guid(id));
-
+            if (user.ActivationCodeExpireDate < DateTime.Now)
+                return false;
             if (user != null && !user.IsEmailVerified)
             {
                 user.IsEmailVerified = true;
