@@ -60,10 +60,9 @@ namespace BusinessTripApplication.Controllers
         public ActionResult Create()
         {
             TripRequestViewModel model = new TripRequestViewModel(areaService);
-            if (model.Status)
-                return View(model);
-            else
-                return RedirectToRoute("Index", "Error");
+
+            return View(model);
+
         }
 
         // POST: Trips/Create
@@ -78,10 +77,11 @@ namespace BusinessTripApplication.Controllers
             trip.User = new User() { Email = User.Identity.Name };
          
             TripRequestViewModel model = new TripRequestViewModel(ModelState.IsValid, trip, tripService, areaService, userService);
-            if (model.Status)
-                return View(model);
-            else
-                return RedirectToRoute("Index", "Error");
+
+            if(model.Trip.User == null || model.Areas.Count() == 0)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            return View(model);
+
         }
 
         // GET: Trips/Edit/5
