@@ -162,18 +162,24 @@ namespace BusinessTripApplication.Controllers
         public ActionResult FacebookCallback(string code)
         {
             var fbLogin = new FacebookLoginer(RedirectUri);
-
-            dynamic result = fbLogin.FbClient.Post("oauth/access_token", new
+            try
             {
-                client_id = fbLogin.AppId,
-                client_secret = fbLogin.AppSecret,
-                redirect_uri = RedirectUri.AbsoluteUri,
-                code = code
-            });
-            fbLogin.Response(UserService, result);
-            Session["AccessToken"] = result.access_token;
+                dynamic result = fbLogin.FbClient.Post("oauth/access_token", new
+                {
+                    client_id = fbLogin.AppId,
+                    client_secret = fbLogin.AppSecret,
+                    redirect_uri = RedirectUri.AbsoluteUri,
+                    code = code
+                });
+                fbLogin.Response(UserService, result);
+                Session["AccessToken"] = result.access_token;
 
-            return RedirectToAction("Index", "Trips");
+                return RedirectToAction("Index", "Trips");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Login", "User");
+            }
         }
 
 
