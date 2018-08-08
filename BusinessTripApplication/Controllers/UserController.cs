@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
+using BusinessTripApplication.Server;
 using BusinessTripApplication.ViewModels;
+using Facebook;
 
 namespace BusinessTripApplication.Controllers
 {
@@ -14,6 +17,18 @@ namespace BusinessTripApplication.Controllers
         IUserService UserService;
         private static readonly log4net.ILog Logger
        = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        private Uri RedirectUri
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookCallback");
+                return uriBuilder.Uri;
+            }
+        }
 
         public UserController(IUserService repo)
         {
@@ -124,6 +139,54 @@ namespace BusinessTripApplication.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult login()
+        {
+            return View();
+        }
+
+        public ActionResult logout()
+        {
+            FormsAuthentication.SignOut();
+            return View("Login");
+        }
+
+        [AllowAnonymous]
+        public ActionResult Facebook()
+        {
+            var fbLogin = new FacebookLoginer(RedirectUri);
+            var redirectLoginUrl = fbLogin.LoginUrl;
+            return Redirect(redirectLoginUrl.AbsoluteUri);
+        }
+
+        public ActionResult FacebookCallback(string code)
+        {
+            var fbLogin = new FacebookLoginer(RedirectUri);
+            try
+            {
+                dynamic result = fbLogin.FbClient.Post("oauth/access_token", new
+                {
+                    client_id = fbLogin.AppId,
+                    client_secret = fbLogin.AppSecret,
+                    redirect_uri = RedirectUri.AbsoluteUri,
+                    code = code
+                });
+                fbLogin.Response(UserService, result);
+                Session["AccessToken"] = result.access_token;
+
+                return RedirectToAction("Index", "Trips");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Login", "User");
+            }
+        }
+
+
+       
 
     }
+
 }
+
+

@@ -1,7 +1,9 @@
-﻿using BusinessTripAdministration.Commands;
+﻿using System.Threading.Tasks;
+using BusinessTripAdministration.Commands;
 using Caliburn.Micro;
 using System.Windows.Input;
 using BusinessTripAdministration.Models;
+using BusinessTripApplication.Server;
 using BusinessTripModels.Models;
 
 namespace BusinessTripAdministration.ViewModels
@@ -155,6 +157,7 @@ namespace BusinessTripAdministration.ViewModels
         {
             await RequestManager.ApproveTrip(Id);
             parentRequestsViewModel.RefreshUnapporvedRequests();
+            SendEmail(true);
         }
         private bool CanAccept()
         {
@@ -164,10 +167,28 @@ namespace BusinessTripAdministration.ViewModels
         {
             await RequestManager.DenyTrip(Id);
             parentRequestsViewModel.RefreshUnapporvedRequests();
+            SendEmail(false);
         }
         private bool CanDeny()
         {
             return true;
+        }
+
+        private async void SendEmail(bool acceptOrDeny)
+        {
+            EmailSender emailSender = new EmailSender();
+            string message;
+            if (acceptOrDeny)
+                message = "We are excited to tell you that your trip with id "
+                             + id + " has been accepted.";
+            else message = "We are sorry to tell you that your trip with id "
+                          + id + " has been denied.";
+            Trip trip = await RequestManager.GetTripById(id);
+            User user = trip.User;
+            if (user != null)
+            {
+                emailSender.SendEmail(user.Email, "Trip Request", message);
+            }
         }
 
     }
