@@ -196,8 +196,6 @@
     <Compile Include="Controllers\TripsApiController.cs" />
     <Compile Include="Controllers\TripsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Exception\DatabaseException.cs" />
-    <Compile Include="Exception\InternetException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

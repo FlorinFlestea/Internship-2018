@@ -1,5 +1,5 @@
 ﻿using BusinessTripAdministration.Models;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
@@ -40,7 +40,7 @@ namespace BusinessTripAdministration.ViewModels
             var tripList = trips.ToList();
             foreach(Trip trip in tripList)
             {
-                 list.Add(new SingleRequestViewModel(trip.ClientName,trip.DepartureLocation.ToString(),trip.StartingDate.ToString(),trip.EndDate.ToString()));
+                 list.Add(new SingleRequestViewModel(trip.ClientName,trip.DepartureLocation,trip.StartingDate.Value.ToString("dd/MM/yyyy"),trip.EndDate.Value.ToString("dd/MM/yyyy")));
             }
 
             RequestList = list;

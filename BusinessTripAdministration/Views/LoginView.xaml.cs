@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using BusinessTripAdministration.Models;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 
 namespace BusinessTripAdministration.Views
 {
