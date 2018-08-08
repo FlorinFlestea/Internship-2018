@@ -6,6 +6,7 @@ using Moq;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Security;
+using BusinessTripApplication.Service;
 
 namespace BusinessTripApplication.UnitTests.Controllers
 {
@@ -14,8 +15,8 @@ namespace BusinessTripApplication.UnitTests.Controllers
 
         public static void CheckUser(Mock<IRegistrationViewModel> MockRegistrationViewModel)
         {
-            MockRegistrationViewModel.Setup(mock => mock.CheckUser(It.IsAny<IUserService>(), It.IsAny<User>())).Returns(
-                (IUserService userService, User user) =>
+            MockRegistrationViewModel.Setup(mock => mock.CheckUser(It.IsAny<IUserService>(), It.IsAny<IRoleService>(), It.IsAny<User>())).Returns(
+                (IUserService userService,IRoleService roleService, User user) =>
                 {
                     bool emailExists = userService.EmailExists(user.Email);
 
