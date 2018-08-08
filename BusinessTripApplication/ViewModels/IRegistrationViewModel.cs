@@ -1,6 +1,6 @@
 ﻿using BusinessTripApplication.Models;
 using BusinessTripApplication.Repository;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 
 namespace BusinessTripApplication.ViewModels
 {

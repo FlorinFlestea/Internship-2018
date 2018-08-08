@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace BusinessTripApplication.Exception
-{
+namespace BusinessTripModels.Exception
+{ 
     [Serializable]
-    internal class DatabaseException : System.Exception
+    public class DatabaseException : System.Exception
     {
         public DatabaseException()
         {

@@ -1,6 +1,6 @@
 ﻿using System;
 using BusinessTripAdministration.Models;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 using Caliburn.Micro;
 using System.Collections.Generic;
 using System.Windows.Input;

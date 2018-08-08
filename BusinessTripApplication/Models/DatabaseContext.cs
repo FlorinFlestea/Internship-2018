@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 
 namespace BusinessTripApplication.Models
 {

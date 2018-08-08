@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using Moq;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 using System.Collections.Generic;
 
 namespace BusinessTripApplication.UnitTests.Repository
