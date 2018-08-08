@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace BusinessTripModels.Models
 {
@@ -26,6 +28,10 @@ namespace BusinessTripModels.Models
 
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
+
+        public DateTime ActivationCodeExpireDate { get; set; }
+
+        public Role Role { get; set; }
 
 
         public User(string name, string email, string password)
