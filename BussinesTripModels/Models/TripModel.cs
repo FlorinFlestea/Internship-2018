@@ -25,13 +25,13 @@ namespace BusinessTripModels.Models
         [Required(ErrorMessage = "Please enter starting date!")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [LessThan("EndDate", ErrorMessage = "The date must be lower than end date!")]
+        [LessThanEqualTo("EndDate", ErrorMessage = "The date must be lower than end date!")]
         public Nullable<DateTime> StartingDate { get; set; }
 
         [Display(Name = "End Date*")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [GreaterThan("StartingDate", ErrorMessage = "The date must be greater than starting date!")]
+        [GreaterThanEqualTo("StartingDate", ErrorMessage = "The date must be greater than starting date!")]
         public Nullable<DateTime> EndDate { get; set; }
 
         [Display(Name = "Project name")]
@@ -54,12 +54,12 @@ namespace BusinessTripModels.Models
 
         [Display(Name = "Client location*")]
         [Required(ErrorMessage = "Please enter client location!")]
-        [RegularExpression(@"^([A-Z][a-z]*)([- ][A-Za-z][a-z]*)*$", ErrorMessage = "Alows only letters, spaces and -!")]
+        [RegularExpression(@"^([A-Za-z]*)([- ][A-Za-z]*)*$", ErrorMessage = "Alows only letters, spaces and -!")]
         public string ClientLocation { get; set; }
 
         [Display(Name = "Leaving location*")]
         [Required(ErrorMessage = "Please enter leaving location!")]
-        [RegularExpression(@"^([A-Z][a-z]*)([- ][A-Za-z][a-z]*)*$", ErrorMessage = "Alows only letters, spaces and -!")]
+        [RegularExpression(@"^([A-Za-z]*)([- ][A-Za-z]*)*$", ErrorMessage = "Alows only letters, spaces and -!")]
         public string DepartureLocation { get; set; }
 
         [Display(Name = "Mean of transportation*")]

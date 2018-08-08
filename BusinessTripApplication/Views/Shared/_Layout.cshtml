@@ -40,6 +40,11 @@
                     <a class="navbar-nav nav-link" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
                 }
             }
+            else
+            {
+                @Html.ActionLink(linkText: "Log in", controllerName: "User", actionName: "LogIn", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+                @Html.ActionLink(linkText: "Sign up", controllerName: "User", actionName: "Registration", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+            }
 
         </div>
     </nav>

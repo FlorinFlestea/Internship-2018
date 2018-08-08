@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using BusinessTripModels.Exception;
 using BusinessTripModels.Models;
+using System;
 
 namespace BusinessTripApplication.ViewModels
 {
@@ -20,11 +21,20 @@ namespace BusinessTripApplication.ViewModels
         //Constructor for GET
         public TripRequestViewModel(IAreaService areaService)
         {
+            Areas = new List<SelectListItem>();
+            Trip = new Trip();
+
             try
             {
                 Areas = GetSelectItems(areaService);
             }
             catch (DatabaseException e)
+            {
+                Message = e.Message;
+                Status = false;
+                return;
+            }
+            catch (Exception e)
             {
                 Message = e.Message;
                 Status = false;
@@ -38,6 +48,9 @@ namespace BusinessTripApplication.ViewModels
         //Constructor for POST
         public TripRequestViewModel(bool modelState, Trip trip, ITripService tripService, IAreaService areaService, IUserService userService)
         {
+            Areas = new List<SelectListItem>();
+            Trip = new Trip();
+
             if (modelState)
             {
                 try
@@ -49,13 +62,19 @@ namespace BusinessTripApplication.ViewModels
                 {
                     Message = e.Message;
                     Status = false;
+                    return;
+                }
+                catch (Exception e)
+                {
+                    Message = e.Message;
+                    Status = false;
+                    return;
                 }
 
                 //Send email to Admin
 
                 Message = "Submit successfully done. An admit will be notified!";
                 Status = true;
-
             }
             else
             {
@@ -69,6 +88,12 @@ namespace BusinessTripApplication.ViewModels
                     Status = false;
                     return;
                 }
+                catch (Exception e)
+                {
+                    Message = e.Message;
+                    Status = false;
+                    return;
+                }
                 Message = "Invalid request!";
                 Status = false;
             }
@@ -76,15 +101,10 @@ namespace BusinessTripApplication.ViewModels
 
         private IList<SelectListItem> GetSelectItems(IAreaService areaService)
         {
-            IList<Area> areas = new List<Area>();
-            try
-            {
-                areas = areaService.FindAll();
-            }
-            catch
-            {
-                throw;
-            }
+            IList<Area> areas = areaService.FindAll();
+
+            if (areas.Count == 0)
+                throw new Exception("You can't submit trips because Areas doesn't exists.");
 
             IList<SelectListItem> selectAreas = new List<SelectListItem>();
             foreach (Area element in areas)
@@ -100,16 +120,15 @@ namespace BusinessTripApplication.ViewModels
         }
         private void AddTrip(Trip trip, ITripService tripService, IAreaService areaService, IUserService userService)
         {
-            try
-            {
-                trip.User = userService.FindByEmail(trip.User.Email);
-                trip.Area = areaService.FindById(trip.Area.Id);
-                tripService.Add(trip);
-            }
-            catch
-            {
-                throw;
-            }
+
+            trip.User = userService.FindByEmail(trip.User.Email);
+            if (trip.User == default(User))
+                throw new Exception("User doesn't exists.");
+
+            trip.Area = areaService.FindById(trip.Area.Id);
+            if (trip.Area == default(Area))
+                throw new Exception("Area doesn't exists.");
+            tripService.Add(trip);
         }
     }
 }
