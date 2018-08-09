@@ -13,5 +13,6 @@ namespace BusinessTripApplication.Repository
         User FindByEmail(string email);
         User FindByActivationCode(Guid activationCode);
         IList<User> FindAll();
+        bool VerifyAccountAgain(string code);
     }
 }

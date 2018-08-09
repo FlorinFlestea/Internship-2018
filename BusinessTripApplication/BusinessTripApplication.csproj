@@ -199,13 +199,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807251053332_Database.cs" />
-    <Compile Include="Migrations\201807251053332_Database.Designer.cs">
-      <DependentUpon>201807251053332_Database.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808080848494_Roles.cs" />
-    <Compile Include="Migrations\201808080848494_Roles.Designer.cs">
-      <DependentUpon>201808080848494_Roles.cs</DependentUpon>
+    <Compile Include="Migrations\201808081050337_Database.cs" />
+    <Compile Include="Migrations\201808081050337_Database.Designer.cs">
+      <DependentUpon>201808081050337_Database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
@@ -363,7 +359,6 @@
     <Content Include="Views\User\VerifyAccount.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Trips\Create.cshtml" />
-    <Content Include="Views\Trips\Edit.cshtml" />
     <Content Include="Views\Trips\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -376,6 +371,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Trips\_Details.cshtml" />
     <Content Include="Views\Trips\_Delete.cshtml" />
+    <Content Include="Views\User\VerifyAccountAgain.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Dashboard.cshtml" />
@@ -391,20 +387,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807251053332_Database.resx">
-      <DependentUpon>201807251053332_Database.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808080848494_Roles.resx">
-      <DependentUpon>201808080848494_Roles.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808081050337_Database.resx">
+      <DependentUpon>201808081050337_Database.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

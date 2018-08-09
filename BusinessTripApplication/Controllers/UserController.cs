@@ -2,6 +2,7 @@
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
+using BusinessTripApplication.Models;
 using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Server;
@@ -110,6 +111,7 @@ namespace BusinessTripApplication.Controllers
         {
             try
             {
+           
                 var model = new RegistrationViewModel(ModelState.IsValid, user, UserService);
                 return View(model);
             }
@@ -126,10 +128,20 @@ namespace BusinessTripApplication.Controllers
         {
             bool result = UserService.VerifyAccount(id);
             ViewBag.Status = result;
-
+            User user = UserService.FindByActivationCode(new Guid(id));
             if (!result)
-                ViewBag.Message = "Invalid Request";
-
+            {
+                if (user!=null && !UserService.IsEmailVerified(user.Email))
+                {
+                    ViewBag.Message = "Invalid Request!Do you want us to send you another verification email?";
+                    ViewBag.Message2 = "Email";
+                }
+                else ViewBag.Message = "Invalid Request!";
+                
+                ViewBag.Id = id;
+            }
+               
+                
             else
             {
                 Guid guid = new Guid(id);
@@ -138,6 +150,22 @@ namespace BusinessTripApplication.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public ActionResult VerifyAccountAgain(string code)
+        {
+            User user = UserService.FindByActivationCode(new Guid(code));
+            UserService.VerifyAccountAgain(code);
+            User addedUser = UserService.FindByEmail(user.Email);
+            Server.EmailSender emailSender = new EmailSender();
+            string url = "https://localhost:44328/User/VerifyAccount/" + addedUser.ActivationCode.ToString();
+            string message = "We are excited to tell you that your account is successfully created. " +
+                             "Please <a href='" + url + "'>Click here </a> to verify your account. </br>";
+
+            emailSender.SendEmail(addedUser.Email, "Register", message);
+            return View();
+        }
+
 
         [AllowAnonymous]
         public ActionResult login()

@@ -17,11 +17,14 @@ namespace BusinessTripApplication.Repository
             addedUser.ActivationCode = Guid.NewGuid();
             addedUser.Password = Crypto.Hash(addedUser.Password);
             addedUser.IsEmailVerified = false;
+            addedUser.ActivationCodeExpireDate = DateTime.Now.Add(new TimeSpan(1,0,0));
 
             try
             {
                 using (var context = new DatabaseContext())
                 {
+                    addedUser.Role = context.Roles.FirstOrDefault(t => t.Type == "User");
+
                     context.Users.Add(addedUser);
                     context.SaveChanges();
                 }
@@ -88,5 +91,29 @@ namespace BusinessTripApplication.Repository
 
             return update;
         }
+
+
+        public User UpdateActivationCode(User updatedUser)
+        {
+            User update;
+            try
+            {
+                using (var context = new DatabaseContext())
+                {
+                    update = context.Users.SingleOrDefault(user => user.Id == updatedUser.Id);
+                    update.ActivationCode = Guid.NewGuid();
+                    update.ActivationCodeExpireDate = DateTime.Now.Add(new TimeSpan(1, 0, 0));
+                    context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                Logger.Info(e.Message);
+                throw new DatabaseException("Cannot connect to Database!\n");
+            }
+
+            return update;
+        }
+
     }
 }

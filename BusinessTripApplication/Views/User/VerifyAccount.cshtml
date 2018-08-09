@@ -9,11 +9,18 @@
     <div class="alert alert-success">
         <strong>Success!</strong> Your account has been activated successfully. You will be redirected ...
     </div>
-    <meta http-equiv="refresh" content="3; url=https://localhost:44328/User/Dashboard/" />
+    <meta http-equiv="refresh" content="3; url=https://localhost:44328/Trips/" />
 }
 else
 {
     <div class="alert alert-danger">
-        <strong>Error!</strong> @ViewBag.Message
+        <strong>Error!</strong>@ViewBag.Message
     </div>
+        if (ViewBag.Message2 != null)
+        {
+             <div class="card-footer">
+                 <p style="color: black;"> <button id="btn_Send" type="button" onclick="window.open('https://localhost:44328/User/VerifyAccountAgain?code=@ViewBag.Id', '_self', 'resizable=yes')" class="btn btn-primary btn-sm">Send email</button> </p>
+             </div>
+        }
+        
 }

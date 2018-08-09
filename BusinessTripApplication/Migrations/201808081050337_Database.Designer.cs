@@ -7,13 +7,13 @@ namespace BusinessTripApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Roles : IMigrationMetadata
+    public sealed partial class Database : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Roles));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Database));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808080848494_Roles"; }
+            get { return "201808081050337_Database"; }
         }
         
         string IMigrationMetadata.Source
