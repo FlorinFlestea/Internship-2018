@@ -104,7 +104,7 @@ namespace BusinessTripApplication.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Repository.Remove(Repository.FindById(id));
+            TripDeleteViewModel model=new TripDeleteViewModel(id, userService, tripService);
             return RedirectToAction("Index");
         }
 

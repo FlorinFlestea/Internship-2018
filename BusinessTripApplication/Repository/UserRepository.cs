@@ -57,6 +57,25 @@ namespace BusinessTripApplication.Repository
             return users;
         }
 
+        public IList<User> FindAllAdmins()
+        {
+            IList<User> admins = new List<User>();
+            try
+            {
+                using (var context = new DatabaseContext())
+                {
+                    admins = context.Users.Where(user=>user.Role.Type=="admin").ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                Logger.Info(e.Message);
+                throw new DatabaseException("Cannot connect to Database!\n");
+            }
+
+            return admins;
+        }
+
         public User FindByActivationCode(Guid code)
         {
             IList<User> users = FindAll();

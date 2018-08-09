@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using BusinessTripModels.Exception;
 using BusinessTripModels.Models;
 using System;
+using System.Linq;
+using BusinessTripApplication.Server;
 
 namespace BusinessTripApplication.ViewModels
 {
@@ -56,6 +58,7 @@ namespace BusinessTripApplication.ViewModels
                 try
                 {
                     AddTrip(trip, tripService, areaService, userService);
+                    SendEmail(trip.Id, userService, tripService);
                     Areas = GetSelectItems(areaService);
                 }
                 catch (DatabaseException e)
@@ -129,6 +132,23 @@ namespace BusinessTripApplication.ViewModels
             if (trip.Area == default(Area))
                 throw new Exception("Area doesn't exists.");
             tripService.Add(trip);
+        }
+
+        private void SendEmail(int id, IUserService service, ITripService tripService)
+        {
+            Trip trip = tripService.FindById(id);
+            EmailSender emailSender = new EmailSender();
+            string message = "There is a new Trip request with id "+id+" from user "
+                             +trip.User.Email+"<br/>"+
+                "Starting date: "+ trip.StartingDate+"<br/>"+
+            "End date: " + trip.EndDate+"<br/>";
+            List<User> admins = service.FindAllAdmins().ToList();
+            
+            foreach (User admin in admins)
+            {
+                emailSender.SendEmail(admin.Email, "New Trip Request", message);
+            }
+            
         }
     }
 }
