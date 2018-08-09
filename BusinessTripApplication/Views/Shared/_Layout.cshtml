@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<BusinessTripModels.Trip>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -32,16 +33,100 @@
                 <li class="nav-item">@Html.ActionLink(linkText: "Contact", controllerName: "Home", actionName: "Contact", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
             </ul>
 
+            <div class="filter-bar">
 
-            @if (Request.IsAuthenticated)
-            {
-                using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-                {
-                    <a class="navbar-nav nav-link" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-                }
-            }
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+                    Search
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Trip Search</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                
+                             
+
+
+                                <h6>Transportation</h6>
+                                @Html.DropDownList("dropRoles", new List<SelectListItem>()
+                              {
+                              new SelectListItem() { Text= "Car", Value = "true" },
+                              new SelectListItem() { Text= "Train", Value = "false" },
+                              new SelectListItem() { Text= "AirPlane", Value = "false", Selected = true }
+                              }, "Select ...")
+
+
+                                @Html.AntiForgeryToken()
+
+                                <div class="row form-group">
+                                    <div class="col-md-12">
+                                        <h6>Date Time</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group input-daterange" id="datepicker">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">From</span>
+                                            </div>
+                                            @Html.TextBox("Date", new { @class = "form-control", @placeholder = "Select a date", @autocomplete = "off" })
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">To</span>
+                                            </div>
+
+                                            @Html.TextBox("Date", new { @class = "form-control", @placeholder = "Select a date", @autocomplete = "off" })
+                                        </div>
+                                        <div class="col-md-12">
+                                            @Html.ValidationMessage("Date", "", new { @class = "text-danger" })
+                                            @Html.ValidationMessage("Date", "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <h6>Location</h6>
+                                @Html.DropDownList("dropRoles", new List<SelectListItem>()
+                              {
+                              new SelectListItem() { Text= "Cluj", Value = "true" },
+                              new SelectListItem() { Text= "Bucuresti", Value = "false" },
+                              new SelectListItem() { Text= "Brasov", Value = "false", Selected = true }
+                              }, "Select ...")
+
+                                </br>
+                                </br>
+
+                                <button type="button" class="btn btn-primary">Primary</button>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
 
         </div>
+
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                <a class="navbar-nav nav-link" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+            }
+        }
+
+
+
+
+
     </nav>
     <div class="container body-content">
         @RenderBody()
@@ -50,6 +135,28 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/selectJS")
+    @Scripts.Render("~/bundles/datepickerJS")
+
+    @Styles.Render("~/bundles/datepickerCSS")
+    @Styles.Render("~/bundles/selectCSS")
+
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $('.selectpicker').selectpicker();
+
+        $('.input-daterange').datepicker({
+            format: "dd/mm/yyyy",
+            startDate: "today",
+            language: "ro",
+            orientation: "bottom auto"
+        });
+
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
+
+    </script>
+
 </body>
 </html>

@@ -24,15 +24,19 @@ namespace BusinessTripApplication.Controllers
         public ActionResult Index()
         {
             var identity = User.Identity.Name;
+            var db = new DatabaseContext();
             User user = userService.FindByEmail(identity);
 
             if (user != null)
             {
-                var db = new DatabaseContext();
+
                 return View(db.Trips.Where(t => t.User.Id == user.Id));
             }
             else
-                return View();
+
+               
+
+            return View();
         }
 
         // GET: Trips/Details/5
@@ -53,6 +57,7 @@ namespace BusinessTripApplication.Controllers
             }
             return View(trip);
         }
+       
 
         // GET: Trips/Create
         [Authorize]
@@ -130,6 +135,7 @@ namespace BusinessTripApplication.Controllers
             }
             return View(trip);
         }
+
 
         // POST: Trips/Delete/5
         [HttpPost, ActionName("Delete")]
