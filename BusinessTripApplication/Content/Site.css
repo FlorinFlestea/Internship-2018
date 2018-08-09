@@ -17,7 +17,7 @@ a {
 
 label {
     color: #6BD425;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .control-label {
@@ -117,4 +117,9 @@ textarea {
 }
 .filter-bar{
     margin-right:5%;
+}
+}
+
+.table td {
+    text-align: center;
 }

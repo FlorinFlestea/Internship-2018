@@ -1,23 +1,21 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
-using BusinessTripApplication.Models;
-using BusinessTripModels;
-using BussinesTripModels;
+using BusinessTripApplication.Service;
+using BusinessTripModels.Models;
+using BussinesTripModels.Models;
 
 namespace BusinessTripApplication.Controllers
 {
     public class TripsApiController : ApiController
     {
-        private DatabaseContext db = new DatabaseContext();
-
+        private readonly TripService tripService = new TripService();
+        
         // GET: api/TripsApi
         public IQueryable<Trip> GetTrips()
         {
-            return db.Trips;
+            return tripService.GetAll().AsQueryable();
         }
 
 
@@ -25,14 +23,14 @@ namespace BusinessTripApplication.Controllers
         [Route("api/TripsApi/approved")]
         public IQueryable<Trip> GetTripsApproved()
         {
-            return db.Trips.Where(a => a.Status == 1);
+            return tripService.GetAll().AsQueryable().Where(a => a.Status == 1);
         }
 
         // GET : api/TripsApi/denied
         [Route("api/TripsApi/denied")]
         public IQueryable<Trip> GetTripsDenied()
         {
-            return db.Trips.Where(a => a.Status == 0);
+            return tripService.GetAll().AsQueryable().Where(a => a.Status == 0);
         }
 
 
@@ -40,14 +38,14 @@ namespace BusinessTripApplication.Controllers
         [Route("api/TripsApi/pending")]
         public IQueryable<Trip> GetTripsPending()
         {
-            return db.Trips.Where(a => a.Status > 1);
+            return tripService.GetAll().AsQueryable().Where(a => a.Status > 1);
         }
 
         // GET: api/TripsApi/5
         [ResponseType(typeof(Trip))]
         public IHttpActionResult GetTrip(int id)
         {
-            Trip trip = db.Trips.Find(id);
+            Trip trip = tripService.FindById(id);
             if (trip == null)
             {
                 return NotFound();
@@ -65,33 +63,12 @@ namespace BusinessTripApplication.Controllers
                 return BadRequest(ModelState);
             }
 
-            Trip trip = model.Trip;
-            int id = model.Id;
 
-            if (id != trip.Id)
-            {
-                return BadRequest();
-            }
+            var updatedTrip = tripService.Update(model.Trip);
 
-            db.Entry(trip).State = EntityState.Modified;
+            return StatusCode(updatedTrip.Id == model.Id ? HttpStatusCode.Accepted : HttpStatusCode.NoContent);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TripExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+      
         }
 
         // POST: api/TripsApi
@@ -103,8 +80,7 @@ namespace BusinessTripApplication.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Trips.Add(trip);
-            db.SaveChanges();
+            tripService.Add(trip);
 
             return CreatedAtRoute("DefaultApi", new { id = trip.Id }, trip);
         }
@@ -113,30 +89,19 @@ namespace BusinessTripApplication.Controllers
         [ResponseType(typeof(Trip))]
         public IHttpActionResult DeleteTrip(int id)
         {
-            Trip trip = db.Trips.Find(id);
+            Trip trip = tripService.FindById(id);
             if (trip == null)
             {
                 return NotFound();
             }
 
-            db.Trips.Remove(trip);
-            db.SaveChanges();
+           tripService.Remove(trip);
 
             return Ok(trip);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+ 
 
-        private bool TripExists(int id)
-        {
-            return db.Trips.Count(e => e.Id == id) > 0;
-        }
+      
     }
 }

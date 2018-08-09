@@ -9,6 +9,7 @@ using System.Windows.Input;
 using BusinessTripAdministration.Commands;
 using BusinessTripAdministration.Models;
 using BusinessTripModels;
+using BusinessTripModels.Models;
 using Caliburn.Micro;
 
 namespace BusinessTripAdministration.ViewModels

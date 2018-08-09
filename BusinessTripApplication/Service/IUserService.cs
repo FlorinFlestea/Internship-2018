@@ -1,7 +1,6 @@
 ﻿using System;
-using BusinessTripApplication.Models;
 using System.Collections.Generic;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 
 namespace BusinessTripApplication.Repository
 {
@@ -14,5 +13,7 @@ namespace BusinessTripApplication.Repository
         User FindByEmail(string email);
         User FindByActivationCode(Guid activationCode);
         IList<User> FindAll();
+        bool VerifyAccountAgain(string code);
+        IList<User> FindAllAdmins();
     }
 }

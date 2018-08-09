@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using BusinessTripModels;
-using BussinesTripModels;
+using BusinessTripModels.Models;
+using BussinesTripModels.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace BusinessTripAdministration.Models
 {

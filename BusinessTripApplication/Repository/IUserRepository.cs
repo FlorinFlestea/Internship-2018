@@ -1,7 +1,7 @@
 ﻿using BusinessTripApplication.Models;
 using System;
 using System.Collections.Generic;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 
 namespace BusinessTripApplication.Repository
 {
@@ -12,5 +12,7 @@ namespace BusinessTripApplication.Repository
         User FindByActivationCode(Guid code);
         User UpdateIsEmailVerified(User updatedUser);
         IList<User> FindAll();
+        User UpdateActivationCode(User user);
+        IList<User> FindAllAdmins();
     }
 }

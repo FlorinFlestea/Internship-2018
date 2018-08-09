@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BusinessTripApplication.Models;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 using BusinessTripApplication.Repository;
 using BusinessTripApplication.Service;
 using BusinessTripApplication.ViewModels;
@@ -24,19 +24,16 @@ namespace BusinessTripApplication.Controllers
         public ActionResult Index()
         {
             var identity = User.Identity.Name;
-            var db = new DatabaseContext();
             User user = userService.FindByEmail(identity);
 
             if (user != null)
             {
-
+                var db = new DatabaseContext();
+                Repository.GetAll();
                 return View(db.Trips.Where(t => t.User.Id == user.Id));
             }
             else
-
-               
-
-            return View();
+                return View();
         }
 
         // GET: Trips/Details/5
@@ -55,19 +52,17 @@ namespace BusinessTripApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(trip);
+            return PartialView("_Details",trip);
         }
-       
 
         // GET: Trips/Create
         [Authorize]
         public ActionResult Create()
         {
             TripRequestViewModel model = new TripRequestViewModel(areaService);
-            if (model.Status)
-                return View(model);
-            else
-                return RedirectToRoute("~/Shared/Error");
+
+            return View(model);
+
         }
 
         // POST: Trips/Create
@@ -82,42 +77,9 @@ namespace BusinessTripApplication.Controllers
             trip.User = new User() { Email = User.Identity.Name };
          
             TripRequestViewModel model = new TripRequestViewModel(ModelState.IsValid, trip, tripService, areaService, userService);
-            if (model.Status)
-                return View(model);
-            else
-                return RedirectToRoute("~/Shared/Error");
-        }
 
-        // GET: Trips/Edit/5
-        [Authorize]
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var trip = Repository.FindById(id);
-            if (trip == null)
-            {
-                return HttpNotFound();
-            }
-            return View(trip);
-        }
+            return View(model);
 
-        // POST: Trips/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Edit([Bind(Include = "Id,PmName,ClientName,StartingDate,EndDate,ProjectName,ProjectNumber,TaskNumber,ClientLocation,DepartureLocation,Transportation,NeedOfPhone,NeedOfBankCard,Accommodation,Comments,Approved")] Trip trip)
-        {
-            if (ModelState.IsValid)
-            {
-                Repository.Update(trip);
-                return RedirectToAction("Index");
-            }
-            return View(trip);
         }
 
         // GET: Trips/Delete/5
@@ -133,9 +95,8 @@ namespace BusinessTripApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(trip);
+            return PartialView("_Delete",trip);
         }
-
 
         // POST: Trips/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -143,7 +104,7 @@ namespace BusinessTripApplication.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Repository.Remove(Repository.FindById(id));
+            TripDeleteViewModel model=new TripDeleteViewModel(id, userService, tripService);
             return RedirectToAction("Index");
         }
 

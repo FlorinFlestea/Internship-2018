@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Helpers;
-using BusinessTripApplication.Exception;
+using BusinessTripModels.Exception;
+using BusinessTripModels.Models;
 using BusinessTripApplication.Models;
-using BusinessTripModels;
 
 namespace BusinessTripApplication.Repository
 {
@@ -17,11 +17,14 @@ namespace BusinessTripApplication.Repository
             addedUser.ActivationCode = Guid.NewGuid();
             addedUser.Password = Crypto.Hash(addedUser.Password);
             addedUser.IsEmailVerified = false;
+            addedUser.ActivationCodeExpireDate = DateTime.Now.Add(new TimeSpan(1,0,0));
 
             try
             {
                 using (var context = new DatabaseContext())
                 {
+                    addedUser.Role = context.Roles.FirstOrDefault(t => t.Type == "User");
+
                     context.Users.Add(addedUser);
                     context.SaveChanges();
                 }
@@ -52,6 +55,25 @@ namespace BusinessTripApplication.Repository
             }
 
             return users;
+        }
+
+        public IList<User> FindAllAdmins()
+        {
+            IList<User> admins = new List<User>();
+            try
+            {
+                using (var context = new DatabaseContext())
+                {
+                    admins = context.Users.Where(user=>user.Role.Type=="admin").ToList();
+                }
+            }
+            catch (System.Exception e)
+            {
+                Logger.Info(e.Message);
+                throw new DatabaseException("Cannot connect to Database!\n");
+            }
+
+            return admins;
         }
 
         public User FindByActivationCode(Guid code)
@@ -88,5 +110,29 @@ namespace BusinessTripApplication.Repository
 
             return update;
         }
+
+
+        public User UpdateActivationCode(User updatedUser)
+        {
+            User update;
+            try
+            {
+                using (var context = new DatabaseContext())
+                {
+                    update = context.Users.SingleOrDefault(user => user.Id == updatedUser.Id);
+                    update.ActivationCode = Guid.NewGuid();
+                    update.ActivationCodeExpireDate = DateTime.Now.Add(new TimeSpan(1, 0, 0));
+                    context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                Logger.Info(e.Message);
+                throw new DatabaseException("Cannot connect to Database!\n");
+            }
+
+            return update;
+        }
+
     }
 }

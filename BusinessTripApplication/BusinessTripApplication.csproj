@@ -24,10 +24,8 @@
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -67,6 +65,9 @@
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.10-beta\lib\net45\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="HtmlSanitizationLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
       <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
@@ -195,18 +196,12 @@
     <Compile Include="Controllers\TripsApiController.cs" />
     <Compile Include="Controllers\TripsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Exception\DatabaseException.cs" />
-    <Compile Include="Exception\InternetException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807251053332_Database.cs" />
-    <Compile Include="Migrations\201807251053332_Database.Designer.cs">
-      <DependentUpon>201807251053332_Database.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808021117010_TripsDB.cs" />
-    <Compile Include="Migrations\201808021117010_TripsDB.Designer.cs">
-      <DependentUpon>201808021117010_TripsDB.cs</DependentUpon>
+    <Compile Include="Migrations\201808081050337_Database.cs" />
+    <Compile Include="Migrations\201808081050337_Database.Designer.cs">
+      <DependentUpon>201808081050337_Database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
@@ -217,8 +212,8 @@
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\TripRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="Server\EmailSender.cs" />
-    <Compile Include="Server\IEmailSender.cs" />
+    <Compile Include="Server\FacebookLoginer.cs" />
+    <Compile Include="Server\IFacebookLoginer.cs" />
     <Compile Include="Service\AreaService.cs" />
     <Compile Include="Service\IAreaService.cs" />
     <Compile Include="Service\ITripService.cs" />
@@ -230,6 +225,7 @@
     <Compile Include="ViewModels\ITripRequestViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\TripDeleteViewModel.cs" />
     <Compile Include="ViewModels\TripRequestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +256,7 @@
     <Content Include="Content\dash-style\styles-dash.css" />
     <Content Include="Content\images\36892c14.png" />
     <Content Include="Content\images\hermes-rivera-471868-unsplash.jpg" />
+    <Content Include="Content\images\FbLoginButton.png" />
     <Content Include="Content\images\rawpixel-574844-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-579241-unsplash.jpg" />
     <Content Include="Content\images\rawpixel-652547-unsplash.jpg" />
@@ -299,7 +296,9 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap-select.css.map" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -341,7 +340,9 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\ValidationScriptRegistration.js" />
     <Content Include="Scripts\ValidationScriptLogin.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -359,9 +360,6 @@
     <Content Include="Views\User\VerifyAccount.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Trips\Create.cshtml" />
-    <Content Include="Views\Trips\Delete.cshtml" />
-    <Content Include="Views\Trips\Details.cshtml" />
-    <Content Include="Views\Trips\Edit.cshtml" />
     <Content Include="Views\Trips\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -372,6 +370,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Trips\_Details.cshtml" />
+    <Content Include="Views\Trips\_Delete.cshtml" />
+    <Content Include="Views\User\VerifyAccountAgain.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Dashboard.cshtml" />
@@ -383,24 +384,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807251053332_Database.resx">
-      <DependentUpon>201807251053332_Database.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808021117010_TripsDB.resx">
-      <DependentUpon>201808021117010_TripsDB.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -409,6 +394,11 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808081050337_Database.resx">
+      <DependentUpon>201808081050337_Database.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

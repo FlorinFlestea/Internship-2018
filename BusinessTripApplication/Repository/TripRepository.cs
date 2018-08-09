@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using BusinessTripApplication.Exception;
+using System.Security.Cryptography.X509Certificates;
 using BusinessTripApplication.Models;
-using BusinessTripModels;
+using BusinessTripModels.Exception;
+using BusinessTripModels.Models;
 
 namespace BusinessTripApplication.Repository
 {
@@ -39,7 +40,7 @@ namespace BusinessTripApplication.Repository
             {
                 using (DatabaseContext context = new DatabaseContext())
                 {
-                    foundTrip = context.Trips.Find(id);
+                    foundTrip = context.Trips.Include(x => x.Area).Include(x => x.User).FirstOrDefault(x=> x.Id == id);
                 }
             }
             catch (System.Exception e)

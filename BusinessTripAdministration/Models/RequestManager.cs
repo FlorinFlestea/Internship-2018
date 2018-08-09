@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessTripAdministration.ViewModels;
-using BusinessTripModels;
+using BusinessTripModels.Models;
 
 namespace BusinessTripAdministration.Models
 {
