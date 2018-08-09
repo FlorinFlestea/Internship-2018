@@ -14,5 +14,6 @@ namespace BusinessTripApplication.Repository
         User FindByActivationCode(Guid activationCode);
         IList<User> FindAll();
         bool VerifyAccountAgain(string code);
+        IList<User> FindAllAdmins();
     }
 }

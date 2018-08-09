@@ -29,6 +29,11 @@ namespace BusinessTripApplication.Repository
             return userRepository.FindAll();
         }
 
+        public IList<User> FindAllAdmins()
+        {
+            return userRepository.FindAllAdmins();
+        }
+
         public bool IsEmailVerified(string email)
         {
             return userRepository.FindByEmail(email).IsEmailVerified == true;
