@@ -96,7 +96,12 @@ namespace BusinessTripApplication.Controllers
         {
             try
             {
-           
+                using (var db = new DatabaseContext())
+                {
+                    db.Roles.Add(new Role() {Id = 1, Type = "Admin"});
+                    db.Roles.Add(new Role() {Id = 1, Type = "User"});
+                    db.SaveChanges();
+                }
                 var model = new RegistrationViewModel(ModelState.IsValid, user, UserService);
                 return View(model);
             }

@@ -43,7 +43,7 @@ namespace BusinessTripApplication.Repository
         {
             User user = userRepository.FindByActivationCode(new Guid(id));
 
-            if (user != null && !user.IsEmailVerified)
+            if (user != null && !user.IsEmailVerified && user.ActivationCodeExpireDate > DateTime.Now)
             {
                 user.IsEmailVerified = true;
                 userRepository.UpdateIsEmailVerified(user);

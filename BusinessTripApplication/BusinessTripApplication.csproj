@@ -202,6 +202,10 @@
     <Compile Include="Migrations\201808081050337_Database.Designer.cs">
       <DependentUpon>201808081050337_Database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808081157020_Ceva.cs" />
+    <Compile Include="Migrations\201808081157020_Ceva.Designer.cs">
+      <DependentUpon>201808081157020_Ceva.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -388,6 +392,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808081050337_Database.resx">
       <DependentUpon>201808081050337_Database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808081157020_Ceva.resx">
+      <DependentUpon>201808081157020_Ceva.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

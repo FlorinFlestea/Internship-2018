@@ -17,7 +17,7 @@ namespace BusinessTripApplication.Repository
             addedUser.ActivationCode = Guid.NewGuid();
             addedUser.Password = Crypto.Hash(addedUser.Password);
             addedUser.IsEmailVerified = false;
-            addedUser.ActivationCodeExpireDate = DateTime.Now.Add(new TimeSpan(1,0,0));
+            addedUser.ActivationCodeExpireDate = DateTime.Now.AddHours(10);
 
             try
             {

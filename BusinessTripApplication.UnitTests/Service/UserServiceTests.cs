@@ -135,7 +135,7 @@ namespace BusinessTripApplication.UnitTests.Service
             {
                 new User(),
                 new User{Id=1, Email=null, IsEmailVerified=false, Name=""},
-                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false},
+                new User{Email = "asd", ActivationCode= new Guid("229c7b1b-309e-4d83-95b7-2f3e800403da"), IsEmailVerified = false, ActivationCodeExpireDate = DateTime.Now.AddDays(2)},
                 new User { IsEmailVerified = true, ActivationCode = new Guid("b5027fcc-da70-46f5-abf3-d1ae4c835df4") }
             };
 
