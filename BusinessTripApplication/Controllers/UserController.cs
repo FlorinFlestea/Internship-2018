@@ -128,10 +128,20 @@ namespace BusinessTripApplication.Controllers
         {
             bool result = UserService.VerifyAccount(id);
             ViewBag.Status = result;
-
+            User user = UserService.FindByActivationCode(new Guid(id));
             if (!result)
-                ViewBag.Message = id;
-
+            {
+                if (user!=null && !UserService.IsEmailVerified(user.Email))
+                {
+                    ViewBag.Message = "Invalid Request!Do you want us to send you another verification email?";
+                    ViewBag.Message2 = "Email";
+                }
+                else ViewBag.Message = "Invalid Request!";
+                
+                ViewBag.Id = id;
+            }
+               
+                
             else
             {
                 Guid guid = new Guid(id);

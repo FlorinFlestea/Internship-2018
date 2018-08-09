@@ -14,9 +14,13 @@
 else
 {
     <div class="alert alert-danger">
-        <strong>Error!</strong>Invalid Request! Do you want us to send you another verification email? 
+        <strong>Error!</strong>@ViewBag.Message
     </div>
-    <div class="card-footer">
-        <p style="color: black;"> <button id="btn_Send" type="button" onclick="window.open('https://localhost:44328/User/VerifyAccountAgain?code=@ViewBag.Message', '_self', 'resizable=yes')" class="btn btn-primary btn-sm">Send email</button> </p>
-    </div>
+        if (ViewBag.Message2 != null)
+        {
+             <div class="card-footer">
+                 <p style="color: black;"> <button id="btn_Send" type="button" onclick="window.open('https://localhost:44328/User/VerifyAccountAgain?code=@ViewBag.Id', '_self', 'resizable=yes')" class="btn btn-primary btn-sm">Send email</button> </p>
+             </div>
+        }
+        
 }
