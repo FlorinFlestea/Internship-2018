@@ -12,5 +12,6 @@ namespace BusinessTripApplication.Repository
         User FindByActivationCode(Guid code);
         User UpdateIsEmailVerified(User updatedUser);
         IList<User> FindAll();
+        User UpdateActivationCode(User user);
     }
 }

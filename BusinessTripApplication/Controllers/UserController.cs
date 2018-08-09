@@ -145,12 +145,14 @@ namespace BusinessTripApplication.Controllers
         public ActionResult VerifyAccountAgain(string code)
         {
             User user = UserService.FindByActivationCode(new Guid(code));
+            UserService.VerifyAccountAgain(code);
+            User addedUser = UserService.FindByEmail(user.Email);
             Server.EmailSender emailSender = new EmailSender();
-            string url = "https://localhost:44328/User/VerifyAccount/" + user.ActivationCode.ToString();
+            string url = "https://localhost:44328/User/VerifyAccount/" + addedUser.ActivationCode.ToString();
             string message = "We are excited to tell you that your account is successfully created. " +
                              "Please <a href='" + url + "'>Click here </a> to verify your account. </br>";
 
-            emailSender.SendEmail(user.Email, "Register", message);
+            emailSender.SendEmail(addedUser.Email, "Register", message);
             return View();
         }
 

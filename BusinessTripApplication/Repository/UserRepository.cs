@@ -91,5 +91,29 @@ namespace BusinessTripApplication.Repository
 
             return update;
         }
+
+
+        public User UpdateActivationCode(User updatedUser)
+        {
+            User update;
+            try
+            {
+                using (var context = new DatabaseContext())
+                {
+                    update = context.Users.SingleOrDefault(user => user.Id == updatedUser.Id);
+                    update.ActivationCode = Guid.NewGuid();
+                    update.ActivationCodeExpireDate = DateTime.Now.Add(new TimeSpan(1, 0, 0));
+                    context.SaveChanges();
+                }
+            }
+            catch (System.Exception e)
+            {
+                Logger.Info(e.Message);
+                throw new DatabaseException("Cannot connect to Database!\n");
+            }
+
+            return update;
+        }
+
     }
 }
