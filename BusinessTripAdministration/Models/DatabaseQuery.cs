@@ -38,7 +38,14 @@ namespace BusinessTripAdministration.Models
             var reader = cmd.ExecuteReader();
             var returnOption = reader.HasRows;
             sqlConnection.Close();
+            if (returnOption)
+                return CheckIfAdmin(email);
             return returnOption;
+        }
+
+        public static bool CheckIfAdmin(string email)
+        {
+            return true;
         }
     }
 }
